@@ -1,10 +1,9 @@
 # SCAR-EGABI Tools for Southern Ocean spatial analysis and modelling - course
-### 2-6 september 2019
 
 <img src="/images/EGABI_logo.svg" alt="EG-ABI Logo"
-	title="EG-ABI Logo" width="150"  style="float:right"/>
+	title="EG-ABI Logo" width="150"  align="right"/>
 
-
+### 2-6 september 2019
 ## Course Scope
 
 The Scientific Committee on Antarctic research (www.scar.org) is pleased to partner with the rOpenSci project and the Antarctic Biodiversity Portal (www.biodiversity.aq) in organising a short course on tools for Southern Ocean spatial analysis and modelling using R.
