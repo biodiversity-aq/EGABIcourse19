@@ -42,11 +42,32 @@ Participants will have to arrange their own travel and accommodation, but limite
 Deadline for applications is: Friday June 15th where after you will be notified of the offer of a place and sent an invoice for the course fee.
 • Deadline for payment is Friday 7th July 2018 where after your place will be offered to someone else.
 
-## About rOpenSci
+If you have questions or sugestion you can create an issue at www.github.com/biodiversity-aq/EGABIcourse19
+
+Alternatively you can contact datascience.biodiversity.aq( at ) gmail.com
+
+## About rOpenSci 
+
+<img src="/images/icon_short_color.svg" alt="rOpenSci"
+	title="rOpenSci Logo" width="75"  align="left"/>
+	
 rOpenSci is a non-profit organisation that maintains a number of widely used R packages and is very active in promoting a community spirit around the R-world. Their core values are to have open and reproducible research, shared data and easy-to-use tools and to make all this accessible to a large number of people.
 
+
+
 ## About SCAR - EG-ABI
+
+<img src="/images/EGABI_logo.svg" alt="EG-ABI Logo"
+	title="EG-ABI Logo" width="75"  align="left"/>
+
 The Expert Group on Antarctic Biodiversity Informatics aims to foster the application and development of biodiversity informatics (computationally-driven biodiversity science and information processing) in the SCAR community.
 
+
+
 ## About Antarctic Biodiversity Portal Antarctic Lifewatch
+
+<img src="/images/AntaBIF_Logo.jpg" alt="Antarctic Biodiversity Portal"
+	title="Antarctic Biodiversity Portal" width="75"  align="left"/>
+
 The Antarctic Biodiversity Portal offers access to Antarctic Biodiversity Data. It is one of the federal belgian contributions to LifeWatch-ERIC is a European Infrastructure Consortium providing e-Science research facilities to scientists seeking to increase our knowledge and deepen our understanding of Biodiversity organisation and Ecosystem functions and services.
+
