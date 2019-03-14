@@ -59,7 +59,7 @@ If you have questions or suggestions you can [create an issue here](https://gith
 
 <img src="/images/icon_short_color.svg" alt="rOpenSci" title="rOpenSci Logo" width="75"  align="left"/>
 
-[https://ropensci.org/](rOpenSci) is a non-profit initiative founded in 2011 to make scientific data retrieval reproducible, and fosters a culture that values open and reproducible research using shared data and reusable software. rOpenSci maintains a number of widely used R packages, creates social infrastructure through a welcoming and diverse community, builds capacity and advocates for a culture of data sharing and reusable software.
+[rOpenSci](https://ropensci.org/) is a non-profit initiative founded in 2011 to make scientific data retrieval reproducible, and fosters a culture that values open and reproducible research using shared data and reusable software. rOpenSci maintains a number of widely used R packages, creates social infrastructure through a welcoming and diverse community, builds capacity and advocates for a culture of data sharing and reusable software.
 
 
 ## About SCAR EG-ABI

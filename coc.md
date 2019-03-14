@@ -28,12 +28,12 @@ Course participants agree to:
 - Take care of each other. Alert a member of the organising committee if you notice a dangerous situation, someone in distress, or a potential violation of this code of conduct, even if it seems inconsequential.
 
 
-If anyone engages in harassing behavior, the Committee will take action that may include warning the offender or asking them to leave an event or an online channel either temporarily or permanently, or seeking help from law enforcement. If you feel you have been unfairly accused of violating this code of conduct, you should report it with a concise description of your grievance.
+If anyone engages in harassing behavior, the organising committee will take action that may include warning the offender or asking them to leave an event or an online channel either temporarily or permanently, or seeking help from law enforcement. If you feel you have been unfairly accused of violating this code of conduct, you should report it with a concise description of your grievance.
 
-This Code of Conduct applies to all people participating in the event, including staff and leadership. It applies to all modes of interaction in person and online including GitHub project repositories, Slack, and social media, and includes social gatherings affiliated with the event.
+This code of conduct applies to all people participating in the event, including staff and leadership. It applies to all modes of interaction in person and online including GitHub project repositories, Slack, and social media, and includes social gatherings affiliated with the event.
 
 We welcome your feedback on this and every other aspect of the event, and we thank you for working with us to make it a safe, enjoyable, and friendly experience for everyone who participates.
 
 ----
 
-This code of conduct has been adapted from the [https://ropensci.org/code-of-conduct/](rOpenSci) and [http://ozunconf18.ropensci.org/coc/](Melbourne 2018 rOpenSci Unconference) codes of conduct. Parts of above text are licensed CC BY-SA 4.0.
+This code of conduct has been adapted from the [rOpenSci](https://ropensci.org/code-of-conduct/) and [Melbourne 2018 rOpenSci Unconference](http://ozunconf18.ropensci.org/coc/) codes of conduct. Parts of above text are licensed CC BY-SA 4.0.
