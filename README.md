@@ -45,13 +45,13 @@ To ensure a safe, enjoyable, and friendly experience for everyone who participat
 
 There is a 75 euro registration fee for the course.
 The fee include full participation in the course, and digital copies of the course material, as well as coffee breaks and a small lunch.
-Participants will have to arrange their own travel and accommodation, but limited travel support will be available in collaboration with the [SCAR Ant-Eco](https://www.scar.org/science/anteco/home/) research program.
+Participants will need to arrange their own travel and accommodation, but limited travel support will be available in collaboration with the [SCAR Ant-Eco](https://www.scar.org/science/anteco/home/) research program.
 
 ## Registration
 
-Deadline for applications is Friday June 15th. After this date you will be notified of the offer of a place and sent an invoice for the course fee. The deadline for payment is Friday 7th July 2018 --- failure to pay will lead to your place being offered to someone else.
+Deadline for applications is Friday June 15th. After this date you will be notified of the offer of a place and sent an invoice for the course fee. The deadline for payment is Friday 7th July 2018. Failure to pay will lead to your place being offered to someone else.
 
-If you have questions or suggestions you can [create an issue here](https://github.com/SCAR/EGABIcourse19/issues). Alternatively you can contact datascience.biodiversity.aq ( at ) gmail.com
+If you have questions or suggestions you can [create an issue here](https://github.com/SCAR/EGABIcourse19/issues). Alternatively you can contact datascience.biodiversity.aq (at) gmail.com
 
 ----
 
