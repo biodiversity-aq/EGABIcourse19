@@ -21,13 +21,13 @@ Our aim is that by the end of the course students will be equipped to:
 
 <img src="/images/Anton.jpeg" alt="Anton" title="Anton" width="75"  align="left"/> Anton Van de Putte (Royal Belgian Institute for Natural Sciences, KULeuven) manages the SCAR Antarctic Biodiversity Portal and is a strong advocate of FAIR data and reproducible science. You can ask him questions about biological open data standards and data cleaning.
 
-Ben Raymond (Australian Antarctic Division and the University of Tasmania) is a data-focused research scientist working across a range of Antarctic and Southern Ocean science. He is a co-proponent of the SCAR/rOpenSci R community initiative (https://scar.github.io/ropensci/)
+<img src="/images/Ben.jpg" alt="Ben" title="Ben" width="75"  align="right"/> Ben Raymond (Australian Antarctic Division and the University of Tasmania) is a data-focused research scientist working across a range of Antarctic and Southern Ocean science. He is a co-proponent of the SCAR/rOpenSci R community initiative (https://scar.github.io/ropensci/)
 
-Charlène Guillaumot (ULB, Bruxelles) is an ecological modeller.She studies the potential and limits of species distribution models and dynamic energy budget models on Southern Ocean case studies, and develops/adapts methodologies according to the encountered issues. 
+<img src="/images/Charlene.jpg" alt="Charlene" title="Charlene" width="75"  align="left"/> Charlène Guillaumot (ULB, Bruxelles) is an ecological modeller.She studies the potential and limits of species distribution models and dynamic energy budget models on Southern Ocean case studies, and develops/adapts methodologies according to the encountered issues. 
 
-Grant Humphries (director Black Bawks Data Science ltd, Fort Augustus, Scotland) is a seabird biologist and data scientist who has worked on terrestrial and marine ecosystems with a focus on applying machine learning to complex ecosystems. You can chat with Grant about creating decision support tools in R and Python, and what his favourite programming language is.
+<img src="/images/Grant.jpg" alt="Grant" title="Grant" width="75"  align="right"/>Grant Humphries (director Black Bawks Data Science ltd, Fort Augustus, Scotland) is a seabird biologist and data scientist who has worked on terrestrial and marine ecosystems with a focus on applying machine learning to complex ecosystems. You can chat with Grant about creating decision support tools in R and Python, and what his favourite programming language is.
 
-Huw Griffith (British Antarctic Survey) is a marine biologist who studies large-scale biogeographic and ecological patterns in space and time. He uses selected groups of animals to investigate trends in distribution in the Polar Regions, utilising large biological and physical databases to understand key processes.
+<img src="/images/Huw.jpg" alt="Huw" title="Huw" width="75"  align="left"/> Huw Griffith (British Antarctic Survey) is a marine biologist who studies large-scale biogeographic and ecological patterns in space and time. He uses selected groups of animals to investigate trends in distribution in the Polar Regions, utilising large biological and physical databases to understand key processes.
 
 
 ## Course Length
