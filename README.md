@@ -17,6 +17,19 @@ Our aim is that by the end of the course students will be equipped to:
 - Learn about species distribution models and how to develop them
 - Apply these new insights to their own data.
 
+## Course Instructors
+
+Anton Van de Putte (Royal Belgian Institute for Natural Sciences, KULeuven) manages the SCAR Antarctic Biodiversity Portal and is a strong advocate of FAIR data and reproducible science. You can ask him questions about biological open data standards and data cleaning.
+
+Ben Raymond (Australian Antarctic Division and the University of Tasmania) is a data-focused research scientist working across a range of Antarctic and Southern Ocean science. He is a co-proponent of the SCAR/rOpenSci R community initiative (https://scar.github.io/ropensci/)
+
+Charlène Guillaumot (ULB, Bruxelles) is an ecological modeller.She studies the potential and limits of species distribution models and dynamic energy budget models on Southern Ocean case studies, and develops/adapts methodologies according to the encountered issues. 
+
+Grant Humphries (director Black Bawks Data Science ltd, Fort Augustus, Scotland) is a seabird biologist and data scientist who has worked on terrestrial and marine ecosystems with a focus on applying machine learning to complex ecosystems. You can chat with Grant about creating decision support tools in R and Python, and what his favourite programming language is.
+
+Huw Griffith (British Antarctic Survey) is a marine biologist who studies large-scale biogeographic and ecological patterns in space and time. He uses selected groups of animals to investigate trends in distribution in the Polar Regions, utilising large biological and physical databases to understand key processes.
+
+
 ## Course Length
 
 The first part of the course (3 days)  will focus on introducing various R packages and overall workflows. The second part of the course (2 days) will be a hands-on opportunity for participants to work on their own data with the assistance of the course instructors. You can choose to only register for the first part of the course if you prefer.
