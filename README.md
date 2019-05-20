@@ -19,7 +19,7 @@ Our aim is that by the end of the course students will be equipped to:
 
 ## Course Instructors
 
-<img src="/images/Anton.jpg" alt="Anton" title="Anton" width="75"  align="left"/> Anton Van de Putte (Royal Belgian Institute for Natural Sciences, KULeuven) manages the SCAR Antarctic Biodiversity Portal and is a strong advocate of FAIR data and reproducible science. You can ask him questions about biological open data standards and data cleaning.
+<img src="/images/Anton.jpeg" alt="Anton" title="Anton" width="75"  align="left"/> Anton Van de Putte (Royal Belgian Institute for Natural Sciences, KULeuven) manages the SCAR Antarctic Biodiversity Portal and is a strong advocate of FAIR data and reproducible science. You can ask him questions about biological open data standards and data cleaning.
 
 Ben Raymond (Australian Antarctic Division and the University of Tasmania) is a data-focused research scientist working across a range of Antarctic and Southern Ocean science. He is a co-proponent of the SCAR/rOpenSci R community initiative (https://scar.github.io/ropensci/)
 
