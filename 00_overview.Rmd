@@ -5,7 +5,7 @@
 Make sure we have the packages we need from CRAN:
 
 ```{r pkgs1}
-pkgs <- c("remotes", "worrms", "dplyr")
+pkgs <- c("remotes", "worrms", "dplyr", "robis", "ncdf4", "raster")
 pkgs <- setdiff(pkgs, installed.packages()[, 1])
 if (length(pkgs) > 0) install.packages(pkgs)
 ```
@@ -15,13 +15,13 @@ And from GitHub:
 ```{r pkgs2}
 library(remotes)
 pkgs <- c("AustralianAntarcticDivision/SOmap", "AustralianAntarcticDivision/blueant")
-pkgs <- setdiff(basename(pkgs), installed.packages()[, 1])
+pkgs <- pkgs[!basename(pkgs) %in% installed.packages()[, 1]]
 for (pkg in pkgs) remotes::install_github(pkg)
 ```
 
 ## Taxonomy
 
-```{r tax1}
+```{r tax1, cache = TRUE, message = FALSE}
 library(worrms)
 library(dplyr)
 
@@ -40,7 +40,7 @@ Get all data from this data set:
 Antarctic Euphausiacea occurence data from "German Antarctic Marine Living Resources" (GAMLR) Expeditions
 
 
-```{r occ1}
+```{r occ1, cache = TRUE, message = FALSE}
 library(robis)
 
 ##ds <- dataset(taxonid = my_aphia_id)
@@ -53,7 +53,7 @@ x <- occurrence(datasetid = "cb16377b-56a8-4d95-802d-4eec02466773")
 
 Plot the complete distribution of samples in black, and *Euphausia crystallorophias* in green:
 
-```{r map1}
+```{r map1, message = FALSE}
 library(SOmap)
 SOauto_map(x$decimalLongitude, x$decimalLatitude, input_lines = FALSE, pcol = "black")
 with(x %>% dplyr::filter(aphiaID == tax[[1]]$valid_AphiaID), SOplot(decimalLongitude, decimalLatitude, pch = 19, col = "green"))
@@ -76,7 +76,7 @@ xfit <- x %>% dplyr::rename(lon = "decimalLongitude", lat = "decimalLatitude") %
 
 ## Environmental data
 
-```{r envdat1}
+```{r envdat1, cache = TRUE, message = FALSE}
 library(blueant)
 ## put the data into a temporary directory
 my_data_directory <- tempdir()
@@ -87,7 +87,7 @@ data_source <- sources_sdm("Southern Ocean marine environmental data")
 status <- bb_get(data_source, local_file_root = my_data_directory, verbose = TRUE)
 ```
 
-```{r envdat2}
+```{r envdat2, cache = TRUE, message = FALSE}
 nc_files <- Filter(function(z) grepl("\\.nc$", z), status$files[[1]]$file)
 
 ## create a raster stack of all layers
@@ -108,7 +108,7 @@ head(xfit)
 
 ## Fit model
 
-```{r mod1}
+```{r mod1, message = FALSE}
 library(mgcv)
 
 fit <- gam(present ~ s(depth) + s(ice_cover_mean), family = binomial, data = xfit)
