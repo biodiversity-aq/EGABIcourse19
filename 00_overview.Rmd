@@ -1,0 +1,140 @@
+# SCAR-EGABI Tools for Southern Ocean Spatial Analysis and Modelling
+
+## Preparation
+
+Make sure we have the packages we need from CRAN:
+
+```{r pkgs1}
+pkgs <- c("remotes", "worrms", "dplyr")
+pkgs <- setdiff(pkgs, installed.packages()[, 1])
+if (length(pkgs) > 0) install.packages(pkgs)
+```
+
+And from GitHub:
+
+```{r pkgs2}
+library(remotes)
+pkgs <- c("AustralianAntarcticDivision/SOmap", "AustralianAntarcticDivision/blueant")
+pkgs <- setdiff(basename(pkgs), installed.packages()[, 1])
+for (pkg in pkgs) remotes::install_github(pkg)
+```
+
+## Taxonomy
+
+```{r tax1}
+library(worrms)
+library(dplyr)
+
+my_species <- "Euphausia crystallorophias"
+tax <- wm_records_names(name = my_species)
+tax
+
+my_aphia_id <- tax[[1]]$valid_AphiaID
+
+```
+
+## Occurrences
+
+Get all data from this data set:
+
+Antarctic Euphausiacea occurence data from "German Antarctic Marine Living Resources" (GAMLR) Expeditions
+
+
+```{r occ1}
+library(robis)
+
+##ds <- dataset(taxonid = my_aphia_id)
+##x <- occurrence(datasetid = ds$id[6])
+x <- occurrence(datasetid = "cb16377b-56a8-4d95-802d-4eec02466773")
+
+## https://ipt.biodiversity.aq/resource?r=gamlr
+
+```
+
+Plot the complete distribution of samples in black, and *Euphausia crystallorophias* in green:
+
+```{r map1}
+library(SOmap)
+SOauto_map(x$decimalLongitude, x$decimalLatitude, input_lines = FALSE, pcol = "black")
+with(x %>% dplyr::filter(aphiaID == tax[[1]]$valid_AphiaID), SOplot(decimalLongitude, decimalLatitude, pch = 19, col = "green"))
+```
+
+Or as a polar stereo map:
+
+```{r map2}
+SOmap(Trim = max(x$decimalLatitude))
+SOplot(x$decimalLongitude, x$decimalLatitude, pch = 19, col = "black")
+with(x %>% dplyr::filter(aphiaID == tax[[1]]$valid_AphiaID), SOplot(decimalLongitude, decimalLatitude, pch = 19, col = "green"))
+```
+
+Reorganise data:
+
+```{r dat1}
+xfit <- x %>% dplyr::rename(lon = "decimalLongitude", lat = "decimalLatitude") %>%
+  group_by(lon, lat) %>% dplyr::summarize(present = any(my_aphia_id %in% aphiaID))
+```
+
+## Environmental data
+
+```{r envdat1}
+library(blueant)
+## put the data into a temporary directory
+my_data_directory <- tempdir()
+
+## the data source we want
+data_source <- sources_sdm("Southern Ocean marine environmental data")
+
+status <- bb_get(data_source, local_file_root = my_data_directory, verbose = TRUE)
+```
+
+```{r envdat2}
+nc_files <- Filter(function(z) grepl("\\.nc$", z), status$files[[1]]$file)
+
+## create a raster stack of all layers
+env_stack <- stack(nc_files)
+
+## the first few files
+head(names(env_stack))
+```
+
+```{r envdat3}
+env_stack <- subset(env_stack, c("depth", "ice_cover_mean"))
+
+temp <- as.data.frame(raster::extract(env_stack, xfit[, c("lon", "lat")]))
+
+xfit <- bind_cols(xfit, temp)
+head(xfit)
+```
+
+## Fit model
+
+```{r mod1}
+library(mgcv)
+
+fit <- gam(present ~ s(depth) + s(ice_cover_mean), family = binomial, data = xfit)
+
+summary(fit)
+
+plot(fit, pages = 1)
+```
+
+## Predict from model
+
+```{r pred1}
+xpred <- expand.grid(lon = seq(from = floor(min(xfit$lon)), to = ceiling(max(xfit$lon)), by = 0.25),
+                    lat = seq(from = floor(min(xfit$lat)), to = ceiling(max(xfit$lat)), by = 0.25))
+xpred <- bind_cols(as.data.frame(xpred), as.data.frame(raster::extract(env_stack, xpred[, c("lon", "lat")])))
+
+xpred$predicted <- predict(fit, newdata = xpred, type = "response")
+
+## create raster
+pr <- rasterFromXYZ(xpred[, c("lon", "lat", "predicted")])
+projection(pr) <- "+proj=longlat +datum=WGS84"
+```
+
+Plot it:
+
+```{r predmap}
+SOmap(Trim = max(x$decimalLatitude))
+SOplot(pr)
+```
