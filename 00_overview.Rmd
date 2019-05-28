@@ -1,20 +1,25 @@
-# SCAR-EGABI Tools for Southern Ocean Spatial Analysis and Modelling
+# Overview
+
+An example analysis that very briefly demonstrates some of the tasks that we'll tackle during the workshop.
 
 ## Preparation
 
 Make sure we have the packages we need from CRAN:
 
-```{r pkgs1}
-pkgs <- c("remotes", "worrms", "dplyr", "robis", "ncdf4", "raster")
+```{r pkgs1, message = FALSE}
+pkgs <- c("dplyr", "ncdf4", "raster", "remotes", "robis", "worrms")
 pkgs <- setdiff(pkgs, installed.packages()[, 1])
 if (length(pkgs) > 0) install.packages(pkgs)
+
+library(dplyr)
 ```
 
 And from GitHub:
 
 ```{r pkgs2}
 library(remotes)
-pkgs <- c("AustralianAntarcticDivision/SOmap", "AustralianAntarcticDivision/blueant")
+pkgs <- c("SCAR/antanym", "AustralianAntarcticDivision/blueant",
+          "AustralianAntarcticDivision/SOmap")
 pkgs <- pkgs[!basename(pkgs) %in% installed.packages()[, 1]]
 for (pkg in pkgs) remotes::install_github(pkg)
 ```
@@ -23,22 +28,18 @@ for (pkg in pkgs) remotes::install_github(pkg)
 
 ```{r tax1, cache = TRUE, message = FALSE}
 library(worrms)
-library(dplyr)
 
 my_species <- "Euphausia crystallorophias"
 tax <- wm_records_names(name = my_species)
 tax
 
+## the Aphia ID (taxonomic ID) of our species
 my_aphia_id <- tax[[1]]$valid_AphiaID
-
 ```
 
 ## Occurrences
 
-Get all data from this data set:
-
-Antarctic Euphausiacea occurence data from "German Antarctic Marine Living Resources" (GAMLR) Expeditions
-
+Get all data from the [Antarctic Euphausiacea occurence data from "German Antarctic Marine Living Resources" (GAMLR) Expeditions](https://ipt.biodiversity.aq/resource?r=gamlr) data set:
 
 ```{r occ1, cache = TRUE, message = FALSE}
 library(robis)
@@ -46,9 +47,6 @@ library(robis)
 ##ds <- dataset(taxonid = my_aphia_id)
 ##x <- occurrence(datasetid = ds$id[6])
 x <- occurrence(datasetid = "cb16377b-56a8-4d95-802d-4eec02466773")
-
-## https://ipt.biodiversity.aq/resource?r=gamlr
-
 ```
 
 Plot the complete distribution of samples in black, and *Euphausia crystallorophias* in green:
@@ -56,22 +54,25 @@ Plot the complete distribution of samples in black, and *Euphausia crystalloroph
 ```{r map1, message = FALSE}
 library(SOmap)
 SOauto_map(x$decimalLongitude, x$decimalLatitude, input_lines = FALSE, pcol = "black")
-with(x %>% dplyr::filter(aphiaID == tax[[1]]$valid_AphiaID), SOplot(decimalLongitude, decimalLatitude, pch = 19, col = "green"))
+with(x %>% dplyr::filter(aphiaID == my_aphia_id), 
+     SOplot(decimalLongitude, decimalLatitude, pch = 19, col = "green"))
 ```
 
 Or as a polar stereo map:
 
-```{r map2}
+```{r map2, message = FALSE}
 SOmap(Trim = max(x$decimalLatitude))
 SOplot(x$decimalLongitude, x$decimalLatitude, pch = 19, col = "black")
-with(x %>% dplyr::filter(aphiaID == tax[[1]]$valid_AphiaID), SOplot(decimalLongitude, decimalLatitude, pch = 19, col = "green"))
+with(x %>% dplyr::filter(aphiaID == my_aphia_id), 
+     SOplot(decimalLongitude, decimalLatitude, pch = 19, col = "green"))
 ```
 
-Reorganise data:
+Reorganise data into presence/absence by sampling site:
 
 ```{r dat1}
 xfit <- x %>% dplyr::rename(lon = "decimalLongitude", lat = "decimalLatitude") %>%
-  group_by(lon, lat) %>% dplyr::summarize(present = any(my_aphia_id %in% aphiaID))
+    group_by(lon, lat) %>%
+    dplyr::summarize(present = any(my_aphia_id %in% aphiaID))
 ```
 
 ## Environmental data
@@ -84,6 +85,7 @@ my_data_directory <- tempdir()
 ## the data source we want
 data_source <- sources_sdm("Southern Ocean marine environmental data")
 
+## fetch the data
 status <- bb_get(data_source, local_file_root = my_data_directory, verbose = TRUE)
 ```
 
@@ -93,11 +95,13 @@ nc_files <- Filter(function(z) grepl("\\.nc$", z), status$files[[1]]$file)
 ## create a raster stack of all layers
 env_stack <- stack(nc_files)
 
-## the first few files
+## the first few layers
 head(names(env_stack))
 ```
 
-```{r envdat3}
+Select just the `depth` and `ice_cover_mean` layers and extract their values at our sampling locations:
+
+```{r envdat3, cache = TRUE}
 env_stack <- subset(env_stack, c("depth", "ice_cover_mean"))
 
 temp <- as.data.frame(raster::extract(env_stack, xfit[, c("lon", "lat")]))
@@ -108,21 +112,28 @@ head(xfit)
 
 ## Fit model
 
-```{r mod1, message = FALSE}
+We have presence/absence data, so we'll fit a simple binomial model. The probability of presence of *Euphausia crystallorophias* is fitted as a smooth function of depth and mean sea ice cover:
+
+```{r mod1, cache = TRUE, message = FALSE}
 library(mgcv)
 
 fit <- gam(present ~ s(depth) + s(ice_cover_mean), family = binomial, data = xfit)
 
 summary(fit)
+```
 
-plot(fit, pages = 1)
+The fits to depth and ice cover:
+
+```{r mod2, cache = TRUE, message = FALSE}
+plot(fit, pages = 1, shade = TRUE)
 ```
 
 ## Predict from model
 
-```{r pred1}
+```{r pred1, cache = TRUE}
 xpred <- expand.grid(lon = seq(from = floor(min(xfit$lon)), to = ceiling(max(xfit$lon)), by = 0.25),
-                    lat = seq(from = floor(min(xfit$lat)), to = ceiling(max(xfit$lat)), by = 0.25))
+                     lat = seq(from = floor(min(xfit$lat)), to = ceiling(max(xfit$lat)), by = 0.25))
+
 xpred <- bind_cols(as.data.frame(xpred), as.data.frame(raster::extract(env_stack, xpred[, c("lon", "lat")])))
 
 xpred$predicted <- predict(fit, newdata = xpred, type = "response")
@@ -137,4 +148,34 @@ Plot it:
 ```{r predmap}
 SOmap(Trim = max(x$decimalLatitude))
 SOplot(pr)
+```
+
+## Other bits and pieces
+
+### Place names
+
+```{r placenames1}
+library(antanym)
+
+## get data
+xn <- an_read(cache = "session", sp = TRUE)
+
+## reduce to one name per feature
+xn <- an_preferred(xn, origin = "United Kingdom")
+
+## ask for suggestions in our region to show on our map
+xns <- an_suggest(xn, map_scale = 20e6, map_extent = extent(pr))
+
+## transform to our map projection, convert to data frame, take the top 10
+xns <- as_tibble(SOproj(xns)) %>% head(10)
+```
+
+Add them to the map:
+
+```{r predmap2}
+SOmap(Trim = max(x$decimalLatitude))
+SOplot(pr)
+with(xns, points(x = longitude, y = latitude, pch = 16))
+with(xns, text(x = longitude, y = latitude, labels = place_name, 
+               cex = 0.75, pos = 2 + 2*(seq_len(nrow(xns)) %% 2)))
 ```

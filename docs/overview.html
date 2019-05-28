@@ -6,7 +6,7 @@
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 <meta name="generator" content="pandoc" />
 <meta name="viewport" content="width=device-width, initial-scale=1" />
-<meta property="og:title" content="2 SCAR-EGABI Tools for Southern Ocean Spatial Analysis and Modelling | SCAR-EGABI Tools for Southern Ocean Spatial Analysis and Modelling" />
+<meta property="og:title" content="2 Overview | SCAR-EGABI Tools for Southern Ocean Spatial Analysis and Modelling" />
 <meta property="og:type" content="book" />
 
 
@@ -19,7 +19,7 @@
 
 <meta name="description" content="Course material">
 
-<title>2 SCAR-EGABI Tools for Southern Ocean Spatial Analysis and Modelling | SCAR-EGABI Tools for Southern Ocean Spatial Analysis and Modelling</title>
+<title>2 Overview | SCAR-EGABI Tools for Southern Ocean Spatial Analysis and Modelling</title>
 
 <script src="libs/jquery-1.11.3/jquery.min.js"></script>
 <meta name="viewport" content="width=device-width, initial-scale=1" />
@@ -129,13 +129,16 @@ img {
 <div id="TOC">
 <ul>
 <li><a href="index.html#about-this"><span class="toc-section-number">1</span> About this</a></li>
-<li class="has-sub"><a href="scar-egabi-tools-for-southern-ocean-spatial-analysis-and-modelling.html#scar-egabi-tools-for-southern-ocean-spatial-analysis-and-modelling"><span class="toc-section-number">2</span> SCAR-EGABI Tools for Southern Ocean Spatial Analysis and Modelling</a><ul>
-<li><a href="scar-egabi-tools-for-southern-ocean-spatial-analysis-and-modelling.html#preparation"><span class="toc-section-number">2.1</span> Preparation</a></li>
-<li><a href="scar-egabi-tools-for-southern-ocean-spatial-analysis-and-modelling.html#taxonomy"><span class="toc-section-number">2.2</span> Taxonomy</a></li>
-<li><a href="scar-egabi-tools-for-southern-ocean-spatial-analysis-and-modelling.html#occurrences"><span class="toc-section-number">2.3</span> Occurrences</a></li>
-<li><a href="scar-egabi-tools-for-southern-ocean-spatial-analysis-and-modelling.html#environmental-data"><span class="toc-section-number">2.4</span> Environmental data</a></li>
-<li><a href="scar-egabi-tools-for-southern-ocean-spatial-analysis-and-modelling.html#fit-model"><span class="toc-section-number">2.5</span> Fit model</a></li>
-<li><a href="scar-egabi-tools-for-southern-ocean-spatial-analysis-and-modelling.html#predict-from-model"><span class="toc-section-number">2.6</span> Predict from model</a></li>
+<li class="has-sub"><a href="overview.html#overview"><span class="toc-section-number">2</span> Overview</a><ul>
+<li><a href="overview.html#preparation"><span class="toc-section-number">2.1</span> Preparation</a></li>
+<li><a href="overview.html#taxonomy"><span class="toc-section-number">2.2</span> Taxonomy</a></li>
+<li><a href="overview.html#occurrences"><span class="toc-section-number">2.3</span> Occurrences</a></li>
+<li><a href="overview.html#environmental-data"><span class="toc-section-number">2.4</span> Environmental data</a></li>
+<li><a href="overview.html#fit-model"><span class="toc-section-number">2.5</span> Fit model</a></li>
+<li><a href="overview.html#predict-from-model"><span class="toc-section-number">2.6</span> Predict from model</a></li>
+<li class="has-sub"><a href="overview.html#other-bits-and-pieces"><span class="toc-section-number">2.7</span> Other bits and pieces</a><ul>
+<li><a href="overview.html#place-names"><span class="toc-section-number">2.7.1</span> Place names</a></li>
+</ul></li>
 </ul></li>
 </ul>
 </div>
@@ -143,24 +146,27 @@ img {
 </div>
 <div class="row">
 <div class="col-sm-12">
-<div id="scar-egabi-tools-for-southern-ocean-spatial-analysis-and-modelling" class="section level1">
-<h1><span class="header-section-number">2</span> SCAR-EGABI Tools for Southern Ocean Spatial Analysis and Modelling</h1>
+<div id="overview" class="section level1">
+<h1><span class="header-section-number">2</span> Overview</h1>
+<p>An example analysis that very briefly demonstrates some of the tasks that we’ll tackle during the workshop.</p>
 <div id="preparation" class="section level2">
 <h2><span class="header-section-number">2.1</span> Preparation</h2>
 <p>Make sure we have the packages we need from CRAN:</p>
-<pre class="sourceCode r"><code class="sourceCode r">pkgs &lt;-<span class="st"> </span><span class="kw">c</span>(<span class="st">&quot;remotes&quot;</span>, <span class="st">&quot;worrms&quot;</span>, <span class="st">&quot;dplyr&quot;</span>, <span class="st">&quot;robis&quot;</span>, <span class="st">&quot;ncdf4&quot;</span>, <span class="st">&quot;raster&quot;</span>)
+<pre class="sourceCode r"><code class="sourceCode r">pkgs &lt;-<span class="st"> </span><span class="kw">c</span>(<span class="st">&quot;dplyr&quot;</span>, <span class="st">&quot;ncdf4&quot;</span>, <span class="st">&quot;raster&quot;</span>, <span class="st">&quot;remotes&quot;</span>, <span class="st">&quot;robis&quot;</span>, <span class="st">&quot;worrms&quot;</span>)
 pkgs &lt;-<span class="st"> </span><span class="kw">setdiff</span>(pkgs, <span class="kw">installed.packages</span>()[, <span class="dv">1</span>])
-<span class="cf">if</span> (<span class="kw">length</span>(pkgs) <span class="op">&gt;</span><span class="st"> </span><span class="dv">0</span>) <span class="kw">install.packages</span>(pkgs)</code></pre>
+<span class="cf">if</span> (<span class="kw">length</span>(pkgs) <span class="op">&gt;</span><span class="st"> </span><span class="dv">0</span>) <span class="kw">install.packages</span>(pkgs)
+
+<span class="kw">library</span>(dplyr)</code></pre>
 <p>And from GitHub:</p>
 <pre class="sourceCode r"><code class="sourceCode r"><span class="kw">library</span>(remotes)
-pkgs &lt;-<span class="st"> </span><span class="kw">c</span>(<span class="st">&quot;AustralianAntarcticDivision/SOmap&quot;</span>, <span class="st">&quot;AustralianAntarcticDivision/blueant&quot;</span>)
+pkgs &lt;-<span class="st"> </span><span class="kw">c</span>(<span class="st">&quot;SCAR/antanym&quot;</span>, <span class="st">&quot;AustralianAntarcticDivision/blueant&quot;</span>,
+          <span class="st">&quot;AustralianAntarcticDivision/SOmap&quot;</span>)
 pkgs &lt;-<span class="st"> </span>pkgs[<span class="op">!</span><span class="kw">basename</span>(pkgs) <span class="op">%in%</span><span class="st"> </span><span class="kw">installed.packages</span>()[, <span class="dv">1</span>]]
 <span class="cf">for</span> (pkg <span class="cf">in</span> pkgs) remotes<span class="op">::</span><span class="kw">install_github</span>(pkg)</code></pre>
 </div>
 <div id="taxonomy" class="section level2">
 <h2><span class="header-section-number">2.2</span> Taxonomy</h2>
 <pre class="sourceCode r"><code class="sourceCode r"><span class="kw">library</span>(worrms)
-<span class="kw">library</span>(dplyr)
 
 my_species &lt;-<span class="st"> &quot;Euphausia crystallorophias&quot;</span>
 tax &lt;-<span class="st"> </span><span class="kw">wm_records_names</span>(<span class="dt">name =</span> my_species)
@@ -191,34 +197,33 @@ tax</code></pre>
 ##   isFreshwater isTerrestrial isExtinct match_type modified                
 ##   &lt;lgl&gt;        &lt;lgl&gt;         &lt;lgl&gt;     &lt;chr&gt;      &lt;chr&gt;                   
 ## 1 NA           NA            NA        exact      2010-03-02T17:11:18.233Z</code></pre>
-<pre class="sourceCode r"><code class="sourceCode r">my_aphia_id &lt;-<span class="st"> </span>tax[[<span class="dv">1</span>]]<span class="op">$</span>valid_AphiaID</code></pre>
+<pre class="sourceCode r"><code class="sourceCode r"><span class="co">## the Aphia ID (taxonomic ID) of our species</span>
+my_aphia_id &lt;-<span class="st"> </span>tax[[<span class="dv">1</span>]]<span class="op">$</span>valid_AphiaID</code></pre>
 </div>
 <div id="occurrences" class="section level2">
 <h2><span class="header-section-number">2.3</span> Occurrences</h2>
-<p>Get all data from this data set:</p>
-<p>Antarctic Euphausiacea occurence data from “German Antarctic Marine Living Resources” (GAMLR) Expeditions</p>
+<p>Get all data from the <a href="https://ipt.biodiversity.aq/resource?r=gamlr">Antarctic Euphausiacea occurence data from “German Antarctic Marine Living Resources” (GAMLR) Expeditions</a> data set:</p>
 <pre class="sourceCode r"><code class="sourceCode r"><span class="kw">library</span>(robis)
 
 <span class="co">##ds &lt;- dataset(taxonid = my_aphia_id)</span>
 <span class="co">##x &lt;- occurrence(datasetid = ds$id[6])</span>
-x &lt;-<span class="st"> </span><span class="kw">occurrence</span>(<span class="dt">datasetid =</span> <span class="st">&quot;cb16377b-56a8-4d95-802d-4eec02466773&quot;</span>)
-
-<span class="co">## https://ipt.biodiversity.aq/resource?r=gamlr</span></code></pre>
+x &lt;-<span class="st"> </span><span class="kw">occurrence</span>(<span class="dt">datasetid =</span> <span class="st">&quot;cb16377b-56a8-4d95-802d-4eec02466773&quot;</span>)</code></pre>
 <p>Plot the complete distribution of samples in black, and <em>Euphausia crystallorophias</em> in green:</p>
 <pre class="sourceCode r"><code class="sourceCode r"><span class="kw">library</span>(SOmap)
 <span class="kw">SOauto_map</span>(x<span class="op">$</span>decimalLongitude, x<span class="op">$</span>decimalLatitude, <span class="dt">input_lines =</span> <span class="ot">FALSE</span>, <span class="dt">pcol =</span> <span class="st">&quot;black&quot;</span>)
-<span class="kw">with</span>(x <span class="op">%&gt;%</span><span class="st"> </span>dplyr<span class="op">::</span><span class="kw">filter</span>(aphiaID <span class="op">==</span><span class="st"> </span>tax[[<span class="dv">1</span>]]<span class="op">$</span>valid_AphiaID), <span class="kw">SOplot</span>(decimalLongitude, decimalLatitude, <span class="dt">pch =</span> <span class="dv">19</span>, <span class="dt">col =</span> <span class="st">&quot;green&quot;</span>))</code></pre>
+<span class="kw">with</span>(x <span class="op">%&gt;%</span><span class="st"> </span>dplyr<span class="op">::</span><span class="kw">filter</span>(aphiaID <span class="op">==</span><span class="st"> </span>my_aphia_id), 
+     <span class="kw">SOplot</span>(decimalLongitude, decimalLatitude, <span class="dt">pch =</span> <span class="dv">19</span>, <span class="dt">col =</span> <span class="st">&quot;green&quot;</span>))</code></pre>
 <p><img src="_main_files/figure-html/map1-1.png" width="672" /></p>
 <p>Or as a polar stereo map:</p>
 <pre class="sourceCode r"><code class="sourceCode r"><span class="kw">SOmap</span>(<span class="dt">Trim =</span> <span class="kw">max</span>(x<span class="op">$</span>decimalLatitude))
-<span class="kw">SOplot</span>(x<span class="op">$</span>decimalLongitude, x<span class="op">$</span>decimalLatitude, <span class="dt">pch =</span> <span class="dv">19</span>, <span class="dt">col =</span> <span class="st">&quot;black&quot;</span>)</code></pre>
-<pre><code>## No projection provided, assuming longlat</code></pre>
-<pre class="sourceCode r"><code class="sourceCode r"><span class="kw">with</span>(x <span class="op">%&gt;%</span><span class="st"> </span>dplyr<span class="op">::</span><span class="kw">filter</span>(aphiaID <span class="op">==</span><span class="st"> </span>tax[[<span class="dv">1</span>]]<span class="op">$</span>valid_AphiaID), <span class="kw">SOplot</span>(decimalLongitude, decimalLatitude, <span class="dt">pch =</span> <span class="dv">19</span>, <span class="dt">col =</span> <span class="st">&quot;green&quot;</span>))</code></pre>
-<pre><code>## No projection provided, assuming longlat</code></pre>
+<span class="kw">SOplot</span>(x<span class="op">$</span>decimalLongitude, x<span class="op">$</span>decimalLatitude, <span class="dt">pch =</span> <span class="dv">19</span>, <span class="dt">col =</span> <span class="st">&quot;black&quot;</span>)
+<span class="kw">with</span>(x <span class="op">%&gt;%</span><span class="st"> </span>dplyr<span class="op">::</span><span class="kw">filter</span>(aphiaID <span class="op">==</span><span class="st"> </span>my_aphia_id), 
+     <span class="kw">SOplot</span>(decimalLongitude, decimalLatitude, <span class="dt">pch =</span> <span class="dv">19</span>, <span class="dt">col =</span> <span class="st">&quot;green&quot;</span>))</code></pre>
 <p><img src="_main_files/figure-html/map2-1.png" width="672" /></p>
-<p>Reorganise data:</p>
+<p>Reorganise data into presence/absence by sampling site:</p>
 <pre class="sourceCode r"><code class="sourceCode r">xfit &lt;-<span class="st"> </span>x <span class="op">%&gt;%</span><span class="st"> </span>dplyr<span class="op">::</span><span class="kw">rename</span>(<span class="dt">lon =</span> <span class="st">&quot;decimalLongitude&quot;</span>, <span class="dt">lat =</span> <span class="st">&quot;decimalLatitude&quot;</span>) <span class="op">%&gt;%</span>
-<span class="st">  </span><span class="kw">group_by</span>(lon, lat) <span class="op">%&gt;%</span><span class="st"> </span>dplyr<span class="op">::</span><span class="kw">summarize</span>(<span class="dt">present =</span> <span class="kw">any</span>(my_aphia_id <span class="op">%in%</span><span class="st"> </span>aphiaID))</code></pre>
+<span class="st">    </span><span class="kw">group_by</span>(lon, lat) <span class="op">%&gt;%</span>
+<span class="st">    </span>dplyr<span class="op">::</span><span class="kw">summarize</span>(<span class="dt">present =</span> <span class="kw">any</span>(my_aphia_id <span class="op">%in%</span><span class="st"> </span>aphiaID))</code></pre>
 </div>
 <div id="environmental-data" class="section level2">
 <h2><span class="header-section-number">2.4</span> Environmental data</h2>
@@ -229,29 +234,31 @@ my_data_directory &lt;-<span class="st"> </span><span class="kw">tempdir</span>(
 <span class="co">## the data source we want</span>
 data_source &lt;-<span class="st"> </span><span class="kw">sources_sdm</span>(<span class="st">&quot;Southern Ocean marine environmental data&quot;</span>)
 
+<span class="co">## fetch the data</span>
 status &lt;-<span class="st"> </span><span class="kw">bb_get</span>(data_source, <span class="dt">local_file_root =</span> my_data_directory, <span class="dt">verbose =</span> <span class="ot">TRUE</span>)</code></pre>
 <pre><code>## 
-## Fri May 24 15:38:05 2019
+## Tue May 28 12:29:49 2019
 ## Synchronizing dataset: Southern Ocean marine environmental data
 ## Source URL https://data.aad.gov.au/eds/4742/download
 ## --------------------------------------------------------------------------------------------
 ## 
-##  this dataset path is: /tmp/Rtmpb6TfTc/data.aad.gov.au/eds/4742
+##  this dataset path is: /tmp/RtmpFYFABG/data.aad.gov.au/eds/4742
 ##  building file list ... done.
 ##  downloading file 1 of 1: https://data.aad.gov.au/eds/4742/download ...  file unchanged on server, not downloading.
-##   decompressing: /tmp/Rtmpb6TfTc/data.aad.gov.au/eds/4742/download.zip ... no new files to extract (not overwriting existing files) ... done.
+##   decompressing: /tmp/RtmpFYFABG/data.aad.gov.au/eds/4742/download.zip ... no new files to extract (not overwriting existing files) ... done.
 ## 
-## Fri May 24 15:38:05 2019 dataset synchronization complete: Southern Ocean marine environmental data</code></pre>
+## Tue May 28 12:29:51 2019 dataset synchronization complete: Southern Ocean marine environmental data</code></pre>
 <pre class="sourceCode r"><code class="sourceCode r">nc_files &lt;-<span class="st"> </span><span class="kw">Filter</span>(<span class="cf">function</span>(z) <span class="kw">grepl</span>(<span class="st">&quot;</span><span class="ch">\\</span><span class="st">.nc$&quot;</span>, z), status<span class="op">$</span>files[[<span class="dv">1</span>]]<span class="op">$</span>file)
 
 <span class="co">## create a raster stack of all layers</span>
 env_stack &lt;-<span class="st"> </span><span class="kw">stack</span>(nc_files)
 
-<span class="co">## the first few files</span>
+<span class="co">## the first few layers</span>
 <span class="kw">head</span>(<span class="kw">names</span>(env_stack))</code></pre>
 <pre><code>## [1] &quot;chla_ampli_alltime_2005_2012&quot; &quot;chla_max_alltime_2005_2012&quot;  
 ## [3] &quot;chla_mean_alltime_2005_2012&quot;  &quot;chla_min_alltime_2005_2012&quot;  
 ## [5] &quot;chla_sd_alltime_2005_2012&quot;    &quot;depth&quot;</code></pre>
+<p>Select just the <code>depth</code> and <code>ice_cover_mean</code> layers and extract their values at our sampling locations:</p>
 <pre class="sourceCode r"><code class="sourceCode r">env_stack &lt;-<span class="st"> </span><span class="kw">subset</span>(env_stack, <span class="kw">c</span>(<span class="st">&quot;depth&quot;</span>, <span class="st">&quot;ice_cover_mean&quot;</span>))
 
 temp &lt;-<span class="st"> </span><span class="kw">as.data.frame</span>(raster<span class="op">::</span><span class="kw">extract</span>(env_stack, xfit[, <span class="kw">c</span>(<span class="st">&quot;lon&quot;</span>, <span class="st">&quot;lat&quot;</span>)]))
@@ -271,6 +278,7 @@ xfit &lt;-<span class="st"> </span><span class="kw">bind_cols</span>(xfit, temp)
 </div>
 <div id="fit-model" class="section level2">
 <h2><span class="header-section-number">2.5</span> Fit model</h2>
+<p>We have presence/absence data, so we’ll fit a simple binomial model. The probability of presence of <em>Euphausia crystallorophias</em> is fitted as a smooth function of depth and mean sea ice cover:</p>
 <pre class="sourceCode r"><code class="sourceCode r"><span class="kw">library</span>(mgcv)
 
 fit &lt;-<span class="st"> </span><span class="kw">gam</span>(present <span class="op">~</span><span class="st"> </span><span class="kw">s</span>(depth) <span class="op">+</span><span class="st"> </span><span class="kw">s</span>(ice_cover_mean), <span class="dt">family =</span> binomial, <span class="dt">data =</span> xfit)
@@ -298,13 +306,15 @@ fit &lt;-<span class="st"> </span><span class="kw">gam</span>(present <span clas
 ## 
 ## R-sq.(adj) =  0.265   Deviance explained = 32.5%
 ## UBRE = -0.64176  Scale est. = 1         n = 2390</code></pre>
-<pre class="sourceCode r"><code class="sourceCode r"><span class="kw">plot</span>(fit, <span class="dt">pages =</span> <span class="dv">1</span>)</code></pre>
-<p><img src="_main_files/figure-html/mod1-1.png" width="672" /></p>
+<p>The fits to depth and ice cover:</p>
+<pre class="sourceCode r"><code class="sourceCode r"><span class="kw">plot</span>(fit, <span class="dt">pages =</span> <span class="dv">1</span>, <span class="dt">shade =</span> <span class="ot">TRUE</span>)</code></pre>
+<p><img src="_main_files/figure-html/mod2-1.png" width="672" /></p>
 </div>
 <div id="predict-from-model" class="section level2">
 <h2><span class="header-section-number">2.6</span> Predict from model</h2>
 <pre class="sourceCode r"><code class="sourceCode r">xpred &lt;-<span class="st"> </span><span class="kw">expand.grid</span>(<span class="dt">lon =</span> <span class="kw">seq</span>(<span class="dt">from =</span> <span class="kw">floor</span>(<span class="kw">min</span>(xfit<span class="op">$</span>lon)), <span class="dt">to =</span> <span class="kw">ceiling</span>(<span class="kw">max</span>(xfit<span class="op">$</span>lon)), <span class="dt">by =</span> <span class="fl">0.25</span>),
-                    <span class="dt">lat =</span> <span class="kw">seq</span>(<span class="dt">from =</span> <span class="kw">floor</span>(<span class="kw">min</span>(xfit<span class="op">$</span>lat)), <span class="dt">to =</span> <span class="kw">ceiling</span>(<span class="kw">max</span>(xfit<span class="op">$</span>lat)), <span class="dt">by =</span> <span class="fl">0.25</span>))
+                     <span class="dt">lat =</span> <span class="kw">seq</span>(<span class="dt">from =</span> <span class="kw">floor</span>(<span class="kw">min</span>(xfit<span class="op">$</span>lat)), <span class="dt">to =</span> <span class="kw">ceiling</span>(<span class="kw">max</span>(xfit<span class="op">$</span>lat)), <span class="dt">by =</span> <span class="fl">0.25</span>))
+
 xpred &lt;-<span class="st"> </span><span class="kw">bind_cols</span>(<span class="kw">as.data.frame</span>(xpred), <span class="kw">as.data.frame</span>(raster<span class="op">::</span><span class="kw">extract</span>(env_stack, xpred[, <span class="kw">c</span>(<span class="st">&quot;lon&quot;</span>, <span class="st">&quot;lat&quot;</span>)])))
 
 xpred<span class="op">$</span>predicted &lt;-<span class="st"> </span><span class="kw">predict</span>(fit, <span class="dt">newdata =</span> xpred, <span class="dt">type =</span> <span class="st">&quot;response&quot;</span>)
@@ -316,7 +326,33 @@ pr &lt;-<span class="st"> </span><span class="kw">rasterFromXYZ</span>(xpred[, <
 <pre class="sourceCode r"><code class="sourceCode r"><span class="kw">SOmap</span>(<span class="dt">Trim =</span> <span class="kw">max</span>(x<span class="op">$</span>decimalLatitude))
 <span class="kw">SOplot</span>(pr)</code></pre>
 <p><img src="_main_files/figure-html/predmap-1.png" width="672" /></p>
+</div>
+<div id="other-bits-and-pieces" class="section level2">
+<h2><span class="header-section-number">2.7</span> Other bits and pieces</h2>
+<div id="place-names" class="section level3">
+<h3><span class="header-section-number">2.7.1</span> Place names</h3>
+<pre class="sourceCode r"><code class="sourceCode r"><span class="kw">library</span>(antanym)
 
+<span class="co">## get data</span>
+xn &lt;-<span class="st"> </span><span class="kw">an_read</span>(<span class="dt">cache =</span> <span class="st">&quot;session&quot;</span>, <span class="dt">sp =</span> <span class="ot">TRUE</span>)
+
+<span class="co">## reduce to one name per feature</span>
+xn &lt;-<span class="st"> </span><span class="kw">an_preferred</span>(xn, <span class="dt">origin =</span> <span class="st">&quot;United Kingdom&quot;</span>)
+
+<span class="co">## ask for suggestions in our region to show on our map</span>
+xns &lt;-<span class="st"> </span><span class="kw">an_suggest</span>(xn, <span class="dt">map_scale =</span> <span class="fl">20e6</span>, <span class="dt">map_extent =</span> <span class="kw">extent</span>(pr))
+
+<span class="co">## transform to our map projection, convert to data frame, take the top 10</span>
+xns &lt;-<span class="st"> </span><span class="kw">as_tibble</span>(<span class="kw">SOproj</span>(xns)) <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">head</span>(<span class="dv">10</span>)</code></pre>
+<p>Add them to the map:</p>
+<pre class="sourceCode r"><code class="sourceCode r"><span class="kw">SOmap</span>(<span class="dt">Trim =</span> <span class="kw">max</span>(x<span class="op">$</span>decimalLatitude))
+<span class="kw">SOplot</span>(pr)
+<span class="kw">with</span>(xns, <span class="kw">points</span>(<span class="dt">x =</span> longitude, <span class="dt">y =</span> latitude, <span class="dt">pch =</span> <span class="dv">16</span>))
+<span class="kw">with</span>(xns, <span class="kw">text</span>(<span class="dt">x =</span> longitude, <span class="dt">y =</span> latitude, <span class="dt">labels =</span> place_name, 
+               <span class="dt">cex =</span> <span class="fl">0.75</span>, <span class="dt">pos =</span> <span class="dv">2</span> <span class="op">+</span><span class="st"> </span><span class="dv">2</span><span class="op">*</span>(<span class="kw">seq_len</span>(<span class="kw">nrow</span>(xns)) <span class="op">%%</span><span class="st"> </span><span class="dv">2</span>)))</code></pre>
+<p><img src="_main_files/figure-html/predmap2-1.png" width="672" /></p>
+
+</div>
 </div>
 </div>
 <p style="text-align: center;">
