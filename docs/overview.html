@@ -140,6 +140,26 @@ img {
 <li><a href="overview.html#place-names"><span class="toc-section-number">2.7.1</span> Place names</a></li>
 </ul></li>
 </ul></li>
+<li class="has-sub"><a href="introduction-to-r-and-the-tidyverse.html#introduction-to-r-and-the-tidyverse"><span class="toc-section-number">3</span> Introduction to R and the tidyverse</a><ul>
+<li><a href="introduction-to-r-and-the-tidyverse.html#r"><span class="toc-section-number">3.1</span> R</a></li>
+<li><a href="introduction-to-r-and-the-tidyverse.html#the-tidyverse"><span class="toc-section-number">3.2</span> The tidyverse</a></li>
+</ul></li>
+<li><a href="biological-data.html#biological-data"><span class="toc-section-number">4</span> Biological data</a></li>
+<li class="has-sub"><a href="mapping.html#mapping"><span class="toc-section-number">5</span> Mapping</a><ul>
+<li><a href="mapping.html#somap"><span class="toc-section-number">5.1</span> SOmap</a></li>
+<li><a href="mapping.html#antanym"><span class="toc-section-number">5.2</span> antanym</a></li>
+</ul></li>
+<li class="has-sub"><a href="species-distribution-modelling.html#species-distribution-modelling"><span class="toc-section-number">6</span> Species distribution modelling</a><ul>
+<li><a href="species-distribution-modelling.html#introduction-and-review"><span class="toc-section-number">6.1</span> Introduction and review</a></li>
+<li><a href="species-distribution-modelling.html#methods"><span class="toc-section-number">6.2</span> Methods</a></li>
+<li class="has-sub"><a href="species-distribution-modelling.html#evaluation"><span class="toc-section-number">6.3</span> Evaluation</a><ul>
+<li><a href="species-distribution-modelling.html#other-modelling-approaches"><span class="toc-section-number">6.3.1</span> Other modelling approaches</a></li>
+</ul></li>
+</ul></li>
+<li class="has-sub"><a href="other-r-resources-for-southern-oceanantarctic-use.html#other-r-resources-for-southern-oceanantarctic-use"><span class="toc-section-number">7</span> Other R resources for Southern Ocean/Antarctic use</a><ul>
+<li><a href="other-r-resources-for-southern-oceanantarctic-use.html#diet-data-sohungry"><span class="toc-section-number">7.1</span> Diet data: sohungry</a></li>
+<li><a href="other-r-resources-for-southern-oceanantarctic-use.html#allometric-equations-solong"><span class="toc-section-number">7.2</span> Allometric equations: solong</a></li>
+</ul></li>
 </ul>
 </div>
 </div>
@@ -325,7 +345,7 @@ xpred<span class="op">$</span>predicted &lt;-<span class="st"> </span><span clas
 pr &lt;-<span class="st"> </span><span class="kw">rasterFromXYZ</span>(xpred[, <span class="kw">c</span>(<span class="st">&quot;lon&quot;</span>, <span class="st">&quot;lat&quot;</span>, <span class="st">&quot;predicted&quot;</span>)])
 <span class="kw">projection</span>(pr) &lt;-<span class="st"> &quot;+proj=longlat +datum=WGS84&quot;</span>
 
-my_cmap &lt;-<span class="st"> </span><span class="kw">hcl.colors</span>(<span class="dv">21</span>, <span class="st">&quot;Geyser&quot;</span>)</code></pre>
+my_cmap &lt;-<span class="st"> </span><span class="cf">if</span> (<span class="kw">getRversion</span>() <span class="op">&gt;=</span><span class="st"> &quot;3.6&quot;</span>) <span class="kw">hcl.colors</span>(<span class="dv">21</span>, <span class="st">&quot;Geyser&quot;</span>) <span class="cf">else</span> <span class="kw">topo.colors</span>(<span class="dv">21</span>)</code></pre>
 <p>Plot it:</p>
 <pre class="sourceCode r"><code class="sourceCode r">p &lt;-<span class="st"> </span><span class="kw">SOauto_map</span>(<span class="dt">x =</span> pr, <span class="dt">contours =</span> <span class="ot">FALSE</span>, <span class="dt">bathy =</span> pr)
 p<span class="op">$</span>bathy_palette &lt;-<span class="st"> </span>my_cmap
@@ -365,6 +385,7 @@ xns &lt;-<span class="st"> </span><span class="kw">as_tibble</span>(<span class=
 </div>
 <p style="text-align: center;">
 <a href="index.html"><button class="btn btn-default">Previous</button></a>
+<a href="introduction-to-r-and-the-tidyverse.html"><button class="btn btn-default">Next</button></a>
 </p>
 </div>
 </div>
