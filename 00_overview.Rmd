@@ -53,18 +53,20 @@ Plot the complete distribution of samples in black, and *Euphausia crystalloroph
 
 ```{r map1, message = FALSE}
 library(SOmap)
-SOauto_map(x$decimalLongitude, x$decimalLatitude, input_lines = FALSE, pcol = "black")
+SOauto_map(x$decimalLongitude, x$decimalLatitude, input_lines = FALSE, contours = FALSE, 
+           pcol = "black", pcex = 0.2)
 with(x %>% dplyr::filter(aphiaID == my_aphia_id), 
-     SOplot(decimalLongitude, decimalLatitude, pch = 19, col = "green"))
+     SOplot(decimalLongitude, decimalLatitude, pch = 19, cex = 0.2, col = "green"))
 ```
 
 Or as a polar stereo map:
 
 ```{r map2, message = FALSE}
-SOmap(Trim = max(x$decimalLatitude))
-SOplot(x$decimalLongitude, x$decimalLatitude, pch = 19, col = "black")
+basemap <- SOmap(Trim = ceiling(max(x$decimalLatitude))+1, Bathleg = FALSE)
+plot(basemap)
+SOplot(x$decimalLongitude, x$decimalLatitude, pch = 19, cex = 0.2, col = "black")
 with(x %>% dplyr::filter(aphiaID == my_aphia_id), 
-     SOplot(decimalLongitude, decimalLatitude, pch = 19, col = "green"))
+     SOplot(decimalLongitude, decimalLatitude, pch = 19, cex = 0.2, col = "green"))
 ```
 
 Reorganise data into presence/absence by sampling site:
@@ -141,13 +143,21 @@ xpred$predicted <- predict(fit, newdata = xpred, type = "response")
 ## create raster
 pr <- rasterFromXYZ(xpred[, c("lon", "lat", "predicted")])
 projection(pr) <- "+proj=longlat +datum=WGS84"
+
+my_cmap <- hcl.colors(21, "Geyser")
 ```
 
 Plot it:
 
+```{r predmap2}
+p <- SOauto_map(x = pr, contours = FALSE, bathy = pr)
+p$bathy_palette <- my_cmap
+p
+```
+
 ```{r predmap}
-SOmap(Trim = max(x$decimalLatitude))
-SOplot(pr)
+plot(basemap)
+SOplot(pr, col = my_cmap)
 ```
 
 ## Other bits and pieces
@@ -157,7 +167,7 @@ SOplot(pr)
 ```{r placenames1}
 library(antanym)
 
-## get data
+## get full SCAR gazetteer data
 xn <- an_read(cache = "session", sp = TRUE)
 
 ## reduce to one name per feature
@@ -167,15 +177,15 @@ xn <- an_preferred(xn, origin = "United Kingdom")
 xns <- an_suggest(xn, map_scale = 20e6, map_extent = extent(pr))
 
 ## transform to our map projection, convert to data frame, take the top 10
-xns <- as_tibble(SOproj(xns)) %>% head(10)
+xns <- as_tibble(SOproj(xns, target = basemap$projection)) %>% head(10)
 ```
 
 Add them to the map:
 
-```{r predmap2}
-SOmap(Trim = max(x$decimalLatitude))
-SOplot(pr)
-with(xns, points(x = longitude, y = latitude, pch = 16))
+```{r predmap3}
+plot(basemap)
+SOplot(pr, col = my_cmap)
+with(xns, points(x = longitude, y = latitude, pch = 16, cex = 0.4))
 with(xns, text(x = longitude, y = latitude, labels = place_name, 
                cex = 0.75, pos = 2 + 2*(seq_len(nrow(xns)) %% 2)))
 ```
