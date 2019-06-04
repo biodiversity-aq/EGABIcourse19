@@ -40,7 +40,7 @@ Participants will have to arrange their own travel and accommodation, but limite
 
 ## Registration
 Deadline for applications is: Friday June 15th where after you will be notified of the offer of a place and sent an invoice for the course fee.
-• Deadline for payment is Friday 7th July 2018 where after your place will be offered to someone else.
+• Deadline for payment is Friday 7th July 2019 where after your place will be offered to someone else.
 
 If you have questions or sugestion you can create an issue at www.github.com/biodiversity-aq/EGABIcourse19
 
