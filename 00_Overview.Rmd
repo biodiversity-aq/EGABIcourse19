@@ -17,11 +17,15 @@ library(dplyr)
 And from GitHub:
 
 ```{r pkgs2}
-library(remotes)
-pkgs <- c("SCAR/antanym", "AustralianAntarcticDivision/blueant",
-          "AustralianAntarcticDivision/SOmap")
-pkgs <- pkgs[!basename(pkgs) %in% installed.packages()[, 1]]
-for (pkg in pkgs) remotes::install_github(pkg)
+## packages with required minimum version
+pkgs <- c("SCAR/antanym" = NA, "AustralianAntarcticDivision/blueant" = NA,
+          "AustralianAntarcticDivision/SOmap" =  "0.3.0")
+for (pkg in names(pkgs)) {
+    if (!basename(pkg) %in% installed.packages()[, 1] ||
+        (!is.na(pkgs[[pkg]]) && packageVersion(basename(pkg)) < pkgs[[pkg]])) {
+        remotes::install_github(pkg)
+    }
+}
 ```
 
 ## Taxonomy
@@ -53,8 +57,7 @@ Plot the complete distribution of samples in black, and *Euphausia crystalloroph
 
 ```{r map1, message = FALSE}
 library(SOmap)
-SOauto_map(x$decimalLongitude, x$decimalLatitude, input_lines = FALSE, contours = FALSE, 
-           pcol = "black", pcex = 0.2)
+SOmap_auto(x$decimalLongitude, x$decimalLatitude, input_lines = FALSE, pcol = "black", pcex = 0.2)
 with(x %>% dplyr::filter(aphiaID == my_aphia_id), 
      SOplot(decimalLongitude, decimalLatitude, pch = 19, cex = 0.2, col = "green"))
 ```
@@ -62,7 +65,7 @@ with(x %>% dplyr::filter(aphiaID == my_aphia_id),
 Or as a polar stereo map:
 
 ```{r map2, message = FALSE}
-basemap <- SOmap(Trim = ceiling(max(x$decimalLatitude))+1, Bathleg = FALSE)
+basemap <- SOmap(trim = ceiling(max(x$decimalLatitude))+1, bathy_legend = FALSE)
 plot(basemap)
 SOplot(x$decimalLongitude, x$decimalLatitude, pch = 19, cex = 0.2, col = "black")
 with(x %>% dplyr::filter(aphiaID == my_aphia_id), 
@@ -150,7 +153,7 @@ my_cmap <- if (getRversion() >= "3.6") hcl.colors(21, "Geyser") else topo.colors
 Plot it:
 
 ```{r predmap2}
-p <- SOauto_map(x = pr, contours = FALSE, bathy = pr)
+p <- SOmap_auto(x = pr, bathy = pr)
 p$bathy_palette <- my_cmap
 p
 ```

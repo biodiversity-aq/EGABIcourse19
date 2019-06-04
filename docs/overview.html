@@ -178,11 +178,15 @@ pkgs &lt;-<span class="st"> </span><span class="kw">setdiff</span>(pkgs, <span c
 
 <span class="kw">library</span>(dplyr)</code></pre>
 <p>And from GitHub:</p>
-<pre class="sourceCode r"><code class="sourceCode r"><span class="kw">library</span>(remotes)
-pkgs &lt;-<span class="st"> </span><span class="kw">c</span>(<span class="st">&quot;SCAR/antanym&quot;</span>, <span class="st">&quot;AustralianAntarcticDivision/blueant&quot;</span>,
-          <span class="st">&quot;AustralianAntarcticDivision/SOmap&quot;</span>)
-pkgs &lt;-<span class="st"> </span>pkgs[<span class="op">!</span><span class="kw">basename</span>(pkgs) <span class="op">%in%</span><span class="st"> </span><span class="kw">installed.packages</span>()[, <span class="dv">1</span>]]
-<span class="cf">for</span> (pkg <span class="cf">in</span> pkgs) remotes<span class="op">::</span><span class="kw">install_github</span>(pkg)</code></pre>
+<pre class="sourceCode r"><code class="sourceCode r"><span class="co">## packages with required minimum version</span>
+pkgs &lt;-<span class="st"> </span><span class="kw">c</span>(<span class="st">&quot;SCAR/antanym&quot;</span> =<span class="st"> </span><span class="ot">NA</span>, <span class="st">&quot;AustralianAntarcticDivision/blueant&quot;</span> =<span class="st"> </span><span class="ot">NA</span>,
+          <span class="st">&quot;AustralianAntarcticDivision/SOmap&quot;</span> =<span class="st">  &quot;0.3.0&quot;</span>)
+<span class="cf">for</span> (pkg <span class="cf">in</span> <span class="kw">names</span>(pkgs)) {
+    <span class="cf">if</span> (<span class="op">!</span><span class="kw">basename</span>(pkg) <span class="op">%in%</span><span class="st"> </span><span class="kw">installed.packages</span>()[, <span class="dv">1</span>] <span class="op">||</span>
+<span class="st">        </span>(<span class="op">!</span><span class="kw">is.na</span>(pkgs[[pkg]]) <span class="op">&amp;&amp;</span><span class="st"> </span><span class="kw">packageVersion</span>(<span class="kw">basename</span>(pkg)) <span class="op">&lt;</span><span class="st"> </span>pkgs[[pkg]])) {
+        remotes<span class="op">::</span><span class="kw">install_github</span>(pkg)
+    }
+}</code></pre>
 </div>
 <div id="taxonomy" class="section level2">
 <h2><span class="header-section-number">2.2</span> Taxonomy</h2>
@@ -230,13 +234,12 @@ my_aphia_id &lt;-<span class="st"> </span>tax[[<span class="dv">1</span>]]<span 
 x &lt;-<span class="st"> </span><span class="kw">occurrence</span>(<span class="dt">datasetid =</span> <span class="st">&quot;cb16377b-56a8-4d95-802d-4eec02466773&quot;</span>)</code></pre>
 <p>Plot the complete distribution of samples in black, and <em>Euphausia crystallorophias</em> in green:</p>
 <pre class="sourceCode r"><code class="sourceCode r"><span class="kw">library</span>(SOmap)
-<span class="kw">SOauto_map</span>(x<span class="op">$</span>decimalLongitude, x<span class="op">$</span>decimalLatitude, <span class="dt">input_lines =</span> <span class="ot">FALSE</span>, <span class="dt">contours =</span> <span class="ot">FALSE</span>, 
-           <span class="dt">pcol =</span> <span class="st">&quot;black&quot;</span>, <span class="dt">pcex =</span> <span class="fl">0.2</span>)
+<span class="kw">SOmap_auto</span>(x<span class="op">$</span>decimalLongitude, x<span class="op">$</span>decimalLatitude, <span class="dt">input_lines =</span> <span class="ot">FALSE</span>, <span class="dt">pcol =</span> <span class="st">&quot;black&quot;</span>, <span class="dt">pcex =</span> <span class="fl">0.2</span>)
 <span class="kw">with</span>(x <span class="op">%&gt;%</span><span class="st"> </span>dplyr<span class="op">::</span><span class="kw">filter</span>(aphiaID <span class="op">==</span><span class="st"> </span>my_aphia_id), 
      <span class="kw">SOplot</span>(decimalLongitude, decimalLatitude, <span class="dt">pch =</span> <span class="dv">19</span>, <span class="dt">cex =</span> <span class="fl">0.2</span>, <span class="dt">col =</span> <span class="st">&quot;green&quot;</span>))</code></pre>
 <p><img src="_main_files/figure-html/map1-1.png" width="672" /></p>
 <p>Or as a polar stereo map:</p>
-<pre class="sourceCode r"><code class="sourceCode r">basemap &lt;-<span class="st"> </span><span class="kw">SOmap</span>(<span class="dt">Trim =</span> <span class="kw">ceiling</span>(<span class="kw">max</span>(x<span class="op">$</span>decimalLatitude))<span class="op">+</span><span class="dv">1</span>, <span class="dt">Bathleg =</span> <span class="ot">FALSE</span>)
+<pre class="sourceCode r"><code class="sourceCode r">basemap &lt;-<span class="st"> </span><span class="kw">SOmap</span>(<span class="dt">trim =</span> <span class="kw">ceiling</span>(<span class="kw">max</span>(x<span class="op">$</span>decimalLatitude))<span class="op">+</span><span class="dv">1</span>, <span class="dt">bathy_legend =</span> <span class="ot">FALSE</span>)
 <span class="kw">plot</span>(basemap)
 <span class="kw">SOplot</span>(x<span class="op">$</span>decimalLongitude, x<span class="op">$</span>decimalLatitude, <span class="dt">pch =</span> <span class="dv">19</span>, <span class="dt">cex =</span> <span class="fl">0.2</span>, <span class="dt">col =</span> <span class="st">&quot;black&quot;</span>)
 <span class="kw">with</span>(x <span class="op">%&gt;%</span><span class="st"> </span>dplyr<span class="op">::</span><span class="kw">filter</span>(aphiaID <span class="op">==</span><span class="st"> </span>my_aphia_id), 
@@ -347,7 +350,7 @@ pr &lt;-<span class="st"> </span><span class="kw">rasterFromXYZ</span>(xpred[, <
 
 my_cmap &lt;-<span class="st"> </span><span class="cf">if</span> (<span class="kw">getRversion</span>() <span class="op">&gt;=</span><span class="st"> &quot;3.6&quot;</span>) <span class="kw">hcl.colors</span>(<span class="dv">21</span>, <span class="st">&quot;Geyser&quot;</span>) <span class="cf">else</span> <span class="kw">topo.colors</span>(<span class="dv">21</span>)</code></pre>
 <p>Plot it:</p>
-<pre class="sourceCode r"><code class="sourceCode r">p &lt;-<span class="st"> </span><span class="kw">SOauto_map</span>(<span class="dt">x =</span> pr, <span class="dt">contours =</span> <span class="ot">FALSE</span>, <span class="dt">bathy =</span> pr)
+<pre class="sourceCode r"><code class="sourceCode r">p &lt;-<span class="st"> </span><span class="kw">SOmap_auto</span>(<span class="dt">x =</span> pr, <span class="dt">bathy =</span> pr)
 p<span class="op">$</span>bathy_palette &lt;-<span class="st"> </span>my_cmap
 p</code></pre>
 <p><img src="_main_files/figure-html/predmap2-1.png" width="672" /></p>
