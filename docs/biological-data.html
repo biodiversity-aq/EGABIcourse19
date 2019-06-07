@@ -2,35 +2,52 @@
 <html xmlns="http://www.w3.org/1999/xhtml" lang="" xml:lang="">
 <head>
 
-<meta charset="utf-8" />
-<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-<meta name="generator" content="pandoc" />
-<meta name="viewport" content="width=device-width, initial-scale=1" />
-<meta property="og:title" content="4 Biological data | SCAR-EGABI Tools for Southern Ocean Spatial Analysis and Modelling" />
-<meta property="og:type" content="book" />
+  <meta charset="utf-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <title>4 Biological data | SCAR-EGABI Tools for Southern Ocean Spatial Analysis and Modelling</title>
+  <meta name="description" content="Course material" />
+  <meta name="generator" content="bookdown 0.10 and GitBook 2.6.7" />
 
+  <meta property="og:title" content="4 Biological data | SCAR-EGABI Tools for Southern Ocean Spatial Analysis and Modelling" />
+  <meta property="og:type" content="book" />
+  
+  
+  <meta property="og:description" content="Course material" />
+  
 
-<meta property="og:description" content="Course material" />
-
+  <meta name="twitter:card" content="summary" />
+  <meta name="twitter:title" content="4 Biological data | SCAR-EGABI Tools for Southern Ocean Spatial Analysis and Modelling" />
+  
+  <meta name="twitter:description" content="Course material" />
+  
 
 <meta name="author" content="Anton Van de Putte, Charlène Guillaumot, Grant Humphries, Huw Griffith, Ben Raymond" />
 
 
 
-<meta name="description" content="Course material">
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="apple-mobile-web-app-capable" content="yes" />
+  <meta name="apple-mobile-web-app-status-bar-style" content="black" />
+  
+  
+<link rel="prev" href="introduction-to-r-and-the-tidyverse.html">
+<link rel="next" href="mapping.html">
+<script src="libs/jquery-2.2.3/jquery.min.js"></script>
+<link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-table.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-bookdown.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-highlight.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-search.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-fontsettings.css" rel="stylesheet" />
 
-<title>4 Biological data | SCAR-EGABI Tools for Southern Ocean Spatial Analysis and Modelling</title>
-
-<script src="libs/jquery-1.11.3/jquery.min.js"></script>
-<meta name="viewport" content="width=device-width, initial-scale=1" />
-<link href="libs/bootstrap-3.3.5/css/bootstrap.min.css" rel="stylesheet" />
-<script src="libs/bootstrap-3.3.5/js/bootstrap.min.js"></script>
-<script src="libs/bootstrap-3.3.5/shim/html5shiv.min.js"></script>
-<script src="libs/bootstrap-3.3.5/shim/respond.min.js"></script>
-<script src="libs/navigation-1.1/tabsets.js"></script>
 
 
-<style type="text/css">code{white-space: pre;}</style>
+
+
+
+
+
+
 <style type="text/css">
 a.sourceLine { display: inline-block; line-height: 1.25; }
 a.sourceLine { pointer-events: none; color: inherit; text-decoration: inherit; }
@@ -94,100 +111,127 @@ code span.va { color: #19177c; } /* Variable */
 code span.vs { color: #4070a0; } /* VerbatimString */
 code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
 </style>
-<style type="text/css">
-  pre:not([class]) {
-    background-color: white;
-  }
-</style>
 
-
-
-<style type = "text/css">
-.main-container {
-  max-width: 940px;
-  margin-left: auto;
-  margin-right: auto;
-}
-code {
-  color: inherit;
-  background-color: rgba(0, 0, 0, 0.04);
-}
-img {
-  max-width:100%;
-  height: auto;
-}
-</style>
+<link rel="stylesheet" href="styles.css" type="text/css" />
 </head>
 
 <body>
 
-<div class="container-fluid main-container">
 
 
-<div class="row">
-<div class="col-sm-12">
-<div id="TOC">
-<ul>
-<li><a href="index.html#about-this"><span class="toc-section-number">1</span> About this</a></li>
-<li class="has-sub"><a href="overview.html#overview"><span class="toc-section-number">2</span> Overview</a><ul>
-<li><a href="overview.html#preparation"><span class="toc-section-number">2.1</span> Preparation</a></li>
-<li><a href="overview.html#taxonomy"><span class="toc-section-number">2.2</span> Taxonomy</a></li>
-<li><a href="overview.html#occurrences"><span class="toc-section-number">2.3</span> Occurrences</a></li>
-<li><a href="overview.html#environmental-data"><span class="toc-section-number">2.4</span> Environmental data</a></li>
-<li><a href="overview.html#fit-model"><span class="toc-section-number">2.5</span> Fit model</a></li>
-<li><a href="overview.html#predict-from-model"><span class="toc-section-number">2.6</span> Predict from model</a></li>
-<li class="has-sub"><a href="overview.html#other-bits-and-pieces"><span class="toc-section-number">2.7</span> Other bits and pieces</a><ul>
-<li><a href="overview.html#place-names"><span class="toc-section-number">2.7.1</span> Place names</a></li>
+  <div class="book without-animation with-summary font-size-2 font-family-1" data-basepath=".">
+
+    <div class="book-summary">
+      <nav role="navigation">
+
+<ul class="summary">
+<li class="chapter" data-level="1" data-path="index.html"><a href="index.html"><i class="fa fa-check"></i><b>1</b> About this</a><ul>
+<li class="chapter" data-level="" data-path="index.html"><a href="index.html#technical-stuff"><i class="fa fa-check"></i>Technical stuff</a></li>
+</ul></li>
+<li class="chapter" data-level="2" data-path="overview.html"><a href="overview.html"><i class="fa fa-check"></i><b>2</b> Overview</a><ul>
+<li class="chapter" data-level="2.1" data-path="overview.html"><a href="overview.html#preparation"><i class="fa fa-check"></i><b>2.1</b> Preparation</a></li>
+<li class="chapter" data-level="2.2" data-path="overview.html"><a href="overview.html#taxonomy"><i class="fa fa-check"></i><b>2.2</b> Taxonomy</a></li>
+<li class="chapter" data-level="2.3" data-path="overview.html"><a href="overview.html#occurrences"><i class="fa fa-check"></i><b>2.3</b> Occurrences</a></li>
+<li class="chapter" data-level="2.4" data-path="overview.html"><a href="overview.html#environmental-data"><i class="fa fa-check"></i><b>2.4</b> Environmental data</a></li>
+<li class="chapter" data-level="2.5" data-path="overview.html"><a href="overview.html#fit-model"><i class="fa fa-check"></i><b>2.5</b> Fit model</a></li>
+<li class="chapter" data-level="2.6" data-path="overview.html"><a href="overview.html#predict-from-model"><i class="fa fa-check"></i><b>2.6</b> Predict from model</a></li>
+<li class="chapter" data-level="2.7" data-path="overview.html"><a href="overview.html#other-bits-and-pieces"><i class="fa fa-check"></i><b>2.7</b> Other bits and pieces</a><ul>
+<li class="chapter" data-level="2.7.1" data-path="overview.html"><a href="overview.html#place-names"><i class="fa fa-check"></i><b>2.7.1</b> Place names</a></li>
 </ul></li>
 </ul></li>
-<li class="has-sub"><a href="introduction-to-r-and-the-tidyverse.html#introduction-to-r-and-the-tidyverse"><span class="toc-section-number">3</span> Introduction to R and the tidyverse</a><ul>
-<li><a href="introduction-to-r-and-the-tidyverse.html#r"><span class="toc-section-number">3.1</span> R</a></li>
-<li><a href="introduction-to-r-and-the-tidyverse.html#the-tidyverse"><span class="toc-section-number">3.2</span> The tidyverse</a></li>
+<li class="chapter" data-level="3" data-path="introduction-to-r-and-the-tidyverse.html"><a href="introduction-to-r-and-the-tidyverse.html"><i class="fa fa-check"></i><b>3</b> Introduction to R and the tidyverse</a><ul>
+<li class="chapter" data-level="3.1" data-path="introduction-to-r-and-the-tidyverse.html"><a href="introduction-to-r-and-the-tidyverse.html#r"><i class="fa fa-check"></i><b>3.1</b> R</a></li>
+<li class="chapter" data-level="3.2" data-path="introduction-to-r-and-the-tidyverse.html"><a href="introduction-to-r-and-the-tidyverse.html#the-tidyverse"><i class="fa fa-check"></i><b>3.2</b> The tidyverse</a></li>
 </ul></li>
-<li><a href="biological-data.html#biological-data"><span class="toc-section-number">4</span> Biological data</a></li>
-<li class="has-sub"><a href="mapping.html#mapping"><span class="toc-section-number">5</span> Mapping</a><ul>
-<li><a href="mapping.html#somap"><span class="toc-section-number">5.1</span> SOmap</a></li>
-<li><a href="mapping.html#antanym"><span class="toc-section-number">5.2</span> antanym</a></li>
+<li class="chapter" data-level="4" data-path="biological-data.html"><a href="biological-data.html"><i class="fa fa-check"></i><b>4</b> Biological data</a></li>
+<li class="chapter" data-level="5" data-path="mapping.html"><a href="mapping.html"><i class="fa fa-check"></i><b>5</b> Mapping</a><ul>
+<li class="chapter" data-level="5.1" data-path="mapping.html"><a href="mapping.html#somap"><i class="fa fa-check"></i><b>5.1</b> SOmap</a></li>
+<li class="chapter" data-level="5.2" data-path="mapping.html"><a href="mapping.html#antanym"><i class="fa fa-check"></i><b>5.2</b> antanym</a></li>
 </ul></li>
-<li class="has-sub"><a href="species-distribution-modelling.html#species-distribution-modelling"><span class="toc-section-number">6</span> Species distribution modelling</a><ul>
-<li><a href="species-distribution-modelling.html#introduction-and-review"><span class="toc-section-number">6.1</span> Introduction and review</a></li>
-<li><a href="species-distribution-modelling.html#methods"><span class="toc-section-number">6.2</span> Methods</a></li>
-<li class="has-sub"><a href="species-distribution-modelling.html#evaluation"><span class="toc-section-number">6.3</span> Evaluation</a><ul>
-<li><a href="species-distribution-modelling.html#other-modelling-approaches"><span class="toc-section-number">6.3.1</span> Other modelling approaches</a></li>
+<li class="chapter" data-level="6" data-path="species-distribution-modelling.html"><a href="species-distribution-modelling.html"><i class="fa fa-check"></i><b>6</b> Species distribution modelling</a><ul>
+<li class="chapter" data-level="6.1" data-path="species-distribution-modelling.html"><a href="species-distribution-modelling.html#introduction-and-review"><i class="fa fa-check"></i><b>6.1</b> Introduction and review</a></li>
+<li class="chapter" data-level="6.2" data-path="species-distribution-modelling.html"><a href="species-distribution-modelling.html#methods"><i class="fa fa-check"></i><b>6.2</b> Methods</a></li>
+<li class="chapter" data-level="6.3" data-path="species-distribution-modelling.html"><a href="species-distribution-modelling.html#evaluation"><i class="fa fa-check"></i><b>6.3</b> Evaluation</a><ul>
+<li class="chapter" data-level="6.3.1" data-path="species-distribution-modelling.html"><a href="species-distribution-modelling.html#other-modelling-approaches"><i class="fa fa-check"></i><b>6.3.1</b> Other modelling approaches</a></li>
 </ul></li>
 </ul></li>
-<li class="has-sub"><a href="other-r-resources-for-southern-oceanantarctic-use.html#other-r-resources-for-southern-oceanantarctic-use"><span class="toc-section-number">7</span> Other R resources for Southern Ocean/Antarctic use</a><ul>
-<li><a href="other-r-resources-for-southern-oceanantarctic-use.html#diet-data-sohungry"><span class="toc-section-number">7.1</span> Diet data: sohungry</a></li>
-<li><a href="other-r-resources-for-southern-oceanantarctic-use.html#allometric-equations-solong"><span class="toc-section-number">7.2</span> Allometric equations: solong</a></li>
+<li class="chapter" data-level="7" data-path="other-r-resources-for-southern-oceanantarctic-use.html"><a href="other-r-resources-for-southern-oceanantarctic-use.html"><i class="fa fa-check"></i><b>7</b> Other R resources for Southern Ocean/Antarctic use</a><ul>
+<li class="chapter" data-level="7.1" data-path="other-r-resources-for-southern-oceanantarctic-use.html"><a href="other-r-resources-for-southern-oceanantarctic-use.html#diet-data-sohungry"><i class="fa fa-check"></i><b>7.1</b> Diet data: sohungry</a></li>
+<li class="chapter" data-level="7.2" data-path="other-r-resources-for-southern-oceanantarctic-use.html"><a href="other-r-resources-for-southern-oceanantarctic-use.html#allometric-equations-solong"><i class="fa fa-check"></i><b>7.2</b> Allometric equations: solong</a></li>
 </ul></li>
 </ul>
-</div>
-</div>
-</div>
-<div class="row">
-<div class="col-sm-12">
+
+      </nav>
+    </div>
+
+    <div class="book-body">
+      <div class="body-inner">
+        <div class="book-header" role="navigation">
+          <h1>
+            <i class="fa fa-circle-o-notch fa-spin"></i><a href="./">SCAR-EGABI Tools for Southern Ocean Spatial Analysis and Modelling</a>
+          </h1>
+        </div>
+
+        <div class="page-wrapper" tabindex="-1" role="main">
+          <div class="page-inner">
+
+            <section class="normal" id="section-">
 <div id="biological-data" class="section level1">
 <h1><span class="header-section-number">4</span> Biological data</h1>
 
 </div>
-<p style="text-align: center;">
-<a href="introduction-to-r-and-the-tidyverse.html"><button class="btn btn-default">Previous</button></a>
-<a href="mapping.html"><button class="btn btn-default">Next</button></a>
-</p>
-</div>
-</div>
+            </section>
 
-
-</div>
-
+          </div>
+        </div>
+      </div>
+<a href="introduction-to-r-and-the-tidyverse.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
+<a href="mapping.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
+    </div>
+  </div>
+<script src="libs/gitbook-2.6.7/js/app.min.js"></script>
+<script src="libs/gitbook-2.6.7/js/lunr.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-search.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-sharing.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-fontsettings.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-bookdown.js"></script>
+<script src="libs/gitbook-2.6.7/js/jquery.highlight.js"></script>
 <script>
-
-// add bootstrap table styles to pandoc tables
-$(document).ready(function () {
-  $('tr.header').parent('thead').parent('table').addClass('table table-condensed');
+gitbook.require(["gitbook"], function(gitbook) {
+gitbook.start({
+"sharing": {
+"github": false,
+"facebook": true,
+"twitter": true,
+"google": false,
+"linkedin": false,
+"weibo": false,
+"instapaper": false,
+"vk": false,
+"all": ["facebook", "google", "twitter", "linkedin", "weibo", "instapaper"]
+},
+"fontsettings": {
+"theme": "white",
+"family": "sans",
+"size": 2
+},
+"edit": {
+"link": null,
+"text": null
+},
+"history": {
+"link": null,
+"text": null
+},
+"download": null,
+"toc": {
+"collapse": "section",
+"scroll_highlight": true
+}
 });
-
+});
 </script>
 
 </body>
+
 </html>
