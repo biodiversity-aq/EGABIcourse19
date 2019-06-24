@@ -2,7 +2,7 @@
 
 <img src="/images/EGABI_logo.svg" alt="EG-ABI Logo" title="EG-ABI Logo" width="150"  align="right"/>
 
-### 2-6 September 2019, Brussels, Belgium
+### 2-6 September 2019, KULeuven, Leuven, Belgium
 ## Course Scope
 
 The Scientific Committee on Antarctic Research (www.scar.org) is pleased to partner with the rOpenSci project and the Antarctic Biodiversity Portal (www.biodiversity.aq) in organising a short course on tools for Southern Ocean spatial analysis and modelling using R.
