@@ -39,7 +39,7 @@ The fee include full participation in the course, and digital copies of the cour
 Participants will have to arrange their own travel and accommodation, but limited travel support will be available in collaboration with Ent-Eco.
 
 ## Registration
-Deadline for applications is: Friday June 15th where after you will be notified of the offer of a place and sent an invoice for the course fee.
+Application for the course are closed.
 • Deadline for payment is Friday 7th July 2019 where after your place will be offered to someone else.
 
 If you have questions or sugestion you can create an issue at www.github.com/biodiversity-aq/EGABIcourse19
