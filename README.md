@@ -62,7 +62,7 @@ Participants will need to arrange their own travel and accommodation, but limite
 
 ## Registration
 
-Deadline for applications is Friday June 15th. After this date you will be notified of the offer of a place and sent an invoice for the course fee. The deadline for payment is Friday 7th July 2018. Failure to pay will lead to your place being offered to someone else.
+Applications for the course are closed. The deadline for payment is Friday 7th July 2018. Failure to pay will lead to your place being offered to someone else.
 
 you can register using this [form](https://docs.google.com/forms/d/e/1FAIpQLSfnxIDptkIJzhqm0FeYGrNwHiQRdUwQAltfKfsMfO9L49mJRQ/viewform)
 
