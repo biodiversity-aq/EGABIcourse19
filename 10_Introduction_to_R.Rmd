@@ -2,5 +2,7 @@
 
 ## R
 
+See [Getting Started in R](https://github.com/saghirb/Getting-Started-in-R/blob/master/Getting-Started-in-R.pdf) by [Saghir Bashir](https://github.com/saghirb).
+
 ## The tidyverse
 
