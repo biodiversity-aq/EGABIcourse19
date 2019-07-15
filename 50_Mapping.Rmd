@@ -7,14 +7,10 @@ if (packageVersion("SOmap") < 0.5)
   stop("This bookdown code currently requires the development version of SOmap.\nInstall with remotes::install_github(\"AustralianAntarcticDivision/SOmap\", ref = \"dev-0.5\")")
 ```
 
-Blurb.
+The `SOmap` package is intended to provide an easy way to produce nice-looking maps of Antarctica and the Southern Ocean. It is primarily focused on maps in polar stereographic projection (although the `SOmap_auto` function extends this to other projections). `SOmap` won't necessarily get you exactly the map you want. But if it doesn't, it should hopefully get you close enough that you can make modifications to suit your exact purposes.
 
-- intended to provide an easy way to get SO maps
-- primarily polar stereo projection, though SOmap_auto is not necessarily so
-- base/raster/sp
-- gg
+By default, `SOmap` works with base graphics (and associated functionality from packages such as `raster` and `sp`). It is also possible to work with `ggplot2`-based graphics, as described below.
 
-SOmap won't necessarily get you exactly the map you want. But it should hopefully get you close enough that you can make modifications to suit your exact purposes.
 
 ### Circumpolar maps
 
@@ -62,7 +58,72 @@ SOplot(my_points_ll, col = "blue")
 
 #### Adding raster layers
 
-#### Modifying the `SOmap` object
+First let's construct some artificial raster data (in longitude-latitude space) for demonstration purposes:
+
+```{r somap_raster1, message = FALSE, warning = FALSE}
+library(raster)
+temp <- as.data.frame(expand.grid(lon = seq(100, 140, by = 0.25), lat = seq(-65, -45, by = 0.1)))
+temp$val <- sqrt((temp$lon - 120)^2/3 + (temp$lat - -40)^2/5)
+## create raster object
+xr <- rasterFromXYZ(temp)
+projection(xr) <- "+proj=longlat +datum=WGS84"
+```
+
+`SOplot` will reproject and plot this for us:
+
+```{r somap_raster2}
+SOmap()
+SOplot(xr)
+```
+
+The legend is out of character with the rest of the map. We can use `SOleg` to fix that:
+
+```{r somap_raster3}
+## colour map to use
+my_colourmap <- colorRampPalette(c("#4D4140", "#596F7E", "#168B98",
+                                   "#ED5B67", "#E27766", "#DAAD50", "#EAC3A6"))(51)
+
+## draw the base map
+SOmap()
+
+## add our raster
+SOplot(xr, legend = FALSE, col = my_colourmap)
+
+## add the legend
+SOleg(xr, position = "topright", col = my_colourmap, ticks = 6,
+      type = "continuous", label = "My variable")
+```
+
+OK, well that worked but clearly the labels need tidying up. We can do that, but we have to be careful to make sure that the colour range of the legend matches that of the plotted raster.
+
+```{r somap_raster4}
+## draw the base map
+SOmap()
+
+## add our raster, controlling the colour range to span the values 0 to 30
+SOplot(xr, legend = FALSE, col = my_colourmap,
+       breaks = seq(0, 30, length.out = length(my_colourmap) + 1))
+
+## add the legend, again controlling the colour range
+SOleg(position = "topright", col = my_colourmap,
+      breaks = seq(0, 30, length.out = 7),
+      type = "continuous", label = "My variable")
+```
+
+
+Multiple rasters:
+
+```{r somap_raster5}
+xr2 <- shift(xr, x = -70) ## offset in longitude
+SOmap()
+SOplot(xr, legend = FALSE, col = my_colourmap)
+SOplot(xr2, legend = FALSE, col = my_colourmap)
+```
+
+
+
+
+#### Modifying maps
 
 Calls to `SOmap()`, `SOmanagement()`, `SOmap_auto()` return an object of class `SOmap`, `SOmap_management`, or `SOmap_auto`. These objects contain all of the data and plotting instructions required to draw the map. Calling `print()` or `plot()` on one of these objects will cause that code to be executed, and the object to be drawn in the current graphics device. Hence, calling `SOmap()` directly *without* assigning the result to a variable will make it appear in the graphics device, because the returned object is being printed to the console (and thus triggering the `print` method). But you can also assign the result to a variable, e.g. `myplot <- SOmap()` and then explicitly plot the object with `plot(myplot)`. The advantage of this is that you can potentially manipulate the `myplot` object to make changes to the map before plotting it.
 
@@ -150,6 +211,31 @@ myplotgg$ice[[1]]$plotargs$fill <- "green"
 plot(myplotgg)
 ```
 
+Or remove the bathymetric raster layer:
+
+```{r somap5d}
+temp <- myplotgg
+temp$bathy <- NULL
+temp$bathy_legend <- NULL
+plot(temp)
+```
+
+
+```{r somaphidden, echo = FALSE, eval = FALSE}
+## Adding multiple rasters gets tricky (if they require separate colour scales), because `ggplot2` is only designed to work with a single colour scale per geometry type. However, the `ggnewscale` package can help here:
+
+## these functions don't exist in base R < 3.5 but are used by ggnewscale
+isFALSE <- function (x) is.logical(x) && length(x) == 1L && !is.na(x) && !x
+isTRUE <- function (x) is.logical(x) && length(x) == 1L && !is.na(x) && x
+```
+
+```{r somap5e, include = FALSE, eval = FALSE}
+library(ggnewscale)
+plot(myplotgg) + new_scale_fill() +
+  geom_raster(data = as.data.frame(xr, xy = TRUE), aes(x = x, y = y, fill = val), inherit.aes = FALSE) +
+  scale_fill_gradientn(colors = my_colourmap, na.value = NA, name = "My variable")
+```
+
 
 
 ##### Modifying the `ggplot` object.
@@ -173,7 +259,7 @@ When constructing maps, we commonly want to show features like oceanographic fro
 
 ### quantarcticR
 
-Note, this package is still in development. Install if needed:
+Note, this package is still in development, so the usage as shown here might change in later versions. Install if needed:
 
 ```{r eval = FALSE}
 remotes::install_github("SCAR-sandpit/quantarcticR")
