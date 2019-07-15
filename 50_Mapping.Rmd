@@ -2,4 +2,45 @@
 
 ## SOmap
 
-## antanym
+## Supporting data
+
+When constructing maps, we commonly want to show features like oceanographic fronts, ice extent, coastline, place names, and MPA boundaries. There are a few sources of such data:
+
+- some layers are bundled into `SOmap`, see the `SOmap::SOmap_data` object
+- `antanym` provides access to the SCAR Composite Gazetteer of place names
+- the `quantarcticR` package provides access to [Quantarctica](http://quantarctica.npolar.no/) data layers.
+
+### quantarcticR
+
+Note, this package is still in development. Install if needed:
+
+```{r}
+remotes::install_github("SCAR-sandpit/quantarcticR")
+```
+
+Example usage:
+
+```{r}
+library(quantarcticR)
+ds <- qa_datasets() ## all available layers
+head(ds)
+
+## more info about a particular layer
+my_layer <- qa_dataset("Median sea ice extent 1981-2010")
+my_layer
+
+## fetch the actual data for that layer
+layer_data <- qa_get(my_layer)
+
+## plot it
+plot(layer_data[layer_data$MONTH == "October", ])
+
+## or add to a SOmap
+SOmap(trim = -50, border_width = 0.5)
+SOplot(layer_data[layer_data$MONTH == "October", ], col = "red")
+
+```
+
+### antanym
+
+See the [overview](overview.html) article.
