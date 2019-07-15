@@ -6,6 +6,10 @@ documentclass: book
 site: bookdown::bookdown_site
 ---
 
+```{r echo = FALSE}
+library(knitr)
+```
+
 # About this
 
 Blah blah

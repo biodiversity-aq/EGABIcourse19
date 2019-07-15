@@ -119,8 +119,15 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
 </ul></li>
 <li class="chapter" data-level="4" data-path="biological-data.html"><a href="biological-data.html"><i class="fa fa-check"></i><b>4</b> Biological data</a></li>
 <li class="chapter" data-level="5" data-path="mapping.html"><a href="mapping.html"><i class="fa fa-check"></i><b>5</b> Mapping</a><ul>
-<li class="chapter" data-level="5.1" data-path="mapping.html"><a href="mapping.html#somap"><i class="fa fa-check"></i><b>5.1</b> SOmap</a></li>
-<li class="chapter" data-level="5.2" data-path="mapping.html"><a href="mapping.html#antanym"><i class="fa fa-check"></i><b>5.2</b> antanym</a></li>
+<li class="chapter" data-level="5.1" data-path="mapping.html"><a href="mapping.html#somap"><i class="fa fa-check"></i><b>5.1</b> SOmap</a><ul>
+<li class="chapter" data-level="5.1.1" data-path="mapping.html"><a href="mapping.html#circumpolar-maps"><i class="fa fa-check"></i><b>5.1.1</b> Circumpolar maps</a></li>
+<li class="chapter" data-level="5.1.2" data-path="mapping.html"><a href="mapping.html#non-circumpolar-maps"><i class="fa fa-check"></i><b>5.1.2</b> Non-circumpolar maps</a></li>
+<li class="chapter" data-level="5.1.3" data-path="mapping.html"><a href="mapping.html#plotting-via-ggplot2"><i class="fa fa-check"></i><b>5.1.3</b> Plotting via ggplot2</a></li>
+</ul></li>
+<li class="chapter" data-level="5.2" data-path="mapping.html"><a href="mapping.html#supporting-data-for-maps"><i class="fa fa-check"></i><b>5.2</b> Supporting data for maps</a><ul>
+<li class="chapter" data-level="5.2.1" data-path="mapping.html"><a href="mapping.html#quantarcticr"><i class="fa fa-check"></i><b>5.2.1</b> quantarcticR</a></li>
+<li class="chapter" data-level="5.2.2" data-path="mapping.html"><a href="mapping.html#antanym"><i class="fa fa-check"></i><b>5.2.2</b> antanym</a></li>
+</ul></li>
 </ul></li>
 <li class="chapter" data-level="6" data-path="species-distribution-modelling.html"><a href="species-distribution-modelling.html"><i class="fa fa-check"></i><b>6</b> Species distribution modelling</a><ul>
 <li class="chapter" data-level="6.1" data-path="species-distribution-modelling.html"><a href="species-distribution-modelling.html#introduction-and-review"><i class="fa fa-check"></i><b>6.1</b> Introduction and review</a></li>
@@ -161,7 +168,6 @@ pkgs &lt;-<span class="st"> </span><span class="kw">setdiff</span>(pkgs, <span c
 <span class="cf">if</span> (<span class="kw">length</span>(pkgs) <span class="op">&gt;</span><span class="st"> </span><span class="dv">0</span>) <span class="kw">install.packages</span>(pkgs)
 
 <span class="kw">library</span>(dplyr)</code></pre></div>
-<pre><code>## Warning: package &#39;dplyr&#39; was built under R version 3.4.4</code></pre>
 <p>And from GitHub:</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">## packages with required minimum version
 pkgs &lt;-<span class="st"> </span><span class="kw">c</span>(<span class="st">&quot;SCAR/antanym&quot;</span> =<span class="st"> </span><span class="ot">NA</span>, <span class="st">&quot;AustralianAntarcticDivision/blueant&quot;</span> =<span class="st"> </span><span class="ot">NA</span>,
@@ -347,22 +353,12 @@ p</code></pre></div>
 <h2><span class="header-section-number">2.7</span> Other bits and pieces</h2>
 <div id="place-names" class="section level3">
 <h3><span class="header-section-number">2.7.1</span> Place names</h3>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">library</span>(antanym)</code></pre></div>
-<pre><code>## The Composite Gazetteer of Antarctica is made available under a CC-BY license.
-## If you use it, please cite it:
-## Composite Gazetteer of Antarctica, Scientific Committee on Antarctic Research. GCMD Metadata (http://gcmd.nasa.gov/records/SCAR_Gazetteer.html)</code></pre>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">## get full SCAR gazetteer data
-xn &lt;-<span class="st"> </span><span class="kw">an_read</span>(<span class="dt">cache =</span> <span class="st">&quot;session&quot;</span>, <span class="dt">sp =</span> <span class="ot">TRUE</span>)</code></pre></div>
-<pre><code>## Warning: 64974 parsing failures.
-##  row                col           expected   actual         file
-## 1018 accepted_by        1/0/T/F/TRUE/FALSE U Harris literal data
-## 1018 verified_by        1/0/T/F/TRUE/FALSE U Harris literal data
-## 1412 accepted_by        1/0/T/F/TRUE/FALSE AUS      literal data
-## 2185 verified_by        1/0/T/F/TRUE/FALSE Brolsma  literal data
-## 2376 scar_feature_class 1/0/T/F/TRUE/FALSE 3        literal data
-## .... .................. .................. ........ ............
-## See problems(...) for more details.</code></pre>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">## reduce to one name per feature
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">library</span>(antanym)
+
+## get full SCAR gazetteer data
+xn &lt;-<span class="st"> </span><span class="kw">an_read</span>(<span class="dt">cache =</span> <span class="st">&quot;session&quot;</span>, <span class="dt">sp =</span> <span class="ot">TRUE</span>)
+
+## reduce to one name per feature
 xn &lt;-<span class="st"> </span><span class="kw">an_preferred</span>(xn, <span class="dt">origin =</span> <span class="st">&quot;United Kingdom&quot;</span>)
 
 ## ask for suggestions in our region to show on our map

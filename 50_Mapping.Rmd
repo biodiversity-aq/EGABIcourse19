@@ -2,7 +2,168 @@
 
 ## SOmap
 
-## Supporting data
+```{r somapcheck, echo = FALSE}
+if (packageVersion("SOmap") < 0.5)
+  stop("This bookdown code currently requires the development version of SOmap.\nInstall with remotes::install_github(\"AustralianAntarcticDivision/SOmap\", ref = \"dev-0.5\")")
+```
+
+Blurb.
+
+- intended to provide an easy way to get SO maps
+- primarily polar stereo projection, though SOmap_auto is not necessarily so
+- base/raster/sp
+- gg
+
+SOmap won't necessarily get you exactly the map you want. But it should hopefully get you close enough that you can make modifications to suit your exact purposes.
+
+### Circumpolar maps
+
+A basic circumpolar map in polar stereographic projection:
+
+```{r somap1}
+library(SOmap)
+SOmap()
+```
+
+`SOmanagement()` provides a number of contextual layers such as MPA boundaries and management zones.
+
+```{r somap2}
+SOmap(trim = -40) ## plot to 40S
+## add the exclusive economic zones management layer
+SOmanagement(eez = TRUE)
+```
+
+#### Adding points
+
+```{r somap_pts1}
+## some longitude/latitude data
+library(sp)
+my_points_ll <- data.frame(lon = seq(0, 350, by = 10), lat = -55, z = runif(36))
+coordinates(my_points_ll) <- c("lon", "lat")
+projection(my_points_ll) <- "+proj=longlat +datum=WGS84"
+```
+
+This needs to be reprojected to match our map before plotting. The `SOproj` function does this:
+
+```{r somap_pts2}
+## reproject to our SOmap projection
+my_points <- SOproj(my_points_ll)
+## and plot
+SOmap()
+plot(my_points, col = "blue", add = TRUE)
+```
+
+Or use `SOplot` to reproject and plot in one step:
+
+```{r somap_pts3}
+SOmap()
+SOplot(my_points_ll, col = "blue")
+```
+
+#### Adding raster layers
+
+#### Modifying the `SOmap` object
+
+Calls to `SOmap()`, `SOmanagement()`, `SOmap_auto()` return an object of class `SOmap`, `SOmap_management`, or `SOmap_auto`. These objects contain all of the data and plotting instructions required to draw the map. Calling `print()` or `plot()` on one of these objects will cause that code to be executed, and the object to be drawn in the current graphics device. Hence, calling `SOmap()` directly *without* assigning the result to a variable will make it appear in the graphics device, because the returned object is being printed to the console (and thus triggering the `print` method). But you can also assign the result to a variable, e.g. `myplot <- SOmap()` and then explicitly plot the object with `plot(myplot)`. The advantage of this is that you can potentially manipulate the `myplot` object to make changes to the map before plotting it.
+
+Note, this is likely to be fragile. Proceed at your own risk!
+
+```{r somap2a}
+mymap <- SOmap()
+names(mymap)
+```
+
+The object contains a `plot_sequence` component, which defines the order in which each part of the plot is drawn. The other components of the object contain the code required to draw each part. Take e.g. the ice component (this is the ice shelves, glacier tongues, etc). This is a list (in this case with only one element). Each element of the list specifies a function to run along with arguments to pass to it:
+
+```{r somap2b}
+str(mymap$ice)
+```
+
+We can modify the function and/or its arguments:
+
+```{r somap2c}
+mymap$ice[[1]]$plotargs$col <- "green"
+```
+
+```{r somap2d}
+plot(mymap)
+```
+
+### Non-circumpolar maps
+
+- via `SOmap_auto`
+- note that this is not always going to guess the best projection/extent
+- best viewed as a starting point for your own maps
+
+### Plotting via ggplot2
+
+The `SOmap` and `SOmap_auto` functions do their plotting using base graphics. If you are more comfortable working with `ggplot2`, this is also possible.
+
+- convert SOmap object to ggplot format using `SOgg()`
+- as with other `SOmap` functions, this returns an object that contains all of the information needed to generate the map. Printing or plotting this object will cause it to construct a `ggplot` object. Printing or plotting *that* object will cause it to be drawn to the graphics device, just like any other `ggplot` object.
+
+```{r somap3}
+myplot <- SOmap()
+
+myplotgg <- SOgg(myplot) ## creates a SOmap_gg object
+
+class(myplotgg)
+
+my_ggplot <- plot(myplotgg) ## creates a ggplot object
+
+class(my_ggplot)
+
+plot(my_ggplot) ## plot it
+```
+
+Or in one step (this will cause myplot to be converted to SOmap's internal gg format, then a ggplot object constructed from that, then that object will be plotted):
+
+```{r somap4}
+SOgg(myplot)
+```
+
+#### Modifying these maps
+
+We can modify these maps at two levels.
+
+##### Modifying the `SOmap_gg` object
+
+`SOmap_gg` objects are similar in structure to `SOmap` objects:
+
+```{r somap5}
+names(myplotgg)
+```
+
+Instead of base plotting functions, `SOmap_gg` objects use `ggplot2` function calls, e.g.:
+
+```{r somap5a}
+myplotgg$ice[[1]]$plotfun
+```
+
+We can modify these function and/or arguments in a similar manner to `SOmap` objects.
+
+```{r somap5b}
+myplotgg$ice[[1]]$plotargs$fill <- "green"
+```
+
+```{r somap5c}
+plot(myplotgg)
+```
+
+
+
+##### Modifying the `ggplot` object.
+
+Remember that printing or plotting a `SOmap_gg` object produces a `ggplot` object. This can be modified by adding e.g. layers or themes just like a normal `ggplot`. Remember to load the `ggplot2` library now that we are using `ggplot2` functions directly.
+
+```{r somap6, message = FALSE, warning = FALSE}
+library(ggplot2)
+
+my_ggplot + geom_point(data = as.data.frame(my_points), aes(lon, lat, colour = z), size = 3) +
+  scale_colour_distiller(palette = "Spectral")
+```
+
+## Supporting data for maps
 
 When constructing maps, we commonly want to show features like oceanographic fronts, ice extent, coastline, place names, and MPA boundaries. There are a few sources of such data:
 
@@ -14,13 +175,13 @@ When constructing maps, we commonly want to show features like oceanographic fro
 
 Note, this package is still in development. Install if needed:
 
-```{r}
+```{r eval = FALSE}
 remotes::install_github("SCAR-sandpit/quantarcticR")
 ```
 
 Example usage:
 
-```{r}
+```{r qR1}
 library(quantarcticR)
 ds <- qa_datasets() ## all available layers
 head(ds)

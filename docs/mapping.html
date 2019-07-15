@@ -119,8 +119,15 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
 </ul></li>
 <li class="chapter" data-level="4" data-path="biological-data.html"><a href="biological-data.html"><i class="fa fa-check"></i><b>4</b> Biological data</a></li>
 <li class="chapter" data-level="5" data-path="mapping.html"><a href="mapping.html"><i class="fa fa-check"></i><b>5</b> Mapping</a><ul>
-<li class="chapter" data-level="5.1" data-path="mapping.html"><a href="mapping.html#somap"><i class="fa fa-check"></i><b>5.1</b> SOmap</a></li>
-<li class="chapter" data-level="5.2" data-path="mapping.html"><a href="mapping.html#antanym"><i class="fa fa-check"></i><b>5.2</b> antanym</a></li>
+<li class="chapter" data-level="5.1" data-path="mapping.html"><a href="mapping.html#somap"><i class="fa fa-check"></i><b>5.1</b> SOmap</a><ul>
+<li class="chapter" data-level="5.1.1" data-path="mapping.html"><a href="mapping.html#circumpolar-maps"><i class="fa fa-check"></i><b>5.1.1</b> Circumpolar maps</a></li>
+<li class="chapter" data-level="5.1.2" data-path="mapping.html"><a href="mapping.html#non-circumpolar-maps"><i class="fa fa-check"></i><b>5.1.2</b> Non-circumpolar maps</a></li>
+<li class="chapter" data-level="5.1.3" data-path="mapping.html"><a href="mapping.html#plotting-via-ggplot2"><i class="fa fa-check"></i><b>5.1.3</b> Plotting via ggplot2</a></li>
+</ul></li>
+<li class="chapter" data-level="5.2" data-path="mapping.html"><a href="mapping.html#supporting-data-for-maps"><i class="fa fa-check"></i><b>5.2</b> Supporting data for maps</a><ul>
+<li class="chapter" data-level="5.2.1" data-path="mapping.html"><a href="mapping.html#quantarcticr"><i class="fa fa-check"></i><b>5.2.1</b> quantarcticR</a></li>
+<li class="chapter" data-level="5.2.2" data-path="mapping.html"><a href="mapping.html#antanym"><i class="fa fa-check"></i><b>5.2.2</b> antanym</a></li>
+</ul></li>
 </ul></li>
 <li class="chapter" data-level="6" data-path="species-distribution-modelling.html"><a href="species-distribution-modelling.html"><i class="fa fa-check"></i><b>6</b> Species distribution modelling</a><ul>
 <li class="chapter" data-level="6.1" data-path="species-distribution-modelling.html"><a href="species-distribution-modelling.html#introduction-and-review"><i class="fa fa-check"></i><b>6.1</b> Introduction and review</a></li>
@@ -154,10 +161,266 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
 <h1><span class="header-section-number">5</span> Mapping</h1>
 <div id="somap" class="section level2">
 <h2><span class="header-section-number">5.1</span> SOmap</h2>
+<p>Blurb.</p>
+<ul>
+<li>intended to provide an easy way to get SO maps</li>
+<li>primarily polar stereo projection, though SOmap_auto is not necessarily so</li>
+<li>base/raster/sp</li>
+<li>gg</li>
+</ul>
+<p>SOmap won’t necessarily get you exactly the map you want. But it should hopefully get you close enough that you can make modifications to suit your exact purposes.</p>
+<div id="circumpolar-maps" class="section level3">
+<h3><span class="header-section-number">5.1.1</span> Circumpolar maps</h3>
+<p>A basic circumpolar map in polar stereographic projection:</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">library</span>(SOmap)
+<span class="kw">SOmap</span>()</code></pre></div>
+<p><img src="_main_files/figure-html/somap1-1.png" width="672" /></p>
+<p><code>SOmanagement()</code> provides a number of contextual layers such as MPA boundaries and management zones.</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">SOmap</span>(<span class="dt">trim =</span> <span class="op">-</span><span class="dv">40</span>) ## plot to 40S
+## add the exclusive economic zones management layer
+<span class="kw">SOmanagement</span>(<span class="dt">eez =</span> <span class="ot">TRUE</span>)</code></pre></div>
+<p><img src="_main_files/figure-html/somap2-1.png" width="672" /></p>
+<div id="adding-points" class="section level4">
+<h4><span class="header-section-number">5.1.1.1</span> Adding points</h4>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">## some longitude/latitude data
+<span class="kw">library</span>(sp)
+my_points_ll &lt;-<span class="st"> </span><span class="kw">data.frame</span>(<span class="dt">lon =</span> <span class="kw">seq</span>(<span class="dv">0</span>, <span class="dv">350</span>, <span class="dt">by =</span> <span class="dv">10</span>), <span class="dt">lat =</span> <span class="op">-</span><span class="dv">55</span>, <span class="dt">z =</span> <span class="kw">runif</span>(<span class="dv">36</span>))
+<span class="kw">coordinates</span>(my_points_ll) &lt;-<span class="st"> </span><span class="kw">c</span>(<span class="st">&quot;lon&quot;</span>, <span class="st">&quot;lat&quot;</span>)
+<span class="kw">projection</span>(my_points_ll) &lt;-<span class="st"> &quot;+proj=longlat +datum=WGS84&quot;</span></code></pre></div>
+<p>This needs to be reprojected to match our map before plotting. The <code>SOproj</code> function does this:</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">## reproject to our SOmap projection
+my_points &lt;-<span class="st"> </span><span class="kw">SOproj</span>(my_points_ll)
+## and plot
+<span class="kw">SOmap</span>()
+<span class="kw">plot</span>(my_points, <span class="dt">col =</span> <span class="st">&quot;blue&quot;</span>, <span class="dt">add =</span> <span class="ot">TRUE</span>)</code></pre></div>
+<p><img src="_main_files/figure-html/somap_pts2-1.png" width="672" /></p>
+<p>Or use <code>SOplot</code> to reproject and plot in one step:</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">SOmap</span>()
+<span class="kw">SOplot</span>(my_points_ll, <span class="dt">col =</span> <span class="st">&quot;blue&quot;</span>)</code></pre></div>
+<p><img src="_main_files/figure-html/somap_pts3-1.png" width="672" /></p>
 </div>
-<div id="antanym" class="section level2">
-<h2><span class="header-section-number">5.2</span> antanym</h2>
+<div id="adding-raster-layers" class="section level4">
+<h4><span class="header-section-number">5.1.1.2</span> Adding raster layers</h4>
+</div>
+<div id="modifying-the-somap-object" class="section level4">
+<h4><span class="header-section-number">5.1.1.3</span> Modifying the <code>SOmap</code> object</h4>
+<p>Calls to <code>SOmap()</code>, <code>SOmanagement()</code>, <code>SOmap_auto()</code> return an object of class <code>SOmap</code>, <code>SOmap_management</code>, or <code>SOmap_auto</code>. These objects contain all of the data and plotting instructions required to draw the map. Calling <code>print()</code> or <code>plot()</code> on one of these objects will cause that code to be executed, and the object to be drawn in the current graphics device. Hence, calling <code>SOmap()</code> directly <em>without</em> assigning the result to a variable will make it appear in the graphics device, because the returned object is being printed to the console (and thus triggering the <code>print</code> method). But you can also assign the result to a variable, e.g. <code>myplot &lt;- SOmap()</code> and then explicitly plot the object with <code>plot(myplot)</code>. The advantage of this is that you can potentially manipulate the <code>myplot</code> object to make changes to the map before plotting it.</p>
+<p>Note, this is likely to be fragile. Proceed at your own risk!</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">mymap &lt;-<span class="st"> </span><span class="kw">SOmap</span>()
+<span class="kw">names</span>(mymap)</code></pre></div>
+<pre><code>##  [1] &quot;projection&quot;    &quot;target&quot;        &quot;straight&quot;      &quot;trim&quot;         
+##  [5] &quot;bathy&quot;         &quot;box&quot;           &quot;plot_sequence&quot; &quot;coastline&quot;    
+##  [9] &quot;ice&quot;           &quot;bathy_legend&quot;  &quot;border&quot;</code></pre>
+<p>The object contains a <code>plot_sequence</code> component, which defines the order in which each part of the plot is drawn. The other components of the object contain the code required to draw each part. Take e.g. the ice component (this is the ice shelves, glacier tongues, etc). This is a list (in this case with only one element). Each element of the list specifies a function to run along with arguments to pass to it:</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">str</span>(mymap<span class="op">$</span>ice)</code></pre></div>
+<pre><code>## List of 1
+##  $ :List of 2
+##   ..$ plotfun : chr &quot;plot&quot;
+##   ..$ plotargs:List of 4
+##   .. ..$ x     :sfc_POLYGON of length 354; first list element: List of 1
+##   .. .. ..$ : num [1:5, 1:2] 1022981 1026000 1021994 1021935 1022981 ...
+##   .. .. ..- attr(*, &quot;class&quot;)= chr [1:3] &quot;XY&quot; &quot;POLYGON&quot; &quot;sfg&quot;
+##   .. ..$ col   : logi NA
+##   .. ..$ border: chr &quot;black&quot;
+##   .. ..$ add   : logi TRUE
+##   ..- attr(*, &quot;class&quot;)= chr &quot;SO_plotter&quot;</code></pre>
+<p>We can modify the function and/or its arguments:</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">mymap<span class="op">$</span>ice[[<span class="dv">1</span>]]<span class="op">$</span>plotargs<span class="op">$</span>col &lt;-<span class="st"> &quot;green&quot;</span></code></pre></div>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">plot</span>(mymap)</code></pre></div>
+<p><img src="_main_files/figure-html/somap2d-1.png" width="672" /></p>
+</div>
+</div>
+<div id="non-circumpolar-maps" class="section level3">
+<h3><span class="header-section-number">5.1.2</span> Non-circumpolar maps</h3>
+<ul>
+<li>via <code>SOmap_auto</code></li>
+<li>note that this is not always going to guess the best projection/extent</li>
+<li>best viewed as a starting point for your own maps</li>
+</ul>
+</div>
+<div id="plotting-via-ggplot2" class="section level3">
+<h3><span class="header-section-number">5.1.3</span> Plotting via ggplot2</h3>
+<p>The <code>SOmap</code> and <code>SOmap_auto</code> functions do their plotting using base graphics. If you are more comfortable working with <code>ggplot2</code>, this is also possible.</p>
+<ul>
+<li>convert SOmap object to ggplot format using <code>SOgg()</code></li>
+<li>as with other <code>SOmap</code> functions, this returns an object that contains all of the information needed to generate the map. Printing or plotting this object will cause it to construct a <code>ggplot</code> object. Printing or plotting <em>that</em> object will cause it to be drawn to the graphics device, just like any other <code>ggplot</code> object.</li>
+</ul>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">myplot &lt;-<span class="st"> </span><span class="kw">SOmap</span>()
 
+myplotgg &lt;-<span class="st"> </span><span class="kw">SOgg</span>(myplot) ## creates a SOmap_gg object
+
+<span class="kw">class</span>(myplotgg)</code></pre></div>
+<pre><code>## [1] &quot;SOmap_gg&quot;</code></pre>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">my_ggplot &lt;-<span class="st"> </span><span class="kw">plot</span>(myplotgg) ## creates a ggplot object
+
+<span class="kw">class</span>(my_ggplot)</code></pre></div>
+<pre><code>## [1] &quot;gg&quot;     &quot;ggplot&quot;</code></pre>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">plot</span>(my_ggplot) ## plot it</code></pre></div>
+<p><img src="_main_files/figure-html/somap3-1.png" width="672" /></p>
+<p>Or in one step (this will cause myplot to be converted to SOmap’s internal gg format, then a ggplot object constructed from that, then that object will be plotted):</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">SOgg</span>(myplot)</code></pre></div>
+<p><img src="_main_files/figure-html/somap4-1.png" width="672" /></p>
+<div id="modifying-these-maps" class="section level4">
+<h4><span class="header-section-number">5.1.3.1</span> Modifying these maps</h4>
+<p>We can modify these maps at two levels.</p>
+<div id="modifying-the-somap_gg-object" class="section level5">
+<h5><span class="header-section-number">5.1.3.1.1</span> Modifying the <code>SOmap_gg</code> object</h5>
+<p><code>SOmap_gg</code> objects are similar in structure to <code>SOmap</code> objects:</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">names</span>(myplotgg)</code></pre></div>
+<pre><code>##  [1] &quot;projection&quot;    &quot;target&quot;        &quot;straight&quot;      &quot;trim&quot;         
+##  [5] &quot;init&quot;          &quot;bathy&quot;         &quot;coord&quot;         &quot;plot_sequence&quot;
+##  [9] &quot;scale_fill&quot;    &quot;bathy_legend&quot;  &quot;coastline&quot;     &quot;ice&quot;          
+## [13] &quot;axis_labels&quot;   &quot;theme&quot;         &quot;border&quot;</code></pre>
+<p>Instead of base plotting functions, <code>SOmap_gg</code> objects use <code>ggplot2</code> function calls, e.g.:</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">myplotgg<span class="op">$</span>ice[[<span class="dv">1</span>]]<span class="op">$</span>plotfun</code></pre></div>
+<pre><code>## [1] &quot;ggplot2::geom_sf&quot;</code></pre>
+<p>We can modify these function and/or arguments in a similar manner to <code>SOmap</code> objects.</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">myplotgg<span class="op">$</span>ice[[<span class="dv">1</span>]]<span class="op">$</span>plotargs<span class="op">$</span>fill &lt;-<span class="st"> &quot;green&quot;</span></code></pre></div>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">plot</span>(myplotgg)</code></pre></div>
+<p><img src="_main_files/figure-html/somap5c-1.png" width="672" /></p>
+</div>
+<div id="modifying-the-ggplot-object." class="section level5">
+<h5><span class="header-section-number">5.1.3.1.2</span> Modifying the <code>ggplot</code> object.</h5>
+<p>Remember that printing or plotting a <code>SOmap_gg</code> object produces a <code>ggplot</code> object. This can be modified by adding e.g. layers or themes just like a normal <code>ggplot</code>. Remember to load the <code>ggplot2</code> library now that we are using <code>ggplot2</code> functions directly.</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">library</span>(ggplot2)
+
+my_ggplot <span class="op">+</span><span class="st"> </span><span class="kw">geom_point</span>(<span class="dt">data =</span> <span class="kw">as.data.frame</span>(my_points), <span class="kw">aes</span>(lon, lat, <span class="dt">colour =</span> z), <span class="dt">size =</span> <span class="dv">3</span>) <span class="op">+</span>
+<span class="st">  </span><span class="kw">scale_colour_distiller</span>(<span class="dt">palette =</span> <span class="st">&quot;Spectral&quot;</span>)</code></pre></div>
+<p><img src="_main_files/figure-html/somap6-1.png" width="672" /></p>
+</div>
+</div>
+</div>
+</div>
+<div id="supporting-data-for-maps" class="section level2">
+<h2><span class="header-section-number">5.2</span> Supporting data for maps</h2>
+<p>When constructing maps, we commonly want to show features like oceanographic fronts, ice extent, coastline, place names, and MPA boundaries. There are a few sources of such data:</p>
+<ul>
+<li>some layers are bundled into <code>SOmap</code>, see the <code>SOmap::SOmap_data</code> object</li>
+<li><code>antanym</code> provides access to the SCAR Composite Gazetteer of place names</li>
+<li>the <code>quantarcticR</code> package provides access to <a href="http://quantarctica.npolar.no/">Quantarctica</a> data layers.</li>
+</ul>
+<div id="quantarcticr" class="section level3">
+<h3><span class="header-section-number">5.2.1</span> quantarcticR</h3>
+<p>Note, this package is still in development. Install if needed:</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">remotes<span class="op">::</span><span class="kw">install_github</span>(<span class="st">&quot;SCAR-sandpit/quantarcticR&quot;</span>)</code></pre></div>
+<p>Example usage:</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">library</span>(quantarcticR)
+ds &lt;-<span class="st"> </span><span class="kw">qa_datasets</span>() ## all available layers
+<span class="kw">kable</span>(<span class="kw">head</span>(ds))</code></pre></div>
+<table>
+<thead>
+<tr class="header">
+<th align="left">layername</th>
+<th align="left">main_file</th>
+<th align="left">type</th>
+<th align="left">cached</th>
+<th align="right">download_size</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td align="left">Overview place names</td>
+<td align="left">C:_ray8PMm/quantarcticR-cache/Miscellaneous/OverviewPlaceNames/OverviewPlaceNames.shp</td>
+<td align="left">shapefile</td>
+<td align="left">FALSE</td>
+<td align="right">19.74K</td>
+</tr>
+<tr class="even">
+<td align="left">COMNAP listed facilities</td>
+<td align="left">C:_ray8PMm/quantarcticR-cache/Miscellaneous/Stations/COMNAP_Antarctic_Facilities.shp</td>
+<td align="left">shapefile</td>
+<td align="left">FALSE</td>
+<td align="right">691.92K</td>
+</tr>
+<tr class="odd">
+<td align="left">Subantarctic stations</td>
+<td align="left">C:_ray8PMm/quantarcticR-cache/Miscellaneous/Stations/Sub-antarctic_Stations.shp</td>
+<td align="left">shapefile</td>
+<td align="left">FALSE</td>
+<td align="right">691.92K</td>
+</tr>
+<tr class="even">
+<td align="left">SCAR Composite gazetteer</td>
+<td align="left">C:_ray8PMm/quantarcticR-cache/Miscellaneous/SCAR_CompositeGazetteer/SCAR_CompositeGazetteer.shp</td>
+<td align="left">shapefile</td>
+<td align="left">FALSE</td>
+<td align="right">329.05M</td>
+</tr>
+<tr class="odd">
+<td align="left">IBO-IOC GEBCO Features (point)</td>
+<td align="left">C:_ray8PMm/quantarcticR-cache/Miscellaneous/IHO-IOC_GEBCO_UnderseaFeatureNames/GEBCO_point.shp</td>
+<td align="left">shapefile</td>
+<td align="left">FALSE</td>
+<td align="right">1.25M</td>
+</tr>
+<tr class="even">
+<td align="left">IBO-IOC GEBCO Features (multipoint)</td>
+<td align="left">C:_ray8PMm/quantarcticR-cache/Miscellaneous/IHO-IOC_GEBCO_UnderseaFeatureNames/GEBCO_multipoint.shp</td>
+<td align="left">shapefile</td>
+<td align="left">FALSE</td>
+<td align="right">1.25M</td>
+</tr>
+</tbody>
+</table>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">## more info about a particular layer
+my_layer &lt;-<span class="st"> </span><span class="kw">qa_dataset</span>(<span class="st">&quot;Median sea ice extent 1981-2010&quot;</span>)
+my_layer</code></pre></div>
+<pre><code>## # A tibble: 1 x 11
+##   layername                      
+##   &lt;chr&gt;                          
+## 1 Median sea ice extent 1981-2010
+##   datasource                                                   
+##   &lt;chr&gt;                                                        
+## 1 SeaIce/Median Ice Extents/Median_SeaIce_Extents_1981-2010.shp
+##   layer_attributes srs_attributes   provider
+##   &lt;list&gt;           &lt;list&gt;           &lt;chr&gt;   
+## 1 &lt;NULL&gt;           &lt;tibble [1 x 4]&gt; ogr     
+##   abstract                                                                 
+##   &lt;chr&gt;                                                                    
+## 1 &quot;Monthly median sea ice extents for the period 1981-2010.\n\nFetterer, F~
+##   extent type      download_size
+##   &lt;list&gt; &lt;chr&gt;       &lt;fs::bytes&gt;
+## 1 &lt;NULL&gt; shapefile          131K
+##   main_file                                                                
+##   &lt;chr&gt;                                                                    
+## 1 &quot;C:\\Users\\ben_ray\\AppData\\Local\\Temp\\Rtmpkj8PMm/quantarcticR-cache~
+##   bb_source$id                                 
+##   &lt;chr&gt;                                        
+## 1 Quantarctica: Median sea ice extent 1981-2010
+##   $name                           $description     
+##   &lt;chr&gt;                           &lt;chr&gt;            
+## 1 Median sea ice extent 1981-2010 Quantarctica data
+##   $doc_url                       $source_url
+##   &lt;chr&gt;                          &lt;list&gt;     
+## 1 http://quantarctica.npolar.no/ &lt;chr [1]&gt;  
+##   $citation                                                                
+##   &lt;chr&gt;                                                                    
+## 1 Matsuoka, K., Skoglund, A., &amp; Roth, G. (2018). Quantarctica Median sea i~
+##   $license                $comment $method    $postprocess
+##   &lt;chr&gt;                   &lt;chr&gt;    &lt;list&gt;     &lt;list&gt;      
+## 1 CC-BY 4.0 International &lt;NA&gt;     &lt;list [5]&gt; &lt;list [0]&gt;  
+##   $authentication_note $user $password $access_function $data_group
+##   &lt;chr&gt;                &lt;chr&gt; &lt;chr&gt;     &lt;chr&gt;            &lt;chr&gt;      
+## 1 &lt;NA&gt;                 &lt;NA&gt;  &lt;NA&gt;      &lt;NA&gt;             &lt;NA&gt;       
+##   $collection_size
+##   &lt;lgl&gt;           
+## 1 NA</code></pre>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">## fetch the actual data for that layer
+layer_data &lt;-<span class="st"> </span><span class="kw">qa_get</span>(my_layer)
+
+## plot it
+<span class="kw">plot</span>(layer_data[layer_data<span class="op">$</span>MONTH <span class="op">==</span><span class="st"> &quot;October&quot;</span>, ])</code></pre></div>
+<p><img src="_main_files/figure-html/qR1-1.png" width="672" /></p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">## or add to a SOmap
+<span class="kw">SOmap</span>(<span class="dt">trim =</span> <span class="op">-</span><span class="dv">50</span>, <span class="dt">border_width =</span> <span class="fl">0.5</span>)
+<span class="kw">SOplot</span>(layer_data[layer_data<span class="op">$</span>MONTH <span class="op">==</span><span class="st"> &quot;October&quot;</span>, ], <span class="dt">col =</span> <span class="st">&quot;red&quot;</span>)</code></pre></div>
+<p><img src="_main_files/figure-html/qR1-2.png" width="672" /></p>
+</div>
+<div id="antanym" class="section level3">
+<h3><span class="header-section-number">5.2.2</span> antanym</h3>
+<p>See the <a href="overview.html">overview</a> article.</p>
+
+</div>
 </div>
 </div>
             </section>
