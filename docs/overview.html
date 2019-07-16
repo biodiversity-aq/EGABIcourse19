@@ -168,6 +168,7 @@ pkgs &lt;-<span class="st"> </span><span class="kw">setdiff</span>(pkgs, <span c
 <span class="cf">if</span> (<span class="kw">length</span>(pkgs) <span class="op">&gt;</span><span class="st"> </span><span class="dv">0</span>) <span class="kw">install.packages</span>(pkgs)
 
 <span class="kw">library</span>(dplyr)</code></pre></div>
+<pre><code>## Warning: package &#39;dplyr&#39; was built under R version 3.4.4</code></pre>
 <p>And from GitHub:</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">## packages with required minimum version
 pkgs &lt;-<span class="st"> </span><span class="kw">c</span>(<span class="st">&quot;SCAR/antanym&quot;</span> =<span class="st"> </span><span class="ot">NA</span>, <span class="st">&quot;AustralianAntarcticDivision/blueant&quot;</span> =<span class="st"> </span><span class="ot">NA</span>,
@@ -194,15 +195,15 @@ tax</code></pre></div>
 ##   scientificname             authority               status  
 ##   &lt;chr&gt;                      &lt;chr&gt;                   &lt;chr&gt;   
 ## 1 Euphausia crystallorophias Holt &amp; Tattersall, 1906 accepted
-##   unacceptreason taxonRankID rank    valid_AphiaID
-##   &lt;lgl&gt;                &lt;int&gt; &lt;chr&gt;           &lt;int&gt;
-## 1 NA                     220 Species        236216
-##   valid_name                 valid_authority         parentNameUsageID
-##   &lt;chr&gt;                      &lt;chr&gt;                               &lt;int&gt;
-## 1 Euphausia crystallorophias Holt &amp; Tattersall, 1906            110673
-##   kingdom  phylum     class        order        family       genus    
-##   &lt;chr&gt;    &lt;chr&gt;      &lt;chr&gt;        &lt;chr&gt;        &lt;chr&gt;        &lt;chr&gt;    
-## 1 Animalia Arthropoda Malacostraca Euphausiacea Euphausiidae Euphausia
+##   unacceptreason taxonRankID rank  valid_AphiaID valid_name                
+##   &lt;lgl&gt;                &lt;int&gt; &lt;lgl&gt;         &lt;int&gt; &lt;chr&gt;                     
+## 1 NA                     220 NA           236216 Euphausia crystallorophias
+##   valid_authority         parentNameUsageID kingdom phylum class order
+##   &lt;chr&gt;                               &lt;int&gt; &lt;lgl&gt;   &lt;lgl&gt;  &lt;lgl&gt; &lt;lgl&gt;
+## 1 Holt &amp; Tattersall, 1906            110673 NA      NA     NA    NA   
+##   family genus
+##   &lt;lgl&gt;  &lt;lgl&gt;
+## 1 NA     NA   
 ##   citation                                                                 
 ##   &lt;chr&gt;                                                                    
 ## 1 Siegel, V. (Ed) (2019). World Euphausiacea Database. Euphausia crystallo~
@@ -224,8 +225,10 @@ my_aphia_id &lt;-<span class="st"> </span>tax[[<span class="dv">1</span>]]<span 
 ##x &lt;- occurrence(datasetid = ds$id[6])
 x &lt;-<span class="st"> </span><span class="kw">occurrence</span>(<span class="dt">datasetid =</span> <span class="st">&quot;cb16377b-56a8-4d95-802d-4eec02466773&quot;</span>)</code></pre></div>
 <p>Plot the complete distribution of samples in black, and <em>Euphausia crystallorophias</em> in green:</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">library</span>(SOmap)
-<span class="kw">SOmap_auto</span>(x<span class="op">$</span>decimalLongitude, x<span class="op">$</span>decimalLatitude, <span class="dt">input_lines =</span> <span class="ot">FALSE</span>, <span class="dt">pcol =</span> <span class="st">&quot;black&quot;</span>, <span class="dt">pcex =</span> <span class="fl">0.2</span>)
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">library</span>(SOmap)</code></pre></div>
+<pre><code>## Warning: package &#39;raster&#39; was built under R version 3.4.4</code></pre>
+<pre><code>## Warning: package &#39;sp&#39; was built under R version 3.4.4</code></pre>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">SOmap_auto</span>(x<span class="op">$</span>decimalLongitude, x<span class="op">$</span>decimalLatitude, <span class="dt">input_lines =</span> <span class="ot">FALSE</span>, <span class="dt">pcol =</span> <span class="st">&quot;black&quot;</span>, <span class="dt">pcex =</span> <span class="fl">0.2</span>)
 <span class="kw">with</span>(x <span class="op">%&gt;%</span><span class="st"> </span>dplyr<span class="op">::</span><span class="kw">filter</span>(aphiaID <span class="op">==</span><span class="st"> </span>my_aphia_id), 
      <span class="kw">SOplot</span>(decimalLongitude, decimalLatitude, <span class="dt">pch =</span> <span class="dv">19</span>, <span class="dt">cex =</span> <span class="fl">0.2</span>, <span class="dt">col =</span> <span class="st">&quot;green&quot;</span>))</code></pre></div>
 <p><img src="_main_files/figure-html/map1-1.png" width="672" /></p>
@@ -253,17 +256,17 @@ data_source &lt;-<span class="st"> </span><span class="kw">sources_sdm</span>(<s
 ## fetch the data
 status &lt;-<span class="st"> </span><span class="kw">bb_get</span>(data_source, <span class="dt">local_file_root =</span> my_data_directory, <span class="dt">verbose =</span> <span class="ot">TRUE</span>)</code></pre></div>
 <pre><code>## 
-## Thu Jul 11 09:53:32 2019
+## Tue Jul 16 14:20:35 2019
 ## Synchronizing dataset: Southern Ocean marine environmental data
 ## Source URL https://data.aad.gov.au/eds/4742/download
 ## --------------------------------------------------------------------------------------------
 ## 
-##  this dataset path is: C:\Users\ben_ray\AppData\Local\Temp\RtmpWCYdnP/data.aad.gov.au/eds/4742
+##  this dataset path is: C:\Users\ben_ray\AppData\Local\Temp\RtmpwHNnAl/data.aad.gov.au/eds/4742
 ##  building file list ... done.
 ##  downloading file 1 of 1: https://data.aad.gov.au/eds/4742/download ...  done.
-##   decompressing: C:\Users\ben_ray\AppData\Local\Temp\RtmpWCYdnP/data.aad.gov.au/eds/4742/download.zip ... extracting 60 files into C:/Users/ben_ray/AppData/Local/Temp/RtmpWCYdnP/data.aad.gov.au/eds/4742 ... done.
+##   decompressing: C:\Users\ben_ray\AppData\Local\Temp\RtmpwHNnAl/data.aad.gov.au/eds/4742/download.zip ... extracting 60 files into C:/Users/ben_ray/AppData/Local/Temp/RtmpwHNnAl/data.aad.gov.au/eds/4742 ... done.
 ## 
-## Thu Jul 11 09:53:40 2019 dataset synchronization complete: Southern Ocean marine environmental data</code></pre>
+## Tue Jul 16 14:20:43 2019 dataset synchronization complete: Southern Ocean marine environmental data</code></pre>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">nc_files &lt;-<span class="st"> </span><span class="kw">Filter</span>(<span class="cf">function</span>(z) <span class="kw">grepl</span>(<span class="st">&quot;</span><span class="ch">\\</span><span class="st">.nc$&quot;</span>, z), status<span class="op">$</span>files[[<span class="dv">1</span>]]<span class="op">$</span>file)
 
 ## create a raster stack of all layers
@@ -339,7 +342,7 @@ xpred<span class="op">$</span>predicted &lt;-<span class="st"> </span><span clas
 pr &lt;-<span class="st"> </span><span class="kw">rasterFromXYZ</span>(xpred[, <span class="kw">c</span>(<span class="st">&quot;lon&quot;</span>, <span class="st">&quot;lat&quot;</span>, <span class="st">&quot;predicted&quot;</span>)])
 <span class="kw">projection</span>(pr) &lt;-<span class="st"> &quot;+proj=longlat +datum=WGS84&quot;</span>
 
-my_cmap &lt;-<span class="st"> </span><span class="cf">if</span> (<span class="kw">getRversion</span>() <span class="op">&gt;=</span><span class="st"> &quot;3.6&quot;</span>) <span class="kw">hcl.colors</span>(<span class="dv">21</span>, <span class="st">&quot;Geyser&quot;</span>) <span class="cf">else</span> <span class="kw">topo.colors</span>(<span class="dv">21</span>)</code></pre></div>
+my_cmap &lt;-<span class="st"> </span><span class="cf">if</span> (<span class="kw">getRversion</span>() <span class="op">&gt;=</span><span class="st"> &quot;3.6&quot;</span>) <span class="kw">hcl.colors</span>(<span class="dv">21</span>, <span class="st">&quot;Geyser&quot;</span>) <span class="cf">else</span> <span class="kw">c</span>(<span class="st">&quot;#008585&quot;</span>, <span class="st">&quot;#359087&quot;</span>, <span class="st">&quot;#539B8A&quot;</span>, <span class="st">&quot;#6DA590&quot;</span>, <span class="st">&quot;#85AF97&quot;</span>, <span class="st">&quot;#9BBAA0&quot;</span>, <span class="st">&quot;#AEC4AA&quot;</span>, <span class="st">&quot;#BED0B0&quot;</span>, <span class="st">&quot;#D0DCB5&quot;</span>, <span class="st">&quot;#E5E7BC&quot;</span>, <span class="st">&quot;#FBF2C4&quot;</span>, <span class="st">&quot;#F3E3B2&quot;</span>, <span class="st">&quot;#EDD59F&quot;</span>, <span class="st">&quot;#E7C68C&quot;</span>, <span class="st">&quot;#E3B77A&quot;</span>, <span class="st">&quot;#DEA868&quot;</span>, <span class="st">&quot;#DA9857&quot;</span>, <span class="st">&quot;#D58847&quot;</span>, <span class="st">&quot;#D1773A&quot;</span>, <span class="st">&quot;#CC6530&quot;</span>, <span class="st">&quot;#C7522B&quot;</span>)</code></pre></div>
 <p>Plot it:</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">p &lt;-<span class="st"> </span><span class="kw">SOmap_auto</span>(<span class="dt">x =</span> pr, <span class="dt">bathy =</span> pr)
 p<span class="op">$</span>bathy_palette &lt;-<span class="st"> </span>my_cmap
@@ -353,12 +356,22 @@ p</code></pre></div>
 <h2><span class="header-section-number">2.7</span> Other bits and pieces</h2>
 <div id="place-names" class="section level3">
 <h3><span class="header-section-number">2.7.1</span> Place names</h3>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">library</span>(antanym)
-
-## get full SCAR gazetteer data
-xn &lt;-<span class="st"> </span><span class="kw">an_read</span>(<span class="dt">cache =</span> <span class="st">&quot;session&quot;</span>, <span class="dt">sp =</span> <span class="ot">TRUE</span>)
-
-## reduce to one name per feature
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">library</span>(antanym)</code></pre></div>
+<pre><code>## The Composite Gazetteer of Antarctica is made available under a CC-BY license.
+## If you use it, please cite it:
+## Composite Gazetteer of Antarctica, Scientific Committee on Antarctic Research. GCMD Metadata (http://gcmd.nasa.gov/records/SCAR_Gazetteer.html)</code></pre>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">## get full SCAR gazetteer data
+xn &lt;-<span class="st"> </span><span class="kw">an_read</span>(<span class="dt">cache =</span> <span class="st">&quot;session&quot;</span>, <span class="dt">sp =</span> <span class="ot">TRUE</span>)</code></pre></div>
+<pre><code>## Warning: 64974 parsing failures.
+##  row                col           expected   actual         file
+## 1018 accepted_by        1/0/T/F/TRUE/FALSE U Harris literal data
+## 1018 verified_by        1/0/T/F/TRUE/FALSE U Harris literal data
+## 1412 accepted_by        1/0/T/F/TRUE/FALSE AUS      literal data
+## 2185 verified_by        1/0/T/F/TRUE/FALSE Brolsma  literal data
+## 2376 scar_feature_class 1/0/T/F/TRUE/FALSE 3        literal data
+## .... .................. .................. ........ ............
+## See problems(...) for more details.</code></pre>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">## reduce to one name per feature
 xn &lt;-<span class="st"> </span><span class="kw">an_preferred</span>(xn, <span class="dt">origin =</span> <span class="st">&quot;United Kingdom&quot;</span>)
 
 ## ask for suggestions in our region to show on our map

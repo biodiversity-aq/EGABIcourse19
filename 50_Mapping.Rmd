@@ -9,6 +9,8 @@ if (packageVersion("SOmap") < 0.5)
 
 The `SOmap` package is intended to provide an easy way to produce nice-looking maps of Antarctica and the Southern Ocean. It is primarily focused on maps in polar stereographic projection (although the `SOmap_auto` function extends this to other projections). `SOmap` won't necessarily get you exactly the map you want. But if it doesn't, it should hopefully get you close enough that you can make modifications to suit your exact purposes.
 
+Please bear in mind that `SOmap` is still in development, and so its functionality (function parameters and/or behaviour) may change.
+
 By default, `SOmap` works with base graphics (and associated functionality from packages such as `raster` and `sp`). It is also possible to work with `ggplot2`-based graphics, as described below.
 
 
@@ -80,17 +82,17 @@ The legend is out of character with the rest of the map. We can use `SOleg` to f
 
 ```{r somap_raster3}
 ## colour map to use
-my_colourmap <- colorRampPalette(c("#4D4140", "#596F7E", "#168B98",
+my_cmap <- colorRampPalette(c("#4D4140", "#596F7E", "#168B98",
                                    "#ED5B67", "#E27766", "#DAAD50", "#EAC3A6"))(51)
 
 ## draw the base map
 SOmap()
 
 ## add our raster
-SOplot(xr, legend = FALSE, col = my_colourmap)
+SOplot(xr, legend = FALSE, col = my_cmap)
 
 ## add the legend
-SOleg(xr, position = "topright", col = my_colourmap, ticks = 6,
+SOleg(xr, position = "topright", col = my_cmap, ticks = 6,
       type = "continuous", label = "My variable")
 ```
 
@@ -101,11 +103,11 @@ OK, well that worked but clearly the labels need tidying up. We can do that, but
 SOmap()
 
 ## add our raster, controlling the colour range to span the values 0 to 30
-SOplot(xr, legend = FALSE, col = my_colourmap,
-       breaks = seq(0, 30, length.out = length(my_colourmap) + 1))
+SOplot(xr, legend = FALSE, col = my_cmap,
+       breaks = seq(0, 30, length.out = length(my_cmap) + 1))
 
 ## add the legend, again controlling the colour range
-SOleg(position = "topright", col = my_colourmap,
+SOleg(position = "topright", col = my_cmap,
       breaks = seq(0, 30, length.out = 7),
       type = "continuous", label = "My variable")
 ```
@@ -116,8 +118,8 @@ Multiple rasters:
 ```{r somap_raster5}
 xr2 <- shift(xr, x = -70) ## offset in longitude
 SOmap()
-SOplot(xr, legend = FALSE, col = my_colourmap)
-SOplot(xr2, legend = FALSE, col = my_colourmap)
+SOplot(xr, legend = FALSE, col = my_cmap)
+SOplot(xr2, legend = FALSE, col = my_cmap)
 ```
 
 
@@ -150,11 +152,68 @@ mymap$ice[[1]]$plotargs$col <- "green"
 plot(mymap)
 ```
 
+We can remove entire components:
+```{r somap2e}
+temp <- mymap
+temp$coastline <- NULL
+temp$ice <- NULL
+plot(temp)
+```
+
+But note that some elements are required (in particular, the bathymetry layer can't currently be removed because the code that draws this is also the code that creates the plot). This code would fail (not run here):
+
+```{r somap2f, eval = FALSE}
+temp <- mymap
+temp$bathy <- NULL
+plot(temp)
+```
+
+
 ### Non-circumpolar maps
 
-- via `SOmap_auto`
-- note that this is not always going to guess the best projection/extent
-- best viewed as a starting point for your own maps
+The `SOmap_auto` function will take your input data and make a guess at an appropriate projection and extent to use. Note that this is not always going to guess the *best* projection and extent, so you should view it as a starting point from which you can generate a map to your exact requirements.
+
+Use the elephant seal track data bundled with the package:
+
+```{r soauto1}
+ellie <- SOmap_data$mirounga_leonina
+
+## construct and plot the map
+SOmap_auto(ellie$lon, ellie$lat)
+```
+
+Just a blank map to which you could add other things:
+```{r soauto2}
+SOmap_auto(ellie$lon, ellie$lat, input_points = FALSE, input_lines = FALSE)
+```
+
+You can pass a raster as input data, but note that it won't plot the raster (it uses its extent to infer an appropriate extent for the map):
+```{r soauto3}
+SOmap_auto(xr)
+```
+
+But we can add the raster if we wish:
+```{r soauto4}
+SOmap_auto(xr)
+SOplot(xr, col = my_cmap)
+```
+
+We can force a particular projection:
+
+```{r soauto5}
+SOmap_auto(xr, target = "laea", centre_lon = 147, centre_lat = -42)
+SOplot(xr, col = my_cmap)
+```
+
+Same but by supplying a full proj4 string to `target`:
+
+```{r soauto6}
+SOmap_auto(xr, target = "+proj=laea +lat_0=-42 +lon_0=147")
+SOplot(xr, col = my_cmap)
+```
+
+See [the SOmap_auto vignette](https://australianantarcticdivision.github.io/SOmap/articles/many-automap-examples.html) for more examples.
+
 
 ### Plotting via ggplot2
 
@@ -233,7 +292,7 @@ isTRUE <- function (x) is.logical(x) && length(x) == 1L && !is.na(x) && x
 library(ggnewscale)
 plot(myplotgg) + new_scale_fill() +
   geom_raster(data = as.data.frame(xr, xy = TRUE), aes(x = x, y = y, fill = val), inherit.aes = FALSE) +
-  scale_fill_gradientn(colors = my_colourmap, na.value = NA, name = "My variable")
+  scale_fill_gradientn(colors = my_cmap, na.value = NA, name = "My variable")
 ```
 
 

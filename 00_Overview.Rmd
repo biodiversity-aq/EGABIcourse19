@@ -147,7 +147,7 @@ xpred$predicted <- predict(fit, newdata = xpred, type = "response")
 pr <- rasterFromXYZ(xpred[, c("lon", "lat", "predicted")])
 projection(pr) <- "+proj=longlat +datum=WGS84"
 
-my_cmap <- if (getRversion() >= "3.6") hcl.colors(21, "Geyser") else topo.colors(21)
+my_cmap <- if (getRversion() >= "3.6") hcl.colors(21, "Geyser") else c("#008585", "#359087", "#539B8A", "#6DA590", "#85AF97", "#9BBAA0", "#AEC4AA", "#BED0B0", "#D0DCB5", "#E5E7BC", "#FBF2C4", "#F3E3B2", "#EDD59F", "#E7C68C", "#E3B77A", "#DEA868", "#DA9857", "#D58847", "#D1773A", "#CC6530", "#C7522B")
 ```
 
 Plot it:
