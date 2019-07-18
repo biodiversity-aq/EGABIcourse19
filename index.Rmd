@@ -10,6 +10,14 @@ site: bookdown::bookdown_site
 library(knitr)
 ```
 
+```{r setup, echo = FALSE}
+## use this chunk to set up data directories and similar
+#BOOKDOWN_DATA_DIR <- 
+#library(quantarcticR)
+## for vignette purposes, and if this is Ben's computer, use a persistent cache_dir
+#if (grepl("ben_ray", qa_cache_dir())) qa_cache_dir("c:/data/Quantarctica3")
+```
+
 # About this
 
 Blah blah
