@@ -227,26 +227,26 @@ srcs[<span class="dv">1</span>, ]</code></pre></div>
 <h3><span class="header-section-number">5.1.2</span> Usage</h3>
 <p>Choose a directory into which to download the data. Usually this would be a persistent directory on your machine so that data sets downloaded in one session would remain available for use in later sessions, and not need re-downloading. A persistent directory could be something like <code>c:\data\</code> (on Windows), or you could use the <code>rappdirs</code> package (the <code>user_cache_dir</code> function) to suggest a suitable directory (cross-platform).</p>
 <p>Here we’ll use the <code>c:/data/cache</code> directory:</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">my_data_directory &lt;-<span class="st">  &quot;c:/data/cache&quot;</span></code></pre></div>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">my_data_dir &lt;-<span class="st">  &quot;/data/cache&quot;</span></code></pre></div>
 <p>Select the data source that we want:</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">data_source &lt;-<span class="st"> </span><span class="kw">sources</span>(<span class="st">&quot;Southern Ocean marine environmental data&quot;</span>)</code></pre></div>
 <p>Note that it’s a good idea to check the dataset size before downloading it, as some are quite large! (Though if you are running the download interactively, it will ask you before downloading a large data set).</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">data_source<span class="op">$</span>collection_size ## size in GB</code></pre></div>
 <pre><code>## [1] 0.1</code></pre>
 <p>And fetch the data:</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">result &lt;-<span class="st"> </span><span class="kw">bb_get</span>(data_source, <span class="dt">local_file_root =</span> my_data_directory, <span class="dt">verbose =</span> <span class="ot">TRUE</span>)</code></pre></div>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">result &lt;-<span class="st"> </span><span class="kw">bb_get</span>(data_source, <span class="dt">local_file_root =</span> my_data_dir, <span class="dt">verbose =</span> <span class="ot">TRUE</span>)</code></pre></div>
 <pre><code>## 
-## Thu Jul 18 16:46:30 2019
+## Fri Jul 19 15:52:32 2019
 ## Synchronizing dataset: Southern Ocean marine environmental data
 ## Source URL https://data.aad.gov.au/eds/4742/download
 ## --------------------------------------------------------------------------------------------
 ## 
-##  this dataset path is: C:\Users\ben_ray\AppData\Local\Temp\RtmpyE9fpT/data.aad.gov.au/eds/4742
+##  this dataset path is: c:\data\cache/data.aad.gov.au/eds/4742
 ##  building file list ... done.
 ##  downloading file 1 of 1: https://data.aad.gov.au/eds/4742/download ...  file unchanged on server, not downloading.
-##   decompressing: C:\Users\ben_ray\AppData\Local\Temp\RtmpyE9fpT/data.aad.gov.au/eds/4742/download.zip ... no new files to extract (not overwriting existing files) ... done.
+##   decompressing: c:\data\cache/data.aad.gov.au/eds/4742/download.zip ... no new files to extract (not overwriting existing files) ... done.
 ## 
-## Thu Jul 18 16:46:31 2019 dataset synchronization complete: Southern Ocean marine environmental data</code></pre>
+## Fri Jul 19 15:52:37 2019 dataset synchronization complete: Southern Ocean marine environmental data</code></pre>
 <p>Now we have a local copy of our data. The sync can be run daily so that the local collection is always up to date - it will only download new files, or files that have changed since the last download. For more information on <code>bowerbird</code>, see the <a href="https://ropensci.github.io/bowerbird/articles/bowerbird.html">package vignette</a>.</p>
 <p>The <code>result</code> object holds information about the data that we downloaded:</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">result</code></pre></div>
@@ -270,12 +270,12 @@ srcs[<span class="dv">1</span>, ]</code></pre></div>
 ## 6 &lt;NA&gt;                                     
 ##   file                                                                     
 ##   &lt;chr&gt;                                                                    
-## 1 &quot;C:\\Users\\ben_ray\\AppData\\Local\\Temp\\RtmpyE9fpT\\data.aad.gov.au\\~
-## 2 C:/Users/ben_ray/AppData/Local/Temp/RtmpyE9fpT/data.aad.gov.au/eds/4742/~
-## 3 C:/Users/ben_ray/AppData/Local/Temp/RtmpyE9fpT/data.aad.gov.au/eds/4742/~
-## 4 C:/Users/ben_ray/AppData/Local/Temp/RtmpyE9fpT/data.aad.gov.au/eds/4742/~
-## 5 C:/Users/ben_ray/AppData/Local/Temp/RtmpyE9fpT/data.aad.gov.au/eds/4742/~
-## 6 C:/Users/ben_ray/AppData/Local/Temp/RtmpyE9fpT/data.aad.gov.au/eds/4742/~
+## 1 &quot;c:\\data\\cache\\data.aad.gov.au\\eds\\4742\\download.zip&quot;              
+## 2 c:/data/cache/data.aad.gov.au/eds/4742/environmental_layers              
+## 3 c:/data/cache/data.aad.gov.au/eds/4742/environmental_layers/chla_ampli_a~
+## 4 c:/data/cache/data.aad.gov.au/eds/4742/environmental_layers/chla_max_all~
+## 5 c:/data/cache/data.aad.gov.au/eds/4742/environmental_layers/chla_mean_al~
+## 6 c:/data/cache/data.aad.gov.au/eds/4742/environmental_layers/chla_min_all~
 ##   note         
 ##   &lt;chr&gt;        
 ## 1 existing copy
@@ -289,49 +289,42 @@ srcs[<span class="dv">1</span>, ]</code></pre></div>
 </div>
 <div id="raadtools" class="section level2">
 <h2><span class="header-section-number">5.2</span> RAADtools</h2>
-<p><a href="https://github.com/AustralianAntarcticDivision/raadtools"><code>raadtools</code></a> is suite of functions that provide consistent access to a range of environmental and similar data, and tools for working with them. It is designed to work data collections maintained by the <code>bowerbird</code>/<code>blueant</code> packages, and builds on R’s existing ecosystem of packages for working with spatial, raster, and multidimensional data.</p>
-<p>We’ll focus on two sources of environmental data: sea ice and water depth. Note that water depth does not change with time but sea ice is highly dynamic, so we will want to know what the ice conditions are like on a day-to-day basis.</p>
-<p>Download daily sea ice data (from 2013 only), and the ETOPO2 bathymetric data set. ETOPO2 is somewhat dated and low resolution compared to more recent data, but will do as a small dataset for demo purposes:</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">library</span>(blueant)
-src &lt;-<span class="st"> </span><span class="kw">bind_rows</span>(
-    <span class="kw">sources</span>(<span class="st">&quot;NSIDC SMMR-SSM/I Nasateam sea ice concentration&quot;</span>, <span class="dt">hemisphere =</span> <span class="st">&quot;south&quot;</span>,
-            <span class="dt">time_resolutions =</span> <span class="st">&quot;day&quot;</span>, <span class="dt">years =</span> <span class="dv">2013</span>),
+<p>The <a href="https://github.com/AustralianAntarcticDivision/raadtools"><code>raadtools</code></a> package provides a consistent interface to a range of environmental and similar data, and tools for working with them. It is designed to work data with collections maintained by the <code>bowerbird</code>/<code>blueant</code> packages, and builds on R’s existing ecosystem of packages for working with spatial, raster, and multidimensional data.</p>
+<p>Here we’ll use two different environmental data sets: sea ice and water depth. Water depth does not change with time but sea ice is provided at daily time resolution.</p>
+<p>First download daily sea ice data (from 2013 only), and the ETOPO2 bathymetric data set. ETOPO2 is somewhat dated and low resolution compared to more recent data, but will do as a small dataset for demo purposes. This may take a few minutes, depending on your connection speed:</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">src &lt;-<span class="st"> </span><span class="kw">bind_rows</span>(
+    <span class="kw">sources</span>(<span class="st">&quot;NSIDC SMMR-SSM/I Nasateam sea ice concentration&quot;</span>, <span class="dt">hemisphere =</span> <span class="st">&quot;south&quot;</span>, <span class="dt">time_resolutions =</span> <span class="st">&quot;day&quot;</span>,
+            <span class="dt">years =</span> <span class="dv">2013</span>),
     <span class="kw">sources</span>(<span class="st">&quot;ETOPO2 bathymetry&quot;</span>))
-result &lt;-<span class="st"> </span><span class="kw">bb_get</span>(src, <span class="dt">local_file_root =</span> my_data_dir, <span class="dt">clobber =</span> <span class="dv">0</span>, <span class="dt">verbose =</span> <span class="ot">TRUE</span>,
-                 <span class="dt">confirm =</span> <span class="ot">NULL</span>)</code></pre></div>
-<pre><code>##  
-## Sat Nov 10 01:00:48 2018 
-## Synchronizing dataset: NSIDC SMMR-SSM/I Nasateam sea ice concentration 
-##  
-##  [... output truncated]</code></pre>
-<p>Now we have local copies of those data files. The sync can be run daily so that the local collection is always up to date - it will only download new files, or files that have changed since the last download. For more information on <code>bowerbird</code>, see the <a href="https://ropensci.github.io/bowerbird/articles/bowerbird.html">package vignette</a>.</p>
-<p>Details of the files can be found in the <code>result</code> object, and those files could now be read with packages such as <code>raster</code>. However, we are collecting data from a range of sources, and so they will be different in terms of their grids, resolutions, projections, and variable-naming conventions, which tends to complicate these operations. In the next section we’ll look at the <code>raadtools</code> package, which provides a set of tools for doing common operations on these types of data.</p>
-<div id="using-those-environmental-data-raadtools" class="section level4">
-<h4><span class="header-section-number">5.2.0.1</span> Using those environmental data: raadtools</h4>
-<p><a href="https://github.com/AustralianAntarcticDivision/raadtools"><code>raadtools</code></a> is suite of functions that provide consistent access to a range of environmental and similar data, and tools for working with them. It is designed to work data collections maintained by the <code>bowerbird</code>/<code>blueant</code> packages.</p>
-<p>Load the package and tell it where our data collection has been stored:</p>
+result &lt;-<span class="st"> </span><span class="kw">bb_get</span>(src, <span class="dt">local_file_root =</span> my_data_dir, <span class="dt">clobber =</span> <span class="dv">0</span>, <span class="dt">verbose =</span> <span class="ot">TRUE</span>, <span class="dt">confirm =</span> <span class="ot">NULL</span>)</code></pre></div>
+<p>Now load the <code>raadtools</code> package and tell it where our data collection has been stored:</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">library</span>(raadtools)
 <span class="kw">set_data_roots</span>(my_data_dir)</code></pre></div>
+<pre><code>## Raad file cache is up to date as at 2019-07-19 15:53:07 (819 files listed)</code></pre>
+<pre><code>## global option &#39;raadfiles.data.roots&#39; set:
+## &#39;/data/cache    2019-07-19 14:55:38&#39;</code></pre>
+<p>Let’s say that we have some points of interest in the Southern Ocean — perhaps a ship track, or some stations where we took marine samples, or as we’ll use here, the <a href="http://www.meop.net/">track of an elephant seal</a> as it moves from the Kerguelen Islands to Antarctica and back again (Data from IMOS 2018[^1], provided as part of the <code>SOmap</code> package).</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">data</span>(<span class="st">&quot;SOmap_data&quot;</span>, <span class="dt">package =</span> <span class="st">&quot;SOmap&quot;</span>)
+ele &lt;-<span class="st"> </span>SOmap_data<span class="op">$</span>mirounga_leonina <span class="op">%&gt;%</span><span class="st"> </span>dplyr<span class="op">::</span><span class="kw">filter</span>(id <span class="op">==</span><span class="st"> &quot;ct96-05-13&quot;</span>)</code></pre></div>
 <p>Define our spatial region of interest and extract the bathymetry data from this region, using the ETOPO2 files we just downloaded:</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">roi &lt;-<span class="st"> </span><span class="kw">round</span>(<span class="kw">c</span>(<span class="kw">range</span>(ele<span class="op">$</span>lon), <span class="kw">range</span>(ele<span class="op">$</span>lat)) <span class="op">+</span><span class="st"> </span><span class="kw">c</span>(<span class="op">-</span><span class="dv">2</span>, <span class="dv">2</span>, <span class="op">-</span><span class="dv">2</span>, <span class="dv">2</span>))
 bx &lt;-<span class="st"> </span><span class="kw">readtopo</span>(<span class="st">&quot;etopo2&quot;</span>, <span class="dt">xylim =</span> roi)</code></pre></div>
 <p>And now we can make a simple plot of our our track superimposed on the bathymetry:</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">plot</span>(bx)
 <span class="kw">lines</span>(ele<span class="op">$</span>lon, ele<span class="op">$</span>lat)</code></pre></div>
-<p><img src="/img/blog-images/2018-11-13-antarctic/plotbathy-1.png" style="display: block; margin: auto;" /></p>
-<p>We can also extract the depth values along our track using the <code>extract()</code> function in <code>raadtools</code>:</p>
+<p><img src="_main_files/figure-html/raadt5-1.png" width="672" /></p>
+<p>The real power of <code>raadtools</code> comes from its extraction functions. We can extract the depth values along our track using the <code>extract()</code> function. We pass it the data-reader function to use (<code>readtopo</code>), the data to apply it to (<code>ele[, c(&quot;lon&quot;, &quot;lat&quot;)]</code>), and any other options to pass to the reader function (in this case, specifying the topographic data source <code>topo = &quot;etopo2&quot;</code>):</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">ele<span class="op">$</span>depth &lt;-<span class="st"> </span><span class="kw">extract</span>(readtopo, ele[, <span class="kw">c</span>(<span class="st">&quot;lon&quot;</span>, <span class="st">&quot;lat&quot;</span>)], <span class="dt">topo =</span> <span class="st">&quot;etopo2&quot;</span>)</code></pre></div>
 <p>Plot the histogram of depth values, showing that most of the track points are located in relatively shallow waters:</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">ggplot</span>(ele, <span class="kw">aes</span>(depth)) <span class="op">+</span><span class="st"> </span><span class="kw">geom_histogram</span>(<span class="dt">bins =</span> <span class="dv">100</span>) <span class="op">+</span><span class="st"> </span><span class="kw">theme_bw</span>()</code></pre></div>
-<p><img src="/img/blog-images/2018-11-13-antarctic/histbathy-1.png" style="display: block; margin: auto;" /></p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">with</span>(ele, <span class="kw">hist</span>(depth, <span class="dt">breaks =</span> <span class="dv">20</span>))</code></pre></div>
+<p><img src="_main_files/figure-html/raadt7-1.png" width="672" /></p>
 <p>This type of extraction will also work with time-varying data — for example, we can extract the sea-ice conditions along our track, based on each track point’s location and time:</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">ele<span class="op">$</span>ice &lt;-<span class="st"> </span><span class="kw">extract</span>(readice, ele[, <span class="kw">c</span>(<span class="st">&quot;lon&quot;</span>, <span class="st">&quot;lat&quot;</span>, <span class="st">&quot;date&quot;</span>)])
-## points outside the ice grid will have missing ice values, so fill them with zeros
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">ele<span class="op">$</span>ice &lt;-<span class="st"> </span><span class="kw">extract</span>(readice, ele[, <span class="kw">c</span>(<span class="st">&quot;lon&quot;</span>, <span class="st">&quot;lat&quot;</span>, <span class="st">&quot;date&quot;</span>)])</code></pre></div>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">## points outside the ice grid will have missing ice values, so fill them with zeros
 ele<span class="op">$</span>ice[<span class="kw">is.na</span>(ele<span class="op">$</span>ice)] &lt;-<span class="st"> </span><span class="dv">0</span>
-<span class="kw">ggplot</span>(ele, <span class="kw">aes</span>(date, ice, <span class="dt">colour =</span> lat)) <span class="op">+</span><span class="st"> </span><span class="kw">geom_path</span>() <span class="op">+</span><span class="st"> </span><span class="kw">theme_bw</span>()</code></pre></div>
-<p><img src="/img/blog-images/2018-11-13-antarctic/temp2-1.png" style="display: block; margin: auto;" /></p>
+<span class="kw">with</span>(ele, <span class="kw">plot</span>(date, ice, <span class="dt">type =</span> <span class="st">&quot;l&quot;</span>))</code></pre></div>
+<p><img src="_main_files/figure-html/raadt9-1.png" width="672" /></p>
 
-</div>
 </div>
 </div>
             </section>

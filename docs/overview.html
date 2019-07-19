@@ -226,9 +226,9 @@ my_aphia_id &lt;-<span class="st"> </span>tax[[<span class="dv">1</span>]]<span 
 <div id="occurrences" class="section level2">
 <h2><span class="header-section-number">2.3</span> Occurrences</h2>
 <p>Get all data from the <a href="https://ipt.biodiversity.aq/resource?r=gamlr">Antarctic Euphausiacea occurence data from “German Antarctic Marine Living Resources” (GAMLR) Expeditions</a> data set:</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">library</span>(robis)
-
-##ds &lt;- dataset(taxonid = my_aphia_id)
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">library</span>(robis)</code></pre></div>
+<pre><code>## Warning: package &#39;robis&#39; was built under R version 3.4.4</code></pre>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">##ds &lt;- dataset(taxonid = my_aphia_id)
 ##x &lt;- occurrence(datasetid = ds$id[6])
 x &lt;-<span class="st"> </span><span class="kw">occurrence</span>(<span class="dt">datasetid =</span> <span class="st">&quot;cb16377b-56a8-4d95-802d-4eec02466773&quot;</span>)</code></pre></div>
 <p>Plot the complete distribution of samples in black, and <em>Euphausia crystallorophias</em> in green:</p>
@@ -261,17 +261,17 @@ data_source &lt;-<span class="st"> </span><span class="kw">sources_sdm</span>(<s
 ## fetch the data
 status &lt;-<span class="st"> </span><span class="kw">bb_get</span>(data_source, <span class="dt">local_file_root =</span> my_data_directory, <span class="dt">verbose =</span> <span class="ot">TRUE</span>)</code></pre></div>
 <pre><code>## 
-## Thu Jul 18 09:52:05 2019
+## Fri Jul 19 15:42:56 2019
 ## Synchronizing dataset: Southern Ocean marine environmental data
 ## Source URL https://data.aad.gov.au/eds/4742/download
 ## --------------------------------------------------------------------------------------------
 ## 
-##  this dataset path is: C:\Users\ben_ray\AppData\Local\Temp\RtmpyE9fpT/data.aad.gov.au/eds/4742
+##  this dataset path is: C:\Users\ben_ray\AppData\Local\Temp\Rtmpum8OQA/data.aad.gov.au/eds/4742
 ##  building file list ... done.
 ##  downloading file 1 of 1: https://data.aad.gov.au/eds/4742/download ...  done.
-##   decompressing: C:\Users\ben_ray\AppData\Local\Temp\RtmpyE9fpT/data.aad.gov.au/eds/4742/download.zip ... extracting 60 files into C:/Users/ben_ray/AppData/Local/Temp/RtmpyE9fpT/data.aad.gov.au/eds/4742 ... done.
+##   decompressing: C:\Users\ben_ray\AppData\Local\Temp\Rtmpum8OQA/data.aad.gov.au/eds/4742/download.zip ... extracting 60 files into C:/Users/ben_ray/AppData/Local/Temp/Rtmpum8OQA/data.aad.gov.au/eds/4742 ... done.
 ## 
-## Thu Jul 18 09:52:13 2019 dataset synchronization complete: Southern Ocean marine environmental data</code></pre>
+## Fri Jul 19 15:49:55 2019 dataset synchronization complete: Southern Ocean marine environmental data</code></pre>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">nc_files &lt;-<span class="st"> </span><span class="kw">Filter</span>(<span class="cf">function</span>(z) <span class="kw">grepl</span>(<span class="st">&quot;</span><span class="ch">\\</span><span class="st">.nc$&quot;</span>, z), status<span class="op">$</span>files[[<span class="dv">1</span>]]<span class="op">$</span>file)
 
 ## create a raster stack of all layers
@@ -303,9 +303,9 @@ xfit &lt;-<span class="st"> </span><span class="kw">bind_cols</span>(xfit, temp)
 <div id="fit-model" class="section level2">
 <h2><span class="header-section-number">2.5</span> Fit model</h2>
 <p>We have presence/absence data, so we’ll fit a simple binomial model. The probability of presence of <em>Euphausia crystallorophias</em> is fitted as a smooth function of depth and mean sea ice cover:</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">library</span>(mgcv)
-
-fit &lt;-<span class="st"> </span><span class="kw">gam</span>(present <span class="op">~</span><span class="st"> </span><span class="kw">s</span>(depth) <span class="op">+</span><span class="st"> </span><span class="kw">s</span>(ice_cover_mean), <span class="dt">family =</span> binomial, <span class="dt">data =</span> xfit)
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">library</span>(mgcv)</code></pre></div>
+<pre><code>## Warning: package &#39;mgcv&#39; was built under R version 3.4.4</code></pre>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">fit &lt;-<span class="st"> </span><span class="kw">gam</span>(present <span class="op">~</span><span class="st"> </span><span class="kw">s</span>(depth) <span class="op">+</span><span class="st"> </span><span class="kw">s</span>(ice_cover_mean), <span class="dt">family =</span> binomial, <span class="dt">data =</span> xfit)
 
 <span class="kw">summary</span>(fit)</code></pre></div>
 <pre><code>## 

@@ -6,11 +6,9 @@ documentclass: book
 site: bookdown::bookdown_site
 ---
 
-```{r echo = FALSE}
-library(knitr)
-```
-
 ```{r setup, echo = FALSE}
+library(knitr)
+
 ## use this chunk to set up data directories and similar
 #BOOKDOWN_DATA_DIR <- 
 #library(quantarcticR)

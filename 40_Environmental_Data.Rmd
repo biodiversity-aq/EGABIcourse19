@@ -46,16 +46,18 @@ Choose a directory into which to download the data. Usually this would be a pers
 ```{r ed0hidden, echo = FALSE, results = "asis"}
 if (grepl("ben_ray", tempdir())) {
   cat("Here we'll use the `c:/data/cache` directory:\n")
+  my_data_dir <-  "/data/cache"
 } else {
   cat("Here we'll use a temporary directory:\n")
+  my_data_dir <-  tempdir()
 }
 ```
 
-```{r ed0a, include = grepl("ben_ray", tempdir())}
-my_data_directory <-  "c:/data/cache"
+```{r ed0a, include = grepl("ben_ray", tempdir()), eval = FALSE}
+my_data_dir <-  "/data/cache"
 ```
-```{r ed0b, include = !grepl("ben_ray", tempdir())}
-my_data_directory <-  tempdir()
+```{r ed0b, include = !grepl("ben_ray", tempdir()), eval = FALSE}
+my_data_dir <-  tempdir()
 ```
 
 Select the data source that we want:
@@ -72,7 +74,7 @@ data_source$collection_size ## size in GB
 
 And fetch the data:
 ```{r ed6, cache = TRUE}
-result <- bb_get(data_source, local_file_root = my_data_directory, verbose = TRUE)
+result <- bb_get(data_source, local_file_root = my_data_dir, verbose = TRUE)
 ```
 
 Now we have a local copy of our data. The sync can be run daily so that the local collection is always up to date - it will only download new files, or files that have changed since the last download. For more information on `bowerbird`, see the [package vignette](https://ropensci.github.io/bowerbird/articles/bowerbird.html).
@@ -93,81 +95,81 @@ These particular files are netCDF, and so could be read using e.g. the `raster` 
 
 ## RAADtools
 
-[`raadtools`](https://github.com/AustralianAntarcticDivision/raadtools) is suite of functions that provide consistent access to a range of environmental and similar data, and tools for working with them. It is designed to work data collections maintained by the `bowerbird`/`blueant` packages, and builds on R's existing ecosystem of packages for working with spatial, raster, and multidimensional data.
+The [`raadtools`](https://github.com/AustralianAntarcticDivision/raadtools) package provides a consistent interface to a range of environmental and similar data, and tools for working with them. It is designed to work data with collections maintained by the `bowerbird`/`blueant` packages, and builds on R's existing ecosystem of packages for working with spatial, raster, and multidimensional data.
 
+Here we'll use two different environmental data sets: sea ice and water depth. Water depth does not change with time but sea ice is provided at daily time resolution.
 
-We'll focus on two sources of environmental data: sea ice and water depth. Note that water depth does not change with time but sea ice is highly dynamic, so we will want to know what the ice conditions are like on a day-to-day basis.
+First download daily sea ice data (from 2013 only), and the ETOPO2 bathymetric data set. ETOPO2 is somewhat dated and low resolution compared to more recent data, but will do as a small dataset for demo purposes. This may take a few minutes, depending on your connection speed:
 
-Download daily sea ice data (from 2013 only), and the ETOPO2 bathymetric data set. ETOPO2 is somewhat dated and low resolution compared to more recent data, but will do as a small dataset for demo purposes:
-
-``` r
-library(blueant)
+```{r raadt1, eval = FALSE}
 src <- bind_rows(
-    sources("NSIDC SMMR-SSM/I Nasateam sea ice concentration", hemisphere = "south",
-            time_resolutions = "day", years = 2013),
+    sources("NSIDC SMMR-SSM/I Nasateam sea ice concentration", hemisphere = "south", time_resolutions = "day",
+            years = 2013),
     sources("ETOPO2 bathymetry"))
-result <- bb_get(src, local_file_root = my_data_dir, clobber = 0, verbose = TRUE,
-                 confirm = NULL)
+result <- bb_get(src, local_file_root = my_data_dir, clobber = 0, verbose = TRUE, confirm = NULL)
 ```
 
-    ##  
-    ## Sat Nov 10 01:00:48 2018 
-    ## Synchronizing dataset: NSIDC SMMR-SSM/I Nasateam sea ice concentration 
-    ##  
-    ##  [... output truncated]
+```{r raadt2, echo = FALSE, message = FALSE, cache = TRUE, eval = FALSE}
+##8***
+## code not shown in output: capture the output and trim it down a bit
+src <- bind_rows(
+    sources("NSIDC SMMR-SSM/I Nasateam sea ice concentration", hemisphere = "south", time_resolutions = "day", years = 2013),
+    sources("ETOPO2 bathymetry"))
+op <- capture.output(result <- bb_get(src, local_file_root = my_data_dir, clobber = 0, verbose = TRUE, confirm = NULL))
+op[4] <- ""
+op[5] <- " [... output truncated]"
+for (oo in op[1:5]) cat(oo, "\n")
+```
 
-Now we have local copies of those data files. The sync can be run daily so that the local collection is always up to date - it will only download new files, or files that have changed since the last download. For more information on `bowerbird`, see the [package vignette](https://ropensci.github.io/bowerbird/articles/bowerbird.html).
 
-Details of the files can be found in the `result` object, and those files could now be read with packages such as `raster`. However, we are collecting data from a range of sources, and so they will be different in terms of their grids, resolutions, projections, and variable-naming conventions, which tends to complicate these operations. In the next section we'll look at the `raadtools` package, which provides a set of tools for doing common operations on these types of data.
+Now load the `raadtools` package and tell it where our data collection has been stored:
 
-#### Using those environmental data: raadtools
-
-[`raadtools`](https://github.com/AustralianAntarcticDivision/raadtools) is suite of functions that provide consistent access to a range of environmental and similar data, and tools for working with them. It is designed to work data collections maintained by the `bowerbird`/`blueant` packages.
-
-Load the package and tell it where our data collection has been stored:
-
-``` r
+```{r raadt3, results = "hold"}
 library(raadtools)
 set_data_roots(my_data_dir)
 ```
 
+Let's say that we have some points of interest in the Southern Ocean &mdash; perhaps a ship track, or some stations where we took marine samples, or as we'll use here, the [track of an elephant seal](http://www.meop.net/) as it moves from the Kerguelen Islands to Antarctica and back again (Data from IMOS 2018[^1], provided as part of the `SOmap` package).
+
+```{r get_track_data, message = FALSE, warning = FALSE}
+data("SOmap_data", package = "SOmap")
+ele <- SOmap_data$mirounga_leonina %>% dplyr::filter(id == "ct96-05-13")
+```
+
 Define our spatial region of interest and extract the bathymetry data from this region, using the ETOPO2 files we just downloaded:
 
-``` r
+```{r raadt4, cache = TRUE}
 roi <- round(c(range(ele$lon), range(ele$lat)) + c(-2, 2, -2, 2))
 bx <- readtopo("etopo2", xylim = roi)
 ```
 
 And now we can make a simple plot of our our track superimposed on the bathymetry:
 
-``` r
+```{r raadt5, cache = TRUE}
 plot(bx)
 lines(ele$lon, ele$lat)
 ```
 
-<img src="/img/blog-images/2018-11-13-antarctic/plotbathy-1.png" style="display: block; margin: auto;" />
+The real power of `raadtools` comes from its extraction functions. We can extract the depth values along our track using the `extract()` function. We pass it the data-reader function to use (`readtopo`), the data to apply it to (`ele[, c("lon", "lat")]`), and any other options to pass to the reader function (in this case, specifying the topographic data source `topo = "etopo2"`):
 
-We can also extract the depth values along our track using the `extract()` function in `raadtools`:
-
-``` r
+```{r raadt6, cache = TRUE}
 ele$depth <- extract(readtopo, ele[, c("lon", "lat")], topo = "etopo2")
 ```
 
 Plot the histogram of depth values, showing that most of the track points are located in relatively shallow waters:
 
-``` r
-ggplot(ele, aes(depth)) + geom_histogram(bins = 100) + theme_bw()
+```{r raadt7, cache = TRUE}
+with(ele, hist(depth, breaks = 20))
 ```
 
-<img src="/img/blog-images/2018-11-13-antarctic/histbathy-1.png" style="display: block; margin: auto;" />
+This type of extraction will also work with time-varying data &mdash; for example, we can extract the sea-ice conditions along our track, based on each track point's location and time:
 
-This type of extraction will also work with time-varying data — for example, we can extract the sea-ice conditions along our track, based on each track point's location and time:
-
-``` r
+```{r raadt8, cache = TRUE, results = "none", message = FALSE, warning = FALSE}
 ele$ice <- extract(readice, ele[, c("lon", "lat", "date")])
+```
+```{r raadt9, cache = TRUE}
 ## points outside the ice grid will have missing ice values, so fill them with zeros
 ele$ice[is.na(ele$ice)] <- 0
-ggplot(ele, aes(date, ice, colour = lat)) + geom_path() + theme_bw()
+with(ele, plot(date, ice, type = "l"))
 ```
 
-<img src="/img/blog-images/2018-11-13-antarctic/temp2-1.png" style="display: block; margin: auto;" />
