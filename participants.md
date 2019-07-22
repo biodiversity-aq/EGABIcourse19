@@ -26,7 +26,7 @@
 ### Andrew	Lowther,	Norway
 
 ### Ana Laura	Machado,	Uruguay
-<img src="/images/participants/AnaLauraMachado.jpg" alt="Ana Laura" title="Ana Laura" width="75"  align="left"/>Ana Laura	Machado is a biologist, interested in studying the effects of climate change and the anthropic impact on the physiology, behavior and distribution of Antarctic penguins. See is keen on learning more about the models of species distribution and how to develop them.
+<img src="/images/participants/AnaLauraMachado.JPG" alt="Ana Laura" title="Ana Laura" width="75"  align="left"/>Ana Laura	Machado is a biologist, interested in studying the effects of climate change and the anthropic impact on the physiology, behavior and distribution of Antarctic penguins. See is keen on learning more about the models of species distribution and how to develop them.
 
 ### Sarah	Maes, Belgium
 
