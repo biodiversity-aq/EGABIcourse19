@@ -1,0 +1,6 @@
+# Introduction to R and the Tidyverse
+
+## R
+
+See [Getting Started in R &mdash; Tidyverse Edition](https://github.com/saghirb/Getting-Started-in-R/blob/master/Getting-Started-in-R.pdf) by [Saghir Bashir](https://github.com/saghirb).
+

@@ -1,0 +1,384 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="" xml:lang="">
+<head>
+
+  <meta charset="utf-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <title>5 Environmental data | SCAR-EGABI Tools for Southern Ocean Spatial Analysis and Modelling</title>
+  <meta name="description" content="Course material" />
+  <meta name="generator" content="bookdown 0.11 and GitBook 2.6.7" />
+
+  <meta property="og:title" content="5 Environmental data | SCAR-EGABI Tools for Southern Ocean Spatial Analysis and Modelling" />
+  <meta property="og:type" content="book" />
+  
+  
+  <meta property="og:description" content="Course material" />
+  
+
+  <meta name="twitter:card" content="summary" />
+  <meta name="twitter:title" content="5 Environmental data | SCAR-EGABI Tools for Southern Ocean Spatial Analysis and Modelling" />
+  
+  <meta name="twitter:description" content="Course material" />
+  
+
+<meta name="author" content="Anton Van de Putte, Charlène Guillaumot, Grant Humphries, Huw Griffith, Ben Raymond" />
+
+
+
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="apple-mobile-web-app-capable" content="yes" />
+  <meta name="apple-mobile-web-app-status-bar-style" content="black" />
+  
+  
+<link rel="prev" href="biological-data.html">
+<link rel="next" href="mapping.html">
+<script src="libs/jquery-2.2.3/jquery.min.js"></script>
+<link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-table.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-bookdown.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-highlight.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-search.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-fontsettings.css" rel="stylesheet" />
+
+
+
+
+
+
+
+
+
+<style type="text/css">
+div.sourceCode { overflow-x: auto; }
+table.sourceCode, tr.sourceCode, td.lineNumbers, td.sourceCode {
+  margin: 0; padding: 0; vertical-align: baseline; border: none; }
+table.sourceCode { width: 100%; line-height: 100%; }
+td.lineNumbers { text-align: right; padding-right: 4px; padding-left: 4px; color: #aaaaaa; border-right: 1px solid #aaaaaa; }
+td.sourceCode { padding-left: 5px; }
+code > span.kw { color: #007020; font-weight: bold; } /* Keyword */
+code > span.dt { color: #902000; } /* DataType */
+code > span.dv { color: #40a070; } /* DecVal */
+code > span.bn { color: #40a070; } /* BaseN */
+code > span.fl { color: #40a070; } /* Float */
+code > span.ch { color: #4070a0; } /* Char */
+code > span.st { color: #4070a0; } /* String */
+code > span.co { color: #60a0b0; font-style: italic; } /* Comment */
+code > span.ot { color: #007020; } /* Other */
+code > span.al { color: #ff0000; font-weight: bold; } /* Alert */
+code > span.fu { color: #06287e; } /* Function */
+code > span.er { color: #ff0000; font-weight: bold; } /* Error */
+code > span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
+code > span.cn { color: #880000; } /* Constant */
+code > span.sc { color: #4070a0; } /* SpecialChar */
+code > span.vs { color: #4070a0; } /* VerbatimString */
+code > span.ss { color: #bb6688; } /* SpecialString */
+code > span.im { } /* Import */
+code > span.va { color: #19177c; } /* Variable */
+code > span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
+code > span.op { color: #666666; } /* Operator */
+code > span.bu { } /* BuiltIn */
+code > span.ex { } /* Extension */
+code > span.pp { color: #bc7a00; } /* Preprocessor */
+code > span.at { color: #7d9029; } /* Attribute */
+code > span.do { color: #ba2121; font-style: italic; } /* Documentation */
+code > span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
+code > span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } /* CommentVar */
+code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
+</style>
+
+<link rel="stylesheet" href="styles.css" type="text/css" />
+</head>
+
+<body>
+
+
+
+  <div class="book without-animation with-summary font-size-2 font-family-1" data-basepath=".">
+
+    <div class="book-summary">
+      <nav role="navigation">
+
+<ul class="summary">
+<li class="chapter" data-level="1" data-path="index.html"><a href="index.html"><i class="fa fa-check"></i><b>1</b> About this</a><ul>
+<li class="chapter" data-level="" data-path="index.html"><a href="index.html#technical-stuff"><i class="fa fa-check"></i>Technical stuff</a></li>
+</ul></li>
+<li class="chapter" data-level="2" data-path="overview.html"><a href="overview.html"><i class="fa fa-check"></i><b>2</b> Overview</a><ul>
+<li class="chapter" data-level="2.1" data-path="overview.html"><a href="overview.html#preparation"><i class="fa fa-check"></i><b>2.1</b> Preparation</a></li>
+<li class="chapter" data-level="2.2" data-path="overview.html"><a href="overview.html#taxonomy"><i class="fa fa-check"></i><b>2.2</b> Taxonomy</a></li>
+<li class="chapter" data-level="2.3" data-path="overview.html"><a href="overview.html#occurrences"><i class="fa fa-check"></i><b>2.3</b> Occurrences</a></li>
+<li class="chapter" data-level="2.4" data-path="overview.html"><a href="overview.html#environmental-data"><i class="fa fa-check"></i><b>2.4</b> Environmental data</a></li>
+<li class="chapter" data-level="2.5" data-path="overview.html"><a href="overview.html#fit-model"><i class="fa fa-check"></i><b>2.5</b> Fit model</a></li>
+<li class="chapter" data-level="2.6" data-path="overview.html"><a href="overview.html#predict-from-model"><i class="fa fa-check"></i><b>2.6</b> Predict from model</a></li>
+<li class="chapter" data-level="2.7" data-path="overview.html"><a href="overview.html#other-bits-and-pieces"><i class="fa fa-check"></i><b>2.7</b> Other bits and pieces</a><ul>
+<li class="chapter" data-level="2.7.1" data-path="overview.html"><a href="overview.html#place-names"><i class="fa fa-check"></i><b>2.7.1</b> Place names</a></li>
+</ul></li>
+</ul></li>
+<li class="chapter" data-level="3" data-path="introduction-to-r-and-the-tidyverse.html"><a href="introduction-to-r-and-the-tidyverse.html"><i class="fa fa-check"></i><b>3</b> Introduction to R and the Tidyverse</a><ul>
+<li class="chapter" data-level="3.1" data-path="introduction-to-r-and-the-tidyverse.html"><a href="introduction-to-r-and-the-tidyverse.html#r"><i class="fa fa-check"></i><b>3.1</b> R</a></li>
+</ul></li>
+<li class="chapter" data-level="4" data-path="biological-data.html"><a href="biological-data.html"><i class="fa fa-check"></i><b>4</b> Biological data</a></li>
+<li class="chapter" data-level="5" data-path="environmental-data-1.html"><a href="environmental-data-1.html"><i class="fa fa-check"></i><b>5</b> Environmental data</a><ul>
+<li class="chapter" data-level="5.1" data-path="environmental-data-1.html"><a href="environmental-data-1.html#bowerbirdblueant"><i class="fa fa-check"></i><b>5.1</b> Bowerbird/blueant</a><ul>
+<li class="chapter" data-level="5.1.1" data-path="environmental-data-1.html"><a href="environmental-data-1.html#available-data-sets"><i class="fa fa-check"></i><b>5.1.1</b> Available data sets</a></li>
+<li class="chapter" data-level="5.1.2" data-path="environmental-data-1.html"><a href="environmental-data-1.html#usage"><i class="fa fa-check"></i><b>5.1.2</b> Usage</a></li>
+</ul></li>
+<li class="chapter" data-level="5.2" data-path="environmental-data-1.html"><a href="environmental-data-1.html#raadtools"><i class="fa fa-check"></i><b>5.2</b> RAADtools</a></li>
+</ul></li>
+<li class="chapter" data-level="6" data-path="mapping.html"><a href="mapping.html"><i class="fa fa-check"></i><b>6</b> Mapping</a><ul>
+<li class="chapter" data-level="6.1" data-path="mapping.html"><a href="mapping.html#somap"><i class="fa fa-check"></i><b>6.1</b> SOmap</a><ul>
+<li class="chapter" data-level="6.1.1" data-path="mapping.html"><a href="mapping.html#circumpolar-maps"><i class="fa fa-check"></i><b>6.1.1</b> Circumpolar maps</a></li>
+<li class="chapter" data-level="6.1.2" data-path="mapping.html"><a href="mapping.html#non-circumpolar-maps"><i class="fa fa-check"></i><b>6.1.2</b> Non-circumpolar maps</a></li>
+<li class="chapter" data-level="6.1.3" data-path="mapping.html"><a href="mapping.html#plotting-via-ggplot2"><i class="fa fa-check"></i><b>6.1.3</b> Plotting via ggplot2</a></li>
+<li class="chapter" data-level="6.1.4" data-path="mapping.html"><a href="mapping.html#modifying-map-objects-advanced-usage"><i class="fa fa-check"></i><b>6.1.4</b> Modifying map objects (advanced usage)</a></li>
+</ul></li>
+<li class="chapter" data-level="6.2" data-path="mapping.html"><a href="mapping.html#supporting-data-for-maps"><i class="fa fa-check"></i><b>6.2</b> Supporting data for maps</a><ul>
+<li class="chapter" data-level="6.2.1" data-path="mapping.html"><a href="mapping.html#quantarcticr"><i class="fa fa-check"></i><b>6.2.1</b> quantarcticR</a></li>
+<li class="chapter" data-level="6.2.2" data-path="mapping.html"><a href="mapping.html#antanym"><i class="fa fa-check"></i><b>6.2.2</b> antanym</a></li>
+</ul></li>
+</ul></li>
+<li class="chapter" data-level="7" data-path="species-distribution-modelling.html"><a href="species-distribution-modelling.html"><i class="fa fa-check"></i><b>7</b> Species distribution modelling</a><ul>
+<li class="chapter" data-level="7.1" data-path="species-distribution-modelling.html"><a href="species-distribution-modelling.html#introduction-and-review"><i class="fa fa-check"></i><b>7.1</b> Introduction and review</a></li>
+<li class="chapter" data-level="7.2" data-path="species-distribution-modelling.html"><a href="species-distribution-modelling.html#methods"><i class="fa fa-check"></i><b>7.2</b> Methods</a></li>
+<li class="chapter" data-level="7.3" data-path="species-distribution-modelling.html"><a href="species-distribution-modelling.html#evaluation"><i class="fa fa-check"></i><b>7.3</b> Evaluation</a><ul>
+<li class="chapter" data-level="7.3.1" data-path="species-distribution-modelling.html"><a href="species-distribution-modelling.html#other-modelling-approaches"><i class="fa fa-check"></i><b>7.3.1</b> Other modelling approaches</a></li>
+</ul></li>
+</ul></li>
+<li class="chapter" data-level="8" data-path="other-r-resources-for-southern-oceanantarctic-use.html"><a href="other-r-resources-for-southern-oceanantarctic-use.html"><i class="fa fa-check"></i><b>8</b> Other R resources for Southern Ocean/Antarctic use</a><ul>
+<li class="chapter" data-level="8.1" data-path="other-r-resources-for-southern-oceanantarctic-use.html"><a href="other-r-resources-for-southern-oceanantarctic-use.html#diet-data-sohungry"><i class="fa fa-check"></i><b>8.1</b> Diet data: sohungry</a></li>
+<li class="chapter" data-level="8.2" data-path="other-r-resources-for-southern-oceanantarctic-use.html"><a href="other-r-resources-for-southern-oceanantarctic-use.html#allometric-equations-solong"><i class="fa fa-check"></i><b>8.2</b> Allometric equations: solong</a></li>
+</ul></li>
+</ul>
+
+      </nav>
+    </div>
+
+    <div class="book-body">
+      <div class="body-inner">
+        <div class="book-header" role="navigation">
+          <h1>
+            <i class="fa fa-circle-o-notch fa-spin"></i><a href="./">SCAR-EGABI Tools for Southern Ocean Spatial Analysis and Modelling</a>
+          </h1>
+        </div>
+
+        <div class="page-wrapper" tabindex="-1" role="main">
+          <div class="page-inner">
+
+            <section class="normal" id="section-">
+<div id="environmental-data-1" class="section level1">
+<h1><span class="header-section-number">5</span> Environmental data</h1>
+<div id="bowerbirdblueant" class="section level2">
+<h2><span class="header-section-number">5.1</span> Bowerbird/blueant</h2>
+<p>Very commonly, we want to know about the environmental conditions at our points of interest. For the remote and vast Southern Ocean these data typically come from satellite or model sources. Some data centres provide extraction tools that will pull out a subset of data to suit your requirements, but often it makes more sense to cache entire data collections locally first and then work with them from there.</p>
+<p><a href="https://github.com/AustralianAntarcticDivision/bowerbird">bowerbird</a> provides a framework for downloading data files to a local collection, and keeping it up to date. The companion <a href="https://github.com/AustralianAntarcticDivision/blueant">blueant</a> package provides a suite of definitions for Southern Ocean and Antarctic data sources that can be used with <code>bowerbird</code>. It encompasses data such as sea ice, bathymetry and land topography, oceanography, and atmospheric reanalysis and weather predictions, from providers such as NASA, NOAA, Copernicus, NSIDC, and Ifremer.</p>
+<p>Why might you want to maintain local copies of entire data sets, instead of just fetching subsets of data from providers as needed?</p>
+<ul>
+<li>many analyses make use of data from a variety of providers (in which case there may not be dynamic extraction tools for all of them),</li>
+<li>analyses might need to crunch through a whole collection of data in order to calculate appropriate statistics (temperature anomalies with respect to a long-term mean, for example),</li>
+<li>different parts of the same data set are used in different analyses, in which case making one copy of the whole thing may be easier to manage than having different subsets for different projects,</li>
+<li>a common suite of data are routinely used by a local research community, in which case it makes more sense to keep a local copy for everyone to use, rather than multiple copies being downloaded by different individuals.</li>
+</ul>
+<p>In these cases, maintaining local copies of a range of data from third-party providers can be extremely beneficial, especially if that collection is hosted with a fast connection to local compute resources (virtual machines or high-performance computational facilities).</p>
+<p>Install from GitHub:</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">remotes<span class="op">::</span><span class="kw">install_github</span>(<span class="st">&quot;AustralianAntarcticDivision/blueant&quot;</span>)</code></pre></div>
+<p>And load the package before use.</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">library</span>(blueant)</code></pre></div>
+<div id="available-data-sets" class="section level3">
+<h3><span class="header-section-number">5.1.1</span> Available data sets</h3>
+<p>First, we can see the available data sets via the <code>sources</code> function.</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">srcs &lt;-<span class="st"> </span>blueant<span class="op">::</span><span class="kw">sources</span>()
+## the names of the first few
+<span class="kw">head</span>(srcs<span class="op">$</span>name)</code></pre></div>
+<pre><code>## [1] &quot;NSIDC SMMR-SSM/I Nasateam sea ice concentration&quot;               
+## [2] &quot;NSIDC SMMR-SSM/I Nasateam near-real-time sea ice concentration&quot;
+## [3] &quot;NSIDC passive microwave supporting files&quot;                      
+## [4] &quot;Nimbus Ice Edge Points from Nimbus Visible Imagery&quot;            
+## [5] &quot;Artist AMSR-E sea ice concentration&quot;                           
+## [6] &quot;Artist AMSR-E supporting files&quot;</code></pre>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">## the full details of the first one
+srcs[<span class="dv">1</span>, ]</code></pre></div>
+<pre><code>## # A tibble: 1 x 16
+##   id                   name                                           
+##   &lt;chr&gt;                &lt;chr&gt;                                          
+## 1 10.5067/8GQ8LZQVL0VL NSIDC SMMR-SSM/I Nasateam sea ice concentration
+##   description                                                              
+##   &lt;chr&gt;                                                                    
+## 1 &quot;Passive microwave estimates of sea ice concentration at 25km spatial re~
+##   doc_url                               source_url
+##   &lt;chr&gt;                                 &lt;list&gt;    
+## 1 http://nsidc.org/data/nsidc-0051.html &lt;chr [1]&gt; 
+##   citation                                                                 
+##   &lt;chr&gt;                                                                    
+## 1 Cavalieri, D. J., C. L. Parkinson, P. Gloersen, and H. Zwally. 1996, upd~
+##   license                                                   
+##   &lt;chr&gt;                                                     
+## 1 Please cite, see http://nsidc.org/about/use_copyright.html
+##   comment                                                                  
+##   &lt;chr&gt;                                                                    
+## 1 This data source may migrate to https access in the future, requiring an~
+##   method     postprocess authentication_note user  password
+##   &lt;list&gt;     &lt;list&gt;      &lt;chr&gt;               &lt;chr&gt; &lt;chr&gt;   
+## 1 &lt;list [5]&gt; &lt;list [0]&gt;  &lt;NA&gt;                &lt;NA&gt;  &lt;NA&gt;    
+##   access_function    data_group collection_size
+##   &lt;chr&gt;              &lt;chr&gt;                &lt;dbl&gt;
+## 1 raadtools::readice Sea ice                 10</code></pre>
+</div>
+<div id="usage" class="section level3">
+<h3><span class="header-section-number">5.1.2</span> Usage</h3>
+<p>Choose a directory into which to download the data. Usually this would be a persistent directory on your machine so that data sets downloaded in one session would remain available for use in later sessions, and not need re-downloading. A persistent directory could be something like <code>c:\data\</code> (on Windows), or you could use the <code>rappdirs</code> package (the <code>user_cache_dir</code> function) to suggest a suitable directory (cross-platform).</p>
+<p>Here we’ll use the <code>c:/data/cache</code> directory:</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">my_data_dir &lt;-<span class="st">  &quot;/data/cache&quot;</span></code></pre></div>
+<p>Select the data source that we want:</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">data_source &lt;-<span class="st"> </span><span class="kw">sources</span>(<span class="st">&quot;Southern Ocean marine environmental data&quot;</span>)</code></pre></div>
+<p>Note that it’s a good idea to check the dataset size before downloading it, as some are quite large! (Though if you are running the download interactively, it will ask you before downloading a large data set).</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">data_source<span class="op">$</span>collection_size ## size in GB</code></pre></div>
+<pre><code>## [1] 0.1</code></pre>
+<p>And fetch the data:</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">result &lt;-<span class="st"> </span><span class="kw">bb_get</span>(data_source, <span class="dt">local_file_root =</span> my_data_dir, <span class="dt">verbose =</span> <span class="ot">TRUE</span>)</code></pre></div>
+<pre><code>## 
+## Fri Jul 19 15:52:32 2019
+## Synchronizing dataset: Southern Ocean marine environmental data
+## Source URL https://data.aad.gov.au/eds/4742/download
+## --------------------------------------------------------------------------------------------
+## 
+##  this dataset path is: c:\data\cache/data.aad.gov.au/eds/4742
+##  building file list ... done.
+##  downloading file 1 of 1: https://data.aad.gov.au/eds/4742/download ...  file unchanged on server, not downloading.
+##   decompressing: c:\data\cache/data.aad.gov.au/eds/4742/download.zip ... no new files to extract (not overwriting existing files) ... done.
+## 
+## Fri Jul 19 15:52:37 2019 dataset synchronization complete: Southern Ocean marine environmental data</code></pre>
+<p>Now we have a local copy of our data. The sync can be run daily so that the local collection is always up to date - it will only download new files, or files that have changed since the last download. For more information on <code>bowerbird</code>, see the <a href="https://ropensci.github.io/bowerbird/articles/bowerbird.html">package vignette</a>.</p>
+<p>The <code>result</code> object holds information about the data that we downloaded:</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">result</code></pre></div>
+<pre><code>## # A tibble: 1 x 5
+##   name                                     id                    
+##   &lt;chr&gt;                                    &lt;chr&gt;                 
+## 1 Southern Ocean marine environmental data 10.26179/5b8f30e30d4f3
+##   source_url                                status files            
+##   &lt;chr&gt;                                     &lt;lgl&gt;  &lt;list&gt;           
+## 1 https://data.aad.gov.au/eds/4742/download TRUE   &lt;tibble [61 x 3]&gt;</code></pre>
+<p>The <code>result$files</code> element tells us about the files:</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">head</span>(result<span class="op">$</span>files[[<span class="dv">1</span>]])</code></pre></div>
+<pre><code>## # A tibble: 6 x 3
+##   url                                      
+##   &lt;chr&gt;                                    
+## 1 https://data.aad.gov.au/eds/4742/download
+## 2 &lt;NA&gt;                                     
+## 3 &lt;NA&gt;                                     
+## 4 &lt;NA&gt;                                     
+## 5 &lt;NA&gt;                                     
+## 6 &lt;NA&gt;                                     
+##   file                                                                     
+##   &lt;chr&gt;                                                                    
+## 1 &quot;c:\\data\\cache\\data.aad.gov.au\\eds\\4742\\download.zip&quot;              
+## 2 c:/data/cache/data.aad.gov.au/eds/4742/environmental_layers              
+## 3 c:/data/cache/data.aad.gov.au/eds/4742/environmental_layers/chla_ampli_a~
+## 4 c:/data/cache/data.aad.gov.au/eds/4742/environmental_layers/chla_max_all~
+## 5 c:/data/cache/data.aad.gov.au/eds/4742/environmental_layers/chla_mean_al~
+## 6 c:/data/cache/data.aad.gov.au/eds/4742/environmental_layers/chla_min_all~
+##   note         
+##   &lt;chr&gt;        
+## 1 existing copy
+## 2 decompressed 
+## 3 decompressed 
+## 4 decompressed 
+## 5 decompressed 
+## 6 decompressed</code></pre>
+<p>These particular files are netCDF, and so could be read using e.g. the <code>raster</code> or <code>ncdf4</code> packages. However, different data from different providers will be different in terms of grids, resolutions, projections, variable-naming conventions, and other facets, which tends to complicate these operations. In the next section we’ll look at the <code>raadtools</code> package, which provides a set of tools for doing common operations on these types of data.</p>
+</div>
+</div>
+<div id="raadtools" class="section level2">
+<h2><span class="header-section-number">5.2</span> RAADtools</h2>
+<p>The <a href="https://github.com/AustralianAntarcticDivision/raadtools"><code>raadtools</code></a> package provides a consistent interface to a range of environmental and similar data, and tools for working with them. It is designed to work data with collections maintained by the <code>bowerbird</code>/<code>blueant</code> packages, and builds on R’s existing ecosystem of packages for working with spatial, raster, and multidimensional data.</p>
+<p>Here we’ll use two different environmental data sets: sea ice and water depth. Water depth does not change with time but sea ice is provided at daily time resolution.</p>
+<p>First download daily sea ice data (from 2013 only), and the ETOPO2 bathymetric data set. ETOPO2 is somewhat dated and low resolution compared to more recent data, but will do as a small dataset for demo purposes. This may take a few minutes, depending on your connection speed:</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">src &lt;-<span class="st"> </span><span class="kw">bind_rows</span>(
+    <span class="kw">sources</span>(<span class="st">&quot;NSIDC SMMR-SSM/I Nasateam sea ice concentration&quot;</span>, <span class="dt">hemisphere =</span> <span class="st">&quot;south&quot;</span>, <span class="dt">time_resolutions =</span> <span class="st">&quot;day&quot;</span>,
+            <span class="dt">years =</span> <span class="dv">2013</span>),
+    <span class="kw">sources</span>(<span class="st">&quot;ETOPO2 bathymetry&quot;</span>))
+result &lt;-<span class="st"> </span><span class="kw">bb_get</span>(src, <span class="dt">local_file_root =</span> my_data_dir, <span class="dt">clobber =</span> <span class="dv">0</span>, <span class="dt">verbose =</span> <span class="ot">TRUE</span>, <span class="dt">confirm =</span> <span class="ot">NULL</span>)</code></pre></div>
+<p>Now load the <code>raadtools</code> package and tell it where our data collection has been stored:</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">library</span>(raadtools)
+<span class="kw">set_data_roots</span>(my_data_dir)</code></pre></div>
+<pre><code>## Raad file cache is up to date as at 2019-07-23 11:24:56 (819 files listed)</code></pre>
+<pre><code>## global option &#39;raadfiles.data.roots&#39; set:
+## &#39;/data/cache    2019-07-19 14:55:38&#39;</code></pre>
+<p>Let’s say that we have some points of interest in the Southern Ocean — perhaps a ship track, or some stations where we took marine samples, or as we’ll use here, the <a href="http://www.meop.net/">track of an elephant seal</a> as it moves from the Kerguelen Islands to Antarctica and back again (Data from IMOS 2018[^1], provided as part of the <code>SOmap</code> package).</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">data</span>(<span class="st">&quot;SOmap_data&quot;</span>, <span class="dt">package =</span> <span class="st">&quot;SOmap&quot;</span>)
+ele &lt;-<span class="st"> </span>SOmap_data<span class="op">$</span>mirounga_leonina <span class="op">%&gt;%</span><span class="st"> </span>dplyr<span class="op">::</span><span class="kw">filter</span>(id <span class="op">==</span><span class="st"> &quot;ct96-05-13&quot;</span>)</code></pre></div>
+<p>Define our spatial region of interest and extract the bathymetry data from this region, using the ETOPO2 files we just downloaded:</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">roi &lt;-<span class="st"> </span><span class="kw">round</span>(<span class="kw">c</span>(<span class="kw">range</span>(ele<span class="op">$</span>lon), <span class="kw">range</span>(ele<span class="op">$</span>lat)) <span class="op">+</span><span class="st"> </span><span class="kw">c</span>(<span class="op">-</span><span class="dv">2</span>, <span class="dv">2</span>, <span class="op">-</span><span class="dv">2</span>, <span class="dv">2</span>))
+bx &lt;-<span class="st"> </span><span class="kw">readtopo</span>(<span class="st">&quot;etopo2&quot;</span>, <span class="dt">xylim =</span> roi)</code></pre></div>
+<p>And now we can make a simple plot of our our track superimposed on the bathymetry:</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">plot</span>(bx)
+<span class="kw">lines</span>(ele<span class="op">$</span>lon, ele<span class="op">$</span>lat)</code></pre></div>
+<p><img src="_main_files/figure-html/raadt5-1.png" width="672" /></p>
+<p>The real power of <code>raadtools</code> comes from its extraction functions. We can extract the depth values along our track using the <code>extract()</code> function. We pass it the data-reader function to use (<code>readtopo</code>), the data to apply it to (<code>ele[, c(&quot;lon&quot;, &quot;lat&quot;)]</code>), and any other options to pass to the reader function (in this case, specifying the topographic data source <code>topo = &quot;etopo2&quot;</code>):</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">ele<span class="op">$</span>depth &lt;-<span class="st"> </span><span class="kw">extract</span>(readtopo, ele[, <span class="kw">c</span>(<span class="st">&quot;lon&quot;</span>, <span class="st">&quot;lat&quot;</span>)], <span class="dt">topo =</span> <span class="st">&quot;etopo2&quot;</span>)</code></pre></div>
+<p>Plot the histogram of depth values, showing that most of the track points are located in relatively shallow waters:</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">with</span>(ele, <span class="kw">hist</span>(depth, <span class="dt">breaks =</span> <span class="dv">20</span>))</code></pre></div>
+<p><img src="_main_files/figure-html/raadt7-1.png" width="672" /></p>
+<p>This type of extraction will also work with time-varying data — for example, we can extract the sea-ice conditions along our track, based on each track point’s location and time:</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">ele<span class="op">$</span>ice &lt;-<span class="st"> </span><span class="kw">extract</span>(readice, ele[, <span class="kw">c</span>(<span class="st">&quot;lon&quot;</span>, <span class="st">&quot;lat&quot;</span>, <span class="st">&quot;date&quot;</span>)])</code></pre></div>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">## points outside the ice grid will have missing ice values, so fill them with zeros
+ele<span class="op">$</span>ice[<span class="kw">is.na</span>(ele<span class="op">$</span>ice)] &lt;-<span class="st"> </span><span class="dv">0</span>
+<span class="kw">with</span>(ele, <span class="kw">plot</span>(date, ice, <span class="dt">type =</span> <span class="st">&quot;l&quot;</span>))</code></pre></div>
+<p><img src="_main_files/figure-html/raadt9-1.png" width="672" /></p>
+
+</div>
+</div>
+            </section>
+
+          </div>
+        </div>
+      </div>
+<a href="biological-data.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
+<a href="mapping.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
+    </div>
+  </div>
+<script src="libs/gitbook-2.6.7/js/app.min.js"></script>
+<script src="libs/gitbook-2.6.7/js/lunr.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-search.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-sharing.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-fontsettings.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-bookdown.js"></script>
+<script src="libs/gitbook-2.6.7/js/jquery.highlight.js"></script>
+<script>
+gitbook.require(["gitbook"], function(gitbook) {
+gitbook.start({
+"sharing": {
+"github": false,
+"facebook": true,
+"twitter": true,
+"google": false,
+"linkedin": false,
+"weibo": false,
+"instapaper": false,
+"vk": false,
+"all": ["facebook", "google", "twitter", "linkedin", "weibo", "instapaper"]
+},
+"fontsettings": {
+"theme": "white",
+"family": "sans",
+"size": 2
+},
+"edit": {
+"link": null,
+"text": null
+},
+"history": {
+"link": null,
+"text": null
+},
+"download": null,
+"toc": {
+"collapse": "subsection",
+"scroll_highlight": true
+},
+"toc_depth": 3
+});
+});
+</script>
+
+</body>
+
+</html>

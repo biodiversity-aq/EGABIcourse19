@@ -1,2 +1,6 @@
 .DS_Store
 *~
+.Rproj.user
+.Rhistory
+data-library
+_bookdown_files/

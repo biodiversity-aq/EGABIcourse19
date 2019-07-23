@@ -1,0 +1,5 @@
+# Other R resources for Southern Ocean/Antarctic use
+
+## Diet data: sohungry
+
+## Allometric equations: solong
