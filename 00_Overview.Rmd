@@ -187,8 +187,15 @@ Add them to the map:
 
 ```{r predmap3}
 plot(basemap)
-SOplot(pr, col = my_cmap)
+SOplot(pr, col = my_cmap, legend = FALSE,
+       breaks = seq(0, 0.9, length.out = length(my_cmap) + 1))
+## curved legend
+SOleg(position = "bottomleft", col = my_cmap,
+      breaks = seq(0, 0.9, by = 0.15),
+      type = "continuous", label = "Probability")
+## placename points
 with(xns, points(x = longitude, y = latitude, pch = 16, cex = 0.4))
+## and labels
 with(xns, text(x = longitude, y = latitude, labels = place_name, 
                cex = 0.75, pos = 2 + 2*(seq_len(nrow(xns)) %% 2)))
 ```

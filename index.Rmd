@@ -18,7 +18,7 @@ library(knitr)
 
 # About this
 
-Blah blah
+This document provides material for the [SCAR-EGABI Tools for Southern Ocean Spatial Analysis and Modelling Course](https://github.com/SCAR/EGABIcourse19/) to be held in Leuven, Belgium in September 2019.
 
 Issues or suggestions about the content can be raised through the [issue tracker](https://github.com/SCAR/EGABIcourse19/issues) (GitHub account required).
 
