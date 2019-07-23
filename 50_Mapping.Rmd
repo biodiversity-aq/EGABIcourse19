@@ -111,11 +111,29 @@ OK, well that worked but clearly the labels need tidying up. We can do that, but
 ## draw the base map
 SOmap()
 ## add our raster, controlling the colour range to span the values 0 to 30
-SOplot(xr, legend = FALSE, col = my_cmap,
-       breaks = seq(0, 30, length.out = length(my_cmap) + 1))
+colour_breaks <- seq(0, 30, length.out = length(my_cmap) + 1)
+SOplot(xr, legend = FALSE, col = my_cmap, breaks = colour_breaks)
 ## add the legend, again controlling the colour range
-SOleg(position = "topright", col = my_cmap,
-      breaks = seq(0, 30, length.out = 7),
+label_breaks <- seq(0, 30, length.out = 7)
+SOleg(position = "topright", col = my_cmap, breaks = label_breaks,
+      type = "continuous", label = "My variable")
+```
+
+Note that if we *don't* want to show the bathymetric legend, we may run into problems:
+
+```{r somap_legend1, cache = TRUE}
+SOmap(bathy_legend = FALSE) ## suppress the bathy legend
+SOleg(position = "topright", col = my_cmap, breaks = label_breaks,
+      type = "continuous", label = "My variable")
+```
+
+The legend has been chopped off because the layout has not left enough space around the map for the curved legend. Currently, the best solution is probably to generate the `SOmap` object *with* the bathymetric legend, but then remove it before plotting (see the [Modifying map objects][Modifying map objects (advanced usage)] section for more details on this):
+
+```{r somap_legend2, cache = TRUE}
+temp <- SOmap()
+temp$bathy_legend <- NULL ## remove the bathy legend
+plot(temp)
+SOleg(position = "topright", col = my_cmap, breaks = label_breaks,
       type = "continuous", label = "My variable")
 ```
 

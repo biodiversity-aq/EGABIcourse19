@@ -113,9 +113,8 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
 <li class="chapter" data-level="2.7.1" data-path="overview.html"><a href="overview.html#place-names"><i class="fa fa-check"></i><b>2.7.1</b> Place names</a></li>
 </ul></li>
 </ul></li>
-<li class="chapter" data-level="3" data-path="introduction-to-r-and-the-tidyverse.html"><a href="introduction-to-r-and-the-tidyverse.html"><i class="fa fa-check"></i><b>3</b> Introduction to R and the tidyverse</a><ul>
+<li class="chapter" data-level="3" data-path="introduction-to-r-and-the-tidyverse.html"><a href="introduction-to-r-and-the-tidyverse.html"><i class="fa fa-check"></i><b>3</b> Introduction to R and the Tidyverse</a><ul>
 <li class="chapter" data-level="3.1" data-path="introduction-to-r-and-the-tidyverse.html"><a href="introduction-to-r-and-the-tidyverse.html#r"><i class="fa fa-check"></i><b>3.1</b> R</a></li>
-<li class="chapter" data-level="3.2" data-path="introduction-to-r-and-the-tidyverse.html"><a href="introduction-to-r-and-the-tidyverse.html#the-tidyverse"><i class="fa fa-check"></i><b>3.2</b> The tidyverse</a></li>
 </ul></li>
 <li class="chapter" data-level="4" data-path="biological-data.html"><a href="biological-data.html"><i class="fa fa-check"></i><b>4</b> Biological data</a></li>
 <li class="chapter" data-level="5" data-path="environmental-data-1.html"><a href="environmental-data-1.html"><i class="fa fa-check"></i><b>5</b> Environmental data</a><ul>
@@ -376,8 +375,15 @@ xns &lt;-<span class="st"> </span><span class="kw">an_suggest</span>(xn, <span c
 xns &lt;-<span class="st"> </span><span class="kw">as_tibble</span>(<span class="kw">SOproj</span>(xns, <span class="dt">target =</span> basemap<span class="op">$</span>projection)) <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">head</span>(<span class="dv">10</span>)</code></pre></div>
 <p>Add them to the map:</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">plot</span>(basemap)
-<span class="kw">SOplot</span>(pr, <span class="dt">col =</span> my_cmap)
+<span class="kw">SOplot</span>(pr, <span class="dt">col =</span> my_cmap, <span class="dt">legend =</span> <span class="ot">FALSE</span>,
+       <span class="dt">breaks =</span> <span class="kw">seq</span>(<span class="dv">0</span>, <span class="fl">0.9</span>, <span class="dt">length.out =</span> <span class="kw">length</span>(my_cmap) <span class="op">+</span><span class="st"> </span><span class="dv">1</span>))
+## curved legend
+<span class="kw">SOleg</span>(<span class="dt">position =</span> <span class="st">&quot;bottomleft&quot;</span>, <span class="dt">col =</span> my_cmap,
+      <span class="dt">breaks =</span> <span class="kw">seq</span>(<span class="dv">0</span>, <span class="fl">0.9</span>, <span class="dt">by =</span> <span class="fl">0.15</span>),
+      <span class="dt">type =</span> <span class="st">&quot;continuous&quot;</span>, <span class="dt">label =</span> <span class="st">&quot;Probability&quot;</span>)
+## placename points
 <span class="kw">with</span>(xns, <span class="kw">points</span>(<span class="dt">x =</span> longitude, <span class="dt">y =</span> latitude, <span class="dt">pch =</span> <span class="dv">16</span>, <span class="dt">cex =</span> <span class="fl">0.4</span>))
+## and labels
 <span class="kw">with</span>(xns, <span class="kw">text</span>(<span class="dt">x =</span> longitude, <span class="dt">y =</span> latitude, <span class="dt">labels =</span> place_name, 
                <span class="dt">cex =</span> <span class="fl">0.75</span>, <span class="dt">pos =</span> <span class="dv">2</span> <span class="op">+</span><span class="st"> </span><span class="dv">2</span><span class="op">*</span>(<span class="kw">seq_len</span>(<span class="kw">nrow</span>(xns)) <span class="op">%%</span><span class="st"> </span><span class="dv">2</span>)))</code></pre></div>
 <p><img src="_main_files/figure-html/predmap3-1.png" width="672" /></p>
