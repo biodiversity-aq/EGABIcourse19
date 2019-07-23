@@ -494,8 +494,11 @@ temp<span class="op">$</span>bathy_legend &lt;-<span class="st"> </span><span cl
 ## convert ice raster to suitable data.frame
 ice_raster_as_df &lt;-<span class="st"> </span>raster<span class="op">::</span><span class="kw">as.data.frame</span>(<span class="kw">SOproj</span>(ice), <span class="dt">xy =</span> <span class="ot">TRUE</span>)
 <span class="kw">names</span>(ice_raster_as_df)[<span class="dv">3</span>] &lt;-<span class="st"> &quot;ice&quot;</span>
-## change the arguments being passed to the bathy plotting function
-temp<span class="op">$</span>bathy[[<span class="dv">1</span>]]<span class="op">$</span>plotargs &lt;-<span class="st"> </span><span class="kw">list</span>(<span class="dt">data =</span> ice_raster_as_df, <span class="dt">mapping =</span> <span class="kw">aes_string</span>(<span class="dt">fill =</span> <span class="st">&quot;ice&quot;</span>))
+## add this to our object in place of bathy
+temp<span class="op">$</span>bathy &lt;-<span class="st"> </span><span class="kw">SO_plotter</span>(<span class="dt">plotfun =</span> <span class="st">&quot;ggplot2::geom_raster&quot;</span>,
+                         <span class="dt">plotargs =</span> <span class="kw">list</span>(<span class="dt">data =</span> ice_raster_as_df,
+                                         <span class="dt">mapping =</span> <span class="kw">aes_string</span>(<span class="dt">fill =</span> <span class="st">&quot;ice&quot;</span>))
+)
 ## change the colour scale
 temp<span class="op">$</span>scale_fill[[<span class="dv">1</span>]]<span class="op">$</span>plotargs &lt;-<span class="st"> </span><span class="kw">list</span>(<span class="dt">colours =</span> my_cmap, <span class="dt">na.value =</span> <span class="st">&quot;#FFFFFF00&quot;</span>, <span class="dt">guide =</span> <span class="ot">FALSE</span>)
 ## remove the bathy legend

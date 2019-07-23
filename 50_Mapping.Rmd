@@ -462,13 +462,15 @@ plot(temp)
 
 Or replace it with a different raster (use the `ice` raster as an example):
 
-```{r somap5e}
+```{r somap5e, warning = FALSE, message = FALSE}
 temp <- myplotgg
 ## convert ice raster to suitable data.frame
 ice_raster_as_df <- raster::as.data.frame(SOproj(ice), xy = TRUE)
 names(ice_raster_as_df)[3] <- "ice"
-## change the arguments being passed to the bathy plotting function
-temp$bathy[[1]]$plotargs <- list(data = ice_raster_as_df, mapping = aes_string(fill = "ice"))
+## add this to our object in place of bathy
+temp$bathy <- SO_plotter(plotfun = "ggplot2::geom_raster",
+                         plotargs = list(data = ice_raster_as_df,
+                                         mapping = aes_string(fill = "ice")))
 ## change the colour scale
 temp$scale_fill[[1]]$plotargs <- list(colours = my_cmap, na.value = "#FFFFFF00", guide = FALSE)
 ## remove the bathy legend
