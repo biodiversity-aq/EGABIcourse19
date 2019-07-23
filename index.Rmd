@@ -6,8 +6,10 @@ documentclass: book
 site: bookdown::bookdown_site
 ---
 
-```{r setup, echo = FALSE}
+```{r setup, echo = FALSE, cache = FALSE}
 library(knitr)
+
+knitr::opts_chunk$set(cache = TRUE)
 
 ## use this chunk to set up data directories and similar
 #BOOKDOWN_DATA_DIR <- 

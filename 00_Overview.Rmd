@@ -30,7 +30,7 @@ for (pkg in names(pkgs)) {
 
 ## Taxonomy
 
-```{r tax1, cache = TRUE, message = FALSE}
+```{r tax1, message = FALSE}
 library(worrms)
 
 my_species <- "Euphausia crystallorophias"
@@ -45,7 +45,7 @@ my_aphia_id <- tax[[1]]$valid_AphiaID
 
 Get all data from the [Antarctic Euphausiacea occurence data from "German Antarctic Marine Living Resources" (GAMLR) Expeditions](https://ipt.biodiversity.aq/resource?r=gamlr) data set:
 
-```{r occ1, cache = TRUE, message = FALSE}
+```{r occ1, message = FALSE}
 library(robis)
 
 ##ds <- dataset(taxonid = my_aphia_id)
@@ -82,7 +82,7 @@ xfit <- x %>% dplyr::rename(lon = "decimalLongitude", lat = "decimalLatitude") %
 
 ## Environmental data
 
-```{r envdat1, cache = TRUE, message = FALSE}
+```{r envdat1, message = FALSE}
 library(blueant)
 ## put the data into a temporary directory
 my_data_directory <- tempdir()
@@ -94,7 +94,7 @@ data_source <- sources_sdm("Southern Ocean marine environmental data")
 status <- bb_get(data_source, local_file_root = my_data_directory, verbose = TRUE)
 ```
 
-```{r envdat2, cache = TRUE, message = FALSE}
+```{r envdat2, message = FALSE}
 nc_files <- Filter(function(z) grepl("\\.nc$", z), status$files[[1]]$file)
 
 ## create a raster stack of all layers
@@ -106,7 +106,7 @@ head(names(env_stack))
 
 Select just the `depth` and `ice_cover_mean` layers and extract their values at our sampling locations:
 
-```{r envdat3, cache = TRUE}
+```{r envdat3}
 env_stack <- subset(env_stack, c("depth", "ice_cover_mean"))
 
 temp <- as.data.frame(raster::extract(env_stack, xfit[, c("lon", "lat")]))
@@ -119,7 +119,7 @@ head(xfit)
 
 We have presence/absence data, so we'll fit a simple binomial model. The probability of presence of *Euphausia crystallorophias* is fitted as a smooth function of depth and mean sea ice cover:
 
-```{r mod1, cache = TRUE, message = FALSE}
+```{r mod1, message = FALSE}
 library(mgcv)
 
 fit <- gam(present ~ s(depth) + s(ice_cover_mean), family = binomial, data = xfit)
@@ -129,13 +129,13 @@ summary(fit)
 
 The fits to depth and ice cover:
 
-```{r mod2, cache = TRUE, message = FALSE}
+```{r mod2, message = FALSE}
 plot(fit, pages = 1, shade = TRUE)
 ```
 
 ## Predict from model
 
-```{r pred1, cache = TRUE}
+```{r pred1}
 xpred <- expand.grid(lon = seq(from = floor(min(xfit$lon)), to = ceiling(max(xfit$lon)), by = 0.25),
                      lat = seq(from = floor(min(xfit$lat)), to = ceiling(max(xfit$lat)), by = 0.25))
 
