@@ -116,13 +116,17 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
 <li class="chapter" data-level="3" data-path="introduction-to-r-and-the-tidyverse.html"><a href="introduction-to-r-and-the-tidyverse.html"><i class="fa fa-check"></i><b>3</b> Introduction to R and the Tidyverse</a><ul>
 <li class="chapter" data-level="3.1" data-path="introduction-to-r-and-the-tidyverse.html"><a href="introduction-to-r-and-the-tidyverse.html#r"><i class="fa fa-check"></i><b>3.1</b> R</a></li>
 </ul></li>
-<li class="chapter" data-level="4" data-path="biological-data.html"><a href="biological-data.html"><i class="fa fa-check"></i><b>4</b> Biological data</a></li>
+<li class="chapter" data-level="4" data-path="biological-data.html"><a href="biological-data.html"><i class="fa fa-check"></i><b>4</b> Biological data</a><ul>
+<li class="chapter" data-level="4.1" data-path="biological-data.html"><a href="biological-data.html#taxonomy-1"><i class="fa fa-check"></i><b>4.1</b> Taxonomy</a></li>
+<li class="chapter" data-level="4.2" data-path="biological-data.html"><a href="biological-data.html#other-packages"><i class="fa fa-check"></i><b>4.2</b> Other packages</a></li>
+</ul></li>
 <li class="chapter" data-level="5" data-path="environmental-data-1.html"><a href="environmental-data-1.html"><i class="fa fa-check"></i><b>5</b> Environmental data</a><ul>
 <li class="chapter" data-level="5.1" data-path="environmental-data-1.html"><a href="environmental-data-1.html#bowerbirdblueant"><i class="fa fa-check"></i><b>5.1</b> Bowerbird/blueant</a><ul>
 <li class="chapter" data-level="5.1.1" data-path="environmental-data-1.html"><a href="environmental-data-1.html#available-data-sets"><i class="fa fa-check"></i><b>5.1.1</b> Available data sets</a></li>
 <li class="chapter" data-level="5.1.2" data-path="environmental-data-1.html"><a href="environmental-data-1.html#usage"><i class="fa fa-check"></i><b>5.1.2</b> Usage</a></li>
 </ul></li>
 <li class="chapter" data-level="5.2" data-path="environmental-data-1.html"><a href="environmental-data-1.html#raadtools"><i class="fa fa-check"></i><b>5.2</b> RAADtools</a></li>
+<li class="chapter" data-level="5.3" data-path="environmental-data-1.html"><a href="environmental-data-1.html#other-useful-packages"><i class="fa fa-check"></i><b>5.3</b> Other useful packages</a></li>
 </ul></li>
 <li class="chapter" data-level="6" data-path="mapping.html"><a href="mapping.html"><i class="fa fa-check"></i><b>6</b> Mapping</a><ul>
 <li class="chapter" data-level="6.1" data-path="mapping.html"><a href="mapping.html#maps-in-r"><i class="fa fa-check"></i><b>6.1</b> Maps in R</a><ul>
@@ -467,6 +471,23 @@ temp<span class="op">$</span>bathy_legend &lt;-<span class="st"> </span><span cl
 my_ggplot <span class="op">+</span><span class="st"> </span><span class="kw">geom_point</span>(<span class="dt">data =</span> <span class="kw">as.data.frame</span>(my_points), <span class="kw">aes</span>(lon, lat, <span class="dt">colour =</span> z), <span class="dt">size =</span> <span class="dv">3</span>) <span class="op">+</span>
 <span class="st">  </span><span class="kw">scale_colour_distiller</span>(<span class="dt">palette =</span> <span class="st">&quot;Spectral&quot;</span>)</code></pre></div>
 <p><img src="_main_files/figure-html/somap6-1.png" width="672" /></p>
+<p>Multiple rasters or multiple sets of points gets tricky if they are on different scales, because <code>ggplot2</code> is only designed to work with a single colour scale per geometry type. You can try your luck with the <code>ggnewscale</code> or <code>relayer</code> packages, although both are in a fairly experimental stage of development.</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">library</span>(relayer)
+ ## remotes::install_github(&quot;clauswilke/relayer&quot;)
+<span class="kw">plot</span>(<span class="kw">SOgg</span>(<span class="kw">SOmap</span>(<span class="dt">straight =</span> <span class="ot">TRUE</span>))) <span class="op">+</span>
+<span class="st">  </span><span class="kw">rename_geom_aes</span>(<span class="kw">geom_raster</span>(<span class="dt">data =</span> <span class="kw">as.data.frame</span>(<span class="kw">SOproj</span>(xr), <span class="dt">xy =</span> <span class="ot">TRUE</span>),
+                  <span class="kw">aes</span>(<span class="dt">x =</span> x, <span class="dt">y =</span> y, <span class="dt">fill2 =</span> val)), <span class="dt">new_aes =</span> <span class="kw">c</span>(<span class="dt">fill =</span> <span class="st">&quot;fill2&quot;</span>)) <span class="op">+</span>
+<span class="st">  </span><span class="kw">scale_fill_gradientn</span>(<span class="dt">aesthetics =</span> <span class="st">&quot;fill2&quot;</span>, <span class="dt">colors =</span> my_cmap, <span class="dt">na.value =</span> <span class="ot">NA</span>,
+                       <span class="dt">name =</span> <span class="st">&quot;My variable&quot;</span>, <span class="dt">guide =</span> <span class="st">&quot;legend&quot;</span>)</code></pre></div>
+<p><img src="_main_files/figure-html/somap5f-1.png" width="672" /></p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">library</span>(ggnewscale)
+ ## remotes::install_github(&quot;eliocamp/ggnewscale&quot;)
+<span class="kw">plot</span>(<span class="kw">SOgg</span>(<span class="kw">SOmap</span>(<span class="dt">straight =</span> <span class="ot">TRUE</span>))) <span class="op">+</span>
+<span class="st">  </span><span class="kw">new_scale_fill</span>() <span class="op">+</span>
+<span class="st">  </span><span class="kw">geom_raster</span>(<span class="dt">data =</span> <span class="kw">as.data.frame</span>(<span class="kw">SOproj</span>(xr), <span class="dt">xy =</span> <span class="ot">TRUE</span>),
+                  <span class="kw">aes</span>(<span class="dt">x =</span> x, <span class="dt">y =</span> y, <span class="dt">fill =</span> val)) <span class="op">+</span>
+<span class="st">  </span><span class="kw">scale_fill_gradientn</span>(<span class="dt">colors =</span> my_cmap, <span class="dt">na.value =</span> <span class="ot">NA</span>, <span class="dt">name =</span> <span class="st">&quot;My variable&quot;</span>)</code></pre></div>
+<p><img src="_main_files/figure-html/somap5g-1.png" width="672" /></p>
 </div>
 <div id="modifying-the-somap_gg-object" class="section level5">
 <h5><span class="header-section-number">6.2.4.2.2</span> Modifying the <code>SOmap_gg</code> object</h5>
@@ -505,15 +526,6 @@ temp<span class="op">$</span>scale_fill[[<span class="dv">1</span>]]<span class=
 temp<span class="op">$</span>bathy_legend &lt;-<span class="st"> </span><span class="ot">NULL</span>
 <span class="kw">plot</span>(temp)</code></pre></div>
 <p><img src="_main_files/figure-html/somap5e-1.png" width="672" /></p>
-<p>Multiple rasters or multiple sets of points gets tricky if they are on different scales, because <code>ggplot2</code> is only designed to work with a single colour scale per geometry type. You can try your luck with the <code>ggnewscale</code> or <code>relayer</code> packages, although both are in a fairly experimental stage of development.</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">library</span>(relayer)
- ## remotes::install_github(&quot;clauswilke/relayer&quot;)
-<span class="kw">plot</span>(<span class="kw">SOgg</span>(<span class="kw">SOmap</span>(<span class="dt">straight =</span> <span class="ot">TRUE</span>))) <span class="op">+</span>
-<span class="st">  </span><span class="kw">rename_geom_aes</span>(<span class="kw">geom_raster</span>(<span class="dt">data =</span> <span class="kw">as.data.frame</span>(<span class="kw">SOproj</span>(xr), <span class="dt">xy =</span> <span class="ot">TRUE</span>),
-                  <span class="kw">aes</span>(<span class="dt">x =</span> x, <span class="dt">y =</span> y, <span class="dt">fill2 =</span> val)), <span class="dt">new_aes =</span> <span class="kw">c</span>(<span class="dt">fill =</span> <span class="st">&quot;fill2&quot;</span>)) <span class="op">+</span>
-<span class="st">  </span><span class="kw">scale_fill_gradientn</span>(<span class="dt">aesthetics =</span> <span class="st">&quot;fill2&quot;</span>, <span class="dt">colors =</span> my_cmap, <span class="dt">na.value =</span> <span class="ot">NA</span>,
-                       <span class="dt">name =</span> <span class="st">&quot;My variable&quot;</span>, <span class="dt">guide =</span> <span class="st">&quot;legend&quot;</span>)</code></pre></div>
-<p><img src="_main_files/figure-html/somap5f-1.png" width="672" /></p>
 </div>
 </div>
 </div>
