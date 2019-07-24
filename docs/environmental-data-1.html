@@ -116,13 +116,17 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
 <li class="chapter" data-level="3" data-path="introduction-to-r-and-the-tidyverse.html"><a href="introduction-to-r-and-the-tidyverse.html"><i class="fa fa-check"></i><b>3</b> Introduction to R and the Tidyverse</a><ul>
 <li class="chapter" data-level="3.1" data-path="introduction-to-r-and-the-tidyverse.html"><a href="introduction-to-r-and-the-tidyverse.html#r"><i class="fa fa-check"></i><b>3.1</b> R</a></li>
 </ul></li>
-<li class="chapter" data-level="4" data-path="biological-data.html"><a href="biological-data.html"><i class="fa fa-check"></i><b>4</b> Biological data</a></li>
+<li class="chapter" data-level="4" data-path="biological-data.html"><a href="biological-data.html"><i class="fa fa-check"></i><b>4</b> Biological data</a><ul>
+<li class="chapter" data-level="4.1" data-path="biological-data.html"><a href="biological-data.html#taxonomy-1"><i class="fa fa-check"></i><b>4.1</b> Taxonomy</a></li>
+<li class="chapter" data-level="4.2" data-path="biological-data.html"><a href="biological-data.html#other-packages"><i class="fa fa-check"></i><b>4.2</b> Other packages</a></li>
+</ul></li>
 <li class="chapter" data-level="5" data-path="environmental-data-1.html"><a href="environmental-data-1.html"><i class="fa fa-check"></i><b>5</b> Environmental data</a><ul>
 <li class="chapter" data-level="5.1" data-path="environmental-data-1.html"><a href="environmental-data-1.html#bowerbirdblueant"><i class="fa fa-check"></i><b>5.1</b> Bowerbird/blueant</a><ul>
 <li class="chapter" data-level="5.1.1" data-path="environmental-data-1.html"><a href="environmental-data-1.html#available-data-sets"><i class="fa fa-check"></i><b>5.1.1</b> Available data sets</a></li>
 <li class="chapter" data-level="5.1.2" data-path="environmental-data-1.html"><a href="environmental-data-1.html#usage"><i class="fa fa-check"></i><b>5.1.2</b> Usage</a></li>
 </ul></li>
 <li class="chapter" data-level="5.2" data-path="environmental-data-1.html"><a href="environmental-data-1.html#raadtools"><i class="fa fa-check"></i><b>5.2</b> RAADtools</a></li>
+<li class="chapter" data-level="5.3" data-path="environmental-data-1.html"><a href="environmental-data-1.html#other-useful-packages"><i class="fa fa-check"></i><b>5.3</b> Other useful packages</a></li>
 </ul></li>
 <li class="chapter" data-level="6" data-path="mapping.html"><a href="mapping.html"><i class="fa fa-check"></i><b>6</b> Mapping</a><ul>
 <li class="chapter" data-level="6.1" data-path="mapping.html"><a href="mapping.html#maps-in-r"><i class="fa fa-check"></i><b>6.1</b> Maps in R</a><ul>
@@ -308,7 +312,7 @@ result &lt;-<span class="st"> </span><span class="kw">bb_get</span>(src, <span c
 <p>Now load the <code>raadtools</code> package and tell it where our data collection has been stored:</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">library</span>(raadtools)
 <span class="kw">set_data_roots</span>(my_data_dir)</code></pre></div>
-<pre><code>## Raad file cache is up to date as at 2019-07-24 10:55:55 (819 files listed)</code></pre>
+<pre><code>## Raad file cache is up to date as at 2019-07-24 12:49:35 (819 files listed)</code></pre>
 <pre><code>## global option &#39;raadfiles.data.roots&#39; set:
 ## &#39;/data/cache    2019-07-19 14:55:38&#39;</code></pre>
 <p>Let’s say that we have some points of interest in the Southern Ocean — perhaps a ship track, or some stations where we took marine samples, or as we’ll use here, the <a href="http://www.meop.net/">track of an elephant seal</a> as it moves from the Kerguelen Islands to Antarctica and back again (Data from IMOS 2018[^1], provided as part of the <code>SOmap</code> package).</p>
@@ -332,6 +336,18 @@ bx &lt;-<span class="st"> </span><span class="kw">readtopo</span>(<span class="s
 ele<span class="op">$</span>ice[<span class="kw">is.na</span>(ele<span class="op">$</span>ice)] &lt;-<span class="st"> </span><span class="dv">0</span>
 <span class="kw">with</span>(ele, <span class="kw">plot</span>(date, ice, <span class="dt">type =</span> <span class="st">&quot;l&quot;</span>))</code></pre></div>
 <p><img src="_main_files/figure-html/raadt9-1.png" width="672" /></p>
+</div>
+<div id="other-useful-packages" class="section level2">
+<h2><span class="header-section-number">5.3</span> Other useful packages</h2>
+<ul>
+<li><p>the <a href="https://polarwatch.noaa.gov/">PolarWatch</a> project aims to enable data discovery and broader use of high-latitude ocean remote sensing data sets. The dedicated ERDDAP server (<a href="https://polarwatch.noaa.gov/erddap" class="uri">https://polarwatch.noaa.gov/erddap</a>) is accessible to R users with <a href="https://cran.r-project.org/package=rerddap">rerddap</a>.</p></li>
+<li><p><a href="https://cran.r-project.org/package=rsoi">rsoi</a> downloads the most up to date Southern Oscillation Index, Oceanic Nino Index, and North Pacific Gyre Oscillation data.</p></li>
+<li><p>satellite reflectance data are a common basis for estimating chlorophyll-<em>a</em> and other phytoplankton parameters at ocean-basin scales. Global products are widely available; however, Southern-Ocean specific algorithms are likely to provide better estimates in these regions. <a href="https://github.com/sosoc/croc">croc</a> implements the Johnson et al. (2013) Southern Ocean algorithm.</p></li>
+<li><p>more broadly, <a href="https://cran.r-project.org/package=oce">oce</a> provides a wide range of tools for reading, processing, and displaying oceanographic data, including measurements from Argo floats and CTD casts, sectional data, sea-level time series, and coastline and topographic data.</p></li>
+<li><p><a href="https://github.com/EPauthenet/fda.oce">fda.oce</a> provides functional data analysis of oceanographic profiles for front detection, water mass identification, unsupervised or supervised classification, model comparison, data calibration, and more.</p></li>
+<li><p><a href="https://github.com/mdsumner/distancetocoast">distancetocoast</a> provides “distance to coastline” data for longitude and latitude coordinates.</p></li>
+<li><p><a href="https://github.com/hypertidy/geodist">geodist</a> for very fast calculation of geodesic distances.</p></li>
+</ul>
 
 </div>
 </div>

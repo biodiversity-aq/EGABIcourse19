@@ -172,3 +172,18 @@ ele$ice[is.na(ele$ice)] <- 0
 with(ele, plot(date, ice, type = "l"))
 ```
 
+## Other useful packages
+
+- the [PolarWatch](https://polarwatch.noaa.gov/) project aims to enable data discovery and broader use of high-latitude ocean remote sensing data sets. The dedicated ERDDAP server (https://polarwatch.noaa.gov/erddap) is accessible to R users with [rerddap](https://cran.r-project.org/package=rerddap).
+
+- [rsoi](https://cran.r-project.org/package=rsoi) downloads the most up to date Southern Oscillation Index, Oceanic Nino Index, and North Pacific Gyre Oscillation data.
+
+- satellite reflectance data are a common basis for estimating chlorophyll-*a* and other phytoplankton parameters at ocean-basin scales. Global products are widely available; however, Southern-Ocean specific algorithms are likely to provide better estimates in these regions. [croc](https://github.com/sosoc/croc) implements the Johnson et al. (2013) Southern Ocean algorithm.
+
+- more broadly, [oce](https://cran.r-project.org/package=oce) provides a wide range of tools for reading, processing, and displaying oceanographic data, including measurements from Argo floats and CTD casts, sectional data, sea-level time series, and coastline and topographic data.
+
+- [fda.oce](https://github.com/EPauthenet/fda.oce) provides functional data analysis of oceanographic profiles for front detection, water mass identification, unsupervised or supervised classification, model comparison, data calibration, and more.
+
+- [distancetocoast](https://github.com/mdsumner/distancetocoast) provides "distance to coastline" data for longitude and latitude coordinates.
+
+- [geodist](https://github.com/hypertidy/geodist) for very fast calculation of geodesic distances.
