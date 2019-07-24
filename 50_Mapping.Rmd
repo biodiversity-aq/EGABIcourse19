@@ -478,20 +478,15 @@ temp$bathy_legend <- NULL
 plot(temp)
 ```
 
+Multiple rasters or multiple sets of points gets tricky if they are on different scales, because `ggplot2` is only designed to work with a single colour scale per geometry type. You can try your luck with the `ggnewscale` or `relayer` packages, although both are in a fairly experimental stage of development.
 
-```{r somaphidden, echo = FALSE, eval = FALSE}
-## Adding multiple rasters gets tricky (if they require separate colour scales), because `ggplot2` is only designed to work with a single colour scale per geometry type. However, the `ggnewscale` package can help here:
-
-## these functions don't exist in base R < 3.5 but are used by ggnewscale
-isFALSE <- function (x) is.logical(x) && length(x) == 1L && !is.na(x) && !x
-isTRUE <- function (x) is.logical(x) && length(x) == 1L && !is.na(x) && x
-```
-
-```{r somap5f, include = FALSE, eval = FALSE}
-library(ggnewscale)
-plot(myplotgg) + new_scale_fill() +
-  geom_raster(data = as.data.frame(xr, xy = TRUE), aes(x = x, y = y, fill = val), inherit.aes = FALSE) +
-  scale_fill_gradientn(colors = my_cmap, na.value = NA, name = "My variable")
+```{r somap5f, warning = FALSE, message = FALSE}
+library(relayer) ## remotes::install_github("clauswilke/relayer")
+plot(SOgg(SOmap(straight = TRUE))) +
+  rename_geom_aes(geom_raster(data = as.data.frame(SOproj(xr), xy = TRUE),
+                  aes(x = x, y = y, fill2 = val)), new_aes = c(fill = "fill2")) +
+  scale_fill_gradientn(aesthetics = "fill2", colors = my_cmap, na.value = NA,
+                       name = "My variable", guide = "legend")
 ```
 
 

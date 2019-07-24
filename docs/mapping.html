@@ -505,6 +505,15 @@ temp<span class="op">$</span>scale_fill[[<span class="dv">1</span>]]<span class=
 temp<span class="op">$</span>bathy_legend &lt;-<span class="st"> </span><span class="ot">NULL</span>
 <span class="kw">plot</span>(temp)</code></pre></div>
 <p><img src="_main_files/figure-html/somap5e-1.png" width="672" /></p>
+<p>Multiple rasters or multiple sets of points gets tricky if they are on different scales, because <code>ggplot2</code> is only designed to work with a single colour scale per geometry type. You can try your luck with the <code>ggnewscale</code> or <code>relayer</code> packages, although both are in a fairly experimental stage of development.</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">library</span>(relayer)
+ ## remotes::install_github(&quot;clauswilke/relayer&quot;)
+<span class="kw">plot</span>(<span class="kw">SOgg</span>(<span class="kw">SOmap</span>(<span class="dt">straight =</span> <span class="ot">TRUE</span>))) <span class="op">+</span>
+<span class="st">  </span><span class="kw">rename_geom_aes</span>(<span class="kw">geom_raster</span>(<span class="dt">data =</span> <span class="kw">as.data.frame</span>(<span class="kw">SOproj</span>(xr), <span class="dt">xy =</span> <span class="ot">TRUE</span>),
+                  <span class="kw">aes</span>(<span class="dt">x =</span> x, <span class="dt">y =</span> y, <span class="dt">fill2 =</span> val)), <span class="dt">new_aes =</span> <span class="kw">c</span>(<span class="dt">fill =</span> <span class="st">&quot;fill2&quot;</span>)) <span class="op">+</span>
+<span class="st">  </span><span class="kw">scale_fill_gradientn</span>(<span class="dt">aesthetics =</span> <span class="st">&quot;fill2&quot;</span>, <span class="dt">colors =</span> my_cmap, <span class="dt">na.value =</span> <span class="ot">NA</span>,
+                       <span class="dt">name =</span> <span class="st">&quot;My variable&quot;</span>, <span class="dt">guide =</span> <span class="st">&quot;legend&quot;</span>)</code></pre></div>
+<p><img src="_main_files/figure-html/somap5f-1.png" width="672" /></p>
 </div>
 </div>
 </div>
