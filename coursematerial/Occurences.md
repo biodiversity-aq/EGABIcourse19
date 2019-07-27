@@ -10,7 +10,7 @@ Here we start with a description of the minimal data you should provide in order
 Each row in your dataset should corresponding to an observation.
 The names of the columns in the dataset should correspond to DwC terms.
 
-You can find a full description of the Darwincore Terms in the [Darwin Core quick reference guide] (https://dwc.tdwg.org/terms/). 
+You can find a full description of the Darwincore Terms in the [Darwin Core quick reference guide](https://dwc.tdwg.org/terms/). 
 
 your data should allow you or anybody else to determine What, Where, When, Who and How
 
@@ -43,11 +43,9 @@ Besides those we recommend a number of other ones as well. In eneral it is bette
 - *organismQuantity*
 - *organismQuantityType*
 - *sex*
-- **lifeStage*
+- *lifeStage*
 - *behavior*
 - *occurrenceRemarks*
-
-
 - *identifiedBy*
 - *dateIdentified*
 
@@ -58,10 +56,10 @@ Besides those we recommend a number of other ones as well. In eneral it is bette
 
 Additional term
 
-*[type] (https://dwc.tdwg.org/terms/#dwc: type)*, 
-*[associatedReferences] (https://dwc.tdwg.org/terms/#dwc: associatedReferences)*
+*[type](https://dwc.tdwg.org/terms/#dwc:type)*, 
+*[associatedReferences](https://dwc.tdwg.org/terms/#dwc:associatedReferences)*
 
-[basisOfRecord] (https://dwc.tdwg.org/terms/#dwc:basisOfRecord) describes the nature of record. It has a to follow a specific vocabulary. Some of these might overlap sometimes. That is why it is usefull to use *[type] (https://dwc.tdwg.org/terms/#dwc: type)* as well.
+[basisOfRecord](https://dwc.tdwg.org/terms/#dwc:basisOfRecord) describes the nature of record. It has a to follow a specific vocabulary. Some of these might overlap sometimes. That is why it is usefull to use *[type](https://dwc.tdwg.org/terms/#dwc:type)* as well.
 
 
 - **PreservedSpecimen** A specimen that has been preserved. This can be a museum specimen, a plant on an herbarium sheet, fish in a bag in a freezer.
@@ -74,14 +72,14 @@ process. Any kid of automated sensor like camera traps, anipi
 - **Occurence** A resource describing an instance of the Occurrence class. NOTE: this value is ambiguous and hence should only be used when the when the resource type is unknown.
 
 
-*[type] (https://dwc.tdwg.org/terms/#dwc:type)* 
+*[type](https://dwc.tdwg.org/terms/#dwc:type)* 
 
-The nature or genre of the resource. Must be populated with a value from the [DCMI type vocabulary] (http://dublincore.org/documents/2010/10/11/dcmi-type-vocabulary/).
+The nature or genre of the resource. Must be populated with a value from the [DCMI type vocabulary](http://dublincore.org/documents/2010/10/11/dcmi-type-vocabulary/).
 
 Options include
 Image, StillImage, MovingImage, Interactive Resource, PhysicalObject, Sound, Text, PhysicalObject, Collection, Dataset, Event, Service, Software
 
-*[associatedReferences] (https://dwc.tdwg.org/terms/#dwc:associatedReferences)* 
+*[associatedReferences](https://dwc.tdwg.org/terms/#dwc:associatedReferences)* 
 A list (concatenated and separated) of identifiers (publication, bibliographic reference, global unique identifier, URI) of literature associated with the Occurrence.
 
 
@@ -89,24 +87,24 @@ Example: If you want to add a record from literature you should use *basisOfReco
 
 
 
-###[occurrenceID] (https://dwc.tdwg.org/terms/#dwc:occurrenceID)
+### [occurrenceID](https://dwc.tdwg.org/terms/#dwc:occurrenceID)
 
 Additonal Terms
 
-*[institutionCode] (https://dwc.tdwg.org/terms/#dwc:institutionCode)*, *[collectionCode] (https://dwc.tdwg.org/terms/#dwc:collectionCode)*, *[catalogNumber] (https://dwc.tdwg.org/terms/#dwc:catalogNumber)*
+*[institutionCode](https://dwc.tdwg.org/terms/#dwc:institutionCode)*, *[collectionCode](https://dwc.tdwg.org/terms/#dwc:collectionCode)*, *[catalogNumber](https://dwc.tdwg.org/terms/#dwc:catalogNumber)*
 
-**[occurrenceID] (https://dwc.tdwg.org/terms/#dwc:occurrenceID)** is an identifier for the occurrence record and should be globally unique and persistent. 
+**[occurrenceID](https://dwc.tdwg.org/terms/#dwc:occurrenceID)** is an identifier for the occurrence record and should be globally unique and persistent. 
 In the absence of a persistent global unique identifier, construct one from a combination of identifiers in the record that will most closely make the occurrenceID globally unique. It is recommende to use. Something like the combination of institutionCode, collectionCode, and catalogNumber is a generally used format.
 
 There are a number of other terms that you could use as well like datasetName and datasetID
 
-**[institutionCode] (https://dwc.tdwg.org/terms/#dwc:institutionCode)**
+**[institutionCode](https://dwc.tdwg.org/terms/#dwc:institutionCode)**
 The name (or acronym) in use by the institution having custody of the object(s) or information referred to in the record.
 
-**[institutionID] (https://dwc.tdwg.org/terms/#dwc:institutionID)**
+**[institutionID](https://dwc.tdwg.org/terms/#dwc:institutionID)**
 An identifier for the institution having custody of the object(s) or information referred to in the record.
 
-For physical specimens, the recommended best practice is to use a code and identifier from a collections registry such as the Global Registry of Biodiversity Repositories [(http://grbio.org/)] (http://grbio.org/).
+For physical specimens, the recommended best practice is to use a code and identifier from a collections registry such as the Global Registry of Biodiversity Repositories [(http://grbio.org/)](http://grbio.org/).
 
 Institution code| Institution name
 ---|---
@@ -115,20 +113,20 @@ BRM|Alfred-Wegener-Institut für Polar- und Meeresforschung
 MNA|The Museo Nazionale dell'Antartide (Italian National Antarctic Museum in Genoa)
 RBINS|Royal Belgian Institute of Natural Sciences
 
-**[collectionCode] (https://dwc.tdwg.org/terms/#dwc:collectionCode)**
+**[collectionCode](https://dwc.tdwg.org/terms/#dwc:collectionCode)**
 The name, acronym, coden, or initialism identifying the collection or data set from which the record was derived.
 
-**[datasetName] (https://dwc.tdwg.org/terms/#dwc:datasetName)** 
+**[datasetName](https://dwc.tdwg.org/terms/#dwc:datasetName)** 
 The name identifying the data set from which the record was derived.
 
-**[datasetID] (https://dwc.tdwg.org/terms/#dwc:datasetID)**
+**[datasetID](https://dwc.tdwg.org/terms/#dwc:datasetID)**
 An identifier for the set of data. May be a global unique identifier or an identifier specific to a collection or institution.
 
 
-**[catalogNumber] (https://dwc.tdwg.org/terms/#dwc:catalogNumber)**
+**[catalogNumber](https://dwc.tdwg.org/terms/#dwc:catalogNumber)**
 An identifier (preferably unique) for the record within the data set or collection.
 
-**[recordNumber] (https://dwc.tdwg.org/terms/#dwc:recordNumber)**
+**[recordNumber](https://dwc.tdwg.org/terms/#dwc:recordNumber)**
 An identifier given to the Occurrence at the time it was recorded. Often serves as a link between field notes and an Occurrence record, such as a specimen collector's number.
 
 occurrenceID|institutionCode | collectionCode|catalogNumber
@@ -144,7 +142,7 @@ For example if you have samples that were collected during an marine expedition 
 
 
 
-### [scientificName] (https://dwc.tdwg.org/terms/#taxon) and [scientificNameID] (https://dwc.tdwg.org/terms/#taxon)
+### [scientificName](https://dwc.tdwg.org/terms/#taxon) and [scientificNameID](https://dwc.tdwg.org/terms/#taxon)
 
 Additional Terms
 
@@ -154,7 +152,7 @@ Additional Additional Terms
 
 *identifiedBy*, *dateIdentified*, *typeStatus*
 
-[scientificName] (https://dwc.tdwg.org/terms/#taxon) In the spirit of keeping things persistent this should always contain the originally recorded scientific name, even if the name is currently a synomym (If the sample is reidentified this is of course a different case). The scientific name should always be to the lowest possible taxonomic rank of which you are certain. In case of uncertain identifications, and the scientific name contains qualifiers such as cf., ? or aff., then this name should go in identificationQualifier.
+[scientificName](https://dwc.tdwg.org/terms/#taxon) In the spirit of keeping things persistent this should always contain the originally recorded scientific name, even if the name is currently a synomym (If the sample is reidentified this is of course a different case). The scientific name should always be to the lowest possible taxonomic rank of which you are certain. In case of uncertain identifications, and the scientific name contains qualifiers such as cf., ? or aff., then this name should go in identificationQualifier.
 
 
 The use of **confer** meaning compare and abbeviated to *cf.* in a scientific name means that the person using the name is saying the animal should be compared to a given species, as it might not be exactly the same species. It’s a way of applying a provisional name to a species and is most frequently used when new fish are discovered that look slightly different to the form normally encountered. It indicates that the fish might be a variant of the same species, but could also turn out to be something completely different.
@@ -204,10 +202,10 @@ There are a few other terms as well that we want to mention. The old term that w
 Please take note that OBIS recommends all quantitative measurements and sampling facts to be treated in the ExtendedMeasurementOrFact extension and not in the Darwin Core files. OBIS recomends using ExtendedMeasurementOrFact in combination with Darwin Core Event Core, which is a little more advanced.
 
 *sex*
-The sex of the biological individual(s) represented in the Occurrence.. The OBIS recommended vocabulary for sex see [BODC vocab : S10] (http://vocab.nerc.ac.uk/collection/S10/current/)
+The sex of the biological individual(s) represented in the Occurrence.. The OBIS recommended vocabulary for sex see [BODC vocab : S10](http://vocab.nerc.ac.uk/collection/S10/current/)
 
 *lifeStage*
-The age class or life stage of the biological individual(s) at the time the Occurrence was recorded. The OBIS recommended vocabulary for lifestage is [BODC vocab: S11] (http://vocab.nerc.ac.uk/collection/S10/current/)
+The age class or life stage of the biological individual(s) at the time the Occurrence was recorded. The OBIS recommended vocabulary for lifestage is [BODC vocab: S11](http://vocab.nerc.ac.uk/collection/S10/current/)
 
 *behavior*
 The behavior shown by the subject at the time the Occurrence was recorded. behavior (no OBIS recomended vocab available)
@@ -315,7 +313,7 @@ In case of a reindetification at some point it is usefull to contact the person 
 
 ##How
 samplingProtocol
-For describing a specific gear we recomend using [BODC vocab : L22] (https://www.bodc.ac.uk/resources/vocabularies/vocabulary_search/L22/)
+For describing a specific gear we recomend using [BODC vocab : L22](https://www.bodc.ac.uk/resources/vocabularies/vocabulary_search/L22/)
 
 
 
