@@ -129,8 +129,8 @@ An identifier (preferably unique) for the record within the data set or collecti
 **[recordNumber](https://dwc.tdwg.org/terms/#dwc:recordNumber)**
 An identifier given to the Occurrence at the time it was recorded. Often serves as a link between field notes and an Occurrence record, such as a specimen collector's number.
 
-occurrenceID|institutionCode | collectionCode|catalogNumber
----|---|---|---|--
+occurrenceID|institutionCode|collectionCode|catalogNumber
+---|---|---|---
 http://arctos.database.museum/guid/MSB:Mamm:233627|MSB|Mamm|233627
  PS89\_FF\_000023|PS89|FF|000023
  
@@ -146,14 +146,24 @@ For example if you have samples that were collected during an marine expedition 
 
 Additional Terms
 
-*scientificNameAuthorship*, *IdentificationQualifier*, *taxonrank*
+*[Kingdom](https://dwc.tdwg.org/terms/#dwc:Kingdom)*, *[taxonrank](https://dwc.tdwg.org/terms/#dwc:taxonrank)*, *[scientificNameAuthorship](https://dwc.tdwg.org/terms/#dwc:scientificNameAuthorship)*, *[IdentificationQualifier](https://dwc.tdwg.org/terms/#dwc:IdentificationQualifier)*
 
-Additional Additional Terms
+Additional Additional Terms (See Who)
 
-*identifiedBy*, *dateIdentified*, *typeStatus*
+*[identifiedBy](https://dwc.tdwg.org/terms/#dwc:identifiedBy)*, *[dateIdentified](https://dwc.tdwg.org/terms/#dwc:dateIdentified)*, *[typeStatus](https://dwc.tdwg.org/terms/#dwc:typeStatus)*
 
-[scientificName](https://dwc.tdwg.org/terms/#taxon) In the spirit of keeping things persistent this should always contain the originally recorded scientific name, even if the name is currently a synomym (If the sample is reidentified this is of course a different case). The scientific name should always be to the lowest possible taxonomic rank of which you are certain. In case of uncertain identifications, and the scientific name contains qualifiers such as cf., ? or aff., then this name should go in identificationQualifier.
+[scientificName](https://dwc.tdwg.org/terms/#taxon) In the spirit of keeping things persistent this should always contain the originally recorded scientific name, even if the name is currently a synomym (If the sample is reidentified this is of course a different case). The scientific name should always be to the lowest possible taxonomic rank of which you are certain. In case of uncertain identifications, and the scientific name contains qualifiers such as cf., ? or aff., then this name should go in *[identificationQualifier](https://dwc.tdwg.org/terms/#identificationQualifier)*.
 
+*[scientificNameAuthorship](https://dwc.tdwg.org/terms/#dwc:scientificNameAuthorship)* OBIS recommends to not include authorship in scientificName, and only use scientificNameAuthorship for that purpose.
+
+[scientificNameID](https://dwc.tdwg.org/terms/#scientificNameID)
+Following the OBIS guidelines a WoRMS LSID should be added in scientificNameID, LSIDs are persistent, location-independent, resource identifiers for uniquely naming biologically significant resources. More information on LSIDs can be found at www.lsid.info.
+
+*[taxonrank](https://dwc.tdwg.org/terms/#dwc:taxonrank)*, Determines the level of idetifciation. This can be for [kingdom](https://dwc.tdwg.org/terms/#dwc:kingdom), [phylum](https://dwc.tdwg.org/terms/#dwc:phylum),[class](https://dwc.tdwg.org/terms/#dwc:class),[order](https://dwc.tdwg.org/terms/#dwc:order),[family](https://dwc.tdwg.org/terms/#dwc:family),[genus](https://dwc.tdwg.org/terms/#dwc:genus),[subgenus](https://dwc.tdwg.org/terms/#dwc:subgenus),[specificEpithet](https://dwc.tdwg.org/terms/#dwc:specificEpithet),[infraspecificEpithet](https://dwc.tdwg.org/terms/#dwc:infraspecificEpithet). given that those are terms they can be specified. It is good practisce to always at least provide the Kingdom. In case you can provide a WoRMS LSID the others are not really required. Otherwise it would be good to add them if possible.
+
+
+[identificationQualifier](https://dwc.tdwg.org/terms/#identificationQualifier)
+A brief phrase or a standard term ("cf.", "aff.") to express the determiner's doubts about the Identification.
 
 The use of **confer** meaning compare and abbeviated to *cf.* in a scientific name means that the person using the name is saying the animal should be compared to a given species, as it might not be exactly the same species. It’s a way of applying a provisional name to a species and is most frequently used when new fish are discovered that look slightly different to the form normally encountered. It indicates that the fish might be a variant of the same species, but could also turn out to be something completely different.
 
@@ -162,7 +172,6 @@ The use of **confer** meaning compare and abbeviated to *cf.* in a scientific na
 **Species** abbreviated as sp. is commonly occurs when authors are confident that some individuals belong to a particular genus but are not sure to which exact species they belong.
 
 Authors may also use "spp." (**Species pliralis**) as a short way of saying that something applies to many species within a genus, but not to all.
-
 
 
 nr|scientificName | scientificNameID | scientificNameAuthorship | IdentificationQualifier| taxonrank
@@ -239,7 +248,7 @@ In cases where decimal latitude are calcullated they often get to much digits. I
 To explain it, you can cheeos this XKCD commic or the table below.
 
 <img src="/images/coordinate_precision_XKCD.png" alt="coordinate precisionXKCD"
-	title="coordinate precision XKCD" width="400"  align="center"/>
+	title="coordinate precision XKCD" width="400" align="center"/>
 
 
 
@@ -273,7 +282,7 @@ Additional Terms
 **eventDate**  The date-time when the occurence/event was recorded. Can be the date-time or interval during which an Event. This term uses the ISO 8601 standard. OBIS recommends using the extended ISO 8601 format with hyphens.
 
 <img src="/images/iso_8601_time_XKCD.png" alt="iso 8601 time XKCD"
-	title="iso 8601 time XKCD" width="400"  align="center"/>
+	title="iso 8601 time XKCD" width="400" align="center"/>
 
 For time intervals ISO 8601 uses / as a separator. 
 Date and time are separated by T. 
@@ -305,14 +314,18 @@ It is an option to split out the eventDate into its seperate components. This ca
 *identifiedBy*, *dateIdentified*
 
 *identifiedBy*
+
 A list (concatenated and separated) of names of people, groups, or organizations who assigned the Taxon to the subject. Recommended best practice is to separate the values in a list with space vertical bar space ( | )
+
+*dateIdentified*
 
 This one is very seldom filled out but it is actually an import one and it should be specific, it should be the person that did the actual odentification not the suprvisor.
 
 In case of a reindetification at some point it is usefull to contact the person that did the initial identification.
 
 ##How
-samplingProtocol
+*samplingProtocol*
+
 For describing a specific gear we recomend using [BODC vocab : L22](https://www.bodc.ac.uk/resources/vocabularies/vocabulary_search/L22/)
 
 
