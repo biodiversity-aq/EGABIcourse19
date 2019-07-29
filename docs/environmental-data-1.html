@@ -264,7 +264,7 @@ srcs[<span class="dv">1</span>, ]</code></pre></div>
 <p>And fetch the data:</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">result &lt;-<span class="st"> </span><span class="kw">bb_get</span>(data_source, <span class="dt">local_file_root =</span> my_data_dir, <span class="dt">verbose =</span> <span class="ot">TRUE</span>)</code></pre></div>
 <pre><code>## 
-## Mon Jul 29 16:53:02 2019
+## Mon Jul 29 17:21:02 2019
 ## Synchronizing dataset: Southern Ocean marine environmental data
 ## Source URL https://data.aad.gov.au/eds/4742/download
 ## --------------------------------------------------------------------------------------------
@@ -274,7 +274,7 @@ srcs[<span class="dv">1</span>, ]</code></pre></div>
 ##  downloading file 1 of 1: https://data.aad.gov.au/eds/4742/download ...  file unchanged on server, not downloading.
 ##   decompressing: c:\data\cache/data.aad.gov.au/eds/4742/download.zip ... no new files to extract (not overwriting existing files) ... done.
 ## 
-## Mon Jul 29 16:53:04 2019 dataset synchronization complete: Southern Ocean marine environmental data</code></pre>
+## Mon Jul 29 17:21:03 2019 dataset synchronization complete: Southern Ocean marine environmental data</code></pre>
 <p>Now we have a local copy of our data. The sync can be run daily so that the local collection is always up to date - it will only download new files, or files that have changed since the last download. For more information on <code>bowerbird</code>, see the <a href="https://ropensci.github.io/bowerbird/articles/bowerbird.html">package vignette</a>.</p>
 <p>The <code>result</code> object holds information about the data that we downloaded:</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">result</code></pre></div>
@@ -326,15 +326,24 @@ srcs[<span class="dv">1</span>, ]</code></pre></div>
     <span class="kw">sources</span>(<span class="st">&quot;ETOPO2 bathymetry&quot;</span>))
 result &lt;-<span class="st"> </span><span class="kw">bb_get</span>(src, <span class="dt">local_file_root =</span> my_data_dir, <span class="dt">clobber =</span> <span class="dv">0</span>, <span class="dt">verbose =</span> <span class="ot">TRUE</span>, <span class="dt">confirm =</span> <span class="ot">NULL</span>)</code></pre></div>
 <pre><code>##  
-## Mon Jul 29 16:53:04 2019 
+## Mon Jul 29 17:21:03 2019 
 ## Synchronizing dataset: NSIDC SMMR-SSM/I Nasateam sea ice concentration 
 ##  
 ##  [... output truncated]</code></pre>
 <p>Now load the <code>raadtools</code> package and tell it where our data collection has been stored:</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">library</span>(raadtools)
-<span class="kw">set_data_roots</span>(my_data_dir)</code></pre></div>
-<pre><code>## Raad file cache is up to date as at 2019-07-29 15:15:41 (819 files listed)</code></pre>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">library</span>(raadtools)</code></pre></div>
+<pre><code>## Warning in set_raad_filenames(clobber = TRUE): failure to read &#39;//aad.gov.au/files/AADC/Scientific_Data/Data/gridded_new/data/.raad_admin/file_db.rds&#39;: is file corrupt?
+##  Consider re-running file cache creation.</code></pre>
+<pre><code>## Warning in set_raad_filenames(clobber = TRUE): failure to read &#39;//aad.gov.au/files/AADC/Scientific_Data/Data/gridded_new/data_local/.raad_admin/file_db.rds&#39;: is file corrupt?
+##  Consider re-running file cache creation.</code></pre>
+<pre><code>## Uploading raad file cache as at 2019-07-29 17:21:07 (135576 files listed)</code></pre>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">set_data_roots</span>(my_data_dir)</code></pre></div>
+<pre><code>## Uploading raad file cache as at 2019-07-29 17:21:07 (819 files listed)</code></pre>
 <pre><code>## global option &#39;raadfiles.data.roots&#39; set:
+## &#39;//aad.gov.au/files/AADC/Scientific_Data/Data/gridded_new/data               2019-07-29 14:51:22
+##  //aad.gov.au/files/AADC/Scientific_Data/Data/gridded_new/data_local         2019-07-28 16:39:16
+##  //aad.gov.au/files/AADC/Scientific_Data/Data/gridded_new/data_deprecated    2018-09-17 13:42:33&#39;
+## global option &#39;raadfiles.data.roots&#39; set:
 ## &#39;/data/cache    2019-07-19 14:55:38&#39;</code></pre>
 <p>Let’s say that we have some points of interest in the Southern Ocean — perhaps a ship track, or some stations where we took marine samples, or as we’ll use here, the <a href="http://www.meop.net/">track of an elephant seal</a> as it moves from the Kerguelen Islands to Antarctica and back again (Data from IMOS 2018[^1], provided as part of the <code>SOmap</code> package).</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">data</span>(<span class="st">&quot;SOmap_data&quot;</span>, <span class="dt">package =</span> <span class="st">&quot;SOmap&quot;</span>)
@@ -342,7 +351,6 @@ ele &lt;-<span class="st"> </span>SOmap_data<span class="op">$</span>mirounga_le
 <p>Define our spatial region of interest and extract the bathymetry data from this region, using the ETOPO2 files we just downloaded:</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">roi &lt;-<span class="st"> </span><span class="kw">round</span>(<span class="kw">c</span>(<span class="kw">range</span>(ele<span class="op">$</span>lon), <span class="kw">range</span>(ele<span class="op">$</span>lat)) <span class="op">+</span><span class="st"> </span><span class="kw">c</span>(<span class="op">-</span><span class="dv">2</span>, <span class="dv">2</span>, <span class="op">-</span><span class="dv">2</span>, <span class="dv">2</span>))
 bx &lt;-<span class="st"> </span><span class="kw">readtopo</span>(<span class="st">&quot;etopo2&quot;</span>, <span class="dt">xylim =</span> roi)</code></pre></div>
-<pre><code>## Raad file cache is up to date as at 2019-07-29 15:15:41 (819 files listed)</code></pre>
 <p>And now we can make a simple plot of our our track superimposed on the bathymetry:</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">plot</span>(bx)
 <span class="kw">lines</span>(ele<span class="op">$</span>lon, ele<span class="op">$</span>lat)</code></pre></div>

@@ -13,7 +13,7 @@ library(knitr)
 knitr::opts_chunk$set(cache = TRUE)
 options(knitr.table.format = "html")
 
-showtbl <- function(z) kable_styling(knitr::kable(z), bootstrap_options = c("striped", "hover", "condensed", "responsive"))
+showtbl <- function(z) kable_styling(knitr::kable(z), bootstrap_options = c("striped", "hover", "condensed"))
 
 
 ## use this chunk to set up data directories and similar

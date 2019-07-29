@@ -147,7 +147,7 @@ An identifier given to the Occurrence at the time it was recorded. Often serves 
 ```{r echo = FALSE}
 showtbl(tribble(~occurrenceID, ~institutionCode, ~collectionCode, ~catalogNumber,
 "http://arctos.database.museum/guid/MSB:Mamm:233627", "MSB", "Mamm", "233627",
-"PS89_FF_000023", "PS89", "FF", "000023"))
+"PS89_FF_000023", "PS89", "FF", "000023")) %>% scroll_box(width = "100%")
 ```
 
 It is a good practice to keep your catalogue/record numbers of equal length throughout your dataset.
@@ -187,15 +187,15 @@ The use of **confer** meaning compare and abbeviated to *cf.* in a scientific na
 
 **Species** abbreviated as sp. is commonly occurs when authors are confident that some individuals belong to a particular genus but are not sure to which exact species they belong.
 
-Authors may also use "spp." (**Species pliralis**) as a short way of saying that something applies to many species within a genus, but not to all.
+Authors may also use "spp." (**Species pluralis**) as a short way of saying that something applies to many species within a genus, but not to all.
 
 
 ```{r echo = FALSE}
-showtbl(tribble(~nr, ~scientificName, ~scientificNameID, ~scientificNameAuthorship, ~IdentificationQualifier, ~taxonrank,
-1, "Electrona", "urn:lsid:marinespecies.org:taxname:125821", "Goode & Bean, 1896", "aff. risso", "genus",
-2, "Electrona antarctica", "urn:lsid:marinespecies.org:taxname:217697", "Günther, 1878", "", "species",
-3, "Electrona", "urn:lsid:marinespecies.org:taxname:125821", "Goode & Bean, 1896", "sp.", "genus",
-4, "Electrona", "urn:lsid:marinespecies.org:taxname:125821", "Goode & Bean, 1896", "spp.", "genus"))
+showtbl(tribble(~"", ~scientificName, ~scientificNameAuthorship, ~IdentificationQualifier, ~taxonrank,
+1, "[Electrona](http://www.marinespecies.org/aphia.php?p=taxdetails&id=125821)", "Goode & Bean, 1896", "aff. risso", "genus",
+2, "[Electrona antarctica](http://www.marinespecies.org/aphia.php?p=taxdetails&id=217697)", "Günther, 1878", "", "species",
+3, "[Electrona](http://www.marinespecies.org/aphia.php?p=taxdetails&id=125821)", "Goode & Bean, 1896", "sp.", "genus",
+4, "[Electrona](http://www.marinespecies.org/aphia.php?p=taxdetails&id=125821)", "Goode & Bean, 1896", "spp.", "genus"))
 ```
 
 What are you saying with that?
