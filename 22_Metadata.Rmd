@@ -1,22 +1,15 @@
-# Metadata
+# Metadata - Darwin Core
 
-## Darwin Core
-
-* [Introduction](### Introduction)
-* [Darwin Core Structure](### Darwin Core structure)
-* [Types of Darwin Core Archives] (### Types of Darwin Core Archives)
-
-### Introduction
-
-The Darwin Core (DwC) is a body of standards maintained by [TDWG](https://www.tdwg.org)  (Biodiversity Information Standards, formerly The International Working Group on Taxonomic Databases).
+The Darwin Core (DwC) is a body of standards maintained by [TDWG](https://www.tdwg.org)  (Biodiversity Information Standards, formerly known as The International Working Group on Taxonomic Databases).
 It includes a glossary of terms intended to facilitate the sharing of information about biological diversity by providing reference definitions, examples, and commentaries. The Darwin Core is primarily based on taxa, their occurrence in nature as documented by observations, specimens, and samples, and related information.
 
-Darwin Core revolves around a standard file format, the Darwin Core Archive (DwC-A). This compact package (a ZIP file) contains interconnected text files and enables data publishers to share their data using a common terminology. DwC is used both by [GBIF] (www.gbif.org) and [OBIS] (www.obis.org) for publishing data.
+Darwin Core revolves around a standard file format, the Darwin Core Archive (DwC-A). This compact package (a ZIP file) contains interconnected text files and enables data publishers to share their data using a common terminology. DwC is used both by [GBIF](www.gbif.org) and [OBIS](www.obis.org) for publishing data.
  
 This standardization not only simplifies the process of publishing biodiversity datasets, it also makes it easy for users to discover, search, evaluate and compare datasets as they seek answers to today’s data-intensive research and policy questions.
 
 
-### Darwin Core structure
+## Darwin Core structure
+
 A DWC-A can contains 4 types of components. These files can include:
 
 * eml.xml
@@ -24,46 +17,37 @@ A DWC-A can contains 4 types of components. These files can include:
 * extension files (optional)
 * meta.xml
 
-eml stands for [Ecological Metadata Language] (https://en.wikipedia.org/wiki/Ecological_Metadata_Language), This files contains the dataset metadata in an xml format.
+EML stands for [Ecological Metadata Language](https://en.wikipedia.org/wiki/Ecological_Metadata_Language). This file contains the dataset metadata in an XML format.
 
-Core and extension files contain data records, arranged one per line. Each row in the extension file or extension record points to a single record in the core file; For each single core record many extension records. This is sometimes referred to as a “star schema”.
+Core and extension files contain data records, arranged one per line. Each row in the extension file or extension record points to a single record in the core file. For each single core record there can be many extension records. This is sometimes referred to as a “star schema”.
 
-the meta.xml describes how the files in the archive are organised. It describes the linkage between the core and extension files and maps non-standards column names to Darwin Core terms.
+The meta.xml file describes how the files in the archive are organised. It describes the linkage between the core and extension files and maps non-standards column names to Darwin Core terms.
 
-To publish the data as a DwC-A, We recommend to upload the core and extension files to the IPT (e.g. [IPT.biodiversity.aq] (http://IPT.biodiversity.aq)). Use the IPT's built-in metadata editor to enter dataset metadata. The IPT will compile th eml on the data you provided As wel as the meta.xml. If you want to 
+To publish the data as a DwC-A, we recommend to upload the core and extension files to the IPT (e.g. [IPT.biodiversity.aq](http://IPT.biodiversity.aq)). Use the IPT's built-in metadata editor to enter dataset metadata. The IPT will compile the EML on the data you provided, as well as the meta.xml.
 
-### Types of Darwin Core archives
-* Metadata
-* Checklist
-* Occurrence
-* Event
+## Types of Darwin Core archives
 
-Used to share information about a specific instance of a taxon such as a specimen or observation.
+* [Resource Metadata](https://github.com/gbif/ipt/wiki/resourceMetadata) - Used to describe a biodiversity information resource, including contact details, even if no digital data can currently be shared (this provides a way for researchers to discover resources which are not yet available online).
+* [Checklist](https://github.com/gbif/ipt/wiki/checklistData) - Used to share annotated species checklists, taxonomic catalogues, and other information about taxa.
+* [Occurrence](https://github.com/gbif/ipt/wiki/occurrenceData) - Used to share information about a specific instance of a taxon such as a specimen or observation.
+* [Event](https://github.com/gbif/ipt/wiki/samplingEventData) - Used to share information about the protocols used in ecological investigations.
 
-Used to share annotated species checklists, taxonomic catalogues, and other information about taxa
-
-Used to share information about ecological investigations 
 
 ## Darwin Core details
 
-In general metadata eml will accompany some data core in a DwC-A. It provides a description and details on the resource.
+In general, metadata EML will accompany some data core in a DwC-A. It provides a description and details on the resource.
 
-It is also  possible to initially only publish your metadata and add your data at a later stage.
+It is also possible to initially only publish your metadata and add your data at a later stage.
 
 This allows researchers to discover resources that or not yet available online.
 It is best to consider your abstract as the material and methods section of your paper but then for just your data.
 Try to provide as much detail as possible.
 
-Actually if you fill out your metadat extensively you have a first very good draft for a datapaper (if that is something you would like to make). you'll just have to add some maps sumarry statitics and your are good to go.
+Actually if you fill out your metadata extensively you have a first very good draft for a data paper (if that is something you would like to make). You'll just have to add some maps, summary statistics, and you are good to go.
 
-If you do are in a hurry below is an overview of what currently are the required fields.
+If you are in a hurry, below is an overview of what currently are the required fields.
 
-
-If you use the IPT to create your Darwin Core archive. you will have to choose a shortname for your dataset. Choose this wisely because it can't be changed. The short name serves as an identifier within the IPT installation, and will be used as a parameter in the URL to access the resource via the Internet.
-
-For the short name you can only alphanumeric characters, hyphens, or underscores.
-
-
+If you use the IPT to create your Darwin Core archive, you will have to choose a short name for your dataset. Choose this wisely because it can't be changed. The short name serves as an identifier within the IPT installation, and will be used as a parameter in the URL to access the resource via the Internet. For the short name you can only use alphanumeric characters, hyphens, or underscores.
 
 ### Required metadata fields:
 

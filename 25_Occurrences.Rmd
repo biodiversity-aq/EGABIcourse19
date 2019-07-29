@@ -1,4 +1,4 @@
-# Occurrence data
+## Metadata for occurrence data
 
 In general the more information you provide the more knowledge can be gained from your occurrence data.
 
@@ -11,7 +11,7 @@ Here we start with a description of the minimal data you should provide in order
 Each row in your dataset should corresponding to an observation.
 The names of the columns in the dataset should correspond to DwC terms.
 
-You can find a full description of the Darwincore Terms in the [Darwin Core quick reference guide](https://dwc.tdwg.org/terms/). But below we provide an overview of the most important terms. If you have information that doesn't ft the Terms below just check the [Darwin Core quick reference guide](https://dwc.tdwg.org/terms/) or create an issue on the EG-ABI course github or the [TDWG Github] (https://github.com/tdwg/dwc-qa)
+You can find a full description of the Darwincore Terms in the [Darwin Core quick reference guide](https://dwc.tdwg.org/terms/). But below we provide an overview of the most important terms. If you have information that doesn't ft the Terms below just check the [Darwin Core quick reference guide](https://dwc.tdwg.org/terms/) or create an issue on the EG-ABI course github or the [TDWG Github](https://github.com/tdwg/dwc-qa)
 
 your data should allow you or anybody else to determine What, Where, When, Who and How.
 
@@ -64,9 +64,9 @@ Besides those we recommend a number of other ones as well. In eneral it is bette
 - *samplingProtocol*
 
 
-## What
+### What
 
-### basisOfRecord
+#### basisOfRecord
 
 Additional term
 
@@ -101,7 +101,7 @@ Example: If you want to add a record from literature you should use *basisOfReco
 
 
 
-### [occurrenceID](https://dwc.tdwg.org/terms/#dwc:occurrenceID)
+#### [occurrenceID](https://dwc.tdwg.org/terms/#dwc:occurrenceID)
 
 Additonal Terms
 
@@ -158,7 +158,7 @@ For example if you have samples that were collected during an marine expedition 
 
 
 
-### [scientificName](https://dwc.tdwg.org/terms/#taxon) and [scientificNameID](https://dwc.tdwg.org/terms/#taxon)
+#### [scientificName](https://dwc.tdwg.org/terms/#taxon) and [scientificNameID](https://dwc.tdwg.org/terms/#taxon)
 
 Additional Terms
 
@@ -205,7 +205,7 @@ What are you saying with that?
 - Case 3: "I'm sure about the genus, but it could be any one of multiple species"
 - Case 4: "I have this bag with fish; I'm sure about the genus but it could be a variety of species within the genus"
 
-### [occurrenceStatus](https://dwc.tdwg.org/terms/#dwc:occurrenceStatus)
+#### [occurrenceStatus](https://dwc.tdwg.org/terms/#dwc:occurrenceStatus)
 
 Additional Terms
 
@@ -240,8 +240,8 @@ The behavior shown by the subject at the time the Occurrence was recorded. behav
 *occurrenceRemarks[decimalLatitude](https://dwc.tdwg.org/terms/#dwc:decimalLatitude)* can hold any comments or notes about the Occurrence.
 
 
-## Where
-### [decimalLatitude](https://dwc.tdwg.org/terms/#dwc:decimalLatitude) and[decimalLongitude](https://dwc.tdwg.org/terms/#dwc:decimalLongitude)
+### Where
+#### [decimalLatitude](https://dwc.tdwg.org/terms/#dwc:decimalLatitude) and[decimalLongitude](https://dwc.tdwg.org/terms/#dwc:decimalLongitude)
 
 Additional Terms
 
@@ -281,9 +281,9 @@ showtbl(tribble(~"decimal places", ~"decimal degrees", ~DMS, ~"Object that can b
 8, "0.00000001", "0° 00' 0.000036\"", "specialized surveying (e.g. tectonic plate mapping)", "1.1132 mm", "434.96 µm"))
 ```
 
-## When
+### When
 
-### [eventDate](https://dwc.tdwg.org/terms/#dwc:eventDate)
+#### [eventDate](https://dwc.tdwg.org/terms/#dwc:eventDate)
 
 Additional Terms
 
@@ -324,7 +324,7 @@ It is an option to split out the eventDate into its seperate components. This ca
 *verbatimEventDate* You can put the original date format here, not really needed but might be usefull, in case where you are digitising old literature records. 
 
 
-## Who
+### Who
 
 *[identifiedBy](https://dwc.tdwg.org/terms/#dwc:identifiedBy)*, *[dateIdentified](https://dwc.tdwg.org/terms/#dwc:dateIdentified)*
 
@@ -339,7 +339,7 @@ This one is very seldom filled out but it is actually an import one and it shoul
 
 In case of a reindetification at some point it is usefull to contact the person that did the initial identification.
 
-## How
+### How
 *[samplingProtocol](https://dwc.tdwg.org/terms/#dwc:samplingProtocol)*
 
 
