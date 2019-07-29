@@ -1,5 +1,5 @@
 # Occurences
-In general the more information you provide the more knowledge can be gained from them.
+In general the more information you provide the more knowledge can be gained from your occurence data.
 
 The first user of this data is future **yourself**. Taking the time to be as detailed in providing and describing your data is time you will gain in the future when you want to reanalyse your data or integrate it in a broader study.
 
@@ -10,10 +10,9 @@ Here we start with a description of the minimal data you should provide in order
 Each row in your dataset should corresponding to an observation.
 The names of the columns in the dataset should correspond to DwC terms.
 
-You can find a full description of the Darwincore Terms in the [Darwin Core quick reference guide](https://dwc.tdwg.org/terms/). 
+You can find a full description of the Darwincore Terms in the [Darwin Core quick reference guide](https://dwc.tdwg.org/terms/). But below we provide an overview of the most important terms. If you have information that doesn't ft the Terms below just check the [Darwin Core quick reference guide](https://dwc.tdwg.org/terms/) or create an issue on the EG-ABI course github or the [TDWG Github] (https://github.com/tdwg/dwc-qa)
 
-your data should allow you or anybody else to determine What, Where, When, Who and How
-
+your data should allow you or anybody else to determine What, Where, When, Who and How.
 
 The Darwincore Standards has 8 absolutely required terms. **basisOfRecord, occurrenceID, scientificName, scientificNameID, occurrenceStatus, decimalLongitude, decimalLatitude, eventDate**
 
@@ -48,6 +47,20 @@ Besides those we recommend a number of other ones as well. In eneral it is bette
 - *occurrenceRemarks*
 - *identifiedBy*
 - *dateIdentified*
+
+**decimalLongitude, decimalLatitude**
+
+- *geodeticDatum*
+- *coordinateUncertaintyInMeters*,
+
+**eventDate**
+
+- *year*, 
+- *month*,
+- *Day*,
+- *Time*,
+- *Timezone*
+- *samplingProtocol*
 
 
 ## What
@@ -188,16 +201,16 @@ What are you saying with that?
 - Case 3: "I'm sure about the genus, but it could be any one of multiple species"
 - Case 4: "I have this bag with fish sure about the genus but it could be a variety of species within the genus"
 
-### occurrenceStatus
+###[occurrenceStatus](https://dwc.tdwg.org/terms/#dwc:occurrenceStatus)
 
 Additional Terms
 
-*organismQuantity*, *organismQuantityType*
+*[organismQuantity](https://dwc.tdwg.org/terms/#dwc:organismQuantity)*, *[organismQuantityType](https://dwc.tdwg.org/terms/#dwc:organismQuantityType)*, *[sex](https://dwc.tdwg.org/terms/#dwc:sex)*, *[lifeStage](https://dwc.tdwg.org/terms/#dwc:lifeStage)*, *[behavior](https://dwc.tdwg.org/terms/#dwc:behavior)*, *[occurrenceRemarks](https://dwc.tdwg.org/terms/#dwc:occurrenceRemarks)*
 
 
 occurrenceStatus is a statement about the presence or absence of a taxon at a location. It is an important term, because it allows us to distinguish between presence and absence records. It is an OBIS required term and should be filled in with either present or absent.
 
-*organismQuantity*, *organismQuantityType*
+*[organismQuantity](https://dwc.tdwg.org/terms/#dwc:organismQuantity)*, *[organismQuantityType](https://dwc.tdwg.org/terms/#dwc:organismQuantityType)*
 These two always go together. organismQuantity is a number for the quantity of animals and organismQuantityType defines the type of quantification system used for the quantity of organisms.
 
 organismQuantity | organismQuantityType
@@ -210,24 +223,24 @@ There are a few other terms as well that we want to mention. The old term that w
 
 Please take note that OBIS recommends all quantitative measurements and sampling facts to be treated in the ExtendedMeasurementOrFact extension and not in the Darwin Core files. OBIS recomends using ExtendedMeasurementOrFact in combination with Darwin Core Event Core, which is a little more advanced.
 
-*sex*
+*sex[decimalLatitude](https://dwc.tdwg.org/terms/#dwc:decimalLatitude)*
 The sex of the biological individual(s) represented in the Occurrence.. The OBIS recommended vocabulary for sex see [BODC vocab : S10](http://vocab.nerc.ac.uk/collection/S10/current/)
 
-*lifeStage*
+*lifeStage[decimalLatitude](https://dwc.tdwg.org/terms/#dwc:decimalLatitude)*
 The age class or life stage of the biological individual(s) at the time the Occurrence was recorded. The OBIS recommended vocabulary for lifestage is [BODC vocab: S11](http://vocab.nerc.ac.uk/collection/S10/current/)
 
-*behavior*
+*behavior[decimalLatitude](https://dwc.tdwg.org/terms/#dwc:decimalLatitude)*
 The behavior shown by the subject at the time the Occurrence was recorded. behavior (no OBIS recomended vocab available)
 
-*occurrenceRemarks* can hold any comments or notes about the Occurrence.
+*occurrenceRemarks[decimalLatitude](https://dwc.tdwg.org/terms/#dwc:decimalLatitude)* can hold any comments or notes about the Occurrence.
 
 
 ## Where
-### decimalLatitude, decimalLongitude and geodeticDatum
+### [decimalLatitude](https://dwc.tdwg.org/terms/#dwc:decimalLatitude) and[decimalLongitude](https://dwc.tdwg.org/terms/#dwc:decimalLongitude)
 
 Additional Terms
 
-*coordinateUncertaintyInMeters*, *locality*, *locationID*, *footprintWKT*
+*[geodeticDatum](https://dwc.tdwg.org/terms/#dwc:geodeticDatum)*, *[coordinateUncertaintyInMeters](https://dwc.tdwg.org/terms/#dwc:coordinateUncertaintyInMeters)*, *[locality](https://dwc.tdwg.org/terms/#dwc:locality)*, *[locationID](https://dwc.tdwg.org/terms/#dwc:locationID)*, *[footprintWKT](https://dwc.tdwg.org/terms/#dwc:footprintWKT)*
 
 To determine the location of a point on a globe you need at least the decimalLatitude and decimalLongitude and and a definition of the spatial reference system that was used. The Spatial reference System defines the model of the earts shape that us used.   
 
@@ -239,11 +252,11 @@ decimalLongitude defines the position relative to the Greenwich Meridian and ran
 
 Mak sure not to swith those around. The standard notation has them as Lattitude followed by Longitude. In the decimal notations they are sometimes switched around as this corresponds more to a cartesian notation. Especially for samples collected in the area of the Antarctic peninsula these switches can be hard to spot.
 
-*coordinateUncertaintyInMeters*
+*[coordinateUncertaintyInMeters](https://dwc.tdwg.org/terms/#dwc:coordinateUncertaintyInMeters)*
 The horizontal distance (in meters) from the given decimalLatitude and decimalLongitude describing the smallest circle containing the whole of the Location. Leave the value empty if the uncertainty is unknown, cannot be estimated, or is not applicable (because there are no coordinates). Zero is not a valid value for this term.
 This one is actually closely linked to the number of decimals in your decimalLatitude, decimalLongitude
 
-In cases where decimal latitude are calcullated they often get to much digits. If you have more than five it doesn't real make sense anymore.
+In cases where decimal latitude are calcullated they often get to much digits. If you have more than 6 in biology it doesn't real make sense anymore or it doesn't represent how precise the measurement was in the field.
 
 To explain it, you can cheeos this XKCD commic or the table below.
 
@@ -268,18 +281,19 @@ decimal places	| decimal degrees	|DMS|	Object that can be unambiguously recogniz
 
 ##When
 
-**eventDate**
+**[eventDate](https://dwc.tdwg.org/terms/#dwc:eventDate)**
+
 Additional Terms
 
-*year*, 
-*month*,
-*Day*,
-*Time*,
-*Timezone*
+*[year](https://dwc.tdwg.org/terms/#dwc:year)*, 
+*[month](https://dwc.tdwg.org/terms/#dwc:month)*,
+*[Day](https://dwc.tdwg.org/terms/#dwc:Day)*,
+*[Time](https://dwc.tdwg.org/terms/#dwc:Time)*,
+*[Timezone](https://dwc.tdwg.org/terms/#dwc:Timezone)*
 
 
 
-**eventDate**  The date-time when the occurence/event was recorded. Can be the date-time or interval during which an Event. This term uses the ISO 8601 standard. OBIS recommends using the extended ISO 8601 format with hyphens.
+**[eventDate](https://dwc.tdwg.org/terms/#dwc:eventDate)**  The date-time when the occurence/event was recorded. Can be the date-time or interval during which an Event. This term uses the ISO 8601 standard. OBIS recommends using the extended ISO 8601 format with hyphens.
 
 <img src="/images/iso_8601_time_XKCD.png" alt="iso 8601 time XKCD"
 	title="iso 8601 time XKCD" width="400" align="center"/>
@@ -306,27 +320,29 @@ It is an option to split out the eventDate into its seperate components. This ca
 *Time*,
 *Timezone*
 
-*verbatimEventDate* You can put the original date format here, not really needed but might be usefull. 
+*verbatimEventDate* You can put the original date format here, not really needed but might be usefull, in case where you are digitising old literature records. 
 
 
 ##Who
 
-*identifiedBy*, *dateIdentified*
+*[identifiedBy](https://dwc.tdwg.org/terms/#dwc:identifiedBy)*, *[dateIdentified](https://dwc.tdwg.org/terms/#dwc:dateIdentified)*
 
-*identifiedBy*
+
+*[identifiedBy](https://dwc.tdwg.org/terms/#dwc:identifiedBy)*
 
 A list (concatenated and separated) of names of people, groups, or organizations who assigned the Taxon to the subject. Recommended best practice is to separate the values in a list with space vertical bar space ( | )
 
-*dateIdentified*
+*[dateIdentified](https://dwc.tdwg.org/terms/#dwc:dateIdentified)*
 
 This one is very seldom filled out but it is actually an import one and it should be specific, it should be the person that did the actual odentification not the suprvisor.
 
 In case of a reindetification at some point it is usefull to contact the person that did the initial identification.
 
 ##How
-*samplingProtocol*
+*[samplingProtocol](https://dwc.tdwg.org/terms/#dwc:samplingProtocol)*
 
-For describing a specific gear we recomend using [BODC vocab : L22](https://www.bodc.ac.uk/resources/vocabularies/vocabulary_search/L22/)
+
+This is a tricky one it is quite relevent but this field often doesn't provide enough space to deescribe what you did.For describing a specific gear you can use [BODC vocab : L22](https://www.bodc.ac.uk/resources/vocabularies/vocabulary_search/L22/)
 
 
 
