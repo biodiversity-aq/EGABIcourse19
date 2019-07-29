@@ -4,11 +4,11 @@
 
   <meta charset="utf-8" />
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-  <title>7 Biological data | SCAR-EGABI Tools for Southern Ocean Spatial Analysis and Modelling</title>
+  <title>5 Metadata | SCAR-EGABI Tools for Southern Ocean Spatial Analysis and Modelling</title>
   <meta name="description" content="Course material" />
   <meta name="generator" content="bookdown 0.11 and GitBook 2.6.7" />
 
-  <meta property="og:title" content="7 Biological data | SCAR-EGABI Tools for Southern Ocean Spatial Analysis and Modelling" />
+  <meta property="og:title" content="5 Metadata | SCAR-EGABI Tools for Southern Ocean Spatial Analysis and Modelling" />
   <meta property="og:type" content="book" />
   
   
@@ -16,7 +16,7 @@
   
 
   <meta name="twitter:card" content="summary" />
-  <meta name="twitter:title" content="7 Biological data | SCAR-EGABI Tools for Southern Ocean Spatial Analysis and Modelling" />
+  <meta name="twitter:title" content="5 Metadata | SCAR-EGABI Tools for Southern Ocean Spatial Analysis and Modelling" />
   
   <meta name="twitter:description" content="Course material" />
   
@@ -30,8 +30,8 @@
   <meta name="apple-mobile-web-app-status-bar-style" content="black" />
   
   
-<link rel="prev" href="occurrence-data.html">
-<link rel="next" href="environmental-data-1.html">
+<link rel="prev" href="introduction-to-r-and-the-tidyverse.html">
+<link rel="next" href="occurrence-data.html">
 <script src="libs/jquery-2.2.3/jquery.min.js"></script>
 <link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
 <link href="libs/gitbook-2.6.7/css/plugin-table.css" rel="stylesheet" />
@@ -206,27 +206,159 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
           <div class="page-inner">
 
             <section class="normal" id="section-">
-<div id="biological-data" class="section level1">
-<h1><span class="header-section-number">7</span> Biological data</h1>
-<div id="taxonomy-1" class="section level2">
-<h2><span class="header-section-number">7.1</span> Taxonomy</h2>
-<p>The Register of Antarctic Marine Species (RAMS) is the authoritative taxonomic database for Antarctic marine organisms. RAMS is part of the World Register of Marine Species (WoRMS).</p>
+<div id="metadata" class="section level1">
+<h1><span class="header-section-number">5</span> Metadata</h1>
+<div id="darwin-core" class="section level2">
+<h2><span class="header-section-number">5.1</span> Darwin Core</h2>
 <ul>
-<li><a href="https://cran.r-project.org/package=worrms">worrms</a> client for the <a href="http://www.marinespecies.org/">WoRMS</a> API. Contains mostly taxonomic data, but also trait data.</li>
-<li><a href="https://cran.r-project.org/package=taxize">taxize</a> provides access to 20ish sources of taxonomic data sources, including WoRMS. It has consistent data outputs and function interfaces across the different data sources so that you don’t need to tailor your code to different taxonomic data providers.</li>
+<li><a href="###%20Introduction">Introduction</a></li>
+<li><a href="###%20Darwin%20Core%20structure">Darwin Core Structure</a></li>
+<li><a href="metadata.html#types-of-darwin-core-archives">Types of Darwin Core Archives</a> (### Types of Darwin Core Archives)</li>
 </ul>
-<p>RAMS is currently being extended to cover non-marine taxa, which will become the Register of Antarctic Species (RAS). Hopefully this will remain covered by <code>worrms</code> and the server-side infrastructure hosted by VLIZ.</p>
-<p>For more detail on R packages dealing with taxonomy in general, see the <a href="https://github.com/ropensci/taxonomy">rOpenSci taxonomy task view</a>.</p>
+<div id="introduction" class="section level3">
+<h3><span class="header-section-number">5.1.1</span> Introduction</h3>
+<p>The Darwin Core (DwC) is a body of standards maintained by <a href="https://www.tdwg.org">TDWG</a> (Biodiversity Information Standards, formerly The International Working Group on Taxonomic Databases). It includes a glossary of terms intended to facilitate the sharing of information about biological diversity by providing reference definitions, examples, and commentaries. The Darwin Core is primarily based on taxa, their occurrence in nature as documented by observations, specimens, and samples, and related information.</p>
+<p>Darwin Core revolves around a standard file format, the Darwin Core Archive (DwC-A). This compact package (a ZIP file) contains interconnected text files and enables data publishers to share their data using a common terminology. DwC is used both by [GBIF] (www.gbif.org) and [OBIS] (www.obis.org) for publishing data.</p>
+<p>This standardization not only simplifies the process of publishing biodiversity datasets, it also makes it easy for users to discover, search, evaluate and compare datasets as they seek answers to today’s data-intensive research and policy questions.</p>
 </div>
-<div id="other-packages" class="section level2">
-<h2><span class="header-section-number">7.2</span> Other packages</h2>
-<p>Tracking of animals using satellite, GPS, or light-level geolocation tags is common, and there are many R packages that can help with this. See the <a href="https://cloud.r-project.org/web/views/SpatioTemporal.html">spatiotemporal task view</a> for a more complete list. Also of interest may be:</p>
+<div id="darwin-core-structure" class="section level3">
+<h3><span class="header-section-number">5.1.2</span> Darwin Core structure</h3>
+<p>A DWC-A can contains 4 types of components. These files can include:</p>
 <ul>
-<li><p><a href="https://github.com/ABindoff/TwilightFree">TwilightFree</a> provides a method for processing light-level geolocation data that is robust to noise (sensor shading and obscuration) and may be particularly suitable for Southern Ocean applications.</p></li>
-<li><p><a href="https://github.com/Trackage/traipse">traipse</a> provides tools for tracking data, for common metrics of distance, direction, and speed.</p></li>
-<li><p><a href="https://github.com/ianjonsen/foieGras">foieGras</a> fits a continuous-time model (RW or CRW) in state-space form to filter Argos satellite location data.</p></li>
+<li>eml.xml</li>
+<li>core file</li>
+<li>extension files (optional)</li>
+<li>meta.xml</li>
 </ul>
+<p>eml stands for [Ecological Metadata Language] (<a href="https://en.wikipedia.org/wiki/Ecological_Metadata_Language" class="uri">https://en.wikipedia.org/wiki/Ecological_Metadata_Language</a>), This files contains the dataset metadata in an xml format.</p>
+<p>Core and extension files contain data records, arranged one per line. Each row in the extension file or extension record points to a single record in the core file; For each single core record many extension records. This is sometimes referred to as a “star schema”.</p>
+<p>the meta.xml describes how the files in the archive are organised. It describes the linkage between the core and extension files and maps non-standards column names to Darwin Core terms.</p>
+<p>To publish the data as a DwC-A, We recommend to upload the core and extension files to the IPT (e.g. [IPT.biodiversity.aq] (<a href="http://IPT.biodiversity.aq" class="uri">http://IPT.biodiversity.aq</a>)). Use the IPT’s built-in metadata editor to enter dataset metadata. The IPT will compile th eml on the data you provided As wel as the meta.xml. If you want to</p>
+</div>
+<div id="types-of-darwin-core-archives" class="section level3">
+<h3><span class="header-section-number">5.1.3</span> Types of Darwin Core archives</h3>
+<ul>
+<li>Metadata</li>
+<li>Checklist</li>
+<li>Occurrence</li>
+<li>Event</li>
+</ul>
+<p>Used to share information about a specific instance of a taxon such as a specimen or observation.</p>
+<p>Used to share annotated species checklists, taxonomic catalogues, and other information about taxa</p>
+<p>Used to share information about ecological investigations</p>
+</div>
+</div>
+<div id="darwin-core-details" class="section level2">
+<h2><span class="header-section-number">5.2</span> Darwin Core details</h2>
+<p>In general metadata eml will accompany some data core in a DwC-A. It provides a description and details on the resource.</p>
+<p>It is also possible to initially only publish your metadata and add your data at a later stage.</p>
+<p>This allows researchers to discover resources that or not yet available online. It is best to consider your abstract as the material and methods section of your paper but then for just your data. Try to provide as much detail as possible.</p>
+<p>Actually if you fill out your metadat extensively you have a first very good draft for a datapaper (if that is something you would like to make). you’ll just have to add some maps sumarry statitics and your are good to go.</p>
+<p>If you do are in a hurry below is an overview of what currently are the required fields.</p>
+<p>If you use the IPT to create your Darwin Core archive. you will have to choose a shortname for your dataset. Choose this wisely because it can’t be changed. The short name serves as an identifier within the IPT installation, and will be used as a parameter in the URL to access the resource via the Internet.</p>
+<p>For the short name you can only alphanumeric characters, hyphens, or underscores.</p>
+<div id="required-metadata-fields" class="section level3">
+<h3><span class="header-section-number">5.2.1</span> Required metadata fields:</h3>
+<div id="basic-metadata" class="section level4">
+<h4><span class="header-section-number">5.2.1.1</span> Basic Metadata</h4>
+<div id="title" class="section level5">
+<h5><span class="header-section-number">5.2.1.1.1</span> title</h5>
+<blockquote>
+<p>This will be the long title of your dataset, and how the dataset will be cited</p>
+</blockquote>
+</div>
+<div id="publishing-organisation" class="section level5">
+<h5><span class="header-section-number">5.2.1.1.2</span> publishing organisation</h5>
+<blockquote>
+<p>Please select the organisation responsible for publishing (producing, releasing, holding) this resource. It will be used as the resource’s publishing organisation when registering this resource with GBIF and when submitting metadata during DOI registrations. It will also be used to auto-generate the citation for the resource (if auto-generation is turned on), so consider the prominence of the role. Please be aware your selection cannot be changed after the resource has been either registered with GBIF or assigned a DOI.</p>
+</blockquote>
+<p>On our IPT you can choose</p>
+<ul>
+<li>Antarctic Biodiversity Information Facility (AntaBIF) for terrestrial datasets</li>
+<li>SCAR - AntOBIS for marine datasets</li>
+<li>SCAR - Microbial Antarctic Resource System for microbial datasets</li>
+</ul>
+<p>We can also publish on behalf of others. Currently we have agreements with</p>
+<ul>
+<li>British Antarctic Survey</li>
+<li>Italian Antarctic National Museum (MNA, section Genua)</li>
+</ul>
+</div>
+<div id="type" class="section level5">
+<h5><span class="header-section-number">5.2.1.1.3</span> type</h5>
+<blockquote>
+<p>The type of resource. The value of this field depends on the core mapping of the resource and is no longer editable if the Darwin Core mapping has already been made.</p>
+</blockquote>
+<p>This can be</p>
+<ul>
+<li>Metadata-only</li>
+<li>Checklist</li>
+<li>Occurence</li>
+<li>Event-Core</li>
+</ul>
+</div>
+<div id="metadata-language" class="section level5">
+<h5><span class="header-section-number">5.2.1.1.4</span> metadata language</h5>
+<blockquote>
+<p>The language in which the metadata document is written.</p>
+</blockquote>
+</div>
+<div id="data-language" class="section level5">
+<h5><span class="header-section-number">5.2.1.1.5</span> data language</h5>
+<blockquote>
+<p>The primary language in which the described data (not the metadata document) is written.</p>
+</blockquote>
+</div>
+<div id="update-frequency" class="section level5">
+<h5><span class="header-section-number">5.2.1.1.6</span> Update Frequency</h5>
+<blockquote>
+<p>The frequency with which changes are made to the resource after the initial resource has been published. For convenience, its value will default to the auto-publishing interval (if auto-publishing has been turned on), however, it can always be overridden later. Please note a description of the maintenance frequency of the resource can also be entered on the Additional Metadata page.</p>
+</blockquote>
+</div>
+<div id="data-license" class="section level5">
+<h5><span class="header-section-number">5.2.1.1.7</span> data license</h5>
+<blockquote>
+<p>The licence that you apply to a dataset provides a standardized way to define appropriate uses of your work. GBIF encourages publishers to adopt the least restrictive licence possible from among three machine-readable options (CC0 1.0, CC-BY 4.0 or CC-BY-NC 4.0) to encourage the widest possible use and application of data. Learn more here. If you are unable to choose one of the three options, and your dataset contains occurrence data, you will not be able to register your dataset with GBIF or make it globally discoverable through GBIF.org. If you feel unable to select one of the three options, please contact the GBIF Secretariat at <a href="mailto:participation@gbif.org">participation@gbif.org</a>.</p>
+</blockquote>
+</div>
+<div id="description" class="section level5">
+<h5><span class="header-section-number">5.2.1.1.8</span> description</h5>
+<blockquote>
+<p>A brief overview of the resource that is being documented broken into paragraphs.</p>
+</blockquote>
+<p>Think of it as an abstract for a (data) paper</p>
+</div>
+<div id="resource-contacts" class="section level5">
+<h5><span class="header-section-number">5.2.1.1.9</span> Resource contact(s)</h5>
+</div>
+<div id="resource-creators" class="section level5">
+<h5><span class="header-section-number">5.2.1.1.10</span> Resource creator(s)</h5>
+</div>
+<div id="metadata-providers" class="section level5">
+<h5><span class="header-section-number">5.2.1.1.11</span> metadata provider(s)</h5>
+<ul>
+<li>Last name</li>
+<li>Position</li>
+<li>Organisation</li>
+</ul>
+</div>
+</div>
+<div id="geographic-coverage" class="section level4">
+<h4><span class="header-section-number">5.2.1.2</span> Geographic coverage</h4>
+<div id="description-1" class="section level5">
+<h5><span class="header-section-number">5.2.1.2.1</span> description</h5>
+</div>
+</div>
+</div>
+<div id="citation-auto-generation" class="section level3">
+<h3><span class="header-section-number">5.2.2</span> Citation auto generation</h3>
+<p>Creator 1 R, Creator 2 R, Creator 3 R (2019): How to create a metadata record. v1. Publishing organisation. Dataset/Type. <a href="https://ipt.biodiversity.aq/resource?r=shortname&amp;v=1.0" class="uri">https://ipt.biodiversity.aq/resource?r=shortname&amp;v=1.0</a></p>
+<div id="example" class="section level4">
+<h4><span class="header-section-number">5.2.2.1</span> Example</h4>
+<p>Griffiths H J, Linse K, Crame J (2017): SOMBASE – Southern Ocean mollusc database: a tool for biogeographic analysis in diversity and evolution. v1.6. British Antarctic Survey. Dataset/Occurrence. <a href="https://ipt.biodiversity.aq/resource?r=sombase_southern_ocean_mollusc_database&amp;v=1.6" class="uri">https://ipt.biodiversity.aq/resource?r=sombase_southern_ocean_mollusc_database&amp;v=1.6</a></p>
 
+</div>
+</div>
 </div>
 </div>
             </section>
@@ -234,8 +366,8 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
           </div>
         </div>
       </div>
-<a href="occurrence-data.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
-<a href="environmental-data-1.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
+<a href="introduction-to-r-and-the-tidyverse.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
+<a href="occurrence-data.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
     </div>
   </div>
 <script src="libs/gitbook-2.6.7/js/app.min.js"></script>

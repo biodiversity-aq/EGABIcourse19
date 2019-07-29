@@ -1,10 +1,10 @@
-# Occurrences
+# Occurrence data
 
 In general the more information you provide the more knowledge can be gained from your occurrence data.
 
 The first user of this data is future **yourself**. Taking the time to be as detailed in providing and describing your data is time you will gain in the future when you want to reanalyse your data or integrate it in a broader study.
 
-The best way is to save the data in some tabular format, something like a csv-file ot Tab delimted txt. It is not recomended to use excel. As this software has the habit of giving you unwanted help, resulting in messed up data...
+The best way is to save the data in some tabular format, something like a csv-file or tab-delimted txt. It is not recomended to use Excel, because it has the habit of giving you unwanted help, resulting in messed up data...
 
 Here we start with a description of the minimal data you should provide in order to analyse your data, including developing a species distribution modeling.
 
@@ -283,11 +283,11 @@ showtbl(tribble(~"decimal places", ~"decimal degrees", ~DMS, ~"Object that can b
 
 ## When
 
-**[eventDate](https://dwc.tdwg.org/terms/#dwc:eventDate)**
+### [eventDate](https://dwc.tdwg.org/terms/#dwc:eventDate)
 
 Additional Terms
 
-*[year](https://dwc.tdwg.org/terms/#dwc:year)*, 
+*[year](https://dwc.tdwg.org/terms/#dwc:year)*,
 *[month](https://dwc.tdwg.org/terms/#dwc:month)*,
 *[Day](https://dwc.tdwg.org/terms/#dwc:Day)*,
 *[Time](https://dwc.tdwg.org/terms/#dwc:Time)*,
