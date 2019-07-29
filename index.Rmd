@@ -8,8 +8,13 @@ site: bookdown::bookdown_site
 
 ```{r setup, echo = FALSE, cache = FALSE}
 library(knitr)
+library(kableExtra)
 
 knitr::opts_chunk$set(cache = TRUE)
+options(knitr.table.format = "html")
+
+showtbl <- function(z) kable_styling(knitr::kable(z), bootstrap_options = c("striped", "hover", "condensed", "responsive"))
+
 
 ## use this chunk to set up data directories and similar
 #BOOKDOWN_DATA_DIR <- 

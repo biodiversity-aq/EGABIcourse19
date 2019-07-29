@@ -1,0 +1,869 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="" xml:lang="">
+<head>
+
+  <meta charset="utf-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <title>5 Occurrences | SCAR-EGABI Tools for Southern Ocean Spatial Analysis and Modelling</title>
+  <meta name="description" content="Course material" />
+  <meta name="generator" content="bookdown 0.11 and GitBook 2.6.7" />
+
+  <meta property="og:title" content="5 Occurrences | SCAR-EGABI Tools for Southern Ocean Spatial Analysis and Modelling" />
+  <meta property="og:type" content="book" />
+  
+  
+  <meta property="og:description" content="Course material" />
+  
+
+  <meta name="twitter:card" content="summary" />
+  <meta name="twitter:title" content="5 Occurrences | SCAR-EGABI Tools for Southern Ocean Spatial Analysis and Modelling" />
+  
+  <meta name="twitter:description" content="Course material" />
+  
+
+<meta name="author" content="Anton Van de Putte, Charlène Guillaumot, Grant Humphries, Huw Griffith, Ben Raymond" />
+
+
+
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="apple-mobile-web-app-capable" content="yes" />
+  <meta name="apple-mobile-web-app-status-bar-style" content="black" />
+  
+  
+<link rel="prev" href="introduction-to-r-and-the-tidyverse.html">
+<link rel="next" href="biological-data.html">
+<script src="libs/jquery-2.2.3/jquery.min.js"></script>
+<link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-table.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-bookdown.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-highlight.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-search.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-fontsettings.css" rel="stylesheet" />
+
+
+
+
+
+
+
+
+
+<style type="text/css">
+div.sourceCode { overflow-x: auto; }
+table.sourceCode, tr.sourceCode, td.lineNumbers, td.sourceCode {
+  margin: 0; padding: 0; vertical-align: baseline; border: none; }
+table.sourceCode { width: 100%; line-height: 100%; }
+td.lineNumbers { text-align: right; padding-right: 4px; padding-left: 4px; color: #aaaaaa; border-right: 1px solid #aaaaaa; }
+td.sourceCode { padding-left: 5px; }
+code > span.kw { color: #007020; font-weight: bold; } /* Keyword */
+code > span.dt { color: #902000; } /* DataType */
+code > span.dv { color: #40a070; } /* DecVal */
+code > span.bn { color: #40a070; } /* BaseN */
+code > span.fl { color: #40a070; } /* Float */
+code > span.ch { color: #4070a0; } /* Char */
+code > span.st { color: #4070a0; } /* String */
+code > span.co { color: #60a0b0; font-style: italic; } /* Comment */
+code > span.ot { color: #007020; } /* Other */
+code > span.al { color: #ff0000; font-weight: bold; } /* Alert */
+code > span.fu { color: #06287e; } /* Function */
+code > span.er { color: #ff0000; font-weight: bold; } /* Error */
+code > span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
+code > span.cn { color: #880000; } /* Constant */
+code > span.sc { color: #4070a0; } /* SpecialChar */
+code > span.vs { color: #4070a0; } /* VerbatimString */
+code > span.ss { color: #bb6688; } /* SpecialString */
+code > span.im { } /* Import */
+code > span.va { color: #19177c; } /* Variable */
+code > span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
+code > span.op { color: #666666; } /* Operator */
+code > span.bu { } /* BuiltIn */
+code > span.ex { } /* Extension */
+code > span.pp { color: #bc7a00; } /* Preprocessor */
+code > span.at { color: #7d9029; } /* Attribute */
+code > span.do { color: #ba2121; font-style: italic; } /* Documentation */
+code > span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
+code > span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } /* CommentVar */
+code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
+</style>
+
+<link rel="stylesheet" href="styles.css" type="text/css" />
+</head>
+
+<body>
+
+
+
+  <div class="book without-animation with-summary font-size-2 font-family-1" data-basepath=".">
+
+    <div class="book-summary">
+      <nav role="navigation">
+
+<ul class="summary">
+<li class="chapter" data-level="1" data-path="index.html"><a href="index.html"><i class="fa fa-check"></i><b>1</b> About this</a><ul>
+<li class="chapter" data-level="" data-path="index.html"><a href="index.html#technical-stuff"><i class="fa fa-check"></i>Technical stuff</a></li>
+</ul></li>
+<li class="chapter" data-level="2" data-path="preliminary-course-schedule.html"><a href="preliminary-course-schedule.html"><i class="fa fa-check"></i><b>2</b> Preliminary course schedule</a><ul>
+<li class="chapter" data-level="2.1" data-path="preliminary-course-schedule.html"><a href="preliminary-course-schedule.html#monday"><i class="fa fa-check"></i><b>2.1</b> Monday</a></li>
+<li class="chapter" data-level="2.2" data-path="preliminary-course-schedule.html"><a href="preliminary-course-schedule.html#tuesday"><i class="fa fa-check"></i><b>2.2</b> Tuesday</a></li>
+<li class="chapter" data-level="2.3" data-path="preliminary-course-schedule.html"><a href="preliminary-course-schedule.html#wednesday"><i class="fa fa-check"></i><b>2.3</b> Wednesday</a></li>
+<li class="chapter" data-level="2.4" data-path="preliminary-course-schedule.html"><a href="preliminary-course-schedule.html#thursday"><i class="fa fa-check"></i><b>2.4</b> Thursday</a></li>
+<li class="chapter" data-level="2.5" data-path="preliminary-course-schedule.html"><a href="preliminary-course-schedule.html#friday"><i class="fa fa-check"></i><b>2.5</b> Friday</a></li>
+</ul></li>
+<li class="chapter" data-level="3" data-path="overview.html"><a href="overview.html"><i class="fa fa-check"></i><b>3</b> Overview</a><ul>
+<li class="chapter" data-level="3.1" data-path="overview.html"><a href="overview.html#preparation"><i class="fa fa-check"></i><b>3.1</b> Preparation</a></li>
+<li class="chapter" data-level="3.2" data-path="overview.html"><a href="overview.html#taxonomy"><i class="fa fa-check"></i><b>3.2</b> Taxonomy</a></li>
+<li class="chapter" data-level="3.3" data-path="overview.html"><a href="overview.html#occurrences"><i class="fa fa-check"></i><b>3.3</b> Occurrences</a></li>
+<li class="chapter" data-level="3.4" data-path="overview.html"><a href="overview.html#environmental-data"><i class="fa fa-check"></i><b>3.4</b> Environmental data</a></li>
+<li class="chapter" data-level="3.5" data-path="overview.html"><a href="overview.html#fit-model"><i class="fa fa-check"></i><b>3.5</b> Fit model</a></li>
+<li class="chapter" data-level="3.6" data-path="overview.html"><a href="overview.html#predict-from-model"><i class="fa fa-check"></i><b>3.6</b> Predict from model</a></li>
+<li class="chapter" data-level="3.7" data-path="overview.html"><a href="overview.html#other-bits-and-pieces"><i class="fa fa-check"></i><b>3.7</b> Other bits and pieces</a><ul>
+<li class="chapter" data-level="3.7.1" data-path="overview.html"><a href="overview.html#place-names"><i class="fa fa-check"></i><b>3.7.1</b> Place names</a></li>
+</ul></li>
+</ul></li>
+<li class="chapter" data-level="4" data-path="introduction-to-r-and-the-tidyverse.html"><a href="introduction-to-r-and-the-tidyverse.html"><i class="fa fa-check"></i><b>4</b> Introduction to R and the Tidyverse</a><ul>
+<li class="chapter" data-level="4.1" data-path="introduction-to-r-and-the-tidyverse.html"><a href="introduction-to-r-and-the-tidyverse.html#r"><i class="fa fa-check"></i><b>4.1</b> R</a></li>
+</ul></li>
+<li class="chapter" data-level="5" data-path="occurrences-1.html"><a href="occurrences-1.html"><i class="fa fa-check"></i><b>5</b> Occurrences</a><ul>
+<li class="chapter" data-level="5.1" data-path="occurrences-1.html"><a href="occurrences-1.html#what"><i class="fa fa-check"></i><b>5.1</b> What</a><ul>
+<li class="chapter" data-level="5.1.1" data-path="occurrences-1.html"><a href="occurrences-1.html#basisofrecord"><i class="fa fa-check"></i><b>5.1.1</b> basisOfRecord</a></li>
+<li class="chapter" data-level="5.1.2" data-path="occurrences-1.html"><a href="occurrences-1.html#occurrenceid"><i class="fa fa-check"></i><b>5.1.2</b> <a href="https://dwc.tdwg.org/terms/#dwc:occurrenceID">occurrenceID</a></a></li>
+<li class="chapter" data-level="5.1.3" data-path="occurrences-1.html"><a href="occurrences-1.html#scientificname-and-scientificnameid"><i class="fa fa-check"></i><b>5.1.3</b> <a href="https://dwc.tdwg.org/terms/#taxon">scientificName</a> and <a href="https://dwc.tdwg.org/terms/#taxon">scientificNameID</a></a></li>
+<li class="chapter" data-level="5.1.4" data-path="occurrences-1.html"><a href="occurrences-1.html#occurrencestatus"><i class="fa fa-check"></i><b>5.1.4</b> <a href="https://dwc.tdwg.org/terms/#dwc:occurrenceStatus">occurrenceStatus</a></a></li>
+</ul></li>
+<li class="chapter" data-level="5.2" data-path="occurrences-1.html"><a href="occurrences-1.html#where"><i class="fa fa-check"></i><b>5.2</b> Where</a><ul>
+<li class="chapter" data-level="5.2.1" data-path="occurrences-1.html"><a href="occurrences-1.html#decimallatitude-anddecimallongitude"><i class="fa fa-check"></i><b>5.2.1</b> <a href="https://dwc.tdwg.org/terms/#dwc:decimalLatitude">decimalLatitude</a> and<a href="https://dwc.tdwg.org/terms/#dwc:decimalLongitude">decimalLongitude</a></a></li>
+</ul></li>
+<li class="chapter" data-level="5.3" data-path="occurrences-1.html"><a href="occurrences-1.html#when"><i class="fa fa-check"></i><b>5.3</b> When</a></li>
+<li class="chapter" data-level="5.4" data-path="occurrences-1.html"><a href="occurrences-1.html#who"><i class="fa fa-check"></i><b>5.4</b> Who</a></li>
+<li class="chapter" data-level="5.5" data-path="occurrences-1.html"><a href="occurrences-1.html#how"><i class="fa fa-check"></i><b>5.5</b> How</a></li>
+</ul></li>
+<li class="chapter" data-level="6" data-path="biological-data.html"><a href="biological-data.html"><i class="fa fa-check"></i><b>6</b> Biological data</a><ul>
+<li class="chapter" data-level="6.1" data-path="biological-data.html"><a href="biological-data.html#taxonomy-1"><i class="fa fa-check"></i><b>6.1</b> Taxonomy</a></li>
+<li class="chapter" data-level="6.2" data-path="biological-data.html"><a href="biological-data.html#other-packages"><i class="fa fa-check"></i><b>6.2</b> Other packages</a></li>
+</ul></li>
+<li class="chapter" data-level="7" data-path="environmental-data-1.html"><a href="environmental-data-1.html"><i class="fa fa-check"></i><b>7</b> Environmental data</a><ul>
+<li class="chapter" data-level="7.1" data-path="environmental-data-1.html"><a href="environmental-data-1.html#bowerbirdblueant"><i class="fa fa-check"></i><b>7.1</b> Bowerbird/blueant</a><ul>
+<li class="chapter" data-level="7.1.1" data-path="environmental-data-1.html"><a href="environmental-data-1.html#available-data-sets"><i class="fa fa-check"></i><b>7.1.1</b> Available data sets</a></li>
+<li class="chapter" data-level="7.1.2" data-path="environmental-data-1.html"><a href="environmental-data-1.html#usage"><i class="fa fa-check"></i><b>7.1.2</b> Usage</a></li>
+</ul></li>
+<li class="chapter" data-level="7.2" data-path="environmental-data-1.html"><a href="environmental-data-1.html#raadtools"><i class="fa fa-check"></i><b>7.2</b> RAADtools</a></li>
+<li class="chapter" data-level="7.3" data-path="environmental-data-1.html"><a href="environmental-data-1.html#other-useful-packages"><i class="fa fa-check"></i><b>7.3</b> Other useful packages</a></li>
+</ul></li>
+<li class="chapter" data-level="8" data-path="mapping.html"><a href="mapping.html"><i class="fa fa-check"></i><b>8</b> Mapping</a><ul>
+<li class="chapter" data-level="8.1" data-path="mapping.html"><a href="mapping.html#maps-in-r"><i class="fa fa-check"></i><b>8.1</b> Maps in R</a><ul>
+<li class="chapter" data-level="8.1.1" data-path="mapping.html"><a href="mapping.html#exercises"><i class="fa fa-check"></i><b>8.1.1</b> Exercises</a></li>
+<li class="chapter" data-level="8.1.2" data-path="mapping.html"><a href="mapping.html#lets-use-the-maps-data"><i class="fa fa-check"></i><b>8.1.2</b> Let’s use the maps data!</a></li>
+</ul></li>
+<li class="chapter" data-level="8.2" data-path="mapping.html"><a href="mapping.html#somap"><i class="fa fa-check"></i><b>8.2</b> SOmap</a><ul>
+<li class="chapter" data-level="8.2.1" data-path="mapping.html"><a href="mapping.html#circumpolar-maps"><i class="fa fa-check"></i><b>8.2.1</b> Circumpolar maps</a></li>
+<li class="chapter" data-level="8.2.2" data-path="mapping.html"><a href="mapping.html#non-circumpolar-maps"><i class="fa fa-check"></i><b>8.2.2</b> Non-circumpolar maps</a></li>
+<li class="chapter" data-level="8.2.3" data-path="mapping.html"><a href="mapping.html#plotting-via-ggplot2"><i class="fa fa-check"></i><b>8.2.3</b> Plotting via ggplot2</a></li>
+<li class="chapter" data-level="8.2.4" data-path="mapping.html"><a href="mapping.html#modifying-map-objects-advanced-usage"><i class="fa fa-check"></i><b>8.2.4</b> Modifying map objects (advanced usage)</a></li>
+</ul></li>
+<li class="chapter" data-level="8.3" data-path="mapping.html"><a href="mapping.html#supporting-data-for-maps"><i class="fa fa-check"></i><b>8.3</b> Supporting data for maps</a><ul>
+<li class="chapter" data-level="8.3.1" data-path="mapping.html"><a href="mapping.html#quantarcticr"><i class="fa fa-check"></i><b>8.3.1</b> quantarcticR</a></li>
+<li class="chapter" data-level="8.3.2" data-path="mapping.html"><a href="mapping.html#antanym"><i class="fa fa-check"></i><b>8.3.2</b> antanym</a></li>
+</ul></li>
+</ul></li>
+<li class="chapter" data-level="9" data-path="species-distribution-modelling.html"><a href="species-distribution-modelling.html"><i class="fa fa-check"></i><b>9</b> Species distribution modelling</a><ul>
+<li class="chapter" data-level="9.1" data-path="species-distribution-modelling.html"><a href="species-distribution-modelling.html#introduction-and-review"><i class="fa fa-check"></i><b>9.1</b> Introduction and review</a></li>
+<li class="chapter" data-level="9.2" data-path="species-distribution-modelling.html"><a href="species-distribution-modelling.html#methods"><i class="fa fa-check"></i><b>9.2</b> Methods</a></li>
+<li class="chapter" data-level="9.3" data-path="species-distribution-modelling.html"><a href="species-distribution-modelling.html#evaluation"><i class="fa fa-check"></i><b>9.3</b> Evaluation</a><ul>
+<li class="chapter" data-level="9.3.1" data-path="species-distribution-modelling.html"><a href="species-distribution-modelling.html#other-modelling-approaches"><i class="fa fa-check"></i><b>9.3.1</b> Other modelling approaches</a></li>
+</ul></li>
+</ul></li>
+<li class="chapter" data-level="10" data-path="other-r-resources-for-southern-oceanantarctic-use.html"><a href="other-r-resources-for-southern-oceanantarctic-use.html"><i class="fa fa-check"></i><b>10</b> Other R resources for Southern Ocean/Antarctic use</a><ul>
+<li class="chapter" data-level="10.1" data-path="other-r-resources-for-southern-oceanantarctic-use.html"><a href="other-r-resources-for-southern-oceanantarctic-use.html#diet-data-sohungry"><i class="fa fa-check"></i><b>10.1</b> Diet data: sohungry</a></li>
+<li class="chapter" data-level="10.2" data-path="other-r-resources-for-southern-oceanantarctic-use.html"><a href="other-r-resources-for-southern-oceanantarctic-use.html#allometric-equations-solong"><i class="fa fa-check"></i><b>10.2</b> Allometric equations: solong</a></li>
+</ul></li>
+</ul>
+
+      </nav>
+    </div>
+
+    <div class="book-body">
+      <div class="body-inner">
+        <div class="book-header" role="navigation">
+          <h1>
+            <i class="fa fa-circle-o-notch fa-spin"></i><a href="./">SCAR-EGABI Tools for Southern Ocean Spatial Analysis and Modelling</a>
+          </h1>
+        </div>
+
+        <div class="page-wrapper" tabindex="-1" role="main">
+          <div class="page-inner">
+
+            <section class="normal" id="section-">
+<div id="occurrences-1" class="section level1">
+<h1><span class="header-section-number">5</span> Occurrences</h1>
+<p>In general the more information you provide the more knowledge can be gained from your occurrence data.</p>
+<p>The first user of this data is future <strong>yourself</strong>. Taking the time to be as detailed in providing and describing your data is time you will gain in the future when you want to reanalyse your data or integrate it in a broader study.</p>
+<p>The best way is to save the data in some tabular format, something like a csv-file ot Tab delimted txt. It is not recomended to use excel. As this software has the habit of giving you unwanted help, resulting in messed up data…</p>
+<p>Here we start with a description of the minimal data you should provide in order to analyse your data, including developing a species distribution modeling.</p>
+<p>Each row in your dataset should corresponding to an observation. The names of the columns in the dataset should correspond to DwC terms.</p>
+<p>You can find a full description of the Darwincore Terms in the <a href="https://dwc.tdwg.org/terms/">Darwin Core quick reference guide</a>. But below we provide an overview of the most important terms. If you have information that doesn’t ft the Terms below just check the <a href="https://dwc.tdwg.org/terms/">Darwin Core quick reference guide</a> or create an issue on the EG-ABI course github or the [TDWG Github] (<a href="https://github.com/tdwg/dwc-qa" class="uri">https://github.com/tdwg/dwc-qa</a>)</p>
+<p>your data should allow you or anybody else to determine What, Where, When, Who and How.</p>
+<p>The Darwincore Standards has 8 absolutely required terms. <strong>basisOfRecord, occurrenceID, scientificName, scientificNameID, occurrenceStatus, decimalLongitude, decimalLatitude, eventDate</strong></p>
+<p>Besides those we recommend a number of other ones as well. In eneral it is better to provide as many as you can.</p>
+<p><strong>basisOfRecord</strong></p>
+<ul>
+<li><em>type</em></li>
+<li><em>associatedReferences</em></li>
+</ul>
+<p><strong>occurrenceID</strong></p>
+<ul>
+<li><em>institutionCode</em></li>
+<li><em>collectionCode</em></li>
+<li><em>catalogNumber</em></li>
+</ul>
+<p><strong>scientificName, scientificNameID</strong></p>
+<ul>
+<li><em>scientificNameAuthorship</em></li>
+<li><em>IdentificationQualifier</em></li>
+<li><em>taxonrank</em></li>
+</ul>
+<p><strong>occurrenceStatus</strong></p>
+<ul>
+<li><em>organismQuantity</em></li>
+<li><em>organismQuantityType</em></li>
+<li><em>sex</em></li>
+<li><em>lifeStage</em></li>
+<li><em>behavior</em></li>
+<li><em>occurrenceRemarks</em></li>
+<li><em>identifiedBy</em></li>
+<li><em>dateIdentified</em></li>
+</ul>
+<p><strong>decimalLongitude, decimalLatitude</strong></p>
+<ul>
+<li><em>geodeticDatum</em></li>
+<li><em>coordinateUncertaintyInMeters</em>,</li>
+</ul>
+<p><strong>eventDate</strong></p>
+<ul>
+<li><em>year</em>,</li>
+<li><em>month</em>,</li>
+<li><em>Day</em>,</li>
+<li><em>Time</em>,</li>
+<li><em>Timezone</em></li>
+<li><em>samplingProtocol</em></li>
+</ul>
+<div id="what" class="section level2">
+<h2><span class="header-section-number">5.1</span> What</h2>
+<div id="basisofrecord" class="section level3">
+<h3><span class="header-section-number">5.1.1</span> basisOfRecord</h3>
+<p>Additional term</p>
+<p><em><a href="https://dwc.tdwg.org/terms/#dwc:type">type</a></em>, <em><a href="https://dwc.tdwg.org/terms/#dwc:associatedReferences">associatedReferences</a></em></p>
+<p><a href="https://dwc.tdwg.org/terms/#dwc:basisOfRecord">basisOfRecord</a> describes the nature of record. It has a to follow a specific vocabulary. Some of these might overlap sometimes. That is why it is usefull to use <em><a href="https://dwc.tdwg.org/terms/#dwc:type">type</a></em> as well.</p>
+<ul>
+<li><strong>PreservedSpecimen</strong> A specimen that has been preserved. This can be a museum specimen, a plant on an herbarium sheet, fish in a bag in a freezer.</li>
+<li><strong>FossilSpecimen</strong> A resource describing a fossilized specimen.</li>
+<li><strong>LivingSpecimen</strong> A resource describing a living specimen. For instance an animal in a zoo.</li>
+<li><strong>MaterialSample</strong> A resource describing a material sample. For instance Material sample from an organism in the wild and sample put into a collection (blood sample, biopsy).</li>
+<li><strong>HumanObservation</strong> A resource describing an observation made by one or more people. For instance an organism observed in the wild and written in field notes. Samples that were collected during an expedition but thrown back into the sea.</li>
+<li><strong>MachineObservation</strong> An output of a machine observation process. Any kid of automated sensor like camera traps, anipi</li>
+<li><strong>Occurrence</strong> A resource describing an instance of the Occurrence class. NOTE: this value is ambiguous and hence should only be used when the when the resource type is unknown.</li>
+</ul>
+<p><em><a href="https://dwc.tdwg.org/terms/#dwc:type">type</a></em></p>
+<p>The nature or genre of the resource. Must be populated with a value from the <a href="http://dublincore.org/documents/2010/10/11/dcmi-type-vocabulary/">DCMI type vocabulary</a>.</p>
+<p>Options include Image, StillImage, MovingImage, Interactive Resource, PhysicalObject, Sound, Text, PhysicalObject, Collection, Dataset, Event, Service, Software</p>
+<p><em><a href="https://dwc.tdwg.org/terms/#dwc:associatedReferences">associatedReferences</a></em> A list (concatenated and separated) of identifiers (publication, bibliographic reference, global unique identifier, URI) of literature associated with the Occurrence.</p>
+<p>Example: If you want to add a record from literature you should use <em>basisOfRecord:</em>HumanObservation with <em>type:</em>Text in combination with <em>associatedReferences:</em>Bibiographic reference</p>
+</div>
+<div id="occurrenceid" class="section level3">
+<h3><span class="header-section-number">5.1.2</span> <a href="https://dwc.tdwg.org/terms/#dwc:occurrenceID">occurrenceID</a></h3>
+<p>Additonal Terms</p>
+<p><em><a href="https://dwc.tdwg.org/terms/#dwc:institutionCode">institutionCode</a></em>, <em><a href="https://dwc.tdwg.org/terms/#dwc:collectionCode">collectionCode</a></em>, <em><a href="https://dwc.tdwg.org/terms/#dwc:catalogNumber">catalogNumber</a></em></p>
+<p><strong><a href="https://dwc.tdwg.org/terms/#dwc:occurrenceID">occurrenceID</a></strong> is an identifier for the occurrence record and should be globally unique and persistent. In the absence of a persistent global unique identifier, construct one from a combination of identifiers in the record that will most closely make the occurrenceID globally unique. It is recommende to use. Something like the combination of institutionCode, collectionCode, and catalogNumber is a generally used format.</p>
+<p>There are a number of other terms that you could use as well like datasetName and datasetID</p>
+<p><strong><a href="https://dwc.tdwg.org/terms/#dwc:institutionCode">institutionCode</a></strong> The name (or acronym) in use by the institution having custody of the object(s) or information referred to in the record.</p>
+<p><strong><a href="https://dwc.tdwg.org/terms/#dwc:institutionID">institutionID</a></strong> An identifier for the institution having custody of the object(s) or information referred to in the record.</p>
+<p>For physical specimens, the recommended best practice is to use a code and identifier from a collections registry such as the Global Registry of Biodiversity Repositories <a href="http://grbio.org/">(http://grbio.org/)</a>.</p>
+<table class="table table-striped table-hover table-condensed table-responsive" style="margin-left: auto; margin-right: auto;">
+<thead>
+<tr>
+<th style="text-align:left;">
+Institution code
+</th>
+<th style="text-align:left;">
+Institution name
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:left;">
+AAS
+</td>
+<td style="text-align:left;">
+British Antarctic Survey
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+BRM
+</td>
+<td style="text-align:left;">
+Alfred-Wegener-Institut für Polar- und Meeresforschung
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+MNA
+</td>
+<td style="text-align:left;">
+The Museo Nazionale dell’Antartide (Italian National Antarctic Museum in Genoa)
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+RBINS
+</td>
+<td style="text-align:left;">
+Royal Belgian Institute of Natural Sciences
+</td>
+</tr>
+</tbody>
+</table>
+<p><strong><a href="https://dwc.tdwg.org/terms/#dwc:collectionCode">collectionCode</a></strong> The name, acronym, coden, or initialism identifying the collection or data set from which the record was derived.</p>
+<p><strong><a href="https://dwc.tdwg.org/terms/#dwc:datasetName">datasetName</a></strong> The name identifying the data set from which the record was derived.</p>
+<p><strong><a href="https://dwc.tdwg.org/terms/#dwc:datasetID">datasetID</a></strong> An identifier for the set of data. May be a global unique identifier or an identifier specific to a collection or institution.</p>
+<p><strong><a href="https://dwc.tdwg.org/terms/#dwc:catalogNumber">catalogNumber</a></strong> An identifier (preferably unique) for the record within the data set or collection.</p>
+<p><strong><a href="https://dwc.tdwg.org/terms/#dwc:recordNumber">recordNumber</a></strong> An identifier given to the Occurrence at the time it was recorded. Often serves as a link between field notes and an Occurrence record, such as a specimen collector’s number.</p>
+<table class="table table-striped table-hover table-condensed table-responsive" style="margin-left: auto; margin-right: auto;">
+<thead>
+<tr>
+<th style="text-align:left;">
+occurrenceID
+</th>
+<th style="text-align:left;">
+institutionCode
+</th>
+<th style="text-align:left;">
+collectionCode
+</th>
+<th style="text-align:left;">
+catalogNumber
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:left;">
+<a href="http://arctos.database.museum/guid/MSB:Mamm:233627" class="uri">http://arctos.database.museum/guid/MSB:Mamm:233627</a>
+</td>
+<td style="text-align:left;">
+MSB
+</td>
+<td style="text-align:left;">
+Mamm
+</td>
+<td style="text-align:left;">
+233627
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+PS89_FF_000023
+</td>
+<td style="text-align:left;">
+PS89
+</td>
+<td style="text-align:left;">
+FF
+</td>
+<td style="text-align:left;">
+000023
+</td>
+</tr>
+</tbody>
+</table>
+<p>It is a good practice to keep your catalogue/record numbers of equal length throughout your dataset.</p>
+<p>To keep it persistent just don’t change it. If you reference another source, keep the number. For example if you have samples that were collected during an marine expedition usually all sampling events get ther own ID. Don’t invent a new ID for the event. This will help you to find any information related to that event at a later stage.</p>
+</div>
+<div id="scientificname-and-scientificnameid" class="section level3">
+<h3><span class="header-section-number">5.1.3</span> <a href="https://dwc.tdwg.org/terms/#taxon">scientificName</a> and <a href="https://dwc.tdwg.org/terms/#taxon">scientificNameID</a></h3>
+<p>Additional Terms</p>
+<p><em><a href="https://dwc.tdwg.org/terms/#dwc:Kingdom">Kingdom</a></em>, <em><a href="https://dwc.tdwg.org/terms/#dwc:taxonrank">taxonrank</a></em>, <em><a href="https://dwc.tdwg.org/terms/#dwc:scientificNameAuthorship">scientificNameAuthorship</a></em>, <em><a href="https://dwc.tdwg.org/terms/#dwc:IdentificationQualifier">IdentificationQualifier</a></em></p>
+<p>Additional Additional Terms (See Who)</p>
+<p><em><a href="https://dwc.tdwg.org/terms/#dwc:identifiedBy">identifiedBy</a></em>, <em><a href="https://dwc.tdwg.org/terms/#dwc:dateIdentified">dateIdentified</a></em>, <em><a href="https://dwc.tdwg.org/terms/#dwc:typeStatus">typeStatus</a></em></p>
+<p><a href="https://dwc.tdwg.org/terms/#taxon">scientificName</a> In the spirit of keeping things persistent this should always contain the originally recorded scientific name, even if the name is currently a synomym (If the sample is reidentified this is of course a different case). The scientific name should always be to the lowest possible taxonomic rank of which you are certain. In case of uncertain identifications, and the scientific name contains qualifiers such as cf., ? or aff., then this name should go in <em><a href="https://dwc.tdwg.org/terms/#identificationQualifier">identificationQualifier</a></em>.</p>
+<p><em><a href="https://dwc.tdwg.org/terms/#dwc:scientificNameAuthorship">scientificNameAuthorship</a></em> OBIS recommends to not include authorship in scientificName, and only use scientificNameAuthorship for that purpose.</p>
+<p><a href="https://dwc.tdwg.org/terms/#scientificNameID">scientificNameID</a> Following the OBIS guidelines a WoRMS LSID should be added in scientificNameID, LSIDs are persistent, location-independent, resource identifiers for uniquely naming biologically significant resources. More information on LSIDs can be found at www.lsid.info.</p>
+<p><em><a href="https://dwc.tdwg.org/terms/#dwc:taxonrank">taxonrank</a></em>, Determines the level of idetifciation. This can be for <a href="https://dwc.tdwg.org/terms/#dwc:kingdom">kingdom</a>, <a href="https://dwc.tdwg.org/terms/#dwc:phylum">phylum</a>,<a href="https://dwc.tdwg.org/terms/#dwc:class">class</a>,<a href="https://dwc.tdwg.org/terms/#dwc:order">order</a>,<a href="https://dwc.tdwg.org/terms/#dwc:family">family</a>,<a href="https://dwc.tdwg.org/terms/#dwc:genus">genus</a>,<a href="https://dwc.tdwg.org/terms/#dwc:subgenus">subgenus</a>,<a href="https://dwc.tdwg.org/terms/#dwc:specificEpithet">specificEpithet</a>,<a href="https://dwc.tdwg.org/terms/#dwc:infraspecificEpithet">infraspecificEpithet</a>. given that those are terms they can be specified. It is good practisce to always at least provide the Kingdom. In case you can provide a WoRMS LSID the others are not really required. Otherwise it would be good to add them if possible.</p>
+<p><a href="https://dwc.tdwg.org/terms/#identificationQualifier">identificationQualifier</a> A brief phrase or a standard term (“cf.”, “aff.”) to express the determiner’s doubts about the Identification.</p>
+<p>The use of <strong>confer</strong> meaning compare and abbeviated to <em>cf.</em> in a scientific name means that the person using the name is saying the animal should be compared to a given species, as it might not be exactly the same species. It’s a way of applying a provisional name to a species and is most frequently used when new fish are discovered that look slightly different to the form normally encountered. It indicates that the fish might be a variant of the same species, but could also turn out to be something completely different.</p>
+<p><strong>Species affinis</strong> (commonly abbreviated to: sp. aff., aff., or affin.) indicates that available material or evidence suggests that the proposed species is related to, has an affinity to, but is not identical to, the species with the binomial name that follows.</p>
+<p><strong>Species</strong> abbreviated as sp. is commonly occurs when authors are confident that some individuals belong to a particular genus but are not sure to which exact species they belong.</p>
+<p>Authors may also use “spp.” (<strong>Species pliralis</strong>) as a short way of saying that something applies to many species within a genus, but not to all.</p>
+<table class="table table-striped table-hover table-condensed table-responsive" style="margin-left: auto; margin-right: auto;">
+<thead>
+<tr>
+<th style="text-align:right;">
+nr
+</th>
+<th style="text-align:left;">
+scientificName
+</th>
+<th style="text-align:left;">
+scientificNameID
+</th>
+<th style="text-align:left;">
+scientificNameAuthorship
+</th>
+<th style="text-align:left;">
+IdentificationQualifier
+</th>
+<th style="text-align:left;">
+taxonrank
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:right;">
+1
+</td>
+<td style="text-align:left;">
+Electrona
+</td>
+<td style="text-align:left;">
+<a href="urn:lsid:marinespecies.org:taxname:125821" class="uri">urn:lsid:marinespecies.org:taxname:125821</a>
+</td>
+<td style="text-align:left;">
+Goode &amp; Bean, 1896
+</td>
+<td style="text-align:left;">
+aff. risso
+</td>
+<td style="text-align:left;">
+genus
+</td>
+</tr>
+<tr>
+<td style="text-align:right;">
+2
+</td>
+<td style="text-align:left;">
+Electrona antarctica
+</td>
+<td style="text-align:left;">
+<a href="urn:lsid:marinespecies.org:taxname:217697" class="uri">urn:lsid:marinespecies.org:taxname:217697</a>
+</td>
+<td style="text-align:left;">
+Günther, 1878
+</td>
+<td style="text-align:left;">
+</td>
+<td style="text-align:left;">
+species
+</td>
+</tr>
+<tr>
+<td style="text-align:right;">
+3
+</td>
+<td style="text-align:left;">
+Electrona
+</td>
+<td style="text-align:left;">
+<a href="urn:lsid:marinespecies.org:taxname:125821" class="uri">urn:lsid:marinespecies.org:taxname:125821</a>
+</td>
+<td style="text-align:left;">
+Goode &amp; Bean, 1896
+</td>
+<td style="text-align:left;">
+sp.
+</td>
+<td style="text-align:left;">
+genus
+</td>
+</tr>
+<tr>
+<td style="text-align:right;">
+4
+</td>
+<td style="text-align:left;">
+Electrona
+</td>
+<td style="text-align:left;">
+<a href="urn:lsid:marinespecies.org:taxname:125821" class="uri">urn:lsid:marinespecies.org:taxname:125821</a>
+</td>
+<td style="text-align:left;">
+Goode &amp; Bean, 1896
+</td>
+<td style="text-align:left;">
+spp.
+</td>
+<td style="text-align:left;">
+genus
+</td>
+</tr>
+</tbody>
+</table>
+<p>What are you saying with that?</p>
+<ul>
+<li>Case 1: “I collected something that looks like Electrona risso but I’m not sure.”</li>
+<li>Case 2: “I’m 100% sure this is Electrona antarctica)</li>
+<li>Case 3: “I’m sure about the genus, but it could be any one of multiple species”</li>
+<li>Case 4: “I have this bag with fish; I’m sure about the genus but it could be a variety of species within the genus”</li>
+</ul>
+</div>
+<div id="occurrencestatus" class="section level3">
+<h3><span class="header-section-number">5.1.4</span> <a href="https://dwc.tdwg.org/terms/#dwc:occurrenceStatus">occurrenceStatus</a></h3>
+<p>Additional Terms</p>
+<p><em><a href="https://dwc.tdwg.org/terms/#dwc:organismQuantity">organismQuantity</a></em>, <em><a href="https://dwc.tdwg.org/terms/#dwc:organismQuantityType">organismQuantityType</a></em>, <em><a href="https://dwc.tdwg.org/terms/#dwc:sex">sex</a></em>, <em><a href="https://dwc.tdwg.org/terms/#dwc:lifeStage">lifeStage</a></em>, <em><a href="https://dwc.tdwg.org/terms/#dwc:behavior">behavior</a></em>, <em><a href="https://dwc.tdwg.org/terms/#dwc:occurrenceRemarks">occurrenceRemarks</a></em></p>
+<p>occurrenceStatus is a statement about the presence or absence of a taxon at a location. It is an important term, because it allows us to distinguish between presence and absence records. It is an OBIS required term and should be filled in with either present or absent.</p>
+<p><em><a href="https://dwc.tdwg.org/terms/#dwc:organismQuantity">organismQuantity</a></em>, <em><a href="https://dwc.tdwg.org/terms/#dwc:organismQuantityType">organismQuantityType</a></em> These two always go together. organismQuantity is a number for the quantity of animals and organismQuantityType defines the type of quantification system used for the quantity of organisms.</p>
+<table class="table table-striped table-hover table-condensed table-responsive" style="margin-left: auto; margin-right: auto;">
+<thead>
+<tr>
+<th style="text-align:left;">
+organismQuantity
+</th>
+<th style="text-align:left;">
+organismQuantityType
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:left;">
+27
+</td>
+<td style="text-align:left;">
+individuals
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+12.5
+</td>
+<td style="text-align:left;">
+%biomass
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+r
+</td>
+<td style="text-align:left;">
+BraunBlanquetScale
+</td>
+</tr>
+</tbody>
+</table>
+<p>There are a few other terms as well that we want to mention. The old term that was used was individualCount but that wasn’t really versatile. Still in some cases it can be usefull to mention it.</p>
+<p>Please take note that OBIS recommends all quantitative measurements and sampling facts to be treated in the ExtendedMeasurementOrFact extension and not in the Darwin Core files. OBIS recomends using ExtendedMeasurementOrFact in combination with Darwin Core Event Core, which is a little more advanced.</p>
+<p><em>sex<a href="https://dwc.tdwg.org/terms/#dwc:decimalLatitude">decimalLatitude</a></em> The sex of the biological individual(s) represented in the Occurrence.. The OBIS recommended vocabulary for sex see <a href="http://vocab.nerc.ac.uk/collection/S10/current/">BODC vocab : S10</a></p>
+<p><em>lifeStage<a href="https://dwc.tdwg.org/terms/#dwc:decimalLatitude">decimalLatitude</a></em> The age class or life stage of the biological individual(s) at the time the Occurrence was recorded. The OBIS recommended vocabulary for lifestage is <a href="http://vocab.nerc.ac.uk/collection/S10/current/">BODC vocab: S11</a></p>
+<p><em>behavior<a href="https://dwc.tdwg.org/terms/#dwc:decimalLatitude">decimalLatitude</a></em> The behavior shown by the subject at the time the Occurrence was recorded. behavior (no OBIS recomended vocab available)</p>
+<p><em>occurrenceRemarks<a href="https://dwc.tdwg.org/terms/#dwc:decimalLatitude">decimalLatitude</a></em> can hold any comments or notes about the Occurrence.</p>
+</div>
+</div>
+<div id="where" class="section level2">
+<h2><span class="header-section-number">5.2</span> Where</h2>
+<div id="decimallatitude-anddecimallongitude" class="section level3">
+<h3><span class="header-section-number">5.2.1</span> <a href="https://dwc.tdwg.org/terms/#dwc:decimalLatitude">decimalLatitude</a> and<a href="https://dwc.tdwg.org/terms/#dwc:decimalLongitude">decimalLongitude</a></h3>
+<p>Additional Terms</p>
+<p><em><a href="https://dwc.tdwg.org/terms/#dwc:geodeticDatum">geodeticDatum</a></em>, <em><a href="https://dwc.tdwg.org/terms/#dwc:coordinateUncertaintyInMeters">coordinateUncertaintyInMeters</a></em>, <em><a href="https://dwc.tdwg.org/terms/#dwc:locality">locality</a></em>, <em><a href="https://dwc.tdwg.org/terms/#dwc:locationID">locationID</a></em>, <em><a href="https://dwc.tdwg.org/terms/#dwc:footprintWKT">footprintWKT</a></em></p>
+<p>To determine the location of a point on a globe you need at least the decimalLatitude and decimalLongitude and and a definition of the spatial reference system that was used. The Spatial reference System defines the model of the earts shape that us used.</p>
+<p>The System currently used by GPS is WGS 84 (also known as WGS 1984, EPSG:4326). Quite often the geodeticDatum is not provided but it is actually essential.</p>
+<p>decimalLatitude defines the position relative to the equator an ranges from 90° (Norh Pole) to -90 (South Pole)</p>
+<p>decimalLongitude defines the position relative to the Greenwich Meridian and ranges from 180 to -180.</p>
+<p>Mak sure not to swith those around. The standard notation has them as Lattitude followed by Longitude. In the decimal notations they are sometimes switched around as this corresponds more to a cartesian notation. Especially for samples collected in the area of the Antarctic peninsula these switches can be hard to spot.</p>
+<p><em><a href="https://dwc.tdwg.org/terms/#dwc:coordinateUncertaintyInMeters">coordinateUncertaintyInMeters</a></em> The horizontal distance (in meters) from the given decimalLatitude and decimalLongitude describing the smallest circle containing the whole of the Location. Leave the value empty if the uncertainty is unknown, cannot be estimated, or is not applicable (because there are no coordinates). Zero is not a valid value for this term. This one is actually closely linked to the number of decimals in your decimalLatitude, decimalLongitude</p>
+<p>In cases where decimal latitude are calcullated they often get to much digits. If you have more than 6 in biology it doesn’t real make sense anymore or it doesn’t represent how precise the measurement was in the field.</p>
+<p>To explain it, you can choose this XKCD commic or the table below.</p>
+<p><img src="https://imgs.xkcd.com/comics/coordinate_precision.png" alt="coordinate precisionXKCD" title="coordinate precision XKCD" width="400" align="center"/></p>
+<table class="table table-striped table-hover table-condensed table-responsive" style="margin-left: auto; margin-right: auto;">
+<thead>
+<tr>
+<th style="text-align:right;">
+decimal places
+</th>
+<th style="text-align:left;">
+decimal degrees
+</th>
+<th style="text-align:left;">
+DMS
+</th>
+<th style="text-align:left;">
+Object that can be unambiguously recognized at this scale
+</th>
+<th style="text-align:left;">
+N/S or E/W at equator
+</th>
+<th style="text-align:left;">
+E/W at 67N/S
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:right;">
+0
+</td>
+<td style="text-align:left;">
+1.0
+</td>
+<td style="text-align:left;">
+1° 00’ 0&quot;
+</td>
+<td style="text-align:left;">
+country or large region
+</td>
+<td style="text-align:left;">
+111.32 km
+</td>
+<td style="text-align:left;">
+43.496 km
+</td>
+</tr>
+<tr>
+<td style="text-align:right;">
+1
+</td>
+<td style="text-align:left;">
+0.1
+</td>
+<td style="text-align:left;">
+0° 06’ 0&quot;
+</td>
+<td style="text-align:left;">
+large city or district
+</td>
+<td style="text-align:left;">
+11.132 km
+</td>
+<td style="text-align:left;">
+4.3496 km
+</td>
+</tr>
+<tr>
+<td style="text-align:right;">
+2
+</td>
+<td style="text-align:left;">
+0.01
+</td>
+<td style="text-align:left;">
+0° 00’ 36&quot;
+</td>
+<td style="text-align:left;">
+town or village
+</td>
+<td style="text-align:left;">
+1.1132 km
+</td>
+<td style="text-align:left;">
+434.96 m
+</td>
+</tr>
+<tr>
+<td style="text-align:right;">
+3
+</td>
+<td style="text-align:left;">
+0.001
+</td>
+<td style="text-align:left;">
+0° 00’ 3.6&quot;
+</td>
+<td style="text-align:left;">
+neighborhood, street
+</td>
+<td style="text-align:left;">
+111.32 m
+</td>
+<td style="text-align:left;">
+43.496 m
+</td>
+</tr>
+<tr>
+<td style="text-align:right;">
+4
+</td>
+<td style="text-align:left;">
+0.0001
+</td>
+<td style="text-align:left;">
+0° 00’ 0.36&quot;
+</td>
+<td style="text-align:left;">
+individual street, land parcel
+</td>
+<td style="text-align:left;">
+11.132 m
+</td>
+<td style="text-align:left;">
+4.3496 m
+</td>
+</tr>
+<tr>
+<td style="text-align:right;">
+5
+</td>
+<td style="text-align:left;">
+0.00001
+</td>
+<td style="text-align:left;">
+0° 00’ 0.036&quot;
+</td>
+<td style="text-align:left;">
+individual trees, door entrance
+</td>
+<td style="text-align:left;">
+1.1132 m
+</td>
+<td style="text-align:left;">
+434.96 mm
+</td>
+</tr>
+<tr>
+<td style="text-align:right;">
+6
+</td>
+<td style="text-align:left;">
+0.000001
+</td>
+<td style="text-align:left;">
+0° 00’ 0.0036&quot;
+</td>
+<td style="text-align:left;">
+individual humans
+</td>
+<td style="text-align:left;">
+111.32 mm
+</td>
+<td style="text-align:left;">
+43.496 mm
+</td>
+</tr>
+<tr>
+<td style="text-align:right;">
+7
+</td>
+<td style="text-align:left;">
+0.0000001
+</td>
+<td style="text-align:left;">
+0° 00’ 0.00036&quot;
+</td>
+<td style="text-align:left;">
+practical limit of commercial surveying
+</td>
+<td style="text-align:left;">
+11.132 mm
+</td>
+<td style="text-align:left;">
+4.3496 mm
+</td>
+</tr>
+<tr>
+<td style="text-align:right;">
+8
+</td>
+<td style="text-align:left;">
+0.00000001
+</td>
+<td style="text-align:left;">
+0° 00’ 0.000036&quot;
+</td>
+<td style="text-align:left;">
+specialized surveying (e.g. tectonic plate mapping)
+</td>
+<td style="text-align:left;">
+1.1132 mm
+</td>
+<td style="text-align:left;">
+434.96 µm
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+<div id="when" class="section level2">
+<h2><span class="header-section-number">5.3</span> When</h2>
+<p><strong><a href="https://dwc.tdwg.org/terms/#dwc:eventDate">eventDate</a></strong></p>
+<p>Additional Terms</p>
+<p><em><a href="https://dwc.tdwg.org/terms/#dwc:year">year</a></em>, <em><a href="https://dwc.tdwg.org/terms/#dwc:month">month</a></em>, <em><a href="https://dwc.tdwg.org/terms/#dwc:Day">Day</a></em>, <em><a href="https://dwc.tdwg.org/terms/#dwc:Time">Time</a></em>, <em><a href="https://dwc.tdwg.org/terms/#dwc:Timezone">Timezone</a></em></p>
+<p><strong><a href="https://dwc.tdwg.org/terms/#dwc:eventDate">eventDate</a></strong> The date-time when the occurrence/event was recorded. Can be the date-time or interval during which an Event. This term uses the ISO 8601 standard. OBIS recommends using the extended ISO 8601 format with hyphens.</p>
+<p><img src="https://imgs.xkcd.com/comics/iso_8601.png" alt="iso 8601 time XKCD" title="iso 8601 time XKCD" width="400" align="center"/></p>
+<p>For time intervals ISO 8601 uses / as a separator. Date and time are separated by T. Times can have a time zone indicator at the end, if this is not the case then the time is assumed to be local time. When a time is UTC, a Z is added. Some examples of ISO 8601 dates are:</p>
+<p>1973-02-28T15:25:00 2005-08-31T12:11+12 1993-01-26T04:39+12/1993-01-26T05:48+12 2008-04-25T09:53 1948-09-13 1993-01/02 1993-01 1993</p>
+<p>It is an option to split out the eventDate into its seperate components. This can be a goood safeguard against software lie excel reformatin your dates and times.</p>
+<p><em>year</em>, <em>month</em>, <em>Day</em>, <em>Time</em>, <em>Timezone</em></p>
+<p><em>verbatimEventDate</em> You can put the original date format here, not really needed but might be usefull, in case where you are digitising old literature records.</p>
+</div>
+<div id="who" class="section level2">
+<h2><span class="header-section-number">5.4</span> Who</h2>
+<p><em><a href="https://dwc.tdwg.org/terms/#dwc:identifiedBy">identifiedBy</a></em>, <em><a href="https://dwc.tdwg.org/terms/#dwc:dateIdentified">dateIdentified</a></em></p>
+<p><em><a href="https://dwc.tdwg.org/terms/#dwc:identifiedBy">identifiedBy</a></em></p>
+<p>A list (concatenated and separated) of names of people, groups, or organizations who assigned the Taxon to the subject. Recommended best practice is to separate the values in a list with space vertical bar space ( | )</p>
+<p><em><a href="https://dwc.tdwg.org/terms/#dwc:dateIdentified">dateIdentified</a></em></p>
+<p>This one is very seldom filled out but it is actually an import one and it should be specific, it should be the person that did the actual odentification not the suprvisor.</p>
+<p>In case of a reindetification at some point it is usefull to contact the person that did the initial identification.</p>
+</div>
+<div id="how" class="section level2">
+<h2><span class="header-section-number">5.5</span> How</h2>
+<p><em><a href="https://dwc.tdwg.org/terms/#dwc:samplingProtocol">samplingProtocol</a></em></p>
+<p>This is a tricky one it is quite relevent but this field often doesn’t provide enough space to describe what you did. For describing a specific gear you can use <a href="https://www.bodc.ac.uk/resources/vocabularies/vocabulary_search/L22/">BODC vocab : L22</a></p>
+
+</div>
+</div>
+            </section>
+
+          </div>
+        </div>
+      </div>
+<a href="introduction-to-r-and-the-tidyverse.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
+<a href="biological-data.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
+    </div>
+  </div>
+<script src="libs/gitbook-2.6.7/js/app.min.js"></script>
+<script src="libs/gitbook-2.6.7/js/lunr.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-search.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-sharing.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-fontsettings.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-bookdown.js"></script>
+<script src="libs/gitbook-2.6.7/js/jquery.highlight.js"></script>
+<script>
+gitbook.require(["gitbook"], function(gitbook) {
+gitbook.start({
+"sharing": {
+"github": false,
+"facebook": true,
+"twitter": true,
+"google": false,
+"linkedin": false,
+"weibo": false,
+"instapaper": false,
+"vk": false,
+"all": ["facebook", "google", "twitter", "linkedin", "weibo", "instapaper"]
+},
+"fontsettings": {
+"theme": "white",
+"family": "sans",
+"size": 2
+},
+"edit": {
+"link": null,
+"text": null
+},
+"history": {
+"link": null,
+"text": null
+},
+"download": null,
+"toc": {
+"collapse": "subsection",
+"scroll_highlight": true
+},
+"toc_depth": 3
+});
+});
+</script>
+
+</body>
+
+</html>
