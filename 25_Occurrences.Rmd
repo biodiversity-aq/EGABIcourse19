@@ -1,24 +1,23 @@
 ## Metadata for occurrence data
 
-In general the more information you provide the more knowledge can be gained from your occurrence data.
+In general, the more information you provide the more knowledge can be gained from your occurrence data.
 
 The first user of this data is future **yourself**. Taking the time to be as detailed in providing and describing your data is time you will gain in the future when you want to reanalyse your data or integrate it in a broader study.
 
 The best way is to save the data in some tabular format, something like a csv-file or tab-delimted txt. It is not recomended to use Excel, because it has the habit of giving you unwanted help, resulting in messed up data...
 
-Here we start with a description of the minimal data you should provide in order to analyse your data, including developing a species distribution modeling.
+Here we start with a description of the minimal metadata that you should provide in order to analyse your data, including developing a species distribution modelling.
 
-Each row in your dataset should corresponding to an observation.
-The names of the columns in the dataset should correspond to DwC terms.
+Each row in your dataset should corresponding to an observation. The names of the columns in the dataset should correspond to DwC terms.
 
-You can find a full description of the Darwincore Terms in the [Darwin Core quick reference guide](https://dwc.tdwg.org/terms/). But below we provide an overview of the most important terms. If you have information that doesn't ft the Terms below just check the [Darwin Core quick reference guide](https://dwc.tdwg.org/terms/) or create an issue on the EG-ABI course github or the [TDWG Github](https://github.com/tdwg/dwc-qa)
+You can find a full description of the Darwin Core terms in the [Darwin Core quick reference guide](https://dwc.tdwg.org/terms/). But below we provide an overview of the most important terms. If you have information that doesn't ft the terms below just check the [Darwin Core quick reference guide](https://dwc.tdwg.org/terms/) or create an issue on the EG-ABI course github or the [TDWG Github](https://github.com/tdwg/dwc-qa).
 
-your data should allow you or anybody else to determine What, Where, When, Who and How.
+Your metadata should allow you or anybody else to determine What, Where, When, Who and How.
 
-The Darwincore Standards has 8 absolutely required terms. **basisOfRecord, occurrenceID, scientificName, scientificNameID, occurrenceStatus, decimalLongitude, decimalLatitude, eventDate**
+The Darwin Core Standards has 8 absolutely required terms. **basisOfRecord, occurrenceID, scientificName, scientificNameID, occurrenceStatus, decimalLongitude, decimalLatitude, eventDate**
 
 
-Besides those we recommend a number of other ones as well. In eneral it is better to provide as many as you can.
+Besides those we recommend a number of other ones as well. In general it is better to provide as many as you can.
 
 
 **basisOfRecord**
@@ -52,14 +51,14 @@ Besides those we recommend a number of other ones as well. In eneral it is bette
 **decimalLongitude, decimalLatitude**
 
 - *geodeticDatum*
-- *coordinateUncertaintyInMeters*,
+- *coordinateUncertaintyInMeters*
 
 **eventDate**
 
-- *year*, 
-- *month*,
-- *Day*,
-- *Time*,
+- *year*
+- *month*
+- *Day*
+- *Time*
 - *Timezone*
 - *samplingProtocol*
 
@@ -73,44 +72,42 @@ Additional term
 *[type](https://dwc.tdwg.org/terms/#dwc:type)*, 
 *[associatedReferences](https://dwc.tdwg.org/terms/#dwc:associatedReferences)*
 
-[basisOfRecord](https://dwc.tdwg.org/terms/#dwc:basisOfRecord) describes the nature of record. It has a to follow a specific vocabulary. Some of these might overlap sometimes. That is why it is usefull to use *[type](https://dwc.tdwg.org/terms/#dwc:type)* as well.
+[basisOfRecord](https://dwc.tdwg.org/terms/#dwc:basisOfRecord) describes the nature of record. It has a to follow a specific vocabulary. Some of these might overlap sometimes. That is why it is useful to use *[type](https://dwc.tdwg.org/terms/#dwc:type)* as well.
 
 
 - **PreservedSpecimen** A specimen that has been preserved. This can be a museum specimen, a plant on an herbarium sheet, fish in a bag in a freezer.
 - **FossilSpecimen** A resource describing a fossilized specimen.
 - **LivingSpecimen** A resource describing a living specimen. For instance an animal in a zoo.
-- **MaterialSample** A resource describing a material sample. For instance Material sample from an organism in the wild and sample put into a collection (blood sample, biopsy).
+- **MaterialSample** A resource describing a material sample. For instance a material sample from an organism in the wild and sample put into a collection (blood sample, biopsy).
 - **HumanObservation** A resource describing an observation made by one or more people. For instance an organism observed in the wild and written in field notes. Samples that were collected during an expedition but thrown back into the sea.
-- **MachineObservation** An output of a machine observation 
-process. Any kid of automated sensor like camera traps, anipi
-- **Occurrence** A resource describing an instance of the Occurrence class. NOTE: this value is ambiguous and hence should only be used when the when the resource type is unknown.
+- **MachineObservation** An output of a machine observation process. Any kind of automated sensor like camera traps.
+- **Occurrence** A resource describing an instance of the Occurrence class. NOTE: this value is ambiguous and hence should only be used when the resource type is unknown.
 
 
 *[type](https://dwc.tdwg.org/terms/#dwc:type)* 
 
 The nature or genre of the resource. Must be populated with a value from the [DCMI type vocabulary](http://dublincore.org/documents/2010/10/11/dcmi-type-vocabulary/).
 
-Options include
-Image, StillImage, MovingImage, Interactive Resource, PhysicalObject, Sound, Text, PhysicalObject, Collection, Dataset, Event, Service, Software
+Options include: Image, StillImage, MovingImage, Interactive Resource, PhysicalObject, Sound, Text, PhysicalObject, Collection, Dataset, Event, Service, Software.
 
 *[associatedReferences](https://dwc.tdwg.org/terms/#dwc:associatedReferences)* 
-A list (concatenated and separated) of identifiers (publication, bibliographic reference, global unique identifier, URI) of literature associated with the Occurrence.
+A list (concatenated and separated) of identifiers (publication, bibliographic reference, global unique identifier, URI) of literature associated with the occurrence.
 
 
-Example: If you want to add a record from literature you should use *basisOfRecord:*HumanObservation with *type:*Text in combination with *associatedReferences:*Bibiographic reference
+Example: If you want to add a record from literature you should use *basisOfRecord:*HumanObservation with *type:*Text in combination with *associatedReferences:*Bibliographic reference
 
 
 
 #### [occurrenceID](https://dwc.tdwg.org/terms/#dwc:occurrenceID)
 
-Additonal Terms
+Additional Terms
 
 *[institutionCode](https://dwc.tdwg.org/terms/#dwc:institutionCode)*, *[collectionCode](https://dwc.tdwg.org/terms/#dwc:collectionCode)*, *[catalogNumber](https://dwc.tdwg.org/terms/#dwc:catalogNumber)*
 
 **[occurrenceID](https://dwc.tdwg.org/terms/#dwc:occurrenceID)** is an identifier for the occurrence record and should be globally unique and persistent. 
-In the absence of a persistent global unique identifier, construct one from a combination of identifiers in the record that will most closely make the occurrenceID globally unique. It is recommende to use. Something like the combination of institutionCode, collectionCode, and catalogNumber is a generally used format.
+In the absence of a persistent global unique identifier, construct one from a combination of identifiers in the record that will most closely make the occurrenceID globally unique. Something like the combination of institutionCode, collectionCode, and catalogNumber is a generally used format.
 
-There are a number of other terms that you could use as well like datasetName and datasetID
+There are a number of other terms that you could use as well like datasetName and datasetID.
 
 **[institutionCode](https://dwc.tdwg.org/terms/#dwc:institutionCode)**
 The name (or acronym) in use by the institution having custody of the object(s) or information referred to in the record.
@@ -131,18 +128,18 @@ showtbl(tribble(~"Institution code", ~"Institution name",
 **[collectionCode](https://dwc.tdwg.org/terms/#dwc:collectionCode)**
 The name, acronym, coden, or initialism identifying the collection or data set from which the record was derived.
 
-**[datasetName](https://dwc.tdwg.org/terms/#dwc:datasetName)** 
+**[datasetName](https://dwc.tdwg.org/terms/#dwc:datasetName)**
 The name identifying the data set from which the record was derived.
 
 **[datasetID](https://dwc.tdwg.org/terms/#dwc:datasetID)**
-An identifier for the set of data. May be a global unique identifier or an identifier specific to a collection or institution.
+An identifier for the set of data. May be a globally unique identifier or an identifier specific to a collection or institution.
 
 
 **[catalogNumber](https://dwc.tdwg.org/terms/#dwc:catalogNumber)**
 An identifier (preferably unique) for the record within the data set or collection.
 
 **[recordNumber](https://dwc.tdwg.org/terms/#dwc:recordNumber)**
-An identifier given to the Occurrence at the time it was recorded. Often serves as a link between field notes and an Occurrence record, such as a specimen collector's number.
+An identifier given to the occurrence at the time it was recorded. Often serves as a link between field notes and an occurrence record, such as a specimen collector's number.
 
 ```{r echo = FALSE}
 showtbl(tribble(~occurrenceID, ~institutionCode, ~collectionCode, ~catalogNumber,
@@ -153,7 +150,8 @@ showtbl(tribble(~occurrenceID, ~institutionCode, ~collectionCode, ~catalogNumber
 It is a good practice to keep your catalogue/record numbers of equal length throughout your dataset.
 
 To keep it persistent just don't change it. If you reference another source, keep the number.
-For example if you have samples that were collected during an marine expedition usually all sampling events get ther own ID. Don't invent a new ID for the event. This will help you to find any information related to that event at a later stage.
+
+For example if you have samples that were collected during a marine expedition, usually all sampling events get ther own ID. Don't invent a new ID for the event. This will help you to find any information related to that event at a later stage.
 
 
 
@@ -168,24 +166,24 @@ Additional Additional Terms (See Who)
 
 *[identifiedBy](https://dwc.tdwg.org/terms/#dwc:identifiedBy)*, *[dateIdentified](https://dwc.tdwg.org/terms/#dwc:dateIdentified)*, *[typeStatus](https://dwc.tdwg.org/terms/#dwc:typeStatus)*
 
-[scientificName](https://dwc.tdwg.org/terms/#taxon) In the spirit of keeping things persistent this should always contain the originally recorded scientific name, even if the name is currently a synomym (If the sample is reidentified this is of course a different case). The scientific name should always be to the lowest possible taxonomic rank of which you are certain. In case of uncertain identifications, and the scientific name contains qualifiers such as cf., ? or aff., then this name should go in *[identificationQualifier](https://dwc.tdwg.org/terms/#identificationQualifier)*.
+[scientificName](https://dwc.tdwg.org/terms/#taxon) In the spirit of keeping things persistent this should always contain the originally recorded scientific name, even if the name is currently a synonym (if the sample has been reidentified this is of course a different case). The scientific name should always be to the lowest possible taxonomic rank of which you are certain. In case of uncertain identifications, and the scientific name contains qualifiers such as cf., ? or aff., then this name should go in *[identificationQualifier](https://dwc.tdwg.org/terms/#identificationQualifier)*.
 
 *[scientificNameAuthorship](https://dwc.tdwg.org/terms/#dwc:scientificNameAuthorship)* OBIS recommends to not include authorship in scientificName, and only use scientificNameAuthorship for that purpose.
 
 [scientificNameID](https://dwc.tdwg.org/terms/#scientificNameID)
-Following the OBIS guidelines a WoRMS LSID should be added in scientificNameID, LSIDs are persistent, location-independent, resource identifiers for uniquely naming biologically significant resources. More information on LSIDs can be found at www.lsid.info.
+Following the OBIS guidelines a WoRMS LSID should be added in scientificNameID. LSIDs are persistent, location-independent, resource identifiers for uniquely naming biologically significant resources. More information on LSIDs can be found at http://www.lsid.info.
 
-*[taxonrank](https://dwc.tdwg.org/terms/#dwc:taxonrank)*, Determines the level of idetifciation. This can be for [kingdom](https://dwc.tdwg.org/terms/#dwc:kingdom), [phylum](https://dwc.tdwg.org/terms/#dwc:phylum),[class](https://dwc.tdwg.org/terms/#dwc:class),[order](https://dwc.tdwg.org/terms/#dwc:order),[family](https://dwc.tdwg.org/terms/#dwc:family),[genus](https://dwc.tdwg.org/terms/#dwc:genus),[subgenus](https://dwc.tdwg.org/terms/#dwc:subgenus),[specificEpithet](https://dwc.tdwg.org/terms/#dwc:specificEpithet),[infraspecificEpithet](https://dwc.tdwg.org/terms/#dwc:infraspecificEpithet). given that those are terms they can be specified. It is good practisce to always at least provide the Kingdom. In case you can provide a WoRMS LSID the others are not really required. Otherwise it would be good to add them if possible.
+*[taxonrank](https://dwc.tdwg.org/terms/#dwc:taxonrank)*, Determines the level of identification. This can be for [kingdom](https://dwc.tdwg.org/terms/#dwc:kingdom), [phylum](https://dwc.tdwg.org/terms/#dwc:phylum), [class](https://dwc.tdwg.org/terms/#dwc:class), [order](https://dwc.tdwg.org/terms/#dwc:order), [family](https://dwc.tdwg.org/terms/#dwc:family), [genus](https://dwc.tdwg.org/terms/#dwc:genus), [subgenus](https://dwc.tdwg.org/terms/#dwc:subgenus), [specificEpithet](https://dwc.tdwg.org/terms/#dwc:specificEpithet), [infraspecificEpithet](https://dwc.tdwg.org/terms/#dwc:infraspecificEpithet). It is good practice to always provide at least the kingdom. In case you can provide a WoRMS LSID the others are not really required. Otherwise it would be good to add them if possible.
 
 
 [identificationQualifier](https://dwc.tdwg.org/terms/#identificationQualifier)
-A brief phrase or a standard term ("cf.", "aff.") to express the determiner's doubts about the Identification.
+A brief phrase or a standard term ("cf.", "aff.") to express the determiner's doubts about the identification.
 
-The use of **confer** meaning compare and abbeviated to *cf.* in a scientific name means that the person using the name is saying the animal should be compared to a given species, as it might not be exactly the same species. It’s a way of applying a provisional name to a species and is most frequently used when new fish are discovered that look slightly different to the form normally encountered. It indicates that the fish might be a variant of the same species, but could also turn out to be something completely different.
+The use of **confer** meaning compare and abbeviated to *cf.* in a scientific name means that the person using the name is saying the animal should be compared to a given species, as it might not be exactly the same species. It's a way of applying a provisional name to a species and is most frequently used when new fish are discovered that look slightly different to the form normally encountered. It indicates that the fish might be a variant of the same species, but could also turn out to be something completely different.
 
 **Species affinis** (commonly abbreviated to: sp. aff., aff., or affin.) indicates that available material or evidence suggests that the proposed species is related to, has an affinity to, but is not identical to, the species with the binomial name that follows. 
 
-**Species** abbreviated as sp. is commonly occurs when authors are confident that some individuals belong to a particular genus but are not sure to which exact species they belong.
+**Species** abbreviated as sp. commonly occurs when authors are confident that some individuals belong to a particular genus but are not sure to which exact species they belong.
 
 Authors may also use "spp." (**Species pluralis**) as a short way of saying that something applies to many species within a genus, but not to all.
 
@@ -198,10 +196,10 @@ showtbl(tribble(~"", ~scientificName, ~scientificNameAuthorship, ~Identification
 4, "[Electrona](http://www.marinespecies.org/aphia.php?p=taxdetails&id=125821)", "Goode & Bean, 1896", "spp.", "genus"))
 ```
 
-What are you saying with that?
+What do these examples mean?
 
-- Case 1:  "I collected something that looks like Electrona risso but I'm not sure."
-- Case 2:  "I'm 100% sure this is Electrona antarctica)
+- Case 1:  "I collected something that looks like *Electrona risso* but I'm not sure."
+- Case 2:  "I'm 100% sure this is *Electrona antarctica*)
 - Case 3: "I'm sure about the genus, but it could be any one of multiple species"
 - Case 4: "I have this bag with fish; I'm sure about the genus but it could be a variety of species within the genus"
 
@@ -212,10 +210,10 @@ Additional Terms
 *[organismQuantity](https://dwc.tdwg.org/terms/#dwc:organismQuantity)*, *[organismQuantityType](https://dwc.tdwg.org/terms/#dwc:organismQuantityType)*, *[sex](https://dwc.tdwg.org/terms/#dwc:sex)*, *[lifeStage](https://dwc.tdwg.org/terms/#dwc:lifeStage)*, *[behavior](https://dwc.tdwg.org/terms/#dwc:behavior)*, *[occurrenceRemarks](https://dwc.tdwg.org/terms/#dwc:occurrenceRemarks)*
 
 
-occurrenceStatus is a statement about the presence or absence of a taxon at a location. It is an important term, because it allows us to distinguish between presence and absence records. It is an OBIS required term and should be filled in with either present or absent.
+*occurrenceStatus* is a statement about the presence or absence of a taxon at a location. It is an important term, because it allows us to distinguish between presence and absence records. It is an OBIS required term and should be filled in with either "present" or "absent".
 
 *[organismQuantity](https://dwc.tdwg.org/terms/#dwc:organismQuantity)*, *[organismQuantityType](https://dwc.tdwg.org/terms/#dwc:organismQuantityType)*
-These two always go together. organismQuantity is a number for the quantity of animals and organismQuantityType defines the type of quantification system used for the quantity of organisms.
+These two always go together. *organismQuantity* is a number for the quantity of animals and *organismQuantityType* defines the type of quantification system used for the quantity of organisms.
 
 ```{r echo = FALSE}
 showtbl(tribble(~organismQuantity, ~organismQuantityType,
@@ -224,46 +222,47 @@ showtbl(tribble(~organismQuantity, ~organismQuantityType,
                  "r", "BraunBlanquetScale"))
 ```
 
-There are a few other terms as well that we want to mention. The old term that was used was individualCount but that wasn't really versatile. Still in some cases it can be usefull to mention it.
+There are a few other terms as well that we want to mention. The old term that was used was *individualCount* but that wasn't really versatile. Still in some cases it can be useful to mention it.
 
 Please take note that OBIS recommends all quantitative measurements and sampling facts to be treated in the ExtendedMeasurementOrFact extension and not in the Darwin Core files. OBIS recomends using ExtendedMeasurementOrFact in combination with Darwin Core Event Core, which is a little more advanced.
 
 *sex[decimalLatitude](https://dwc.tdwg.org/terms/#dwc:decimalLatitude)*
-The sex of the biological individual(s) represented in the Occurrence.. The OBIS recommended vocabulary for sex see [BODC vocab : S10](http://vocab.nerc.ac.uk/collection/S10/current/)
+The sex of the biological individual(s) represented in the occurrence. For the OBIS-recommended vocabulary for sex see [BODC vocab : S10](http://vocab.nerc.ac.uk/collection/S10/current/)
 
 *lifeStage[decimalLatitude](https://dwc.tdwg.org/terms/#dwc:decimalLatitude)*
-The age class or life stage of the biological individual(s) at the time the Occurrence was recorded. The OBIS recommended vocabulary for lifestage is [BODC vocab: S11](http://vocab.nerc.ac.uk/collection/S10/current/)
+The age class or life stage of the biological individual(s) at the time the occurrence was recorded. The OBIS recommended vocabulary for lifestage is [BODC vocab: S11](http://vocab.nerc.ac.uk/collection/S10/current/)
 
 *behavior[decimalLatitude](https://dwc.tdwg.org/terms/#dwc:decimalLatitude)*
-The behavior shown by the subject at the time the Occurrence was recorded. behavior (no OBIS recomended vocab available)
+The behavior shown by the subject at the time the occurrence was recorded (no OBIS recomended vocab available).
 
-*occurrenceRemarks[decimalLatitude](https://dwc.tdwg.org/terms/#dwc:decimalLatitude)* can hold any comments or notes about the Occurrence.
+*occurrenceRemarks[decimalLatitude](https://dwc.tdwg.org/terms/#dwc:decimalLatitude)* can hold any comments or notes about the occurrence.
 
 
 ### Where
+
 #### [decimalLatitude](https://dwc.tdwg.org/terms/#dwc:decimalLatitude) and[decimalLongitude](https://dwc.tdwg.org/terms/#dwc:decimalLongitude)
 
 Additional Terms
 
 *[geodeticDatum](https://dwc.tdwg.org/terms/#dwc:geodeticDatum)*, *[coordinateUncertaintyInMeters](https://dwc.tdwg.org/terms/#dwc:coordinateUncertaintyInMeters)*, *[locality](https://dwc.tdwg.org/terms/#dwc:locality)*, *[locationID](https://dwc.tdwg.org/terms/#dwc:locationID)*, *[footprintWKT](https://dwc.tdwg.org/terms/#dwc:footprintWKT)*
 
-To determine the location of a point on a globe you need at least the decimalLatitude and decimalLongitude and and a definition of the spatial reference system that was used. The Spatial reference System defines the model of the earts shape that us used.   
+To determine the location of a point on a globe you need at least the *decimalLatitude* and *decimalLongitude* and and a definition of the spatial reference system that was used. The spatial reference system defines the model of the earths shape that was used.
 
-The System currently used by GPS is WGS 84 (also known as WGS 1984, EPSG:4326). Quite often the geodeticDatum is not provided but it is actually essential.
+The system currently used by GPS is WGS84 (also known as WGS 1984, EPSG:4326). Quite often the geodeticDatum is not provided but it is actually essential.
 
-decimalLatitude defines the position relative to the equator an ranges from 90° (Norh Pole) to -90 (South Pole)
+*decimalLatitude* defines the position (in degrees) relative to the equator and ranges from 90 (North Pole) to -90 (South Pole).
 
-decimalLongitude defines the position relative to the Greenwich Meridian and ranges from 180 to -180.
+*decimalLongitude* defines the position (in degrees) relative to the Greenwich Meridian and ranges from 180 to -180.
 
-Mak sure not to swith those around. The standard notation has them as Lattitude followed by Longitude. In the decimal notations they are sometimes switched around as this corresponds more to a cartesian notation. Especially for samples collected in the area of the Antarctic peninsula these switches can be hard to spot.
+Mak sure not to switch those around. The standard notation has them as latitude followed by longitude. Some people naturally tend to write them as longitude followed by latitude, because this is conceptually similar to a cartesian (x-y) notation. However, especially for samples collected in the area of the Antarctic Peninsula, these switches can be hard to spot.
 
 *[coordinateUncertaintyInMeters](https://dwc.tdwg.org/terms/#dwc:coordinateUncertaintyInMeters)*
-The horizontal distance (in meters) from the given decimalLatitude and decimalLongitude describing the smallest circle containing the whole of the Location. Leave the value empty if the uncertainty is unknown, cannot be estimated, or is not applicable (because there are no coordinates). Zero is not a valid value for this term.
-This one is actually closely linked to the number of decimals in your decimalLatitude, decimalLongitude
+The horizontal distance (in meters) from the given *decimalLatitude* and *decimalLongitude* describing the smallest circle containing the whole of the location. Leave the value empty if the uncertainty is unknown, cannot be estimated, or is not applicable (because there are no coordinates). Zero is not a valid value for this term.
+This one is actually closely linked to the number of decimals in your latitude and longitude values.
 
-In cases where decimal latitude are calcullated they often get to much digits. If you have more than 6 in biology it doesn't real make sense anymore or it doesn't represent how precise the measurement was in the field.
+In cases where decimal latitude are calculated they are often expressed with too many digits. If you have more than 6 in biology it doesn't real make sense anymore or it doesn't represent how precise the measurement was in the field.
 
-To explain it, you can choose this XKCD commic or the table below.
+To explain it, see this XKCD commic or the table below.
 
 <img src="https://imgs.xkcd.com/comics/coordinate_precision.png" alt="coordinate precisionXKCD" title="coordinate precision XKCD" width="400" align="center"/>
 
@@ -295,7 +294,7 @@ Additional Terms
 
 
 
-**[eventDate](https://dwc.tdwg.org/terms/#dwc:eventDate)**  The date-time when the occurrence/event was recorded. Can be the date-time or interval during which an Event. This term uses the ISO 8601 standard. OBIS recommends using the extended ISO 8601 format with hyphens.
+**[eventDate](https://dwc.tdwg.org/terms/#dwc:eventDate)**  The date and time when the occurrence/event was recorded. Can be the date-time or interval during which an event occurred. This term uses the ISO 8601 standard. OBIS recommends using the extended ISO 8601 format with hyphens.
 
 <img src="https://imgs.xkcd.com/comics/iso_8601.png" alt="iso 8601 time XKCD" title="iso 8601 time XKCD" width="400" align="center"/>
 
@@ -313,7 +312,7 @@ When a time is UTC, a Z is added. Some examples of ISO 8601 dates are:
 1993-01
 1993
 
-It is an option to split out the eventDate into its seperate components. This can be a goood safeguard against software lie excel reformatin your dates and times.
+It is an option to split out the *eventDate* into its seperate components. This can be a good safeguard against software like Excel reformatting your dates and times.
 
 *year*, 
 *month*,
@@ -321,7 +320,7 @@ It is an option to split out the eventDate into its seperate components. This ca
 *Time*,
 *Timezone*
 
-*verbatimEventDate* You can put the original date format here, not really needed but might be usefull, in case where you are digitising old literature records. 
+*verbatimEventDate* You can put the original date format here, not really needed but might be useful, in case where you are digitising old literature records. 
 
 
 ### Who
@@ -335,9 +334,9 @@ A list (concatenated and separated) of names of people, groups, or organizations
 
 *[dateIdentified](https://dwc.tdwg.org/terms/#dwc:dateIdentified)*
 
-This one is very seldom filled out but it is actually an import one and it should be specific, it should be the person that did the actual odentification not the suprvisor.
+This one is very seldom filled out but it is actually an important one and it should be specific. It should be the person that did the actual identification not the suprvisor.
 
-In case of a reindetification at some point it is usefull to contact the person that did the initial identification.
+In case of a reindentification it is often useful to be able to contact the person who did the initial identification.
 
 ### How
 *[samplingProtocol](https://dwc.tdwg.org/terms/#dwc:samplingProtocol)*
