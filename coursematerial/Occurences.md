@@ -223,16 +223,16 @@ There are a few other terms as well that we want to mention. The old term that w
 
 Please take note that OBIS recommends all quantitative measurements and sampling facts to be treated in the ExtendedMeasurementOrFact extension and not in the Darwin Core files. OBIS recomends using ExtendedMeasurementOrFact in combination with Darwin Core Event Core, which is a little more advanced.
 
-*sex[decimalLatitude](https://dwc.tdwg.org/terms/#dwc:decimalLatitude)*
+*[sex](https://dwc.tdwg.org/terms/#dwc:sex)*
 The sex of the biological individual(s) represented in the Occurrence.. The OBIS recommended vocabulary for sex see [BODC vocab : S10](http://vocab.nerc.ac.uk/collection/S10/current/)
 
-*lifeStage[decimalLatitude](https://dwc.tdwg.org/terms/#dwc:decimalLatitude)*
+*[lifeStage](https://dwc.tdwg.org/terms/#dwc:lifeStage)*
 The age class or life stage of the biological individual(s) at the time the Occurrence was recorded. The OBIS recommended vocabulary for lifestage is [BODC vocab: S11](http://vocab.nerc.ac.uk/collection/S10/current/)
 
-*behavior[decimalLatitude](https://dwc.tdwg.org/terms/#dwc:decimalLatitude)*
+*[behavior](https://dwc.tdwg.org/terms/#dwc:behavior)*
 The behavior shown by the subject at the time the Occurrence was recorded. behavior (no OBIS recomended vocab available)
 
-*occurrenceRemarks[decimalLatitude](https://dwc.tdwg.org/terms/#dwc:decimalLatitude)* can hold any comments or notes about the Occurrence.
+*[occurrenceRemarks](https://dwc.tdwg.org/terms/#dwc:occurrenceRemarks)* can hold any comments or notes about the Occurrence.
 
 
 ## Where
@@ -279,7 +279,7 @@ decimal places	| decimal degrees	|DMS|	Object that can be unambiguously recogniz
 
 
 
-##When
+## When
 
 **[eventDate](https://dwc.tdwg.org/terms/#dwc:eventDate)**
 
@@ -323,7 +323,7 @@ It is an option to split out the eventDate into its seperate components. This ca
 *verbatimEventDate* You can put the original date format here, not really needed but might be usefull, in case where you are digitising old literature records. 
 
 
-##Who
+## Who
 
 *[identifiedBy](https://dwc.tdwg.org/terms/#dwc:identifiedBy)*, *[dateIdentified](https://dwc.tdwg.org/terms/#dwc:dateIdentified)*
 
@@ -338,7 +338,7 @@ This one is very seldom filled out but it is actually an import one and it shoul
 
 In case of a reindetification at some point it is usefull to contact the person that did the initial identification.
 
-##How
+## How
 *[samplingProtocol](https://dwc.tdwg.org/terms/#dwc:samplingProtocol)*
 
 
