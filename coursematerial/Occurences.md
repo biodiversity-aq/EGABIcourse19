@@ -188,7 +188,7 @@ Authors may also use "spp." (**Species pliralis**) as a short way of saying that
 
 
 nr|scientificName | scientificNameID | scientificNameAuthorship | IdentificationQualifier| taxonrank
----|---|---|---|---|---|---
+---|---|---|---|---|---
 1|Electrona|urn:lsid:marinespecies.org:taxname:125821|Goode & Bean, 1896|aff. risso|genus
 2|Electrona antarctica|urn:lsid:marinespecies.org:taxname:217697|(Günther, 1878) | |Species|
 3|Electrona|urn:lsid:marinespecies.org:taxname:125821|Goode & Bean, 1896|sp.|genus
