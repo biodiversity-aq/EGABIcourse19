@@ -201,7 +201,7 @@ What are you saying with that?
 - Case 3: "I'm sure about the genus, but it could be any one of multiple species"
 - Case 4: "I have this bag with fish sure about the genus but it could be a variety of species within the genus"
 
-###[occurrenceStatus](https://dwc.tdwg.org/terms/#dwc:occurrenceStatus)
+### [occurrenceStatus](https://dwc.tdwg.org/terms/#dwc:occurrenceStatus)
 
 Additional Terms
 
@@ -303,14 +303,14 @@ Date and time are separated by T.
 Times can have a time zone indicator at the end, if this is not the case then the time is assumed to be local time. 
 When a time is UTC, a Z is added. Some examples of ISO 8601 dates are:
 
-1973-02-28T15:25:00
-2005-08-31T12:11+12
-1993-01-26T04:39+12/1993-01-26T05:48+12
-2008-04-25T09:53
-1948-09-13
-1993-01/02
-1993-01
-1993
+- v1973-02-28T15:25:00
+- 2005-08-31T12:11+12
+- 1993-01-26T04:39+12/1993-01-26T05:48+12
+- 2008-04-25T09:53
+- 1948-09-13
+- 1993-01/02
+- 1993-01
+- 1993
 
 It is an option to split out the eventDate into its seperate components. This can be a goood safeguard against software lie excel reformatin your dates and times.
 
