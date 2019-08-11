@@ -35,6 +35,7 @@ Our aim is that by the end of the course students will be equipped to:
 The first part of the course (3 days)  will focus on introducing various R packages and overall workflows. The second part of the course (2 days) will be a hands-on opportunity for participants to work on their own data with the assistance of the course instructors. You can choose to only register for the first part of the course if you prefer.
 The course is targeting Polar Early Career scientists, but is open to any other research students or scientists that require these skills for their work. There is space for a maximum of 20 participants.
 
+The course will generally run from 9am to 5:30pm each day, with breaks throughout the day for refreshments and discussion. See the [course schedule](https://scar.github.io/EGABIcourse19/https://scar.github.io/EGABIcourse19/course-schedule.html).
 
 ## Requirements
 
@@ -64,7 +65,7 @@ Participants will need to arrange their own travel and accommodation, but limite
 
 Applications for the course are closed. The deadline for payment is Friday 7th July 2018. Failure to pay will lead to your place being offered to someone else.
 
-you can register using this [form](https://docs.google.com/forms/d/e/1FAIpQLSfnxIDptkIJzhqm0FeYGrNwHiQRdUwQAltfKfsMfO9L49mJRQ/viewform)
+You can register using this [form](https://docs.google.com/forms/d/e/1FAIpQLSfnxIDptkIJzhqm0FeYGrNwHiQRdUwQAltfKfsMfO9L49mJRQ/viewform)
 
 If you have questions or suggestions you can [create an issue here](https://github.com/SCAR/EGABIcourse19/issues). Alternatively you can contact datascience.biodiversity.aq (at) gmail.com
 
