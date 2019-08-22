@@ -39,7 +39,22 @@ The course will generally run from 9am to 5:30pm each day, with breaks throughou
 
 ## Requirements
 
-Some experience in the computer language R is desirable, and experience with GIS is helpful. All participants must bring their own personal laptop.
+Some experience in the computer language R is desirable, and experience with GIS is helpful. 
+
+**For the course particpipants should bring**
+- their own personal laptop
+- Headphones
+
+**Please make sure you have installed**
+- R https://cran.r-project.org
+- Rstudio https://www.rstudio.com
+
+*Feel free to also install*
+QGIS https://www.qgis.org/en/site/ and Quantarctica http://quantarctica.npolar.no
+
+GGIS is a free, cross-platform, open-source software that allows to create, edit, visualise, analyse and publish geospatial information/ Quantarctica is a collection of Antarctic geographical datasets which works with theQGIS software.
+
+
 If you are not sure if your experience in R is sufficient, you should follow the one of the free online courses below:
 
 https://swcarpentry.github.io/r-novice-gapminder/01-rstudio-intro/
