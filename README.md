@@ -63,10 +63,7 @@ Participants will need to arrange their own travel and accommodation, but limite
 
 ## Registration
 
-Applications for the course are closed. The deadline for payment is Friday 7th July 2018. Failure to pay will lead to your place being offered to someone else.
-
-You can register using this [form](https://docs.google.com/forms/d/e/1FAIpQLSfnxIDptkIJzhqm0FeYGrNwHiQRdUwQAltfKfsMfO9L49mJRQ/viewform)
-
+Applications for the course are closed. 
 If you have questions or suggestions you can [create an issue here](https://github.com/SCAR/EGABIcourse19/issues). Alternatively you can contact datascience.biodiversity.aq (at) gmail.com
 
 ----
