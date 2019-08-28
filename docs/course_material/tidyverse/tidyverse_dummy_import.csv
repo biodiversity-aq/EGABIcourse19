@@ -1,0 +1,17 @@
+Occurrence_field,Number_field,Integer_field,Text_field,Date_field
+0,12,1,stuff,10-10-12
+0,11,2,more stuff,11-10-12
+0,2,1,stuff,12-10-12
+1,3,1,stuff,13-10-12
+1,44,1,more stuff,14-10-12
+1,1,22,fun,15-10-12
+1,23.5,3,dplyr,16-10-12
+0,44.3,4,dplyr,17-10-12
+1,11.1,5,dplyr,18-10-12
+0,33.333,55,fun,19-10-12
+1,2,6,more stuff,20-10-12
+1,2,7,fun ,21-10-12
+0,3,1,fun ,22-10-12
+1,55.2,2,stuff,23-10-12
+0,22,3,stuff,24-10-12
+1,10,7,dplyr,25-10-12
