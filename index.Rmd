@@ -1,6 +1,6 @@
 ---
 title: "SCAR-EGABI Tools for Southern Ocean Spatial Analysis and Modelling"
-author: Anton Van de Putte, Charlène Guillaumot, Grant Humphries, Huw Griffith, Ben Raymond
+author: Anton Van de Putte, Charlène Guillaumot, Grant Humphries, Huw Griffith, Ben Raymond, Ryan Reisinger
 description: Course material
 documentclass: book
 site: bookdown::bookdown_site
