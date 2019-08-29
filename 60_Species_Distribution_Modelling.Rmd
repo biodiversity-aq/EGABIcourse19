@@ -1,9 +1,62 @@
 # Species distribution modelling
 
-## Introduction and review
 
-## Methods
+## SDM introduction and review
 
-## Evaluation
+What are species distribution models?
 
-### Other modelling approaches
+[Powerpoint presentation](./course_material/C1_What_are_SDM.pptx)
+
+### References
+
+- [Soberon and Peterson 2005](./course_material/literature/Soberon Peterson 2005.pdf)
+- [Peterson 2011](./course_material/literature/Peterson 2011.pdf)
+- [Guisan and Zimmermann 2000](./course_material/literature/guisan and zimmermann 2000.pdf)
+- [Elith and Leathwick 2009](./course_material/literature/Elith and Leathwick 2009.pdf)
+- [Elith 2006](./course_material/literature/Elith 2006.pdf)
+- [Araujo and Guisan 2006](./course_material/literature/Araujo _ Guisan2006.pdf)
+
+
+## SDM outputs
+
+Understand and generate SDM outputs.
+
+[Powerpoint presentation](./course_material/C4_SDM outputs.pptx)
+
+### References
+
+ - [Torres 2015](./course_material/literature/Torres 2015.PDF)
+ - [Elith et al. 2010](./course_material/literature/Elith_et_al-2010.pdf)
+ - [Guillaumot et al. 2018 Ecol & Evol](./course_material/literature/Guillaumot et al 2018-Ecology_and_Evolution.pdf)
+ - [Liu et al. 2013](./course_material/literature/liu 2013.pdf)
+
+
+## Calibration
+
+What you should know before running a model.
+
+[Powerpoint presentation](./course_material/C5_Calibration- all you should think about before running a model.pptx)
+
+### References
+
+ - [Appendix S1 Elith 2008](./course_material/literature/Appendix  S1 Elith 2008.pdf)
+ - [Elith et al. 2010](./course_material/literature/Elith_et_al-2010.pdf)
+ - [Muscarella et al. 2014](./course_material/literature/Muscarella_et_al-2014-Methods_in_Ecology_and_Evolution.pdf)
+ - [Boria 2014](./course_material/literature/Boria 2014.pdf)
+ - [Phillips et al. 2009](./course_material/literature/Phillips 2009.pdf)
+ - [Guillaumot et al. 2018 Ecol & Evol](./course_material/literature/Guillaumot et al 2018-Ecology_and_Evolution.pdf)
+ - [Guillaumot et al. 2019](./course_material/literature/Guillaumot et al. 2019_ Progress in Oceano.pdf)
+ - [Guillaumot et al. 2018 MEPS](./course_material/literature/Guillaumot et al 2018 MEPS final version.pdf)
+ - [Brotons 2004](./course_material/literature/Brotons 2004.pdf)
+ - [Wisz and Guisan 2009](./course_material/literature/Wisz Guisan 2009.pdf)
+ - [Barve 2011](./course_material/literature/Barve 2011.pdf)
+ - [Elith et al. 2008](./course_material/literature/Elith_et_al-2008.pdf)
+ - [Barbet-Massin et al. 2012](./course_material/literature/Barbet-Massin_et_al-2012.pdf)
+
+
+## SDM algorithms
+
+Introduction to different SDM algorithms.
+
+[Powerpoint presentation](./course_material/C6_Different algorithms.pptx)
+
