@@ -37,6 +37,15 @@ The course is targeting Polar Early Career scientists, but is open to any other 
 
 The course will generally run from 9am to 5:30pm each day, with breaks throughout the day for refreshments and discussion. See the [course schedule](https://scar.github.io/EGABIcourse19/course-schedule.html).
 
+## Venue
+
+The course will take place at the Meeting Room of the Collegium Veteranorum (Cove 02.10) 
+
+Sint-Michielstraat 2-4
+
+3000 Leuven
+
+
 ## Requirements
 
 Some experience in the computer language R is desirable, and experience with GIS is helpful. 
@@ -70,11 +79,6 @@ English
 
 To ensure a safe, enjoyable, and friendly experience for everyone who participates, we have a strict [code of conduct](coc.md) that all participants are expected to follow.
 
-## Fees and Funding
-
-There is a 75 euro registration fee for the course.
-The fee include full participation in the course, and digital copies of the course material, as well as coffee breaks and a small lunch.
-Participants will need to arrange their own travel and accommodation, but limited travel support will be available in collaboration with the [SCAR Ant-Eco](https://www.scar.org/science/anteco/home/) research program.
 
 ## Registration
 
