@@ -146,11 +146,21 @@ if (packageVersion("SOmap") < 0.5)
 
 The `SOmap` package is intended to solve some of these problems, and provide an easier way to produce nice-looking maps of Antarctica and the Southern Ocean. It is primarily focused on maps in polar stereographic projection (although the `SOmap_auto` function extends this to other projections). `SOmap` won't necessarily get you exactly the map you want, but the idea is that in most cases it should get you close enough that you can make modifications to suit your exact purposes.
 
-Please bear in mind that `SOmap` is still in development, and so its functionality (function parameters and/or behaviour) may change. The &&&
+Please bear in mind that `SOmap` is still in development, and so its functionality (function parameters and/or behaviour) may change.
 
 By default, `SOmap` works with base graphics (and associated functionality from packages such as `raster` and `sp`). It is also possible to work with `ggplot2`-based graphics, as described below.
 
-Start by loading the `SOmap` package:
+Start by installing the `SOmap` package if you haven't done so already:
+
+```{somap_install eval = FALSE}
+remotes::install_github("AustralianAntarcticDivision/SOmap")
+```
+
+<div class="alert alert-info">
+**Temporary note:** the code here was written using the development version of `SOmap`. You may need to install the development version using `remotes::install_github("AustralianAntarcticDivision/SOmap", ref = "dev-0.5")`.
+</div>
+
+Then load the package:
 
 ```{r somap_init, cache = FALSE}
 library(SOmap)
@@ -170,7 +180,7 @@ library(ggplot2)
 
 A basic circumpolar map in polar stereographic projection:
 
-```{r somap1
+```{r somap1}
 SOmap()
 ```
 
@@ -192,7 +202,7 @@ coordinates(my_points_ll) <- c("lon", "lat")
 projection(my_points_ll) <- "+proj=longlat +datum=WGS84"
 ```
 
-This needs to be reprojected to match our map before plotting. The `SOproj` function does this:
+Our data need to be reprojected to match our map before plotting. The `SOproj` function does this:
 
 ```{r somap_pts2}
 ## reproject to our SOmap projection

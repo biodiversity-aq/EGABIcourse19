@@ -303,9 +303,15 @@ maps<span class="op">::</span><span class="kw">map</span>(mpmerc,  <span class="
 <div id="somap" class="section level2">
 <h2><span class="header-section-number">8.2</span> SOmap</h2>
 <p>The <code>SOmap</code> package is intended to solve some of these problems, and provide an easier way to produce nice-looking maps of Antarctica and the Southern Ocean. It is primarily focused on maps in polar stereographic projection (although the <code>SOmap_auto</code> function extends this to other projections). <code>SOmap</code> won’t necessarily get you exactly the map you want, but the idea is that in most cases it should get you close enough that you can make modifications to suit your exact purposes.</p>
-<p>Please bear in mind that <code>SOmap</code> is still in development, and so its functionality (function parameters and/or behaviour) may change. The &amp;&amp;&amp;</p>
+<p>Please bear in mind that <code>SOmap</code> is still in development, and so its functionality (function parameters and/or behaviour) may change.</p>
 <p>By default, <code>SOmap</code> works with base graphics (and associated functionality from packages such as <code>raster</code> and <code>sp</code>). It is also possible to work with <code>ggplot2</code>-based graphics, as described below.</p>
-<p>Start by loading the <code>SOmap</code> package:</p>
+<p>Start by installing the <code>SOmap</code> package if you haven’t done so already:</p>
+<pre class="somap_install"><code>remotes::install_github(&quot;AustralianAntarcticDivision/SOmap&quot;)
+</code></pre>
+<div class="alert alert-info">
+<p><strong>Temporary note:</strong> the code here was written using the development version of <code>SOmap</code>. You may need to install the development version using <code>remotes::install_github(&quot;AustralianAntarcticDivision/SOmap&quot;, ref = &quot;dev-0.5&quot;)</code>.</p>
+</div>
+<p>Then load the package:</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">library</span>(SOmap)
 ## also define a colour map to use for some examples
 my_cmap &lt;-<span class="st"> </span><span class="kw">colorRampPalette</span>(<span class="kw">c</span>(<span class="st">&quot;#4D4140&quot;</span>, <span class="st">&quot;#596F7E&quot;</span>, <span class="st">&quot;#168B98&quot;</span>,
@@ -313,7 +319,7 @@ my_cmap &lt;-<span class="st"> </span><span class="kw">colorRampPalette</span>(<
 <div id="circumpolar-maps" class="section level3">
 <h3><span class="header-section-number">8.2.1</span> Circumpolar maps</h3>
 <p>A basic circumpolar map in polar stereographic projection:</p>
-<p><code>{r somap1 SOmap()</code></p>
+<p><code>{r somap1 } SOmap()</code></p>
 <p><code>SOmanagement()</code> provides a number of contextual layers such as MPA boundaries and management zones.</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">SOmap</span>(<span class="dt">trim =</span> <span class="op">-</span><span class="dv">40</span>) ## plot to 40S
 ## add the exclusive economic zones management layer
@@ -326,7 +332,7 @@ my_cmap &lt;-<span class="st"> </span><span class="kw">colorRampPalette</span>(<
 my_points_ll &lt;-<span class="st"> </span><span class="kw">data.frame</span>(<span class="dt">lon =</span> <span class="kw">seq</span>(<span class="dv">0</span>, <span class="dv">350</span>, <span class="dt">by =</span> <span class="dv">10</span>), <span class="dt">lat =</span> <span class="op">-</span><span class="dv">55</span>, <span class="dt">z =</span> <span class="kw">runif</span>(<span class="dv">36</span>))
 <span class="kw">coordinates</span>(my_points_ll) &lt;-<span class="st"> </span><span class="kw">c</span>(<span class="st">&quot;lon&quot;</span>, <span class="st">&quot;lat&quot;</span>)
 <span class="kw">projection</span>(my_points_ll) &lt;-<span class="st"> &quot;+proj=longlat +datum=WGS84&quot;</span></code></pre></div>
-<p>This needs to be reprojected to match our map before plotting. The <code>SOproj</code> function does this:</p>
+<p>Our data need to be reprojected to match our map before plotting. The <code>SOproj</code> function does this:</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">## reproject to our SOmap projection
 my_points &lt;-<span class="st"> </span><span class="kw">SOproj</span>(my_points_ll)
 ## and plot
