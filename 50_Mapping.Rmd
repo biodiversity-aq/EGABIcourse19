@@ -144,7 +144,7 @@ if (packageVersion("SOmap") < 0.5)
   stop("This bookdown code currently requires the development version of SOmap.\nInstall with remotes::install_github(\"AustralianAntarcticDivision/SOmap\", ref = \"dev-0.5\")")
 ```
 
-The `SOmap` package is intended to solve some of these problems, and provide an easier way to produce nice-looking maps of Antarctica and the Southern Ocean. It is primarily focused on maps in polar stereographic projection (although the `SOmap_auto` function extends this to other projections). `SOmap` won't necessarily get you exactly the map you want, but the idea is that in most cases it should get you close enough that you can make modifications to suit your exact purposes.
+The `SOmap` package is intended to solve some of these problems, and provide an easier way to produce nice-looking maps of Antarctica and the Southern Ocean. It is primarily focused on maps in polar stereographic projection (although the `SOmap_auto` function extends this to other projections). `SOmap` won't necessarily get you exactly the map you want in every circumstance, but the idea is that in most cases it should get you close enough, and if need be you can make modifications to suit your exact purposes.
 
 Please bear in mind that `SOmap` is still in development, and so its functionality (function parameters and/or behaviour) may change.
 
@@ -370,6 +370,10 @@ SOgg(myplot)
 ```
 
 ### Modifying map objects (advanced usage)
+
+The goal of `SOmap` is to make it fairly easy to produce a fairly-good-looking map that will be adequate for most mapping requirements. It will never be possible to automatically produce a *perfect* map in *every circumstance*, but the aim is to have a low-effort way of getting fairly close most of the time.
+
+This section describes some approaches to modifying a map to get it closer to your particular needs. Be warned: depending on the exact modifications needed, this might get you pretty close to the crumbling edge of `SOmap` development. In particular, anything that requires modifying the internal structure of an `SOmap` object may change in the future (with luck, we'll make this sort of thing easier - but we're not there yet.)
 
 #### Modifying base graphics maps
 
