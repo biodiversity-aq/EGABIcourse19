@@ -482,7 +482,7 @@ However, instead of base plotting functions, `SOmap_gg` objects use `ggplot2` fu
 myplotgg$ice[[1]]$plotfun
 ```
 
-We can modify these function and/or arguments in a similar manner to `SOmap` objects.
+We can modify these functions and/or arguments in a similar manner to `SOmap` objects.
 
 ```{r somap5b}
 myplotgg$ice[[1]]$plotargs$fill <- "green"

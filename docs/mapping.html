@@ -538,7 +538,7 @@ my_ggplot <span class="op">+</span><span class="st"> </span><span class="kw">geo
 <p>However, instead of base plotting functions, <code>SOmap_gg</code> objects use <code>ggplot2</code> function calls, e.g.:</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">myplotgg<span class="op">$</span>ice[[<span class="dv">1</span>]]<span class="op">$</span>plotfun</code></pre></div>
 <pre><code>## [1] &quot;ggplot2::geom_sf&quot;</code></pre>
-<p>We can modify these function and/or arguments in a similar manner to <code>SOmap</code> objects.</p>
+<p>We can modify these functions and/or arguments in a similar manner to <code>SOmap</code> objects.</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">myplotgg<span class="op">$</span>ice[[<span class="dv">1</span>]]<span class="op">$</span>plotargs<span class="op">$</span>fill &lt;-<span class="st"> &quot;green&quot;</span></code></pre></div>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">plot</span>(myplotgg)</code></pre></div>
 <p><img src="_main_files/figure-html/somap5c-1.png" width="672" /></p>
