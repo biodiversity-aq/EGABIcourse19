@@ -46,6 +46,7 @@
 
 
 
+<script src="libs/kePrint-0.0.1/kePrint.js"></script>
 
 
 <style type="text/css">
@@ -248,9 +249,9 @@ srcs[<span class="dv">1</span>, ]</code></pre></div>
 ##   comment                                                                  
 ##   &lt;chr&gt;                                                                    
 ## 1 This data source may migrate to https access in the future, requiring an~
-##   method     postprocess authentication_note user  password
-##   &lt;list&gt;     &lt;list&gt;      &lt;chr&gt;               &lt;chr&gt; &lt;chr&gt;   
-## 1 &lt;list [5]&gt; &lt;list [0]&gt;  &lt;NA&gt;                &lt;NA&gt;  &lt;NA&gt;    
+##   method           postprocess authentication_note user  password
+##   &lt;list&gt;           &lt;list&gt;      &lt;chr&gt;               &lt;chr&gt; &lt;chr&gt;   
+## 1 &lt;named list [5]&gt; &lt;list [0]&gt;  &lt;NA&gt;                &lt;NA&gt;  &lt;NA&gt;    
 ##   access_function    data_group collection_size
 ##   &lt;chr&gt;              &lt;chr&gt;                &lt;dbl&gt;
 ## 1 raadtools::readice Sea ice                 10</code></pre>
@@ -268,7 +269,7 @@ srcs[<span class="dv">1</span>, ]</code></pre></div>
 <p>And fetch the data:</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">result &lt;-<span class="st"> </span><span class="kw">bb_get</span>(data_source, <span class="dt">local_file_root =</span> my_data_dir, <span class="dt">verbose =</span> <span class="ot">TRUE</span>)</code></pre></div>
 <pre><code>## 
-## Mon Jul 29 17:21:02 2019
+## Fri Aug 30 09:33:59 2019
 ## Synchronizing dataset: Southern Ocean marine environmental data
 ## Source URL https://data.aad.gov.au/eds/4742/download
 ## --------------------------------------------------------------------------------------------
@@ -278,7 +279,7 @@ srcs[<span class="dv">1</span>, ]</code></pre></div>
 ##  downloading file 1 of 1: https://data.aad.gov.au/eds/4742/download ...  file unchanged on server, not downloading.
 ##   decompressing: c:\data\cache/data.aad.gov.au/eds/4742/download.zip ... no new files to extract (not overwriting existing files) ... done.
 ## 
-## Mon Jul 29 17:21:03 2019 dataset synchronization complete: Southern Ocean marine environmental data</code></pre>
+## Fri Aug 30 09:34:01 2019 dataset synchronization complete: Southern Ocean marine environmental data</code></pre>
 <p>Now we have a local copy of our data. The sync can be run daily so that the local collection is always up to date - it will only download new files, or files that have changed since the last download. For more information on <code>bowerbird</code>, see the <a href="https://ropensci.github.io/bowerbird/articles/bowerbird.html">package vignette</a>.</p>
 <p>The <code>result</code> object holds information about the data that we downloaded:</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">result</code></pre></div>
@@ -330,7 +331,7 @@ srcs[<span class="dv">1</span>, ]</code></pre></div>
     <span class="kw">sources</span>(<span class="st">&quot;ETOPO2 bathymetry&quot;</span>))
 result &lt;-<span class="st"> </span><span class="kw">bb_get</span>(src, <span class="dt">local_file_root =</span> my_data_dir, <span class="dt">clobber =</span> <span class="dv">0</span>, <span class="dt">verbose =</span> <span class="ot">TRUE</span>, <span class="dt">confirm =</span> <span class="ot">NULL</span>)</code></pre></div>
 <pre><code>##  
-## Mon Jul 29 17:21:03 2019 
+## Fri Aug 30 09:34:01 2019 
 ## Synchronizing dataset: NSIDC SMMR-SSM/I Nasateam sea ice concentration 
 ##  
 ##  [... output truncated]</code></pre>

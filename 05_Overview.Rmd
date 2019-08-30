@@ -72,7 +72,7 @@ with(x %>% dplyr::filter(aphiaID == my_aphia_id),
      SOplot(decimalLongitude, decimalLatitude, pch = 19, cex = 0.2, col = "green"))
 ```
 
-Reorganise data into presence/absence by sampling site:
+We're going to fit a species (presence/absence) distribution model, so first let's reorganise our data into presence/absence by sampling site:
 
 ```{r dat1}
 xfit <- x %>% dplyr::rename(lon = "decimalLongitude", lat = "decimalLatitude") %>%
@@ -133,6 +133,8 @@ The fits to depth and ice cover:
 plot(fit, pages = 1, shade = TRUE)
 ```
 
+This suggests that we are more likely to find *Euphausia crystallorophias* in shallow areas with high annual ice cover, which seems plausible given that this species is typically found in coastal/shelf waters.
+
 ## Predict from model
 
 ```{r pred1}
@@ -187,12 +189,8 @@ Add them to the map:
 
 ```{r predmap3}
 plot(basemap)
-SOplot(pr, col = my_cmap, legend = FALSE,
-       breaks = seq(0, 0.9, length.out = length(my_cmap) + 1))
-## curved legend
-SOleg(position = "bottomleft", col = my_cmap,
-      breaks = seq(0, 0.9, by = 0.15),
-      type = "continuous", label = "Probability")
+SOplot(pr, col = my_cmap)
+
 ## placename points
 with(xns, points(x = longitude, y = latitude, pch = 16, cex = 0.4))
 ## and labels

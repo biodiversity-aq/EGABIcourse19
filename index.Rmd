@@ -10,7 +10,7 @@ site: bookdown::bookdown_site
 library(knitr)
 library(kableExtra)
 
-knitr::opts_chunk$set(cache = TRUE)
+knitr::opts_chunk$set(cache = TRUE, warning = FALSE)
 options(knitr.table.format = "html")
 
 showtbl <- function(z) kable_styling(knitr::kable(z), bootstrap_options = c("striped", "hover", "condensed"))

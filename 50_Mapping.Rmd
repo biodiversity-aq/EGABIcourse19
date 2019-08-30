@@ -278,7 +278,7 @@ SOleg(position = "topright", col = my_cmap, breaks = label_breaks,
 Multiple rasters:
 
 ```{r somap_raster5}
-xr2 <- shift(xr, x = -70) ## offset in longitude
+xr2 <- raster::shift(xr, -70) ## offset in longitude
 SOmap()
 SOplot(xr, legend = FALSE, col = my_cmap)
 SOplot(xr2, legend = FALSE, col = my_cmap)
