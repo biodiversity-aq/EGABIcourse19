@@ -144,9 +144,9 @@ if (packageVersion("SOmap") < 0.5)
   stop("This bookdown code currently requires the development version of SOmap.\nInstall with remotes::install_github(\"AustralianAntarcticDivision/SOmap\", ref = \"dev-0.5\")")
 ```
 
-The `SOmap` package is intended to solve some of these problems, and provide an easier way to produce nice-looking maps of Antarctica and the Southern Ocean. It is primarily focused on maps in polar stereographic projection (although the `SOmap_auto` function extends this to other projections). `SOmap` won't necessarily get you exactly the map you want. But if it doesn't, it should hopefully get you close enough that you can make modifications to suit your exact purposes.
+The `SOmap` package is intended to solve some of these problems, and provide an easier way to produce nice-looking maps of Antarctica and the Southern Ocean. It is primarily focused on maps in polar stereographic projection (although the `SOmap_auto` function extends this to other projections). `SOmap` won't necessarily get you exactly the map you want, but the idea is that in most cases it should get you close enough that you can make modifications to suit your exact purposes.
 
-Please bear in mind that `SOmap` is still in development, and so its functionality (function parameters and/or behaviour) may change.
+Please bear in mind that `SOmap` is still in development, and so its functionality (function parameters and/or behaviour) may change. The &&&
 
 By default, `SOmap` works with base graphics (and associated functionality from packages such as `raster` and `sp`). It is also possible to work with `ggplot2`-based graphics, as described below.
 
@@ -242,7 +242,17 @@ SOleg(xr, position = "topright", col = my_cmap, ticks = 6,
       type = "continuous", label = "My variable")
 ```
 
-OK, well that worked but clearly the labels need tidying up. We can do that, but we have to be careful to make sure that the colour range of the legend matches that of the plotted raster.
+OK, well that worked but clearly the labels need tidying up. The easiest way is probably to set the number of decimal places in the label values via the `rnd` parameter:
+
+
+```{r somap_raster4rnd}
+SOmap()
+SOplot(xr, legend = FALSE, col = my_cmap)
+SOleg(xr, position = "topright", col = my_cmap, ticks = 6, rnd = 2,
+      type = "continuous", label = "My variable")
+```
+
+Alternatively, we could explicitly set the colour range and labels.
 
 ```{r somap_raster4}
 ## draw the base map

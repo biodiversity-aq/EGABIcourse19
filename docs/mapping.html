@@ -302,8 +302,8 @@ maps<span class="op">::</span><span class="kw">map</span>(mpmerc,  <span class="
 </div>
 <div id="somap" class="section level2">
 <h2><span class="header-section-number">8.2</span> SOmap</h2>
-<p>The <code>SOmap</code> package is intended to solve some of these problems, and provide an easier way to produce nice-looking maps of Antarctica and the Southern Ocean. It is primarily focused on maps in polar stereographic projection (although the <code>SOmap_auto</code> function extends this to other projections). <code>SOmap</code> won’t necessarily get you exactly the map you want. But if it doesn’t, it should hopefully get you close enough that you can make modifications to suit your exact purposes.</p>
-<p>Please bear in mind that <code>SOmap</code> is still in development, and so its functionality (function parameters and/or behaviour) may change.</p>
+<p>The <code>SOmap</code> package is intended to solve some of these problems, and provide an easier way to produce nice-looking maps of Antarctica and the Southern Ocean. It is primarily focused on maps in polar stereographic projection (although the <code>SOmap_auto</code> function extends this to other projections). <code>SOmap</code> won’t necessarily get you exactly the map you want, but the idea is that in most cases it should get you close enough that you can make modifications to suit your exact purposes.</p>
+<p>Please bear in mind that <code>SOmap</code> is still in development, and so its functionality (function parameters and/or behaviour) may change. The &amp;&amp;&amp;</p>
 <p>By default, <code>SOmap</code> works with base graphics (and associated functionality from packages such as <code>raster</code> and <code>sp</code>). It is also possible to work with <code>ggplot2</code>-based graphics, as described below.</p>
 <p>Start by loading the <code>SOmap</code> package:</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">library</span>(SOmap)
@@ -361,7 +361,13 @@ xr &lt;-<span class="st"> </span><span class="kw">rasterFromXYZ</span>(temp)
 <span class="kw">SOleg</span>(xr, <span class="dt">position =</span> <span class="st">&quot;topright&quot;</span>, <span class="dt">col =</span> my_cmap, <span class="dt">ticks =</span> <span class="dv">6</span>,
       <span class="dt">type =</span> <span class="st">&quot;continuous&quot;</span>, <span class="dt">label =</span> <span class="st">&quot;My variable&quot;</span>)</code></pre></div>
 <p><img src="_main_files/figure-html/somap_raster3-1.png" width="672" /></p>
-<p>OK, well that worked but clearly the labels need tidying up. We can do that, but we have to be careful to make sure that the colour range of the legend matches that of the plotted raster.</p>
+<p>OK, well that worked but clearly the labels need tidying up. The easiest way is probably to set the number of decimal places in the label values via the <code>rnd</code> parameter:</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">SOmap</span>()
+<span class="kw">SOplot</span>(xr, <span class="dt">legend =</span> <span class="ot">FALSE</span>, <span class="dt">col =</span> my_cmap)
+<span class="kw">SOleg</span>(xr, <span class="dt">position =</span> <span class="st">&quot;topright&quot;</span>, <span class="dt">col =</span> my_cmap, <span class="dt">ticks =</span> <span class="dv">6</span>, <span class="dt">rnd =</span> <span class="dv">2</span>,
+      <span class="dt">type =</span> <span class="st">&quot;continuous&quot;</span>, <span class="dt">label =</span> <span class="st">&quot;My variable&quot;</span>)</code></pre></div>
+<p><img src="_main_files/figure-html/somap_raster4rnd-1.png" width="672" /></p>
+<p>Alternatively, we could explicitly set the colour range and labels.</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">## draw the base map
 <span class="kw">SOmap</span>()
 ## add our raster, controlling the colour range to span the values 0 to 30
