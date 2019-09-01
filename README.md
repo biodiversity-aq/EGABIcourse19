@@ -27,7 +27,7 @@ Our aim is that by the end of the course students will be equipped to:
 
 <img src="/images/Grant.jpg" alt="Grant" title="Grant" width="75"  align="right"/>Grant Humphries (HiDef Aerial Surveying Ltd) is a seabird biologist and data scientist who has worked on terrestrial and marine ecosystems with a focus on applying machine learning to complex ecosystems. You can chat with Grant about creating decision support tools in R and Python, and what his favourite programming language is.
 
-<img src="/images/Huw.jpg" alt="Huw" title="Huw" width="75"  align="left"/> Huw Griffith (British Antarctic Survey) is a marine biologist who studies large-scale biogeographic and ecological patterns in space and time. He uses selected groups of animals to investigate trends in distribution in the Polar Regions, utilising large biological and physical databases to understand key processes.
+<img src="/images/Huw.jpg" alt="Huw" title="Huw" width="75"  align="left"/> Huw Griffiths (British Antarctic Survey) is a marine biologist who studies large-scale biogeographic and ecological patterns in space and time. He uses selected groups of animals to investigate trends in distribution in the Polar Regions, utilising large biological and physical databases to understand key processes.
 
 
 ## Course Length
