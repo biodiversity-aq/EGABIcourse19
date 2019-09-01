@@ -305,7 +305,7 @@ data_source &lt;-<span class="st"> </span><span class="kw">sources_sdm</span>(<s
 ## fetch the data
 status &lt;-<span class="st"> </span><span class="kw">bb_get</span>(data_source, <span class="dt">local_file_root =</span> my_data_directory, <span class="dt">verbose =</span> <span class="ot">TRUE</span>)</code></pre></div>
 <pre><code>## 
-## Sun Sep 01 20:04:54 2019
+## Sun Sep 01 21:31:08 2019
 ## Synchronizing dataset: Southern Ocean marine environmental data
 ## Source URL https://data.aad.gov.au/eds/4742/download
 ## --------------------------------------------------------------------------------------------
@@ -315,7 +315,7 @@ status &lt;-<span class="st"> </span><span class="kw">bb_get</span>(data_source,
 ##  downloading file 1 of 1: https://data.aad.gov.au/eds/4742/download ...  file unchanged on server, not downloading.
 ##   decompressing: C:\Users\ben_ray\AppData\Local\Temp\RtmpwhWI9s/data.aad.gov.au/eds/4742/download.zip ... no new files to extract (not overwriting existing files) ... done.
 ## 
-## Sun Sep 01 20:04:56 2019 dataset synchronization complete: Southern Ocean marine environmental data</code></pre>
+## Sun Sep 01 21:31:10 2019 dataset synchronization complete: Southern Ocean marine environmental data</code></pre>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">nc_files &lt;-<span class="st"> </span><span class="kw">Filter</span>(<span class="cf">function</span>(z) <span class="kw">grepl</span>(<span class="st">&quot;</span><span class="ch">\\</span><span class="st">.nc$&quot;</span>, z), status<span class="op">$</span>files[[<span class="dv">1</span>]]<span class="op">$</span>file)
 
 ## create a raster stack of all layers

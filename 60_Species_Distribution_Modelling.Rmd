@@ -56,6 +56,8 @@ What you should know before running a model.
 
 ## Exercise scripts
 
+[EXERCISE.docx](./course_material/exercises/scripts/EXERCISE.docx)
+
 [calibration_BRT.R](./course_material/exercises/scripts/calibration_BRT.R)
 
 ```{r eval = FALSE}

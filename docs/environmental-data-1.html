@@ -280,7 +280,7 @@ srcs[<span class="dv">1</span>, ]</code></pre></div>
 <p>And fetch the data:</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">result &lt;-<span class="st"> </span><span class="kw">bb_get</span>(data_source, <span class="dt">local_file_root =</span> my_data_dir, <span class="dt">verbose =</span> <span class="ot">TRUE</span>)</code></pre></div>
 <pre><code>## 
-## Sun Sep 01 20:05:12 2019
+## Sun Sep 01 21:31:26 2019
 ## Synchronizing dataset: Southern Ocean marine environmental data
 ## Source URL https://data.aad.gov.au/eds/4742/download
 ## --------------------------------------------------------------------------------------------
@@ -290,7 +290,7 @@ srcs[<span class="dv">1</span>, ]</code></pre></div>
 ##  downloading file 1 of 1: https://data.aad.gov.au/eds/4742/download ...  file unchanged on server, not downloading.
 ##   decompressing: c:\data\cache/data.aad.gov.au/eds/4742/download.zip ... no new files to extract (not overwriting existing files) ... done.
 ## 
-## Sun Sep 01 20:05:13 2019 dataset synchronization complete: Southern Ocean marine environmental data</code></pre>
+## Sun Sep 01 21:31:28 2019 dataset synchronization complete: Southern Ocean marine environmental data</code></pre>
 <p>Now we have a local copy of our data. The sync can be run daily so that the local collection is always up to date - it will only download new files, or files that have changed since the last download. For more information on <code>bowerbird</code>, see the <a href="https://ropensci.github.io/bowerbird/articles/bowerbird.html">package vignette</a>.</p>
 <p>The <code>result</code> object holds information about the data that we downloaded:</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">result</code></pre></div>
@@ -342,13 +342,16 @@ srcs[<span class="dv">1</span>, ]</code></pre></div>
     <span class="kw">sources</span>(<span class="st">&quot;ETOPO2 bathymetry&quot;</span>))
 result &lt;-<span class="st"> </span><span class="kw">bb_get</span>(src, <span class="dt">local_file_root =</span> my_data_dir, <span class="dt">clobber =</span> <span class="dv">0</span>, <span class="dt">verbose =</span> <span class="ot">TRUE</span>, <span class="dt">confirm =</span> <span class="ot">NULL</span>)</code></pre></div>
 <pre><code>##  
-## Sun Sep 01 20:05:13 2019 
+## Sun Sep 01 21:31:28 2019 
 ## Synchronizing dataset: NSIDC SMMR-SSM/I Nasateam sea ice concentration 
 ##  
 ##  [... output truncated]</code></pre>
 <p>Now load the <code>raadtools</code> package and tell it where our data collection has been stored:</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">library</span>(raadtools)
 <span class="kw">set_data_roots</span>(my_data_dir)</code></pre></div>
+<pre><code>## Raad file cache is up to date as at 2019-09-01 16:10:26 (819 files listed)</code></pre>
+<pre><code>## global option &#39;raadfiles.data.roots&#39; set:
+## &#39;/data/cache    2019-07-19 14:55:38&#39;</code></pre>
 <p>Let’s say that we have some points of interest in the Southern Ocean — perhaps a ship track, or some stations where we took marine samples, or as we’ll use here, the <a href="http://www.meop.net/">track of an elephant seal</a> as it moves from the Kerguelen Islands to Antarctica and back again (Data from IMOS 2018[^1], provided as part of the <code>SOmap</code> package).</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">data</span>(<span class="st">&quot;SOmap_data&quot;</span>, <span class="dt">package =</span> <span class="st">&quot;SOmap&quot;</span>)
 ele &lt;-<span class="st"> </span>SOmap_data<span class="op">$</span>mirounga_leonina <span class="op">%&gt;%</span><span class="st"> </span>dplyr<span class="op">::</span><span class="kw">filter</span>(id <span class="op">==</span><span class="st"> &quot;ct96-05-13&quot;</span>)</code></pre></div>
