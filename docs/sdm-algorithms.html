@@ -21,7 +21,7 @@
   <meta name="twitter:description" content="Course material" />
   
 
-<meta name="author" content="Anton Van de Putte, Charlène Guillaumot, Grant Humphries, Huw Griffith, Ben Raymond, Ryan Reisinger" />
+<meta name="author" content="Anton Van de Putte, Charlène Guillaumot, Grant Humphries, Huw Griffiths, Ben Raymond, Ryan Reisinger" />
 
 
 
@@ -178,6 +178,7 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
 <li class="chapter" data-level="9.3" data-path="species-distribution-modelling.html"><a href="species-distribution-modelling.html#calibration"><i class="fa fa-check"></i><b>9.3</b> Calibration</a><ul>
 <li class="chapter" data-level="9.3.1" data-path="species-distribution-modelling.html"><a href="species-distribution-modelling.html#references-2"><i class="fa fa-check"></i><b>9.3.1</b> References</a></li>
 </ul></li>
+<li class="chapter" data-level="9.4" data-path="species-distribution-modelling.html"><a href="species-distribution-modelling.html#exercise-scripts"><i class="fa fa-check"></i><b>9.4</b> Exercise scripts</a></li>
 </ul></li>
 <li class="chapter" data-level="10" data-path="sdm-algorithms.html"><a href="sdm-algorithms.html"><i class="fa fa-check"></i><b>10</b> SDM algorithms</a><ul>
 <li class="chapter" data-level="10.1" data-path="sdm-algorithms.html"><a href="sdm-algorithms.html#exercises---practice-with-models"><i class="fa fa-check"></i><b>10.1</b> Exercises - Practice with models</a><ul>
@@ -267,7 +268,7 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">SuperData <span class="op">%&gt;%</span>
 <span class="st">  </span><span class="kw">filter</span>(<span class="op">!</span><span class="kw">is.na</span>(Intelligence))<span class="op">%&gt;%</span><span class="st"> </span>
 <span class="st">  </span><span class="kw">ggplot</span>(<span class="kw">aes</span>(<span class="dt">x=</span>Intelligence,<span class="dt">y=</span>Strength)) <span class="op">+</span><span class="st"> </span><span class="kw">geom_point</span>() <span class="op">+</span><span class="st"> </span><span class="kw">geom_smooth</span>(<span class="dt">method=</span>lm) <span class="op">+</span><span class="st"> </span><span class="kw">theme_bw</span>()</code></pre></div>
-<p><img src="_main_files/figure-html/unnamed-chunk-15-1.png" width="672" /></p>
+<p><img src="_main_files/figure-html/unnamed-chunk-19-1.png" width="672" /></p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">## Looking at the line, it seems like the problem is that there are some extreme low values
 ##   of intelligence. Outliers perhaps?? Try to find out who those values belong to, and
 ##   that may help you determine if they should be included in the analysis
@@ -275,18 +276,18 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
 SuperData <span class="op">%&gt;%</span>
 <span class="st">  </span><span class="kw">filter</span>(<span class="op">!</span><span class="kw">is.na</span>(Combat))<span class="op">%&gt;%</span><span class="st"> </span>
 <span class="st">  </span><span class="kw">ggplot</span>(<span class="kw">aes</span>(<span class="dt">x=</span>Combat,<span class="dt">y=</span>Strength)) <span class="op">+</span><span class="st"> </span><span class="kw">geom_point</span>() <span class="op">+</span><span class="st"> </span><span class="kw">geom_smooth</span>(<span class="dt">method=</span>lm) <span class="op">+</span><span class="st"> </span><span class="kw">theme_bw</span>()</code></pre></div>
-<p><img src="_main_files/figure-html/unnamed-chunk-15-2.png" width="672" /></p>
+<p><img src="_main_files/figure-html/unnamed-chunk-19-2.png" width="672" /></p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">## We can also filter the data conditionally to explore the dataset with specific classes, e.g.:
 SuperData <span class="op">%&gt;%</span>
 <span class="st">  </span><span class="kw">filter</span>(<span class="op">!</span><span class="kw">is.na</span>(Combat),Gender<span class="op">==</span><span class="st">&#39;Female&#39;</span>)<span class="op">%&gt;%</span><span class="st"> </span>
 <span class="st">  </span><span class="kw">ggplot</span>(<span class="kw">aes</span>(<span class="dt">x=</span>Combat,<span class="dt">y=</span>Strength)) <span class="op">+</span><span class="st"> </span><span class="kw">geom_point</span>() <span class="op">+</span><span class="st"> </span><span class="kw">geom_smooth</span>(<span class="dt">method=</span>lm) <span class="op">+</span><span class="st"> </span><span class="kw">theme_bw</span>()</code></pre></div>
-<p><img src="_main_files/figure-html/unnamed-chunk-15-3.png" width="672" /></p>
+<p><img src="_main_files/figure-html/unnamed-chunk-19-3.png" width="672" /></p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">library</span>(GGally)
 ## This is a great library for exploring data quickly! Rather than coding everything bit by bit
 
 quant_df &lt;-<span class="st"> </span>SuperData <span class="op">%&gt;%</span><span class="st"> </span>dplyr<span class="op">::</span><span class="kw">select</span>(Intelligence<span class="op">:</span>Gender,TotalPower)
 <span class="kw">ggpairs</span>(quant_df, <span class="dt">progress =</span> <span class="ot">FALSE</span>)</code></pre></div>
-<p><img src="_main_files/figure-html/unnamed-chunk-15-4.png" width="672" /></p>
+<p><img src="_main_files/figure-html/unnamed-chunk-19-4.png" width="672" /></p>
 <p>Note that ‘total power’ is highly correlated with strength, speed, durability and power. This could impact how we interpret the regression problem later as these variables may wash out the signal we’re trying to explore. Not a bad thing if we’re just trying to make predictions! But if we’re trying to answer a specific question, it could ‘muddy the waters’.</p>
 <p>If you have checked out some of the variables, you might notice two things:</p>
 <ol style="list-style-type: decimal">
@@ -414,7 +415,7 @@ FilteredSupes</code></pre></div>
 <p>Now let’s explore this again.</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">quant_df &lt;-<span class="st"> </span>FilteredSupes <span class="op">%&gt;%</span><span class="st"> </span>dplyr<span class="op">::</span><span class="kw">select</span>(Intelligence<span class="op">:</span>Gender,TotalPower)
 <span class="kw">ggpairs</span>(quant_df, <span class="dt">progress =</span> <span class="ot">FALSE</span>)</code></pre></div>
-<p><img src="_main_files/figure-html/unnamed-chunk-18-1.png" width="672" /></p>
+<p><img src="_main_files/figure-html/unnamed-chunk-22-1.png" width="672" /></p>
 <p>Not much has really changed, as we have not removed too many rows, which is good thing because it means that those data we removed won’t impact the final conclusions in any major way. This just simplifies our data cleaning for this particular exercise. However, we still have lots of ‘Race’ categories.</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">FilteredSupes <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">count</span>(Race)</code></pre></div>
 <pre><code>## # A tibble: 53 x 2
@@ -733,7 +734,7 @@ quant_df &lt;-<span class="st"> </span>OOEdata <span class="op">%&gt;%</span>
 <span class="st">  </span>dplyr<span class="op">::</span><span class="kw">select</span>(Intelligence<span class="op">:</span>TotalPower, Race_Human, Race_Cyborg, Race_Mutant)
 
 <span class="kw">ggpairs</span>(quant_df, <span class="dt">progress =</span> <span class="ot">FALSE</span>)</code></pre></div>
-<p><img src="_main_files/figure-html/unnamed-chunk-22-1.png" width="672" /></p>
+<p><img src="_main_files/figure-html/unnamed-chunk-26-1.png" width="672" /></p>
 <p>This figure is very messy to look at here in R Markdown - but if you eliminate a few of the variables, or use R Studio’s zoom button in the plot window, you should be able to explore this!</p>
 </div>
 <div id="the-models" class="section level3">
@@ -762,7 +763,7 @@ form &lt;-<span class="st"> </span><span class="kw">update</span>(form, . <span 
 treemod &lt;-<span class="st"> </span><span class="kw">rpart</span>(form, <span class="dt">method=</span><span class="st">&#39;class&#39;</span>,<span class="dt">data=</span>modeldat,<span class="dt">cp=</span><span class="fl">0.001</span>,<span class="dt">maxdepth=</span><span class="dv">6</span>)
 
 <span class="kw">rpart.plot</span>(treemod,<span class="dt">cex=</span><span class="fl">0.7</span>)</code></pre></div>
-<p><img src="_main_files/figure-html/unnamed-chunk-23-1.png" width="672" /></p>
+<p><img src="_main_files/figure-html/unnamed-chunk-27-1.png" width="672" /></p>
 </div>
 </div>
 <div id="gbm.step" class="section level4">
@@ -792,84 +793,80 @@ gbmModel &lt;-<span class="st"> </span><span class="kw">gbm.step</span>(<span cl
 ## total mean deviance =  1.2623 
 ## tolerance is fixed at  0.0013 
 ## ntrees resid. dev. 
-## 50    1.256 
+## 50    1.2563 
 ## now adding trees... 
-## 100   1.2506 
-## 150   1.2455 
-## 200   1.2415 
-## 250   1.2377 
-## 300   1.2341 
-## 350   1.2305 
-## 400   1.2278 
-## 450   1.2251 
-## 500   1.223 
-## 550   1.2209 
-## 600   1.2189 
-## 650   1.2172 
-## 700   1.2159 
-## 750   1.215 
-## 800   1.2138 
-## 850   1.2128 
-## 900   1.2118 
-## 950   1.2109 
-## 1000   1.2107 
-## 1050   1.2104 
-## 1100   1.2099 
-## 1150   1.2098 
-## 1200   1.2095 
-## 1250   1.2093 
-## 1300   1.2092 
-## 1350   1.2092 
-## 1400   1.2091 
-## 1450   1.2093 
-## 1500   1.2098 
-## 1550   1.21 
-## 1600   1.2101 
-## 1650   1.2104 
-## 1700   1.2107 
-## 1750   1.2111</code></pre>
-<pre><code>## fitting final gbm model with a fixed number of 1400 trees for Alignment_targ</code></pre>
-<p><img src="_main_files/figure-html/unnamed-chunk-24-1.png" width="672" /></p>
+## 100   1.2509 
+## 150   1.2463 
+## 200   1.2425 
+## 250   1.2391 
+## 300   1.2359 
+## 350   1.2333 
+## 400   1.2309 
+## 450   1.2287 
+## 500   1.2268 
+## 550   1.2257 
+## 600   1.2244 
+## 650   1.2229 
+## 700   1.2216 
+## 750   1.2209 
+## 800   1.2202 
+## 850   1.2194 
+## 900   1.2191 
+## 950   1.2187 
+## 1000   1.2185 
+## 1050   1.2181 
+## 1100   1.2184 
+## 1150   1.2183 
+## 1200   1.2185 
+## 1250   1.2185 
+## 1300   1.2187 
+## 1350   1.219 
+## 1400   1.2193 
+## 1450   1.2196 
+## 1500   1.2199 
+## 1550   1.2206</code></pre>
+<pre><code>## fitting final gbm model with a fixed number of 1050 trees for Alignment_targ</code></pre>
+<p><img src="_main_files/figure-html/unnamed-chunk-28-1.png" width="672" /></p>
 <pre><code>## 
 ## mean total deviance = 1.262 
-## mean residual deviance = 1.003 
+## mean residual deviance = 1.048 
 ##  
-## estimated cv deviance = 1.209 ; se = 0.021 
+## estimated cv deviance = 1.218 ; se = 0.027 
 ##  
-## training data correlation = 0.635 
-## cv correlation =  0.235 ; se = 0.049 
+## training data correlation = 0.609 
+## cv correlation =  0.223 ; se = 0.062 
 ##  
-## training data AUC score = 0.873 
-## cv AUC score = 0.639 ; se = 0.025 
+## training data AUC score = 0.858 
+## cv AUC score = 0.635 ; se = 0.036 
 ##  
-## elapsed time -  0.35 minutes</code></pre>
+## elapsed time -  0.31 minutes</code></pre>
 <p>To get a summary of the output that shows the variable importance rankings:</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">summary</span>(gbmModel)</code></pre></div>
-<p><img src="_main_files/figure-html/unnamed-chunk-25-1.png" width="672" /></p>
-<pre><code>##                           var    rel.inf
-## Intelligence     Intelligence 19.0020695
-## Speed                   Speed 12.2313119
-## TotalPower         TotalPower 11.2780910
-## Durability         Durability 11.0676091
-## Power                   Power  9.6616133
-## Combat                 Combat  9.4768883
-## Gender                 Gender  8.8761597
-## Strength             Strength  7.4926870
-## Creator               Creator  6.5287034
-## Race_Human         Race_Human  2.8874781
-## Race_Mutant       Race_Mutant  1.3156192
-## Race_God             Race_God  0.1817697
-## Race_Animal       Race_Animal  0.0000000
-## Race_Demon         Race_Demon  0.0000000
-## Race_Asgardian Race_Asgardian  0.0000000
-## Race_Android     Race_Android  0.0000000</code></pre>
+<p><img src="_main_files/figure-html/unnamed-chunk-29-1.png" width="672" /></p>
+<pre><code>##                           var   rel.inf
+## Intelligence     Intelligence 20.820157
+## Speed                   Speed 11.911751
+## Durability         Durability 11.470119
+## TotalPower         TotalPower 10.777151
+## Gender                 Gender  9.738665
+## Power                   Power  9.175801
+## Combat                 Combat  8.747551
+## Creator               Creator  6.619132
+## Strength             Strength  6.483010
+## Race_Human         Race_Human  2.880252
+## Race_Mutant       Race_Mutant  1.164674
+## Race_God             Race_God  0.211736
+## Race_Animal       Race_Animal  0.000000
+## Race_Demon         Race_Demon  0.000000
+## Race_Asgardian Race_Asgardian  0.000000
+## Race_Android     Race_Android  0.000000</code></pre>
 <p>You can also plot the partial dependence plots, and then take it further to explore interactions by plotting the perspective plots</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">gbm.plot</span>(gbmModel,<span class="dt">n.plots=</span><span class="dv">5</span>,<span class="dt">write.title=</span>F)</code></pre></div>
-<p><img src="_main_files/figure-html/unnamed-chunk-26-1.png" width="672" /></p>
+<p><img src="_main_files/figure-html/unnamed-chunk-30-1.png" width="672" /></p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">## the gbm perspective plot for intelligence and speed versus the fitted values(z)
 <span class="kw">gbm.perspec</span>(gbmModel,<span class="dv">1</span>,<span class="dv">3</span>,<span class="dt">z.range=</span><span class="kw">c</span>(<span class="fl">0.15</span>,<span class="fl">0.6</span>),<span class="dt">theta=</span><span class="dv">205</span>)</code></pre></div>
-<pre><code>## maximum value = 0.57</code></pre>
-<p><img src="_main_files/figure-html/unnamed-chunk-26-2.png" width="672" /></p>
+<pre><code>## maximum value = 0.53</code></pre>
+<p><img src="_main_files/figure-html/unnamed-chunk-30-2.png" width="672" /></p>
 </div>
 <div id="random-forest" class="section level4">
 <h4><span class="header-section-number">10.1.3.3</span> random forest</h4>
@@ -893,26 +890,26 @@ form &lt;-<span class="st"> </span><span class="kw">update</span>(form, . <span 
 rf.model &lt;-<span class="st"> </span><span class="kw">randomForest</span>(<span class="dt">data=</span><span class="kw">data.frame</span>(modeldat),form,<span class="dt">mtry=</span><span class="dv">3</span>,<span class="dt">maxnodes=</span><span class="dv">10</span>)
 <span class="kw">importance</span>(rf.model)</code></pre></div>
 <pre><code>##                MeanDecreaseGini
-## Intelligence         5.97906362
-## Strength             2.71015149
-## Speed                3.02054765
-## Durability           3.38889346
-## Power                2.11231623
-## Combat               2.55682683
-## Gender               3.77661464
-## Creator              2.21680694
-## TotalPower           3.70953049
-## Race_Animal          0.09094122
-## Race_Human           0.62911709
-## Race_Demon           0.20356215
-## Race_God             0.92810221
-## Race_Asgardian       0.10114833
-## Race_Mutant          0.52449426
-## Race_Android         0.41870671</code></pre>
+## Intelligence         5.79340259
+## Strength             2.80338395
+## Speed                2.89549531
+## Durability           3.36757243
+## Power                2.17044642
+## Combat               2.51442630
+## Gender               3.52461844
+## Creator              2.21753933
+## TotalPower           3.58380358
+## Race_Animal          0.08471123
+## Race_Human           0.64084541
+## Race_Demon           0.19139475
+## Race_God             0.86717915
+## Race_Asgardian       0.12010910
+## Race_Mutant          0.58197529
+## Race_Android         0.40869502</code></pre>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">partialPlot</span>(rf.model,<span class="kw">data.frame</span>(modeldat),Intelligence)</code></pre></div>
-<p><img src="_main_files/figure-html/unnamed-chunk-27-1.png" width="672" /></p>
+<p><img src="_main_files/figure-html/unnamed-chunk-31-1.png" width="672" /></p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">partialPlot</span>(rf.model,<span class="kw">data.frame</span>(modeldat),Gender)</code></pre></div>
-<p><img src="_main_files/figure-html/unnamed-chunk-27-2.png" width="672" /></p>
+<p><img src="_main_files/figure-html/unnamed-chunk-31-2.png" width="672" /></p>
 <p><strong><em>The partial dependence plot will focus on the FIRST class. So if you’re using 0/1, then 0 will be focused on in the interpretation of the plots. This can be changed with the ‘which.class’ argument in partialPlot</em></strong></p>
 </div>
 </div>
@@ -946,106 +943,112 @@ gbmModel &lt;-<span class="st"> </span><span class="kw">gbm.step</span>(<span cl
 ## total mean deviance =  82.8383 
 ## tolerance is fixed at  0.0828 
 ## ntrees resid. dev. 
-## 50    81.8498 
+## 50    81.9699 
 ## now adding trees... 
-## 100   80.7488 
-## 150   79.714 
-## 200   78.7602 
-## 250   77.8476 
-## 300   76.9881 
-## 350   76.176 
-## 400   75.4368 
-## 450   74.7659 
-## 500   74.1771 
-## 550   73.589 
-## 600   73.0445 
-## 650   72.5335 
-## 700   72.0467 
-## 750   71.6144 
-## 800   71.1758 
-## 850   70.7849 
-## 900   70.3872 
-## 950   70.0014 
-## 1000   69.6746 
-## 1050   69.3573 
-## 1100   69.0595 
-## 1150   68.792 
-## 1200   68.5166 
-## 1250   68.2891 
-## 1300   68.0722 
-## 1350   67.8768 
-## 1400   67.6964 
-## 1450   67.5282 
-## 1500   67.3722 
-## 1550   67.2347 
-## 1600   67.092 
-## 1650   66.9663 
-## 1700   66.8533 
-## 1750   66.7477 
-## 1800   66.6437 
-## 1850   66.5526 
-## 1900   66.4648 
-## 1950   66.3756 
-## 2000   66.3115 
-## 2050   66.2497 
-## 2100   66.1841 
-## 2150   66.1106 
-## 2200   66.068 
-## 2250   66.0449 
-## 2300   65.9985 
-## 2350   65.9618 
-## 2400   65.9109 
-## 2450   65.8887 
-## 2500   65.8651 
-## 2550   65.8467 
-## 2600   65.84 
-## 2650   65.8064 
-## 2700   65.7823 
-## 2750   65.7694 
-## 2800   65.7667 
-## 2850   65.7548 
-## 2900   65.7558 
-## 2950   65.7533 
-## 3000   65.773 
-## 3050   65.7719 
-## 3100   65.7735 
-## 3150   65.7841 
-## 3200   65.8002 
-## 3250   65.8017 
-## 3300   65.8118</code></pre>
-<pre><code>## fitting final gbm model with a fixed number of 2950 trees for TotalPower</code></pre>
-<p><img src="_main_files/figure-html/unnamed-chunk-28-1.png" width="672" /></p>
+## 100   80.8815 
+## 150   79.8405 
+## 200   78.8722 
+## 250   77.946 
+## 300   77.086 
+## 350   76.258 
+## 400   75.5219 
+## 450   74.8409 
+## 500   74.2073 
+## 550   73.6355 
+## 600   73.0826 
+## 650   72.5648 
+## 700   72.0707 
+## 750   71.605 
+## 800   71.1614 
+## 850   70.7574 
+## 900   70.3639 
+## 950   70.0084 
+## 1000   69.6572 
+## 1050   69.34 
+## 1100   69.0415 
+## 1150   68.7801 
+## 1200   68.5371 
+## 1250   68.3118 
+## 1300   68.1227 
+## 1350   67.9394 
+## 1400   67.7726 
+## 1450   67.6004 
+## 1500   67.4415 
+## 1550   67.2977 
+## 1600   67.1528 
+## 1650   66.9926 
+## 1700   66.8738 
+## 1750   66.7377 
+## 1800   66.6356 
+## 1850   66.5421 
+## 1900   66.4563 
+## 1950   66.361 
+## 2000   66.2765 
+## 2050   66.187 
+## 2100   66.1144 
+## 2150   66.0401 
+## 2200   65.9854 
+## 2250   65.9365 
+## 2300   65.8814 
+## 2350   65.8265 
+## 2400   65.7799 
+## 2450   65.7448 
+## 2500   65.6983 
+## 2550   65.6682 
+## 2600   65.6615 
+## 2650   65.6389 
+## 2700   65.6333 
+## 2750   65.6036 
+## 2800   65.5908 
+## 2850   65.5748 
+## 2900   65.568 
+## 2950   65.5343 
+## 3000   65.5296 
+## 3050   65.5225 
+## 3100   65.5114 
+## 3150   65.503 
+## 3200   65.4951 
+## 3250   65.4999 
+## 3300   65.5027 
+## 3350   65.4875 
+## 3400   65.4838 
+## 3450   65.4834 
+## 3500   65.4879 
+## 3550   65.4904 
+## 3600   65.4951</code></pre>
+<pre><code>## fitting final gbm model with a fixed number of 3450 trees for TotalPower</code></pre>
+<p><img src="_main_files/figure-html/unnamed-chunk-32-1.png" width="672" /></p>
 <pre><code>## 
 ## mean total deviance = 82.838 
-## mean residual deviance = 54.543 
+## mean residual deviance = 53.403 
 ##  
-## estimated cv deviance = 65.753 ; se = 1.063 
+## estimated cv deviance = 65.483 ; se = 1.892 
 ##  
-## training data correlation = 0.724 
-## cv correlation =  0.583 ; se = 0.032 
+## training data correlation = 0.73 
+## cv correlation =  0.597 ; se = 0.027 
 ##  
-## elapsed time -  0.77 minutes</code></pre>
+## elapsed time -  0.85 minutes</code></pre>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">summary</span>(gbmModel)</code></pre></div>
-<p><img src="_main_files/figure-html/unnamed-chunk-28-2.png" width="672" /></p>
+<p><img src="_main_files/figure-html/unnamed-chunk-32-2.png" width="672" /></p>
 <pre><code>##                           var    rel.inf
-## Combat                 Combat 42.4419404
-## Intelligence     Intelligence 22.9033939
-## Race_Human         Race_Human  9.8977250
-## Creator               Creator  8.7276230
-## Gender                 Gender  7.5488534
-## Alignment           Alignment  3.9918090
-## Race_Mutant       Race_Mutant  3.6870195
-## Race_God             Race_God  0.8016359
+## Combat                 Combat 42.2192682
+## Intelligence     Intelligence 23.2369881
+## Race_Human         Race_Human  9.4306376
+## Creator               Creator  9.0537938
+## Gender                 Gender  7.5214999
+## Alignment           Alignment  4.2604209
+## Race_Mutant       Race_Mutant  3.4907911
+## Race_God             Race_God  0.7866004
 ## Race_Animal       Race_Animal  0.0000000
 ## Race_Demon         Race_Demon  0.0000000
 ## Race_Asgardian Race_Asgardian  0.0000000
 ## Race_Android     Race_Android  0.0000000</code></pre>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">gbm.plot</span>(gbmModel,<span class="dt">n.plots=</span><span class="dv">5</span>,<span class="dt">write.title=</span>F)</code></pre></div>
-<p><img src="_main_files/figure-html/unnamed-chunk-28-3.png" width="672" /></p>
+<p><img src="_main_files/figure-html/unnamed-chunk-32-3.png" width="672" /></p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">## But we are interested in gender, so let&#39;s plot that.
 
 <span class="kw">gbm.plot</span>(gbmModel,<span class="dt">variable.no=</span><span class="dv">4</span>,<span class="dt">plot.layout=</span><span class="kw">c</span>(<span class="dv">1</span>,<span class="dv">1</span>))</code></pre></div>
-<p><img src="_main_files/figure-html/unnamed-chunk-28-4.png" width="672" /></p>
+<p><img src="_main_files/figure-html/unnamed-chunk-32-4.png" width="672" /></p>
 <p>Interestingly, we see that there does seem to be some sort of bias towards more powerful male characters. However, bearing in mind that the predictive performance (as determined by the summary statistics) is not very high.</p>
 
 </div>

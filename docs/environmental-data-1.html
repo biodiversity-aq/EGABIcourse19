@@ -21,7 +21,7 @@
   <meta name="twitter:description" content="Course material" />
   
 
-<meta name="author" content="Anton Van de Putte, Charlène Guillaumot, Grant Humphries, Huw Griffith, Ben Raymond, Ryan Reisinger" />
+<meta name="author" content="Anton Van de Putte, Charlène Guillaumot, Grant Humphries, Huw Griffiths, Ben Raymond, Ryan Reisinger" />
 
 
 
@@ -178,6 +178,7 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
 <li class="chapter" data-level="9.3" data-path="species-distribution-modelling.html"><a href="species-distribution-modelling.html#calibration"><i class="fa fa-check"></i><b>9.3</b> Calibration</a><ul>
 <li class="chapter" data-level="9.3.1" data-path="species-distribution-modelling.html"><a href="species-distribution-modelling.html#references-2"><i class="fa fa-check"></i><b>9.3.1</b> References</a></li>
 </ul></li>
+<li class="chapter" data-level="9.4" data-path="species-distribution-modelling.html"><a href="species-distribution-modelling.html#exercise-scripts"><i class="fa fa-check"></i><b>9.4</b> Exercise scripts</a></li>
 </ul></li>
 <li class="chapter" data-level="10" data-path="sdm-algorithms.html"><a href="sdm-algorithms.html"><i class="fa fa-check"></i><b>10</b> SDM algorithms</a><ul>
 <li class="chapter" data-level="10.1" data-path="sdm-algorithms.html"><a href="sdm-algorithms.html#exercises---practice-with-models"><i class="fa fa-check"></i><b>10.1</b> Exercises - Practice with models</a><ul>
@@ -279,7 +280,7 @@ srcs[<span class="dv">1</span>, ]</code></pre></div>
 <p>And fetch the data:</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">result &lt;-<span class="st"> </span><span class="kw">bb_get</span>(data_source, <span class="dt">local_file_root =</span> my_data_dir, <span class="dt">verbose =</span> <span class="ot">TRUE</span>)</code></pre></div>
 <pre><code>## 
-## Fri Aug 30 09:33:59 2019
+## Sun Sep 01 20:05:12 2019
 ## Synchronizing dataset: Southern Ocean marine environmental data
 ## Source URL https://data.aad.gov.au/eds/4742/download
 ## --------------------------------------------------------------------------------------------
@@ -289,7 +290,7 @@ srcs[<span class="dv">1</span>, ]</code></pre></div>
 ##  downloading file 1 of 1: https://data.aad.gov.au/eds/4742/download ...  file unchanged on server, not downloading.
 ##   decompressing: c:\data\cache/data.aad.gov.au/eds/4742/download.zip ... no new files to extract (not overwriting existing files) ... done.
 ## 
-## Fri Aug 30 09:34:01 2019 dataset synchronization complete: Southern Ocean marine environmental data</code></pre>
+## Sun Sep 01 20:05:13 2019 dataset synchronization complete: Southern Ocean marine environmental data</code></pre>
 <p>Now we have a local copy of our data. The sync can be run daily so that the local collection is always up to date - it will only download new files, or files that have changed since the last download. For more information on <code>bowerbird</code>, see the <a href="https://ropensci.github.io/bowerbird/articles/bowerbird.html">package vignette</a>.</p>
 <p>The <code>result</code> object holds information about the data that we downloaded:</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">result</code></pre></div>
@@ -341,7 +342,7 @@ srcs[<span class="dv">1</span>, ]</code></pre></div>
     <span class="kw">sources</span>(<span class="st">&quot;ETOPO2 bathymetry&quot;</span>))
 result &lt;-<span class="st"> </span><span class="kw">bb_get</span>(src, <span class="dt">local_file_root =</span> my_data_dir, <span class="dt">clobber =</span> <span class="dv">0</span>, <span class="dt">verbose =</span> <span class="ot">TRUE</span>, <span class="dt">confirm =</span> <span class="ot">NULL</span>)</code></pre></div>
 <pre><code>##  
-## Fri Aug 30 09:34:01 2019 
+## Sun Sep 01 20:05:13 2019 
 ## Synchronizing dataset: NSIDC SMMR-SSM/I Nasateam sea ice concentration 
 ##  
 ##  [... output truncated]</code></pre>
@@ -358,13 +359,13 @@ bx &lt;-<span class="st"> </span><span class="kw">readtopo</span>(<span class="s
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">plot</span>(bx)
 <span class="kw">lines</span>(ele<span class="op">$</span>lon, ele<span class="op">$</span>lat)</code></pre></div>
 <p><img src="_main_files/figure-html/raadt5-1.png" width="672" /></p>
-<p>The real power of <code>raadtools</code> comes from its extraction functions. We can extract the depth values along our track using the <code>extract()</code> function. We pass it the data-reader function to use (<code>readtopo</code>), the data to apply it to (<code>ele[, c(&quot;lon&quot;, &quot;lat&quot;)]</code>), and any other options to pass to the reader function (in this case, specifying the topographic data source <code>topo = &quot;etopo2&quot;</code>):</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">ele<span class="op">$</span>depth &lt;-<span class="st"> </span><span class="kw">extract</span>(readtopo, ele[, <span class="kw">c</span>(<span class="st">&quot;lon&quot;</span>, <span class="st">&quot;lat&quot;</span>)], <span class="dt">topo =</span> <span class="st">&quot;etopo2&quot;</span>)</code></pre></div>
+<p>The real power of <code>raadtools</code> comes from its extraction functions. We can extract the depth values along our track using the <code>raadtools::extract()</code> function. We pass it the data-reader function to use (<code>readtopo</code>), the data to apply it to (<code>ele[, c(&quot;lon&quot;, &quot;lat&quot;)]</code>), and any other options to pass to the reader function (in this case, specifying the topographic data source <code>topo = &quot;etopo2&quot;</code>):</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">ele<span class="op">$</span>depth &lt;-<span class="st"> </span>raadtools<span class="op">::</span><span class="kw">extract</span>(readtopo, ele[, <span class="kw">c</span>(<span class="st">&quot;lon&quot;</span>, <span class="st">&quot;lat&quot;</span>)], <span class="dt">topo =</span> <span class="st">&quot;etopo2&quot;</span>)</code></pre></div>
 <p>Plot the histogram of depth values, showing that most of the track points are located in relatively shallow waters:</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">with</span>(ele, <span class="kw">hist</span>(depth, <span class="dt">breaks =</span> <span class="dv">20</span>))</code></pre></div>
 <p><img src="_main_files/figure-html/raadt7-1.png" width="672" /></p>
 <p>This type of extraction will also work with time-varying data — for example, we can extract the sea-ice conditions along our track, based on each track point’s location and time:</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">ele<span class="op">$</span>ice &lt;-<span class="st"> </span><span class="kw">extract</span>(readice, ele[, <span class="kw">c</span>(<span class="st">&quot;lon&quot;</span>, <span class="st">&quot;lat&quot;</span>, <span class="st">&quot;date&quot;</span>)])</code></pre></div>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">ele<span class="op">$</span>ice &lt;-<span class="st"> </span>raadtools<span class="op">::</span><span class="kw">extract</span>(readice, ele[, <span class="kw">c</span>(<span class="st">&quot;lon&quot;</span>, <span class="st">&quot;lat&quot;</span>, <span class="st">&quot;date&quot;</span>)])</code></pre></div>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">## points outside the ice grid will have missing ice values, so fill them with zeros
 ele<span class="op">$</span>ice[<span class="kw">is.na</span>(ele<span class="op">$</span>ice)] &lt;-<span class="st"> </span><span class="dv">0</span>
 <span class="kw">with</span>(ele, <span class="kw">plot</span>(date, ice, <span class="dt">type =</span> <span class="st">&quot;l&quot;</span>))</code></pre></div>

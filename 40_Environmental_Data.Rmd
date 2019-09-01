@@ -149,10 +149,10 @@ plot(bx)
 lines(ele$lon, ele$lat)
 ```
 
-The real power of `raadtools` comes from its extraction functions. We can extract the depth values along our track using the `extract()` function. We pass it the data-reader function to use (`readtopo`), the data to apply it to (`ele[, c("lon", "lat")]`), and any other options to pass to the reader function (in this case, specifying the topographic data source `topo = "etopo2"`):
+The real power of `raadtools` comes from its extraction functions. We can extract the depth values along our track using the `raadtools::extract()` function. We pass it the data-reader function to use (`readtopo`), the data to apply it to (`ele[, c("lon", "lat")]`), and any other options to pass to the reader function (in this case, specifying the topographic data source `topo = "etopo2"`):
 
 ```{r raadt6}
-ele$depth <- extract(readtopo, ele[, c("lon", "lat")], topo = "etopo2")
+ele$depth <- raadtools::extract(readtopo, ele[, c("lon", "lat")], topo = "etopo2")
 ```
 
 Plot the histogram of depth values, showing that most of the track points are located in relatively shallow waters:
@@ -164,7 +164,7 @@ with(ele, hist(depth, breaks = 20))
 This type of extraction will also work with time-varying data &mdash; for example, we can extract the sea-ice conditions along our track, based on each track point's location and time:
 
 ```{r raadt8, results = "none", message = FALSE, warning = FALSE}
-ele$ice <- extract(readice, ele[, c("lon", "lat", "date")])
+ele$ice <- raadtools::extract(readice, ele[, c("lon", "lat", "date")])
 ```
 ```{r raadt9}
 ## points outside the ice grid will have missing ice values, so fill them with zeros
