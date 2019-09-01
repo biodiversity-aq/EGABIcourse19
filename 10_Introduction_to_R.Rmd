@@ -1,9 +1,286 @@
 # Introduction to R and the Tidyverse
 
-[Powerpoint presentation](./course_material/tidyverse/Tidyverse.pptx) and [R script](./course_material/tidyverse/Intro_to_tidyverse.R)
+[Presentation (PDF)](./course_material/tidyverse/Tidyverse.pdf)
+
+## Exercise R script
+
+The R script can be [downloaded here](./course_material/tidyverse/Intro_to_tidyverse.R) and is also reproduced below.
 
 
-See also:
+```{r eval = FALSE}
+
+## We load Tidyverse here, which includes a suite of packages that can work together.
+## When loading directly like below, you get a table which tells you what packages are attached
+library(tidyverse)
+## you will also see a list of conflicted functions - that is, function names that appear
+## in multiple packages. For example, there is a "filter" function in both the stats package
+## and in the dplyr package. See the course notes about namespace prefixes (and e.g.
+## the "dplyr::filter()" usages below)
+
+## Load the starwars dataset found in the dplyr package  (we'll use this later!)
+data(starwars)
+
+
+#################################################################
+#### Data importing ####
+########################
+
+setwd("c:/EGABIcourse19-master/docs/course_material/tidyverse")
+
+### Using base R read.csv the column classes are imported poorly and we would have to
+##    convert them ourselves later!!
+X.csv <- read.csv('tidyverse_dummy_import.csv')
+sapply(X.csv, class)
+
+
+## the readr library can read in csvs as well, except this is done intelligently and fields
+##   can be defined better
+X.csv_r <- readr::read_csv('tidyverse_dummy_import.csv',
+                           col_types=list(Occurrence_field = col_factor()))
+
+## The readxl library is for reading other excel formats and WORKS WELL FOR DATETIME columns
+## However, it does not have a column type option for factors
+##   (if you wanted to define a column as a factor)
+X.xlsx_t <- readxl::read_xlsx('tidyverse_dummy_import.xlsx',1,
+                              col_types = c('guess','numeric','numeric','text','date'))
+## you could make a column a factor, though, if you needed to:
+X.xlsx_t$Occurrence_field <- as.factor(X.xlsx_t$Occurrence_field)
+
+
+###################################################################
+#### Data wrangling ####
+########################
+
+# select the name, gender and homeworld columns
+starwars %>% dplyr::select(name,gender,homeworld)
+## note that we use dplyr::select(), not just select(), because there are several "select"
+##   functions in different packages. Using the namespace prefix makes it clear which one
+##   we are using and less prone to errors caused by e.g. packages being loaded in a
+##   different order
+
+# r base equivalent
+starwars[,c('name','gender','homeworld')]
+
+
+# filter rows with characters from Tatooine
+starwars %>% dplyr::filter(homeworld=='Tatooine')
+# r base equivalent
+starwars[which(starwars$homeworld=='Tatooine'),]
+
+
+# stringing arguments
+starwars %>%
+  dplyr::select(name,gender,homeworld)%>%
+  dplyr::filter(homeworld=='Tatooine')
+
+#r base equivalent
+starwars[which(starwars$homeworld=='Tatooine'),c('name','gender','homeworld')]
+
+
+##################################
+#### grouping and summarising ####
+##################################
+starwars %>% group_by(homeworld)
+
+## This gets the mean height of characters, grouped by homeworld, and adds a count to
+##   get sample size
+starwars %>%
+  group_by(homeworld) %>%
+  summarise(mean_height = mean(height),n = n())
+
+
+## This gets the mean height of characters, grouped by homeworld, and adds a count to
+##   get sample size
+starwars %>%
+  group_by(homeworld,gender) %>%
+  summarise(mean_height = mean(height),n = n()) %>%
+  dplyr::filter(!is.na(homeworld))
+
+
+### Other ways to count!
+starwars %>% count(homeworld,gender) %>% dplyr::filter(!is.na(homeworld))
+starwars %>% add_count(homeworld,gender) %>% dplyr::filter(!is.na(homeworld))
+
+################
+#### TASKS ####
+
+## Create a table with mean median and standard deviation of mass for all humans with brown hair
+starwars %>%
+  group_by(hair_color,species) %>%
+  summarise(meanmass=mean(mass,na.rm = T),
+            medmass=median(mass,na.rm = T),
+            sdmass=sd(mass,na.rm = T)) %>%
+  dplyr::filter(species == 'Human',hair_color=='brown')
+
+## Get the tallest and shortest non-human character
+starwars %>%
+  dplyr::filter(species != 'Human') %>%
+  arrange(height)
+
+starwars %>%
+  dplyr::filter(species != 'Human') %>%
+  arrange(-height)
+
+## How many droids were in Attack of the Clones?
+starwars %>%
+  unnest(films) %>%
+  count(species,films) %>%
+  dplyr::filter(species=='Droid',films=='Attack of the Clones')
+
+
+######################################
+#### Mutate ####
+
+# This will calculate a new column that is the ration of height to mass
+starwars %>%
+  mutate(hm_ratio = height/mass)
+
+
+
+######################################
+#### join ####
+
+df1 <- tibble(
+  category = c('a','a','b','c','c','a','b'),
+  id = c(1,2,3,4,5,6,7)
+)
+
+df2 <- tibble(
+  category = c('b','a','b','a','a','c','c'),
+  id = c(7,6,5,4,3,2,1)
+)
+
+## This will join the two tibbles by the id value.
+df1 %>% left_join(df2,by='id')
+
+
+
+#################################################################
+#### Gather and Spread ####
+###########################
+
+### This is a dataset that you might come across - different devices taking
+##    measurements on the same day
+sst_data <- data.frame(
+  time = as.Date('2009-01-01') + 0:9,
+  unit_A = round(runif(10, 6, 9),2),
+  unit_B = round(runif(10, 7, 10),2),
+  unit_C = round(runif(10, 6, 10),2)
+)
+
+## Gathering makes the dataframe go from wide to LONG format (Long format
+##   typically used by ggplot2)
+sst_data %>%
+  gather(unit,sst,-time)
+
+## spread is the opposite function to gather and goes from LONG to WIDE format
+sst_data %>%
+  gather(unit,sst,-time) %>%
+  spread(unit,sst)
+
+
+
+###############################
+#### Nesting ####
+
+## This nests the unit and sst columns into a table for every time column.
+nested_sst <- sst_data %>%
+  gather(unit,sst,-time) %>%
+  nest(unit,sst)
+
+## This can be used to view a specific data row table
+nested_sst$data[[1]]
+
+###############################
+#### Tasks 2 ####
+#################################
+
+## A tibble with star wars films ranked (by my preference)
+film.rankings <- tibble(
+  films = c('The Phantom Menace','Attack of the Clones','Revenge of the Sith',
+           'A New Hope','The Empire Strikes Back','Return of the Jedi',
+           'The Force Awakens'),
+  rank = c(7,6,5,3,4,1,2)
+)
+
+
+## What films does the character Plo Koon appear in, ordered by rank? The final result
+##   should be a single table drawn from a list column
+Plo.Koon <-starwars %>%
+  dplyr::select(name,films) %>%
+  unnest(films) %>%
+  left_join(film.rankings,by='films') %>%
+  arrange(name,rank) %>%
+  nest(films,rank) %>%
+  dplyr::filter(name == 'Plo Koon')
+
+
+
+## Create a table that nests height and mass data for only humans in a column nested
+##   by film name.
+nested.mass.height <- starwars %>%
+  unnest(films)%>%
+  dplyr::select(name,height,mass,films,species) %>%
+  dplyr::filter(species=='Human')%>%
+  nest(name,height,mass)
+
+
+
+
+################################################################################
+#### Final task - functional programming
+
+## Create an object that is a list of vectors
+X <- c(list(seq(1,50,5)),list(seq(40,100,2)))
+
+## base R
+lapply(X,mean)
+
+## tidyverse
+map(X,mean)
+
+
+
+### This shows how you can use map to run functions over lists to get interesting model
+##    results for large arrays of data.  Very helpful for summarising data quickly
+nested.mass.height %>%
+  mutate(
+    model = map(
+      data,~lm(mass~height,data=.x)
+    ),
+    slope = map_dbl(
+      model, ~coef(.x)['height']
+    ),
+    r.sq = map_dbl(
+      model,~glance(.x)$'r.squared'
+    ),
+    sample_size = map_dbl(
+      data,~nrow(.x)
+    ),
+    tallest = map(
+      data,~.x[which.max(.x$height),'name']
+    ),
+    heaviest = map(
+      data,~.x[which.max(.x$mass),'name']
+    )
+  ) %>%
+  unnest(tallest,heaviest) %>%
+  rename(tallest=name,heaviest=name1)
+
+#########################################################################
+#### ggplot2 link ####
+
+
+
+starwars %>%
+  dplyr::filter(species=='Human',gender=='male') %>%
+  ggplot(aes(x=mass,y=height))+
+    geom_point()+
+    geom_smooth(method=lm)
+```
+
+
+## See also:
 
 - The Software Carpentry [Introduction to R and RStudio](https://swcarpentry.github.io/r-novice-gapminder/01-rstudio-intro/).
 - An [Introduction to R](https://obis.org/manual/intror/) by the Ocean Biogeographic Information System (OBIS).
