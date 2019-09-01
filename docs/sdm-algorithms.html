@@ -820,73 +820,69 @@ gbmModel &lt;-<span class="st"> </span><span class="kw">gbm.step</span>(<span cl
 ## total mean deviance =  1.2623 
 ## tolerance is fixed at  0.0013 
 ## ntrees resid. dev. 
-## 50    1.2565 
+## 50    1.256 
 ## now adding trees... 
-## 100   1.2515 
-## 150   1.2472 
-## 200   1.2432 
-## 250   1.2396 
-## 300   1.2368 
-## 350   1.2339 
-## 400   1.2315 
-## 450   1.2294 
-## 500   1.2276 
-## 550   1.2258 
-## 600   1.2246 
-## 650   1.2233 
-## 700   1.2222 
-## 750   1.2214 
-## 800   1.2204 
-## 850   1.2198 
-## 900   1.2189 
-## 950   1.2182 
-## 1000   1.2179 
-## 1050   1.2173 
-## 1100   1.2169 
-## 1150   1.2167 
-## 1200   1.2164 
-## 1250   1.216 
-## 1300   1.2162 
-## 1350   1.2161 
-## 1400   1.2163 
-## 1450   1.2165 
-## 1500   1.2165 
-## 1550   1.2166 
-## 1600   1.217 
-## 1650   1.2173 
-## 1700   1.2177 
-## 1750   1.2181</code></pre>
-<pre><code>## fitting final gbm model with a fixed number of 1250 trees for Alignment_targ</code></pre>
+## 100   1.2506 
+## 150   1.2457 
+## 200   1.2411 
+## 250   1.2376 
+## 300   1.2343 
+## 350   1.2314 
+## 400   1.2289 
+## 450   1.2266 
+## 500   1.2244 
+## 550   1.2228 
+## 600   1.2212 
+## 650   1.22 
+## 700   1.219 
+## 750   1.2182 
+## 800   1.2178 
+## 850   1.2171 
+## 900   1.2167 
+## 950   1.2162 
+## 1000   1.2162 
+## 1050   1.216 
+## 1100   1.2164 
+## 1150   1.2164 
+## 1200   1.2162 
+## 1250   1.2165 
+## 1300   1.2167 
+## 1350   1.2171 
+## 1400   1.2176 
+## 1450   1.2183 
+## 1500   1.2188 
+## 1550   1.2194</code></pre>
+<pre><code>## fitting final gbm model with a fixed number of 1050 trees for Alignment_targ</code></pre>
 <p><img src="_main_files/figure-html/unnamed-chunk-28-1.png" width="672" /></p>
 <pre><code>## 
 ## mean total deviance = 1.262 
-## mean residual deviance = 1.021 
+## mean residual deviance = 1.048 
 ##  
-## estimated cv deviance = 1.216 ; se = 0.023 
+## estimated cv deviance = 1.216 ; se = 0.018 
 ##  
-## training data correlation = 0.623 
-## cv correlation =  0.225 ; se = 0.054 
+## training data correlation = 0.608 
+## cv correlation =  0.219 ; se = 0.047 
 ##  
-## training data AUC score = 0.865 
-## cv AUC score = 0.637 ; se = 0.032 
+## training data AUC score = 0.857 
+## cv AUC score = 0.645 ; se = 0.03 
 ##  
-## elapsed time -  0.34 minutes</code></pre>
+## elapsed time -  0.31 minutes</code></pre>
 <p>To get a summary of the output that shows the variable importance rankings:</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">summary</span>(gbmModel)</code></pre></div>
 <p><img src="_main_files/figure-html/unnamed-chunk-29-1.png" width="672" /></p>
 <pre><code>##                           var    rel.inf
-## Intelligence     Intelligence 19.7361426
-## Speed                   Speed 12.0501062
-## Durability         Durability 11.2670711
-## TotalPower         TotalPower 11.1783309
-## Power                   Power  9.3927883
-## Combat                 Combat  9.2023335
-## Gender                 Gender  9.1665974
-## Strength             Strength  7.2339232
-## Creator               Creator  6.4606968
-## Race_Human         Race_Human  2.8609579
-## Race_Mutant       Race_Mutant  1.2027066
-## Race_God             Race_God  0.2483457
+## Intelligence     Intelligence 20.6827250
+## Speed                   Speed 11.4610143
+## Durability         Durability 11.2729006
+## TotalPower         TotalPower 10.8897347
+## Gender                 Gender  9.8297482
+## Power                   Power  9.6046351
+## Combat                 Combat  8.8328880
+## Creator               Creator  6.8139959
+## Strength             Strength  6.5173526
+## Race_Human         Race_Human  2.8977875
+## Race_Mutant       Race_Mutant  1.0265049
+## Race_God             Race_God  0.1707131
 ## Race_Animal       Race_Animal  0.0000000
 ## Race_Demon         Race_Demon  0.0000000
 ## Race_Asgardian Race_Asgardian  0.0000000
@@ -896,7 +892,7 @@ gbmModel &lt;-<span class="st"> </span><span class="kw">gbm.step</span>(<span cl
 <p><img src="_main_files/figure-html/unnamed-chunk-30-1.png" width="672" /></p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">## the gbm perspective plot for intelligence and speed versus the fitted values(z)
 <span class="kw">gbm.perspec</span>(gbmModel,<span class="dv">1</span>,<span class="dv">3</span>,<span class="dt">z.range=</span><span class="kw">c</span>(<span class="fl">0.15</span>,<span class="fl">0.6</span>),<span class="dt">theta=</span><span class="dv">205</span>)</code></pre></div>
-<pre><code>## maximum value = 0.56</code></pre>
+<pre><code>## maximum value = 0.53</code></pre>
 <p><img src="_main_files/figure-html/unnamed-chunk-30-2.png" width="672" /></p>
 </div>
 <div id="random-forest" class="section level4">
@@ -921,22 +917,22 @@ form &lt;-<span class="st"> </span><span class="kw">update</span>(form, . <span 
 rf.model &lt;-<span class="st"> </span><span class="kw">randomForest</span>(<span class="dt">data=</span><span class="kw">data.frame</span>(modeldat),form,<span class="dt">mtry=</span><span class="dv">3</span>,<span class="dt">maxnodes=</span><span class="dv">10</span>)
 <span class="kw">importance</span>(rf.model)</code></pre></div>
 <pre><code>##                MeanDecreaseGini
-## Intelligence         5.28420011
-## Strength             2.84018379
-## Speed                2.83447211
-## Durability           3.38629981
-## Power                2.17637193
-## Combat               2.56785568
-## Gender               3.86252926
-## Creator              2.29448980
-## TotalPower           3.71194886
-## Race_Animal          0.09419993
-## Race_Human           0.64551003
-## Race_Demon           0.26987153
-## Race_God             0.89544742
-## Race_Asgardian       0.13587661
-## Race_Mutant          0.53551260
-## Race_Android         0.43190558</code></pre>
+## Intelligence         5.61640111
+## Strength             2.75120205
+## Speed                3.26378212
+## Durability           3.68751428
+## Power                2.00164506
+## Combat               2.69710754
+## Gender               3.65273986
+## Creator              1.95510481
+## TotalPower           3.53433695
+## Race_Animal          0.08585302
+## Race_Human           0.77356915
+## Race_Demon           0.19936608
+## Race_God             0.70108698
+## Race_Asgardian       0.13385622
+## Race_Mutant          0.57543918
+## Race_Android         0.43527047</code></pre>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">partialPlot</span>(rf.model,<span class="kw">data.frame</span>(modeldat),Intelligence)</code></pre></div>
 <p><img src="_main_files/figure-html/unnamed-chunk-31-1.png" width="672" /></p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">partialPlot</span>(rf.model,<span class="kw">data.frame</span>(modeldat),Gender)</code></pre></div>
@@ -974,102 +970,107 @@ gbmModel &lt;-<span class="st"> </span><span class="kw">gbm.step</span>(<span cl
 ## total mean deviance =  82.8383 
 ## tolerance is fixed at  0.0828 
 ## ntrees resid. dev. 
-## 50    81.9399 
+## 50    82.1646 
 ## now adding trees... 
-## 100   80.8294 
-## 150   79.762 
-## 200   78.7662 
-## 250   77.8067 
-## 300   76.9671 
-## 350   76.1876 
-## 400   75.4321 
-## 450   74.7418 
-## 500   74.129 
-## 550   73.5385 
-## 600   72.9606 
-## 650   72.4156 
-## 700   71.917 
-## 750   71.4458 
-## 800   70.9884 
-## 850   70.5602 
-## 900   70.1561 
-## 950   69.768 
-## 1000   69.4022 
-## 1050   69.0794 
-## 1100   68.7948 
-## 1150   68.5311 
-## 1200   68.2664 
-## 1250   68.0109 
-## 1300   67.7885 
-## 1350   67.5769 
-## 1400   67.3781 
-## 1450   67.1945 
-## 1500   67.0258 
-## 1550   66.8751 
-## 1600   66.7335 
-## 1650   66.6114 
-## 1700   66.4877 
-## 1750   66.3862 
-## 1800   66.2854 
-## 1850   66.181 
-## 1900   66.0872 
-## 1950   66.0112 
-## 2000   65.9212 
-## 2050   65.8425 
-## 2100   65.779 
-## 2150   65.7213 
-## 2200   65.6555 
-## 2250   65.5888 
-## 2300   65.5372 
-## 2350   65.4932 
-## 2400   65.4372 
-## 2450   65.3954 
-## 2500   65.3442 
-## 2550   65.2989 
-## 2600   65.2631 
-## 2650   65.2239 
-## 2700   65.1981 
-## 2750   65.1758 
-## 2800   65.1607 
-## 2850   65.138 
-## 2900   65.1231 
-## 2950   65.1158 
-## 3000   65.1141 
-## 3050   65.1029 
-## 3100   65.0888 
-## 3150   65.0782 
-## 3200   65.0648 
-## 3250   65.0709 
-## 3300   65.0682 
-## 3350   65.0708 
-## 3400   65.0639 
-## 3450   65.0627 
-## 3500   65.059 
-## 3550   65.0616 
-## 3600   65.055</code></pre>
-<pre><code>## fitting final gbm model with a fixed number of 3600 trees for TotalPower</code></pre>
+## 100   81.0515 
+## 150   80.0099 
+## 200   78.9957 
+## 250   78.0747 
+## 300   77.2117 
+## 350   76.3914 
+## 400   75.6181 
+## 450   74.9669 
+## 500   74.3643 
+## 550   73.8041 
+## 600   73.2439 
+## 650   72.7152 
+## 700   72.2177 
+## 750   71.7404 
+## 800   71.2944 
+## 850   70.9094 
+## 900   70.5368 
+## 950   70.1607 
+## 1000   69.828 
+## 1050   69.5046 
+## 1100   69.2004 
+## 1150   68.9086 
+## 1200   68.6309 
+## 1250   68.3832 
+## 1300   68.1409 
+## 1350   67.9372 
+## 1400   67.7401 
+## 1450   67.5465 
+## 1500   67.3648 
+## 1550   67.2172 
+## 1600   67.0695 
+## 1650   66.9401 
+## 1700   66.812 
+## 1750   66.6705 
+## 1800   66.5596 
+## 1850   66.44 
+## 1900   66.3336 
+## 1950   66.2491 
+## 2000   66.159 
+## 2050   66.0834 
+## 2100   65.9997 
+## 2150   65.9248 
+## 2200   65.8618 
+## 2250   65.7962 
+## 2300   65.7352 
+## 2350   65.6773 
+## 2400   65.622 
+## 2450   65.5787 
+## 2500   65.5579 
+## 2550   65.5355 
+## 2600   65.5166 
+## 2650   65.4954 
+## 2700   65.47 
+## 2750   65.4401 
+## 2800   65.4134 
+## 2850   65.3928 
+## 2900   65.3896 
+## 2950   65.3746 
+## 3000   65.3472 
+## 3050   65.3328 
+## 3100   65.3125 
+## 3150   65.3111 
+## 3200   65.3022 
+## 3250   65.2793 
+## 3300   65.2659 
+## 3350   65.2544 
+## 3400   65.2394 
+## 3450   65.2298 
+## 3500   65.2258 
+## 3550   65.2305 
+## 3600   65.2263 
+## 3650   65.2308 
+## 3700   65.2257 
+## 3750   65.2244 
+## 3800   65.2387 
+## 3850   65.2405</code></pre>
+<pre><code>## fitting final gbm model with a fixed number of 3750 trees for TotalPower</code></pre>
 <p><img src="_main_files/figure-html/unnamed-chunk-32-1.png" width="672" /></p>
 <pre><code>## 
 ## mean total deviance = 82.838 
-## mean residual deviance = 53.06 
+## mean residual deviance = 52.837 
 ##  
-## estimated cv deviance = 65.055 ; se = 2.478 
+## estimated cv deviance = 65.224 ; se = 1.725 
 ##  
-## training data correlation = 0.733 
-## cv correlation =  0.589 ; se = 0.03 
+## training data correlation = 0.735 
+## cv correlation =  0.601 ; se = 0.024 
 ##  
-## elapsed time -  0.86 minutes</code></pre>
+## elapsed time -  0.92 minutes</code></pre>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">summary</span>(gbmModel)</code></pre></div>
 <p><img src="_main_files/figure-html/unnamed-chunk-32-2.png" width="672" /></p>
 <pre><code>##                           var    rel.inf
-## Combat                 Combat 42.0927960
-## Intelligence     Intelligence 23.3609910
-## Race_Human         Race_Human  9.2489102
-## Creator               Creator  9.0805218
-## Gender                 Gender  7.5157572
-## Alignment           Alignment  4.4071464
-## Race_Mutant       Race_Mutant  3.6285496
-## Race_God             Race_God  0.6653277
+## Combat                 Combat 42.1908031
+## Intelligence     Intelligence 23.3232063
+## Race_Human         Race_Human  9.1917188
+## Creator               Creator  8.9862461
+## Gender                 Gender  7.7090968
+## Alignment           Alignment  4.2868607
+## Race_Mutant       Race_Mutant  3.5157636
+## Race_God             Race_God  0.7963046
 ## Race_Animal       Race_Animal  0.0000000
 ## Race_Demon         Race_Demon  0.0000000
 ## Race_Asgardian Race_Asgardian  0.0000000

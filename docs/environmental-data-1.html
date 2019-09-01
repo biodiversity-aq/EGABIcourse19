@@ -219,7 +219,7 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
 <div id="bowerbirdblueant" class="section level2">
 <h2><span class="header-section-number">9.1</span> Bowerbird/blueant</h2>
 <p>Very commonly, we want to know about the environmental conditions at our points of interest. For the remote and vast Southern Ocean these data typically come from satellite or model sources. Some data centres provide extraction tools that will pull out a subset of data to suit your requirements, but often it makes more sense to cache entire data collections locally first and then work with them from there.</p>
-<p><a href="https://github.com/AustralianAntarcticDivision/bowerbird">bowerbird</a> provides a framework for downloading data files to a local collection, and keeping it up to date. The companion <a href="https://github.com/AustralianAntarcticDivision/blueant">blueant</a> package provides a suite of definitions for Southern Ocean and Antarctic data sources that can be used with <code>bowerbird</code>. It encompasses data such as sea ice, bathymetry and land topography, oceanography, and atmospheric reanalysis and weather predictions, from providers such as NASA, NOAA, Copernicus, NSIDC, and Ifremer.</p>
+<p><a href="https://github.com/ropensci/bowerbird">bowerbird</a> provides a framework for downloading data files to a local collection, and keeping it up to date. The companion <a href="https://github.com/AustralianAntarcticDivision/blueant">blueant</a> package provides a suite of definitions for Southern Ocean and Antarctic data sources that can be used with <code>bowerbird</code>. It encompasses data such as sea ice, bathymetry and land topography, oceanography, and atmospheric reanalysis and weather predictions, from providers such as NASA, NOAA, Copernicus, NSIDC, and Ifremer.</p>
 <p>Why might you want to maintain local copies of entire data sets, instead of just fetching subsets of data from providers as needed?</p>
 <ul>
 <li>many analyses make use of data from a variety of providers (in which case there may not be dynamic extraction tools for all of them),</li>
@@ -285,7 +285,7 @@ srcs[<span class="dv">1</span>, ]</code></pre></div>
 <p>And fetch the data:</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">result &lt;-<span class="st"> </span><span class="kw">bb_get</span>(data_source, <span class="dt">local_file_root =</span> my_data_dir, <span class="dt">verbose =</span> <span class="ot">TRUE</span>)</code></pre></div>
 <pre><code>## 
-## Mon Sep 02 07:38:58 2019
+## Mon Sep 02 08:46:36 2019
 ## Synchronizing dataset: Southern Ocean marine environmental data
 ## Source URL https://data.aad.gov.au/eds/4742/download
 ## --------------------------------------------------------------------------------------------
@@ -295,7 +295,7 @@ srcs[<span class="dv">1</span>, ]</code></pre></div>
 ##  downloading file 1 of 1: https://data.aad.gov.au/eds/4742/download ...  file unchanged on server, not downloading.
 ##   decompressing: c:\data\cache/data.aad.gov.au/eds/4742/download.zip ... no new files to extract (not overwriting existing files) ... done.
 ## 
-## Mon Sep 02 07:38:59 2019 dataset synchronization complete: Southern Ocean marine environmental data</code></pre>
+## Mon Sep 02 08:46:38 2019 dataset synchronization complete: Southern Ocean marine environmental data</code></pre>
 <p>Now we have a local copy of our data. The sync can be run daily so that the local collection is always up to date - it will only download new files, or files that have changed since the last download. For more information on <code>bowerbird</code>, see the <a href="https://ropensci.github.io/bowerbird/articles/bowerbird.html">package vignette</a>.</p>
 <p>The <code>result</code> object holds information about the data that we downloaded:</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">result</code></pre></div>
@@ -347,14 +347,14 @@ srcs[<span class="dv">1</span>, ]</code></pre></div>
     <span class="kw">sources</span>(<span class="st">&quot;ETOPO2 bathymetry&quot;</span>))
 result &lt;-<span class="st"> </span><span class="kw">bb_get</span>(src, <span class="dt">local_file_root =</span> my_data_dir, <span class="dt">clobber =</span> <span class="dv">0</span>, <span class="dt">verbose =</span> <span class="ot">TRUE</span>, <span class="dt">confirm =</span> <span class="ot">NULL</span>)</code></pre></div>
 <pre><code>##  
-## Mon Sep 02 07:39:00 2019 
+## Mon Sep 02 08:46:38 2019 
 ## Synchronizing dataset: NSIDC SMMR-SSM/I Nasateam sea ice concentration 
 ##  
 ##  [... output truncated]</code></pre>
 <p>Now load the <code>raadtools</code> package and tell it where our data collection has been stored:</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">library</span>(raadtools)
 <span class="kw">set_data_roots</span>(my_data_dir)</code></pre></div>
-<pre><code>## Uploading raad file cache as at 2019-09-02 07:39:42 (819 files listed)</code></pre>
+<pre><code>## Uploading raad file cache as at 2019-09-02 08:47:16 (819 files listed)</code></pre>
 <pre><code>## global option &#39;raadfiles.data.roots&#39; set:
 ## &#39;    &#39;
 ## global option &#39;raadfiles.data.roots&#39; set:

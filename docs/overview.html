@@ -310,17 +310,17 @@ data_source &lt;-<span class="st"> </span><span class="kw">sources_sdm</span>(<s
 ## fetch the data
 status &lt;-<span class="st"> </span><span class="kw">bb_get</span>(data_source, <span class="dt">local_file_root =</span> my_data_directory, <span class="dt">verbose =</span> <span class="ot">TRUE</span>)</code></pre></div>
 <pre><code>## 
-## Mon Sep 02 07:37:35 2019
+## Mon Sep 02 08:43:35 2019
 ## Synchronizing dataset: Southern Ocean marine environmental data
 ## Source URL https://data.aad.gov.au/eds/4742/download
 ## --------------------------------------------------------------------------------------------
 ## 
-##  this dataset path is: C:\Users\ben_ray\AppData\Local\Temp\RtmpMV3Sdf/data.aad.gov.au/eds/4742
+##  this dataset path is: C:\Users\ben_ray\AppData\Local\Temp\Rtmpq0b7Uf/data.aad.gov.au/eds/4742
 ##  building file list ... done.
 ##  downloading file 1 of 1: https://data.aad.gov.au/eds/4742/download ...  done.
-##   decompressing: C:\Users\ben_ray\AppData\Local\Temp\RtmpMV3Sdf/data.aad.gov.au/eds/4742/download.zip ... extracting 60 files into C:/Users/ben_ray/AppData/Local/Temp/RtmpMV3Sdf/data.aad.gov.au/eds/4742 ... done.
+##   decompressing: C:\Users\ben_ray\AppData\Local\Temp\Rtmpq0b7Uf/data.aad.gov.au/eds/4742/download.zip ... extracting 60 files into C:/Users/ben_ray/AppData/Local/Temp/Rtmpq0b7Uf/data.aad.gov.au/eds/4742 ... done.
 ## 
-## Mon Sep 02 07:38:16 2019 dataset synchronization complete: Southern Ocean marine environmental data</code></pre>
+## Mon Sep 02 08:45:42 2019 dataset synchronization complete: Southern Ocean marine environmental data</code></pre>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">nc_files &lt;-<span class="st"> </span><span class="kw">Filter</span>(<span class="cf">function</span>(z) <span class="kw">grepl</span>(<span class="st">&quot;</span><span class="ch">\\</span><span class="st">.nc$&quot;</span>, z), status<span class="op">$</span>files[[<span class="dv">1</span>]]<span class="op">$</span>file)
 
 ## create a raster stack of all layers
