@@ -1,0 +1,1109 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="" xml:lang="">
+<head>
+
+  <meta charset="utf-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <title>10 SDM algorithms | SCAR-EGABI Tools for Southern Ocean Spatial Analysis and Modelling</title>
+  <meta name="description" content="Course material" />
+  <meta name="generator" content="bookdown 0.12 and GitBook 2.6.7" />
+
+  <meta property="og:title" content="10 SDM algorithms | SCAR-EGABI Tools for Southern Ocean Spatial Analysis and Modelling" />
+  <meta property="og:type" content="book" />
+  
+  
+  <meta property="og:description" content="Course material" />
+  
+
+  <meta name="twitter:card" content="summary" />
+  <meta name="twitter:title" content="10 SDM algorithms | SCAR-EGABI Tools for Southern Ocean Spatial Analysis and Modelling" />
+  
+  <meta name="twitter:description" content="Course material" />
+  
+
+<meta name="author" content="Anton Van de Putte, Charlène Guillaumot, Grant Humphries, Huw Griffith, Ben Raymond, Ryan Reisinger" />
+
+
+
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="apple-mobile-web-app-capable" content="yes" />
+  <meta name="apple-mobile-web-app-status-bar-style" content="black" />
+  
+  
+<link rel="prev" href="species-distribution-modelling.html">
+<link rel="next" href="other-r-resources-for-southern-oceanantarctic-use.html">
+<script src="libs/jquery-2.2.3/jquery.min.js"></script>
+<link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-table.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-bookdown.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-highlight.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-search.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-fontsettings.css" rel="stylesheet" />
+
+
+
+
+
+
+
+<script src="libs/kePrint-0.0.1/kePrint.js"></script>
+
+
+<style type="text/css">
+div.sourceCode { overflow-x: auto; }
+table.sourceCode, tr.sourceCode, td.lineNumbers, td.sourceCode {
+  margin: 0; padding: 0; vertical-align: baseline; border: none; }
+table.sourceCode { width: 100%; line-height: 100%; }
+td.lineNumbers { text-align: right; padding-right: 4px; padding-left: 4px; color: #aaaaaa; border-right: 1px solid #aaaaaa; }
+td.sourceCode { padding-left: 5px; }
+code > span.kw { color: #007020; font-weight: bold; } /* Keyword */
+code > span.dt { color: #902000; } /* DataType */
+code > span.dv { color: #40a070; } /* DecVal */
+code > span.bn { color: #40a070; } /* BaseN */
+code > span.fl { color: #40a070; } /* Float */
+code > span.ch { color: #4070a0; } /* Char */
+code > span.st { color: #4070a0; } /* String */
+code > span.co { color: #60a0b0; font-style: italic; } /* Comment */
+code > span.ot { color: #007020; } /* Other */
+code > span.al { color: #ff0000; font-weight: bold; } /* Alert */
+code > span.fu { color: #06287e; } /* Function */
+code > span.er { color: #ff0000; font-weight: bold; } /* Error */
+code > span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
+code > span.cn { color: #880000; } /* Constant */
+code > span.sc { color: #4070a0; } /* SpecialChar */
+code > span.vs { color: #4070a0; } /* VerbatimString */
+code > span.ss { color: #bb6688; } /* SpecialString */
+code > span.im { } /* Import */
+code > span.va { color: #19177c; } /* Variable */
+code > span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
+code > span.op { color: #666666; } /* Operator */
+code > span.bu { } /* BuiltIn */
+code > span.ex { } /* Extension */
+code > span.pp { color: #bc7a00; } /* Preprocessor */
+code > span.at { color: #7d9029; } /* Attribute */
+code > span.do { color: #ba2121; font-style: italic; } /* Documentation */
+code > span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
+code > span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } /* CommentVar */
+code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
+</style>
+
+<link rel="stylesheet" href="styles.css" type="text/css" />
+</head>
+
+<body>
+
+
+
+  <div class="book without-animation with-summary font-size-2 font-family-1" data-basepath=".">
+
+    <div class="book-summary">
+      <nav role="navigation">
+
+<ul class="summary">
+<li class="chapter" data-level="1" data-path="index.html"><a href="index.html"><i class="fa fa-check"></i><b>1</b> About this</a><ul>
+<li class="chapter" data-level="" data-path="index.html"><a href="index.html#technical-stuff"><i class="fa fa-check"></i>Technical stuff</a></li>
+</ul></li>
+<li class="chapter" data-level="2" data-path="course-schedule.html"><a href="course-schedule.html"><i class="fa fa-check"></i><b>2</b> Course schedule</a><ul>
+<li class="chapter" data-level="2.1" data-path="course-schedule.html"><a href="course-schedule.html#monday"><i class="fa fa-check"></i><b>2.1</b> Monday</a></li>
+<li class="chapter" data-level="2.2" data-path="course-schedule.html"><a href="course-schedule.html#tuesday"><i class="fa fa-check"></i><b>2.2</b> Tuesday</a></li>
+<li class="chapter" data-level="2.3" data-path="course-schedule.html"><a href="course-schedule.html#wednesday"><i class="fa fa-check"></i><b>2.3</b> Wednesday</a></li>
+<li class="chapter" data-level="2.4" data-path="course-schedule.html"><a href="course-schedule.html#thursday"><i class="fa fa-check"></i><b>2.4</b> Thursday</a></li>
+<li class="chapter" data-level="2.5" data-path="course-schedule.html"><a href="course-schedule.html#friday"><i class="fa fa-check"></i><b>2.5</b> Friday</a></li>
+</ul></li>
+<li class="chapter" data-level="3" data-path="overview.html"><a href="overview.html"><i class="fa fa-check"></i><b>3</b> Overview</a><ul>
+<li class="chapter" data-level="3.1" data-path="overview.html"><a href="overview.html#preparation"><i class="fa fa-check"></i><b>3.1</b> Preparation</a></li>
+<li class="chapter" data-level="3.2" data-path="overview.html"><a href="overview.html#taxonomy"><i class="fa fa-check"></i><b>3.2</b> Taxonomy</a></li>
+<li class="chapter" data-level="3.3" data-path="overview.html"><a href="overview.html#occurrences"><i class="fa fa-check"></i><b>3.3</b> Occurrences</a></li>
+<li class="chapter" data-level="3.4" data-path="overview.html"><a href="overview.html#environmental-data"><i class="fa fa-check"></i><b>3.4</b> Environmental data</a></li>
+<li class="chapter" data-level="3.5" data-path="overview.html"><a href="overview.html#fit-model"><i class="fa fa-check"></i><b>3.5</b> Fit model</a></li>
+<li class="chapter" data-level="3.6" data-path="overview.html"><a href="overview.html#predict-from-model"><i class="fa fa-check"></i><b>3.6</b> Predict from model</a></li>
+<li class="chapter" data-level="3.7" data-path="overview.html"><a href="overview.html#other-bits-and-pieces"><i class="fa fa-check"></i><b>3.7</b> Other bits and pieces</a><ul>
+<li class="chapter" data-level="3.7.1" data-path="overview.html"><a href="overview.html#place-names"><i class="fa fa-check"></i><b>3.7.1</b> Place names</a></li>
+</ul></li>
+</ul></li>
+<li class="chapter" data-level="4" data-path="introduction-to-r-and-the-tidyverse.html"><a href="introduction-to-r-and-the-tidyverse.html"><i class="fa fa-check"></i><b>4</b> Introduction to R and the Tidyverse</a><ul>
+<li class="chapter" data-level="4.1" data-path="introduction-to-r-and-the-tidyverse.html"><a href="introduction-to-r-and-the-tidyverse.html#exercise-r-script"><i class="fa fa-check"></i><b>4.1</b> Exercise R script</a></li>
+<li class="chapter" data-level="4.2" data-path="introduction-to-r-and-the-tidyverse.html"><a href="introduction-to-r-and-the-tidyverse.html#see-also"><i class="fa fa-check"></i><b>4.2</b> See also:</a></li>
+</ul></li>
+<li class="chapter" data-level="5" data-path="metadata-darwin-core.html"><a href="metadata-darwin-core.html"><i class="fa fa-check"></i><b>5</b> Metadata - Darwin Core</a><ul>
+<li class="chapter" data-level="5.1" data-path="metadata-darwin-core.html"><a href="metadata-darwin-core.html#darwin-core-structure"><i class="fa fa-check"></i><b>5.1</b> Darwin Core structure</a></li>
+<li class="chapter" data-level="5.2" data-path="metadata-darwin-core.html"><a href="metadata-darwin-core.html#types-of-darwin-core-archives"><i class="fa fa-check"></i><b>5.2</b> Types of Darwin Core archives</a></li>
+<li class="chapter" data-level="5.3" data-path="metadata-darwin-core.html"><a href="metadata-darwin-core.html#darwin-core-details"><i class="fa fa-check"></i><b>5.3</b> Darwin Core details</a><ul>
+<li class="chapter" data-level="5.3.1" data-path="metadata-darwin-core.html"><a href="metadata-darwin-core.html#required-metadata-fields"><i class="fa fa-check"></i><b>5.3.1</b> Required metadata fields:</a></li>
+<li class="chapter" data-level="5.3.2" data-path="metadata-darwin-core.html"><a href="metadata-darwin-core.html#citation-auto-generation"><i class="fa fa-check"></i><b>5.3.2</b> Citation auto generation</a></li>
+</ul></li>
+<li class="chapter" data-level="5.4" data-path="metadata-darwin-core.html"><a href="metadata-darwin-core.html#metadata-for-occurrence-data"><i class="fa fa-check"></i><b>5.4</b> Metadata for occurrence data</a><ul>
+<li class="chapter" data-level="5.4.1" data-path="metadata-darwin-core.html"><a href="metadata-darwin-core.html#what"><i class="fa fa-check"></i><b>5.4.1</b> What</a></li>
+<li class="chapter" data-level="5.4.2" data-path="metadata-darwin-core.html"><a href="metadata-darwin-core.html#where"><i class="fa fa-check"></i><b>5.4.2</b> Where</a></li>
+<li class="chapter" data-level="5.4.3" data-path="metadata-darwin-core.html"><a href="metadata-darwin-core.html#when"><i class="fa fa-check"></i><b>5.4.3</b> When</a></li>
+<li class="chapter" data-level="5.4.4" data-path="metadata-darwin-core.html"><a href="metadata-darwin-core.html#who"><i class="fa fa-check"></i><b>5.4.4</b> Who</a></li>
+<li class="chapter" data-level="5.4.5" data-path="metadata-darwin-core.html"><a href="metadata-darwin-core.html#how"><i class="fa fa-check"></i><b>5.4.5</b> How</a></li>
+</ul></li>
+</ul></li>
+<li class="chapter" data-level="6" data-path="biological-data.html"><a href="biological-data.html"><i class="fa fa-check"></i><b>6</b> Biological data</a><ul>
+<li class="chapter" data-level="6.1" data-path="biological-data.html"><a href="biological-data.html#taxonomy-1"><i class="fa fa-check"></i><b>6.1</b> Taxonomy</a></li>
+<li class="chapter" data-level="6.2" data-path="biological-data.html"><a href="biological-data.html#other-packages"><i class="fa fa-check"></i><b>6.2</b> Other packages</a></li>
+</ul></li>
+<li class="chapter" data-level="7" data-path="environmental-data-1.html"><a href="environmental-data-1.html"><i class="fa fa-check"></i><b>7</b> Environmental data</a><ul>
+<li class="chapter" data-level="7.1" data-path="environmental-data-1.html"><a href="environmental-data-1.html#bowerbirdblueant"><i class="fa fa-check"></i><b>7.1</b> Bowerbird/blueant</a><ul>
+<li class="chapter" data-level="7.1.1" data-path="environmental-data-1.html"><a href="environmental-data-1.html#available-data-sets"><i class="fa fa-check"></i><b>7.1.1</b> Available data sets</a></li>
+<li class="chapter" data-level="7.1.2" data-path="environmental-data-1.html"><a href="environmental-data-1.html#usage"><i class="fa fa-check"></i><b>7.1.2</b> Usage</a></li>
+</ul></li>
+<li class="chapter" data-level="7.2" data-path="environmental-data-1.html"><a href="environmental-data-1.html#raadtools"><i class="fa fa-check"></i><b>7.2</b> RAADtools</a></li>
+<li class="chapter" data-level="7.3" data-path="environmental-data-1.html"><a href="environmental-data-1.html#other-useful-packages"><i class="fa fa-check"></i><b>7.3</b> Other useful packages</a></li>
+</ul></li>
+<li class="chapter" data-level="8" data-path="mapping.html"><a href="mapping.html"><i class="fa fa-check"></i><b>8</b> Mapping</a><ul>
+<li class="chapter" data-level="8.1" data-path="mapping.html"><a href="mapping.html#maps-in-r"><i class="fa fa-check"></i><b>8.1</b> Maps in R</a><ul>
+<li class="chapter" data-level="8.1.1" data-path="mapping.html"><a href="mapping.html#exercises"><i class="fa fa-check"></i><b>8.1.1</b> Exercises</a></li>
+<li class="chapter" data-level="8.1.2" data-path="mapping.html"><a href="mapping.html#lets-use-the-maps-data"><i class="fa fa-check"></i><b>8.1.2</b> Let’s use the maps data!</a></li>
+</ul></li>
+<li class="chapter" data-level="8.2" data-path="mapping.html"><a href="mapping.html#somap"><i class="fa fa-check"></i><b>8.2</b> SOmap</a><ul>
+<li class="chapter" data-level="8.2.1" data-path="mapping.html"><a href="mapping.html#circumpolar-maps"><i class="fa fa-check"></i><b>8.2.1</b> Circumpolar maps</a></li>
+<li class="chapter" data-level="8.2.2" data-path="mapping.html"><a href="mapping.html#non-circumpolar-maps"><i class="fa fa-check"></i><b>8.2.2</b> Non-circumpolar maps</a></li>
+<li class="chapter" data-level="8.2.3" data-path="mapping.html"><a href="mapping.html#plotting-via-ggplot2"><i class="fa fa-check"></i><b>8.2.3</b> Plotting via ggplot2</a></li>
+<li class="chapter" data-level="8.2.4" data-path="mapping.html"><a href="mapping.html#modifying-map-objects-advanced-usage"><i class="fa fa-check"></i><b>8.2.4</b> Modifying map objects (advanced usage)</a></li>
+</ul></li>
+<li class="chapter" data-level="8.3" data-path="mapping.html"><a href="mapping.html#supporting-data-for-maps"><i class="fa fa-check"></i><b>8.3</b> Supporting data for maps</a><ul>
+<li class="chapter" data-level="8.3.1" data-path="mapping.html"><a href="mapping.html#quantarcticr"><i class="fa fa-check"></i><b>8.3.1</b> quantarcticR</a></li>
+<li class="chapter" data-level="8.3.2" data-path="mapping.html"><a href="mapping.html#antanym"><i class="fa fa-check"></i><b>8.3.2</b> antanym</a></li>
+</ul></li>
+</ul></li>
+<li class="chapter" data-level="9" data-path="species-distribution-modelling.html"><a href="species-distribution-modelling.html"><i class="fa fa-check"></i><b>9</b> Species distribution modelling</a><ul>
+<li class="chapter" data-level="9.1" data-path="species-distribution-modelling.html"><a href="species-distribution-modelling.html#sdm-introduction-and-review"><i class="fa fa-check"></i><b>9.1</b> SDM introduction and review</a><ul>
+<li class="chapter" data-level="9.1.1" data-path="species-distribution-modelling.html"><a href="species-distribution-modelling.html#references"><i class="fa fa-check"></i><b>9.1.1</b> References</a></li>
+</ul></li>
+<li class="chapter" data-level="9.2" data-path="species-distribution-modelling.html"><a href="species-distribution-modelling.html#sdm-outputs"><i class="fa fa-check"></i><b>9.2</b> SDM outputs</a><ul>
+<li class="chapter" data-level="9.2.1" data-path="species-distribution-modelling.html"><a href="species-distribution-modelling.html#references-1"><i class="fa fa-check"></i><b>9.2.1</b> References</a></li>
+</ul></li>
+<li class="chapter" data-level="9.3" data-path="species-distribution-modelling.html"><a href="species-distribution-modelling.html#calibration"><i class="fa fa-check"></i><b>9.3</b> Calibration</a><ul>
+<li class="chapter" data-level="9.3.1" data-path="species-distribution-modelling.html"><a href="species-distribution-modelling.html#references-2"><i class="fa fa-check"></i><b>9.3.1</b> References</a></li>
+</ul></li>
+</ul></li>
+<li class="chapter" data-level="10" data-path="sdm-algorithms.html"><a href="sdm-algorithms.html"><i class="fa fa-check"></i><b>10</b> SDM algorithms</a><ul>
+<li class="chapter" data-level="10.1" data-path="sdm-algorithms.html"><a href="sdm-algorithms.html#exercises---practice-with-models"><i class="fa fa-check"></i><b>10.1</b> Exercises - Practice with models</a><ul>
+<li class="chapter" data-level="10.1.1" data-path="sdm-algorithms.html"><a href="sdm-algorithms.html#load-and-clean-the-data"><i class="fa fa-check"></i><b>10.1.1</b> Load and clean the data</a></li>
+<li class="chapter" data-level="10.1.2" data-path="sdm-algorithms.html"><a href="sdm-algorithms.html#one-hot-encoding"><i class="fa fa-check"></i><b>10.1.2</b> One hot encoding!</a></li>
+<li class="chapter" data-level="10.1.3" data-path="sdm-algorithms.html"><a href="sdm-algorithms.html#the-models"><i class="fa fa-check"></i><b>10.1.3</b> The models</a></li>
+<li class="chapter" data-level="10.1.4" data-path="sdm-algorithms.html"><a href="sdm-algorithms.html#regression-problem"><i class="fa fa-check"></i><b>10.1.4</b> Regression problem</a></li>
+</ul></li>
+</ul></li>
+<li class="chapter" data-level="11" data-path="other-r-resources-for-southern-oceanantarctic-use.html"><a href="other-r-resources-for-southern-oceanantarctic-use.html"><i class="fa fa-check"></i><b>11</b> Other R resources for Southern Ocean/Antarctic use</a><ul>
+<li class="chapter" data-level="11.1" data-path="other-r-resources-for-southern-oceanantarctic-use.html"><a href="other-r-resources-for-southern-oceanantarctic-use.html#diet-data-sohungry"><i class="fa fa-check"></i><b>11.1</b> Diet data: sohungry</a></li>
+<li class="chapter" data-level="11.2" data-path="other-r-resources-for-southern-oceanantarctic-use.html"><a href="other-r-resources-for-southern-oceanantarctic-use.html#allometric-equations-solong"><i class="fa fa-check"></i><b>11.2</b> Allometric equations: solong</a></li>
+</ul></li>
+</ul>
+
+      </nav>
+    </div>
+
+    <div class="book-body">
+      <div class="body-inner">
+        <div class="book-header" role="navigation">
+          <h1>
+            <i class="fa fa-circle-o-notch fa-spin"></i><a href="./">SCAR-EGABI Tools for Southern Ocean Spatial Analysis and Modelling</a>
+          </h1>
+        </div>
+
+        <div class="page-wrapper" tabindex="-1" role="main">
+          <div class="page-inner">
+
+            <section class="normal" id="section-">
+<div id="sdm-algorithms" class="section level1">
+<h1><span class="header-section-number">10</span> SDM algorithms</h1>
+<p>Introduction to different SDM algorithms.</p>
+<p><a href="./course_material/C6_Different%20algorithms.pdf">Presentation (PDF)</a></p>
+<div id="exercises---practice-with-models" class="section level2">
+<h2><span class="header-section-number">10.1</span> Exercises - Practice with models</h2>
+<p>For this exercise, we’re going to play with a superhero dataset! Although this is an SDM focused course, we don’t want to spoil the surprises coming when you start playing with the environmental data.</p>
+<p>We want to run models for two questions:</p>
+<ol style="list-style-type: decimal">
+<li>CLASSIFICATION: Is there a bias towards alignment? (i.e. can we predict if a character will be good or bad)<br />
+</li>
+<li>REGRESSION: Are men stronger than women in the comics? (i.e., can we predict total power, and is Gender one of the most important predictors? Or is there something else that predicts total power)</li>
+</ol>
+<p>As per the slides, we’re going to do a few things:</p>
+<ol style="list-style-type: decimal">
+<li>Explore and clean our data<br />
+</li>
+<li>Use one-hot-encoding to help deal with many categories<br />
+</li>
+<li>Build a single decision tree and visualise it. Re-build the tree with different settings<br />
+</li>
+<li>Run a model with gbm.step and visualise the train/test plot, as well as the variable importance plot<br />
+</li>
+<li>Run the same model with random forests and look at the differences in the outputs</li>
+</ol>
+<p><strong><em>Pick either the classification or regression problem. Solution for the classification problem are included in this document if you need a poke in the right direction. We run the GBM model ONLY for the regression problem here, but you could try out with RF if you wanted</em></strong></p>
+<p>Let’s start by loading libraries</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">library</span>(tidyverse)  ## Isn&#39;t tidyverse awesome?
+<span class="kw">library</span>(dismo)  ## This package contains the gbm.step command
+<span class="kw">library</span>(randomForest)  ## This package contains the randomForest
+<span class="kw">library</span>(rpart)   ## This package contains a series of useful decision tree functions
+<span class="kw">library</span>(rpart.plot)
+<span class="kw">library</span>(gbm)</code></pre></div>
+<div id="load-and-clean-the-data" class="section level3">
+<h3><span class="header-section-number">10.1.1</span> Load and clean the data</h3>
+<p>Now that we’ve got some libraries ready, let’s load and clean our SUPERHERO dataset in preparation for our modelling.</p>
+<pre><code>## Parsed with column specification:
+## cols(
+##   .default = col_character(),
+##   `Unnamed: 0` = col_double(),
+##   Intelligence = col_double(),
+##   Strength = col_double(),
+##   Speed = col_double(),
+##   Durability = col_double(),
+##   Power = col_double(),
+##   Combat = col_double(),
+##   TotalPower = col_double()
+## )</code></pre>
+<pre><code>## See spec(...) for full column specifications.</code></pre>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">Supes &lt;-<span class="st"> </span>readr<span class="op">::</span><span class="kw">read_csv</span>(<span class="st">&#39;SuperheroDataset.csv&#39;</span>)</code></pre></div>
+<p>For the purposes of this exercise, we’re going to use the following columns: Name, Intelligence, Strength, Speed, Durability, Power, Combat, Gender, Race, Creator, Alignment, Total Power. Use the tidyverse to extract those columns.</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">SuperData &lt;-<span class="st"> </span>Supes <span class="op">%&gt;%</span>
+<span class="st">  </span>dplyr<span class="op">::</span><span class="kw">select</span>(Name, Intelligence<span class="op">:</span>Combat, Alignment<span class="op">:</span>Race, Creator, TotalPower)</code></pre></div>
+<div id="exploring-the-data" class="section level4">
+<h4><span class="header-section-number">10.1.1.1</span> Exploring the data</h4>
+<p>If you explore the data a little bit, you’ll be able to see some of the interesting quirks of the dataset. Use ggplot2 (or base plot if you’re feeling lazy ;) ).</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">SuperData <span class="op">%&gt;%</span>
+<span class="st">  </span><span class="kw">filter</span>(<span class="op">!</span><span class="kw">is.na</span>(Intelligence))<span class="op">%&gt;%</span><span class="st"> </span>
+<span class="st">  </span><span class="kw">ggplot</span>(<span class="kw">aes</span>(<span class="dt">x=</span>Intelligence,<span class="dt">y=</span>Strength)) <span class="op">+</span><span class="st"> </span><span class="kw">geom_point</span>() <span class="op">+</span><span class="st"> </span><span class="kw">geom_smooth</span>(<span class="dt">method=</span>lm) <span class="op">+</span><span class="st"> </span><span class="kw">theme_bw</span>()</code></pre></div>
+<p><img src="_main_files/figure-html/unnamed-chunk-15-1.png" width="672" /></p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">## Looking at the line, it seems like the problem is that there are some extreme low values
+##   of intelligence. Outliers perhaps?? Try to find out who those values belong to, and
+##   that may help you determine if they should be included in the analysis
+
+SuperData <span class="op">%&gt;%</span>
+<span class="st">  </span><span class="kw">filter</span>(<span class="op">!</span><span class="kw">is.na</span>(Combat))<span class="op">%&gt;%</span><span class="st"> </span>
+<span class="st">  </span><span class="kw">ggplot</span>(<span class="kw">aes</span>(<span class="dt">x=</span>Combat,<span class="dt">y=</span>Strength)) <span class="op">+</span><span class="st"> </span><span class="kw">geom_point</span>() <span class="op">+</span><span class="st"> </span><span class="kw">geom_smooth</span>(<span class="dt">method=</span>lm) <span class="op">+</span><span class="st"> </span><span class="kw">theme_bw</span>()</code></pre></div>
+<p><img src="_main_files/figure-html/unnamed-chunk-15-2.png" width="672" /></p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">## We can also filter the data conditionally to explore the dataset with specific classes, e.g.:
+SuperData <span class="op">%&gt;%</span>
+<span class="st">  </span><span class="kw">filter</span>(<span class="op">!</span><span class="kw">is.na</span>(Combat),Gender<span class="op">==</span><span class="st">&#39;Female&#39;</span>)<span class="op">%&gt;%</span><span class="st"> </span>
+<span class="st">  </span><span class="kw">ggplot</span>(<span class="kw">aes</span>(<span class="dt">x=</span>Combat,<span class="dt">y=</span>Strength)) <span class="op">+</span><span class="st"> </span><span class="kw">geom_point</span>() <span class="op">+</span><span class="st"> </span><span class="kw">geom_smooth</span>(<span class="dt">method=</span>lm) <span class="op">+</span><span class="st"> </span><span class="kw">theme_bw</span>()</code></pre></div>
+<p><img src="_main_files/figure-html/unnamed-chunk-15-3.png" width="672" /></p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">library</span>(GGally)
+## This is a great library for exploring data quickly! Rather than coding everything bit by bit
+
+quant_df &lt;-<span class="st"> </span>SuperData <span class="op">%&gt;%</span><span class="st"> </span>dplyr<span class="op">::</span><span class="kw">select</span>(Intelligence<span class="op">:</span>Gender,TotalPower)
+<span class="kw">ggpairs</span>(quant_df, <span class="dt">progress =</span> <span class="ot">FALSE</span>)</code></pre></div>
+<p><img src="_main_files/figure-html/unnamed-chunk-15-4.png" width="672" /></p>
+<p>Note that ‘total power’ is highly correlated with strength, speed, durability and power. This could impact how we interpret the regression problem later as these variables may wash out the signal we’re trying to explore. Not a bad thing if we’re just trying to make predictions! But if we’re trying to answer a specific question, it could ‘muddy the waters’.</p>
+<p>If you have checked out some of the variables, you might notice two things:</p>
+<ol style="list-style-type: decimal">
+<li>Race and Creator have too many categories!</li>
+<li>There are a number of Creators that are only used once, or may not be appropriate to include.</li>
+</ol>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">length</span>(<span class="kw">unique</span>(SuperData<span class="op">$</span>Race)) ## Number of unique levels in Race</code></pre></div>
+<pre><code>## [1] 63</code></pre>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">length</span>(<span class="kw">unique</span>(SuperData<span class="op">$</span>Creator))  ## Same only for creator</code></pre></div>
+<pre><code>## [1] 23</code></pre>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">## Let&#39;s just check out Creator:
+<span class="kw">unique</span>(SuperData<span class="op">$</span>Creator)</code></pre></div>
+<pre><code>##  [1] &quot;Dark Horse Comics&quot; &quot;DC Comics&quot;         &quot;George Lucas&quot;     
+##  [4] &quot;HarperCollins&quot;     &quot;Ian Fleming&quot;       &quot;Icon Comics&quot;      
+##  [7] &quot;IDW Publishing&quot;    &quot;Image Comics&quot;      &quot;J. K. Rowling&quot;    
+## [10] &quot;J. R. R. Tolkien&quot;  &quot;Marvel Comics&quot;     &quot;Mattel&quot;           
+## [13] &quot;Microsoft&quot;         &quot;NBC - Heroes&quot;      &quot;Rebellion&quot;        
+## [16] &quot;Shueisha&quot;          &quot;Sony Pictures&quot;     &quot;South Park&quot;       
+## [19] &quot;Star Trek&quot;         &quot;SyFy&quot;              &quot;Team Epic TV&quot;     
+## [22] &quot;Universal Studios&quot; &quot;Wildstorm&quot;</code></pre>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">SuperData <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">count</span>(Creator)</code></pre></div>
+<pre><code>## # A tibble: 23 x 2
+##    Creator               n
+##    &lt;chr&gt;             &lt;int&gt;
+##  1 Dark Horse Comics    19
+##  2 DC Comics           219
+##  3 George Lucas         15
+##  4 HarperCollins         6
+##  5 Ian Fleming           1
+##  6 Icon Comics           4
+##  7 IDW Publishing        4
+##  8 Image Comics         14
+##  9 J. K. Rowling         1
+## 10 J. R. R. Tolkien      1
+## 11 Marvel Comics       395
+## 12 Mattel                2
+## 13 Microsoft             1
+## 14 NBC - Heroes         19
+## 15 Rebellion             1
+## 16 Shueisha              4
+## 17 Sony Pictures         2
+## 18 South Park            1
+## 19 Star Trek             6
+## 20 SyFy                  5
+## 21 Team Epic TV          5
+## 22 Universal Studios     1
+## 23 Wildstorm             4</code></pre>
+<p>There are many classes here that may not be appropriate to include. For example, creator Ian Fleming (creator of James Bond) only has one character. This dataset also has Star Trek characters. So, we decide here to filter out the appropriate classes (keeping Marvel Comics, DC Comics, Dark Horse Comics, and Image Comics).</p>
+<p><strong><em>Note the usage of %in%</em></strong></p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">FilteredSupes &lt;-<span class="st"> </span>SuperData <span class="op">%&gt;%</span>
+<span class="st">  </span>dplyr<span class="op">::</span><span class="kw">filter</span>(Creator <span class="op">%in%</span><span class="st"> </span><span class="kw">c</span>(<span class="st">&#39;Marvel Comics&#39;</span>,<span class="st">&#39;DC Comics&#39;</span>,<span class="st">&#39;Dark Horse Comics&#39;</span>,<span class="st">&#39;Image Comics&#39;</span>)) <span class="op">%&gt;%</span>
+<span class="st">  </span>dplyr<span class="op">::</span><span class="kw">filter</span>(<span class="op">!</span><span class="kw">is.na</span>(Intelligence))
+## we do this last part to remove NA data for cleanliness, though trees don&#39;t require you to do this!
+
+FilteredSupes</code></pre></div>
+<pre><code>## # A tibble: 586 x 12
+##    Name              Intelligence Strength Speed Durability Power Combat
+##    &lt;chr&gt;                    &lt;dbl&gt;    &lt;dbl&gt; &lt;dbl&gt;      &lt;dbl&gt; &lt;dbl&gt;  &lt;dbl&gt;
+##  1 Abe Sapien                  95       30    35         65   100     85
+##  2 Alien                       80       30    45         90    60     60
+##  3 Angel                       90       30    60         90   100     75
+##  4 Buffy                       85       30    45         70    50     60
+##  5 Dash                        65       15    95         60    20     30
+##  6 Elastigirl                  85       35    35         95    55     70
+##  7 Hellboy                     85       55    25         95    75     75
+##  8 Jack-Jack                   35       35    70         80   100     10
+##  9 Jason Voorhees              85       35    25        100   100     50
+## 10 Liz Sherman                 55       35    30         45    75     50
+## 11 Mr Incredible               80       85    35         95    30     40
+## 12 Predator                    85       30    25         85   100     90
+## 13 T-1000                      90       35    35        100   100     75
+## 14 T-800                       90       35    20         60    75     65
+## 15 T-850                       90       80    25         90    85     75
+## 16 T-X                         90       65    30         85   100     80
+## 17 Violet Parr                 80       10    15         50    80     15
+## 18 Abin Sur                    80       90    55         65   100     65
+## 19 Adam Strange                85       10    35         40    40     50
+## 20 Alfred Pennyworth           85       10    20         10    10     55
+## 21 Amazo                       85      100    85        100   100    100
+## 22 Animal Man                  80       50    50         85    75     80
+## 23 Anti-Monitor                95      100    50        100   100     90
+## 24 Aquababy                    60       20    15         15    40     15
+## 25 Aqualad                     85       45    45         75    90     60
+## 26 Aquaman                     95       85    80         80   100     80
+## 27 Ares                        90      100    75        100   100    100
+## 28 Arsenal                     80       55    60         60    65     85
+## 29 Atlas                       85      100    45        100    30     80
+## 30 Atom                        90       95    75         95    90     85
+##    Alignment Gender Race            Creator           TotalPower
+##    &lt;chr&gt;     &lt;chr&gt;  &lt;chr&gt;           &lt;chr&gt;                  &lt;dbl&gt;
+##  1 good      Male   Icthyo Sapien   Dark Horse Comics        410
+##  2 bad       Male   Xenomorph XX121 Dark Horse Comics        365
+##  3 good      Male   Vampire         Dark Horse Comics        445
+##  4 good      Female Human           Dark Horse Comics        340
+##  5 good      Male   Human           Dark Horse Comics        285
+##  6 good      Female Human           Dark Horse Comics        375
+##  7 good      Male   Demon           Dark Horse Comics        410
+##  8 good      Male   Human           Dark Horse Comics        330
+##  9 bad       Male   Human           Dark Horse Comics        395
+## 10 good      Female Human           Dark Horse Comics        290
+## 11 good      Male   Human           Dark Horse Comics        365
+## 12 bad       Male   Yautja          Dark Horse Comics        415
+## 13 bad       Male   Android         Dark Horse Comics        435
+## 14 bad       Male   Cyborg          Dark Horse Comics        345
+## 15 bad       Male   Cyborg          Dark Horse Comics        445
+## 16 bad       Female Cyborg          Dark Horse Comics        450
+## 17 good      Female Human           Dark Horse Comics        250
+## 18 good      Male   Ungaran         DC Comics                455
+## 19 good      Male   Human           DC Comics                260
+## 20 good      Male   Human           DC Comics                190
+## 21 bad       Male   Android         DC Comics                570
+## 22 good      Male   Human           DC Comics                420
+## 23 bad       Male   God / Eternal   DC Comics                535
+## 24 good      Male   Human           DC Comics                165
+## 25 good      Male   Atlantean       DC Comics                400
+## 26 good      Male   Atlantean       DC Comics                520
+## 27 neutral   Male   God / Eternal   DC Comics                565
+## 28 good      Male   Human           DC Comics                405
+## 29 bad       Male   God / Eternal   DC Comics                440
+## 30 good      Male   Human           DC Comics                530
+## # ... with 556 more rows</code></pre>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">## How many races do we now have??
+<span class="kw">length</span>(<span class="kw">unique</span>(FilteredSupes<span class="op">$</span>Race))</code></pre></div>
+<pre><code>## [1] 53</code></pre>
+<p>Now let’s explore this again.</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">quant_df &lt;-<span class="st"> </span>FilteredSupes <span class="op">%&gt;%</span><span class="st"> </span>dplyr<span class="op">::</span><span class="kw">select</span>(Intelligence<span class="op">:</span>Gender,TotalPower)
+<span class="kw">ggpairs</span>(quant_df, <span class="dt">progress =</span> <span class="ot">FALSE</span>)</code></pre></div>
+<p><img src="_main_files/figure-html/unnamed-chunk-18-1.png" width="672" /></p>
+<p>Not much has really changed, as we have not removed too many rows, which is good thing because it means that those data we removed won’t impact the final conclusions in any major way. This just simplifies our data cleaning for this particular exercise. However, we still have lots of ‘Race’ categories.</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">FilteredSupes <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">count</span>(Race)</code></pre></div>
+<pre><code>## # A tibble: 53 x 2
+##    Race                    n
+##    &lt;chr&gt;               &lt;int&gt;
+##  1 Alien                   8
+##  2 Amazon                  2
+##  3 Android                 8
+##  4 Animal                  2
+##  5 Asgardian               5
+##  6 Atlantean               5
+##  7 Bizarro                 1
+##  8 Bolovaxian              1
+##  9 Clone                   1
+## 10 Cosmic Entity           4
+## 11 Cyborg                  9
+## 12 Czarnian                1
+## 13 DemiHumanGod            2
+## 14 Demon                   6
+## 15 Eternal                 3
+## 16 Flora Colossus          1
+## 17 Frost Giant             2
+## 18 God / Eternal          16
+## 19 Gorilla                 1
+## 20 Human                 384
+## 21 Human / Altered         2
+## 22 Human / Cosmic          2
+## 23 Human / Radiation      12
+## 24 HumanHumanInhuman       1
+## 25 HumanHumanKree          2
+## 26 HumanHumanSpartoi       1
+## 27 HumanHumanVuldarian     1
+## 28 Icthyo Sapien           1
+## 29 Inhuman                 4
+## 30 Kakarantharaian         1
+## # ... with 23 more rows</code></pre>
+<p>Looking at the breakdown of Race, there are many with a count of 1. These can cause some issues when trying to do any cross validation… so we should remove them.</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">FilteredSupes &lt;-<span class="st"> </span>FilteredSupes <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">add_count</span>(Race) <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">filter</span>(n <span class="op">&gt;</span><span class="st"> </span><span class="dv">1</span>)
+
+FilteredSupes <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">count</span>(Race)</code></pre></div>
+<pre><code>## # A tibble: 25 x 2
+##    Race                  n
+##    &lt;chr&gt;             &lt;int&gt;
+##  1 Alien                 8
+##  2 Amazon                2
+##  3 Android               8
+##  4 Animal                2
+##  5 Asgardian             5
+##  6 Atlantean             5
+##  7 Cosmic Entity         4
+##  8 Cyborg                9
+##  9 DemiHumanGod          2
+## 10 Demon                 6
+## 11 Eternal               3
+## 12 Frost Giant           2
+## 13 God / Eternal        16
+## 14 Human               384
+## 15 Human / Altered       2
+## 16 Human / Cosmic        2
+## 17 Human / Radiation    12
+## 18 HumanHumanKree        2
+## 19 Inhuman               4
+## 20 Kryptonian            7
+## 21 Metahuman             2
+## 22 Mutant               57
+## 23 New God               3
+## 24 Symbiote              9
+## 25 Vampire               2</code></pre>
+</div>
+</div>
+<div id="one-hot-encoding" class="section level3">
+<h3><span class="header-section-number">10.1.2</span> One hot encoding!</h3>
+<p>Race has MANY categories! This COULD cause the trees to get swamped by this predictor. Also, by one-hot encoding, we can keep data that would otherwise get thrown out if just filtering out categories. For example, if we removed the ‘cyborg’ category by way of filtering, those character data would be removed as well (they might be useful). One hot encoding turns each category into a binary variable. Can be done easily in tidyverse!</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">OOEdata &lt;-<span class="st"> </span>FilteredSupes <span class="op">%&gt;%</span><span class="st"> </span>
+<span class="st">        </span><span class="kw">separate_rows</span>(Race)<span class="op">%&gt;%</span><span class="st"> </span>
+<span class="st">        </span><span class="kw">mutate</span>(<span class="dt">count =</span> <span class="dv">1</span>) <span class="op">%&gt;%</span><span class="st"> </span>
+<span class="st">        </span><span class="kw">spread</span>(Race, count, <span class="dt">fill =</span> <span class="dv">0</span>, <span class="dt">sep =</span> <span class="st">&quot;_&quot;</span>)
+
+OOEdata</code></pre></div>
+<pre><code>## # A tibble: 558 x 38
+##    Name              Intelligence Strength Speed Durability Power Combat
+##    &lt;chr&gt;                    &lt;dbl&gt;    &lt;dbl&gt; &lt;dbl&gt;      &lt;dbl&gt; &lt;dbl&gt;  &lt;dbl&gt;
+##  1 Angel                       90       30    60         90   100     75
+##  2 Buffy                       85       30    45         70    50     60
+##  3 Dash                        65       15    95         60    20     30
+##  4 Elastigirl                  85       35    35         95    55     70
+##  5 Hellboy                     85       55    25         95    75     75
+##  6 Jack-Jack                   35       35    70         80   100     10
+##  7 Jason Voorhees              85       35    25        100   100     50
+##  8 Liz Sherman                 55       35    30         45    75     50
+##  9 Mr Incredible               80       85    35         95    30     40
+## 10 T-1000                      90       35    35        100   100     75
+## 11 T-800                       90       35    20         60    75     65
+## 12 T-850                       90       80    25         90    85     75
+## 13 T-X                         90       65    30         85   100     80
+## 14 Violet Parr                 80       10    15         50    80     15
+## 15 Adam Strange                85       10    35         40    40     50
+## 16 Alfred Pennyworth           85       10    20         10    10     55
+## 17 Amazo                       85      100    85        100   100    100
+## 18 Animal Man                  80       50    50         85    75     80
+## 19 Anti-Monitor                95      100    50        100   100     90
+## 20 Aquababy                    60       20    15         15    40     15
+## 21 Aqualad                     85       45    45         75    90     60
+## 22 Aquaman                     95       85    80         80   100     80
+## 23 Ares                        90      100    75        100   100    100
+## 24 Arsenal                     80       55    60         60    65     85
+## 25 Atlas                       85      100    45        100    30     80
+## 26 Atom                        90       95    75         95    90     85
+## 27 Atom Girl                   75       10    25         30    40     45
+## 28 Atom II                     95       10    35         45    40     60
+## 29 Atom IV                     85       55    55         55    60     65
+## 30 Azrael                      85       20    20         20    35     80
+##    Alignment Gender Creator           TotalPower     n Race_Alien
+##    &lt;chr&gt;     &lt;chr&gt;  &lt;chr&gt;                  &lt;dbl&gt; &lt;int&gt;      &lt;dbl&gt;
+##  1 good      Male   Dark Horse Comics        445     2          0
+##  2 good      Female Dark Horse Comics        340   384          0
+##  3 good      Male   Dark Horse Comics        285   384          0
+##  4 good      Female Dark Horse Comics        375   384          0
+##  5 good      Male   Dark Horse Comics        410     6          0
+##  6 good      Male   Dark Horse Comics        330   384          0
+##  7 bad       Male   Dark Horse Comics        395   384          0
+##  8 good      Female Dark Horse Comics        290   384          0
+##  9 good      Male   Dark Horse Comics        365   384          0
+## 10 bad       Male   Dark Horse Comics        435     8          0
+## 11 bad       Male   Dark Horse Comics        345     9          0
+## 12 bad       Male   Dark Horse Comics        445     9          0
+## 13 bad       Female Dark Horse Comics        450     9          0
+## 14 good      Female Dark Horse Comics        250   384          0
+## 15 good      Male   DC Comics                260   384          0
+## 16 good      Male   DC Comics                190   384          0
+## 17 bad       Male   DC Comics                570     8          0
+## 18 good      Male   DC Comics                420   384          0
+## 19 bad       Male   DC Comics                535    16          0
+## 20 good      Male   DC Comics                165   384          0
+## 21 good      Male   DC Comics                400     5          0
+## 22 good      Male   DC Comics                520     5          0
+## 23 neutral   Male   DC Comics                565    16          0
+## 24 good      Male   DC Comics                405   384          0
+## 25 bad       Male   DC Comics                440    16          0
+## 26 good      Male   DC Comics                530   384          0
+## 27 good      Female DC Comics                225   384          0
+## 28 good      Male   DC Comics                285   384          0
+## 29 good      Male   DC Comics                375   384          0
+## 30 good      Male   DC Comics                260   384          0
+##    Race_Altered Race_Amazon Race_Android Race_Animal Race_Asgardian
+##           &lt;dbl&gt;       &lt;dbl&gt;        &lt;dbl&gt;       &lt;dbl&gt;          &lt;dbl&gt;
+##  1            0           0            0           0              0
+##  2            0           0            0           0              0
+##  3            0           0            0           0              0
+##  4            0           0            0           0              0
+##  5            0           0            0           0              0
+##  6            0           0            0           0              0
+##  7            0           0            0           0              0
+##  8            0           0            0           0              0
+##  9            0           0            0           0              0
+## 10            0           0            1           0              0
+## 11            0           0            0           0              0
+## 12            0           0            0           0              0
+## 13            0           0            0           0              0
+## 14            0           0            0           0              0
+## 15            0           0            0           0              0
+## 16            0           0            0           0              0
+## 17            0           0            1           0              0
+## 18            0           0            0           0              0
+## 19            0           0            0           0              0
+## 20            0           0            0           0              0
+## 21            0           0            0           0              0
+## 22            0           0            0           0              0
+## 23            0           0            0           0              0
+## 24            0           0            0           0              0
+## 25            0           0            0           0              0
+## 26            0           0            0           0              0
+## 27            0           0            0           0              0
+## 28            0           0            0           0              0
+## 29            0           0            0           0              0
+## 30            0           0            0           0              0
+##    Race_Atlantean Race_Cosmic Race_Cyborg Race_DemiHumanGod Race_Demon
+##             &lt;dbl&gt;       &lt;dbl&gt;       &lt;dbl&gt;             &lt;dbl&gt;      &lt;dbl&gt;
+##  1              0           0           0                 0          0
+##  2              0           0           0                 0          0
+##  3              0           0           0                 0          0
+##  4              0           0           0                 0          0
+##  5              0           0           0                 0          1
+##  6              0           0           0                 0          0
+##  7              0           0           0                 0          0
+##  8              0           0           0                 0          0
+##  9              0           0           0                 0          0
+## 10              0           0           0                 0          0
+## 11              0           0           1                 0          0
+## 12              0           0           1                 0          0
+## 13              0           0           1                 0          0
+## 14              0           0           0                 0          0
+## 15              0           0           0                 0          0
+## 16              0           0           0                 0          0
+## 17              0           0           0                 0          0
+## 18              0           0           0                 0          0
+## 19              0           0           0                 0          0
+## 20              0           0           0                 0          0
+## 21              1           0           0                 0          0
+## 22              1           0           0                 0          0
+## 23              0           0           0                 0          0
+## 24              0           0           0                 0          0
+## 25              0           0           0                 0          0
+## 26              0           0           0                 0          0
+## 27              0           0           0                 0          0
+## 28              0           0           0                 0          0
+## 29              0           0           0                 0          0
+## 30              0           0           0                 0          0
+##    Race_Entity Race_Eternal Race_Frost Race_Giant Race_God Race_Human
+##          &lt;dbl&gt;        &lt;dbl&gt;      &lt;dbl&gt;      &lt;dbl&gt;    &lt;dbl&gt;      &lt;dbl&gt;
+##  1           0            0          0          0        0          0
+##  2           0            0          0          0        0          1
+##  3           0            0          0          0        0          1
+##  4           0            0          0          0        0          1
+##  5           0            0          0          0        0          0
+##  6           0            0          0          0        0          1
+##  7           0            0          0          0        0          1
+##  8           0            0          0          0        0          1
+##  9           0            0          0          0        0          1
+## 10           0            0          0          0        0          0
+## 11           0            0          0          0        0          0
+## 12           0            0          0          0        0          0
+## 13           0            0          0          0        0          0
+## 14           0            0          0          0        0          1
+## 15           0            0          0          0        0          1
+## 16           0            0          0          0        0          1
+## 17           0            0          0          0        0          0
+## 18           0            0          0          0        0          1
+## 19           0            1          0          0        1          0
+## 20           0            0          0          0        0          1
+## 21           0            0          0          0        0          0
+## 22           0            0          0          0        0          0
+## 23           0            1          0          0        1          0
+## 24           0            0          0          0        0          1
+## 25           0            1          0          0        1          0
+## 26           0            0          0          0        0          1
+## 27           0            0          0          0        0          1
+## 28           0            0          0          0        0          1
+## 29           0            0          0          0        0          1
+## 30           0            0          0          0        0          1
+##    Race_HumanHumanKree Race_Inhuman Race_Kryptonian Race_Metahuman
+##                  &lt;dbl&gt;        &lt;dbl&gt;           &lt;dbl&gt;          &lt;dbl&gt;
+##  1                   0            0               0              0
+##  2                   0            0               0              0
+##  3                   0            0               0              0
+##  4                   0            0               0              0
+##  5                   0            0               0              0
+##  6                   0            0               0              0
+##  7                   0            0               0              0
+##  8                   0            0               0              0
+##  9                   0            0               0              0
+## 10                   0            0               0              0
+## 11                   0            0               0              0
+## 12                   0            0               0              0
+## 13                   0            0               0              0
+## 14                   0            0               0              0
+## 15                   0            0               0              0
+## 16                   0            0               0              0
+## 17                   0            0               0              0
+## 18                   0            0               0              0
+## 19                   0            0               0              0
+## 20                   0            0               0              0
+## 21                   0            0               0              0
+## 22                   0            0               0              0
+## 23                   0            0               0              0
+## 24                   0            0               0              0
+## 25                   0            0               0              0
+## 26                   0            0               0              0
+## 27                   0            0               0              0
+## 28                   0            0               0              0
+## 29                   0            0               0              0
+## 30                   0            0               0              0
+##    Race_Mutant Race_New Race_Radiation Race_Symbiote Race_Vampire
+##          &lt;dbl&gt;    &lt;dbl&gt;          &lt;dbl&gt;         &lt;dbl&gt;        &lt;dbl&gt;
+##  1           0        0              0             0            1
+##  2           0        0              0             0            0
+##  3           0        0              0             0            0
+##  4           0        0              0             0            0
+##  5           0        0              0             0            0
+##  6           0        0              0             0            0
+##  7           0        0              0             0            0
+##  8           0        0              0             0            0
+##  9           0        0              0             0            0
+## 10           0        0              0             0            0
+## 11           0        0              0             0            0
+## 12           0        0              0             0            0
+## 13           0        0              0             0            0
+## 14           0        0              0             0            0
+## 15           0        0              0             0            0
+## 16           0        0              0             0            0
+## 17           0        0              0             0            0
+## 18           0        0              0             0            0
+## 19           0        0              0             0            0
+## 20           0        0              0             0            0
+## 21           0        0              0             0            0
+## 22           0        0              0             0            0
+## 23           0        0              0             0            0
+## 24           0        0              0             0            0
+## 25           0        0              0             0            0
+## 26           0        0              0             0            0
+## 27           0        0              0             0            0
+## 28           0        0              0             0            0
+## 29           0        0              0             0            0
+## 30           0        0              0             0            0
+## # ... with 528 more rows</code></pre>
+<p>Now, you can very easily explore each category!!</p>
+<p><strong><em>Remember though, these need to be converted to factors or else they’ll be confused as integers!!</em></strong></p>
+<p><strong><em>magrittr</em></strong> package can help do this easily</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">library</span>(magrittr)
+
+columns &lt;-<span class="st"> </span><span class="kw">names</span>(OOEdata)[<span class="dv">12</span><span class="op">:</span><span class="kw">length</span>(<span class="kw">names</span>(OOEdata))]
+OOEdata &lt;-<span class="st"> </span>OOEdata <span class="op">%&lt;&gt;%</span><span class="st"> </span><span class="kw">mutate_at</span>(columns, <span class="kw">funs</span>(<span class="kw">factor</span>(.)))
+
+
+quant_df &lt;-<span class="st"> </span>OOEdata <span class="op">%&gt;%</span>
+<span class="st">  </span>dplyr<span class="op">::</span><span class="kw">select</span>(Intelligence<span class="op">:</span>TotalPower, Race_Human, Race_Cyborg, Race_Mutant)
+
+<span class="kw">ggpairs</span>(quant_df, <span class="dt">progress =</span> <span class="ot">FALSE</span>)</code></pre></div>
+<p><img src="_main_files/figure-html/unnamed-chunk-22-1.png" width="672" /></p>
+<p>This figure is very messy to look at here in R Markdown - but if you eliminate a few of the variables, or use R Studio’s zoom button in the plot window, you should be able to explore this!</p>
+</div>
+<div id="the-models" class="section level3">
+<h3><span class="header-section-number">10.1.3</span> The models</h3>
+<div id="cart" class="section level4">
+<h4><span class="header-section-number">10.1.3.1</span> CART</h4>
+<p>Let’s start by building ourselves a single tree. Feel free to try this with different variables.</p>
+<div id="classification-example" class="section level5">
+<h5><span class="header-section-number">10.1.3.1.1</span> Classification example</h5>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">## Let&#39;s remove &#39;neutral&#39; characters from our dataset so we can look at if we can predict
+##   if they are good or evil. We&#39;ll also select just a few columns to work with for
+##   simplicity&#39;s sake
+
+modeldat &lt;-<span class="st"> </span>OOEdata <span class="op">%&gt;%</span><span class="st"> </span>
+<span class="st">  </span>dplyr<span class="op">::</span><span class="kw">filter</span>(Alignment<span class="op">!=</span><span class="st">&#39;neutral&#39;</span>) <span class="op">%&gt;%</span>
+<span class="st">  </span>dplyr<span class="op">::</span><span class="kw">select</span>(Intelligence<span class="op">:</span>TotalPower, Race_Animal, Race_Human, Race_Demon, Race_God,
+                Race_Asgardian, Race_Mutant, Race_Android)
+
+form &lt;-<span class="st"> </span><span class="kw">as.formula</span>(<span class="kw">paste</span>(<span class="st">&quot;Alignment ~ &quot;</span>,<span class="kw">paste</span>(<span class="kw">names</span>(modeldat),<span class="dt">collapse=</span><span class="st">&#39;+&#39;</span>)))
+form &lt;-<span class="st"> </span><span class="kw">update</span>(form, . <span class="op">~</span><span class="st"> </span>. <span class="op">-</span>Alignment) 
+
+## Check out help(rpart.control) for a list of the parameters that you can change!
+## Try playing with these to get an idea of how they impact a single tree
+
+## To run a regression model, change method to &#39;anova&#39;
+treemod &lt;-<span class="st"> </span><span class="kw">rpart</span>(form, <span class="dt">method=</span><span class="st">&#39;class&#39;</span>,<span class="dt">data=</span>modeldat,<span class="dt">cp=</span><span class="fl">0.001</span>,<span class="dt">maxdepth=</span><span class="dv">6</span>)
+
+<span class="kw">rpart.plot</span>(treemod,<span class="dt">cex=</span><span class="fl">0.7</span>)</code></pre></div>
+<p><img src="_main_files/figure-html/unnamed-chunk-23-1.png" width="672" /></p>
+</div>
+</div>
+<div id="gbm.step" class="section level4">
+<h4><span class="header-section-number">10.1.3.2</span> GBM.step</h4>
+<p>We’re going to ‘skip’ a step here to a degree and use the gbm.step algorithm, an extension to gbm (generalized boosted regression modelling/ boosted regression trees). gbm.step will calculate the optimal tree to use by way of cross validation, rather than just building a pile of trees and letting the user decide.</p>
+<p>We’ll just use the model we had above (classification). Unfortunately, gbm.step uses column index values, rather than names!</p>
+<p><strong><em>gbm.step is not particularly well oriented towards multiple class target / dependent variables</em></strong> <strong><em>gbm.step needs to use a data.frame (can’t use a tibble), and in the target MUST be a factor</em></strong> <strong><em>gbm.step ALSO needs the TARGET variable to be in the form 0/1 </em></strong></p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">modeldat &lt;-<span class="st"> </span>modeldat <span class="op">%&gt;%</span><span class="st"> </span>
+<span class="st">  </span><span class="kw">mutate</span>(<span class="dt">Alignment_targ =</span> <span class="kw">case_when</span>(Alignment <span class="op">==</span><span class="st"> &#39;good&#39;</span> <span class="op">~</span><span class="st"> </span><span class="dv">0</span>, Alignment <span class="op">==</span><span class="st"> &#39;bad&#39;</span> <span class="op">~</span><span class="st"> </span><span class="dv">1</span> )) <span class="op">%&gt;%</span>
+<span class="st">  </span><span class="kw">mutate_at</span>(<span class="kw">c</span>(<span class="st">&#39;Alignment_targ&#39;</span>,<span class="st">&#39;Gender&#39;</span>,<span class="st">&#39;Creator&#39;</span>), <span class="kw">funs</span>(<span class="kw">factor</span>(.)))
+
+modeldf &lt;-<span class="st"> </span><span class="kw">data.frame</span>(modeldat)
+modeldf<span class="op">$</span>Alignment_targ &lt;-<span class="st"> </span><span class="kw">as.numeric</span>(<span class="kw">as.character</span>(modeldf<span class="op">$</span>Alignment_targ))
+
+gbmModel &lt;-<span class="st"> </span><span class="kw">gbm.step</span>(<span class="dt">data=</span>modeldf,<span class="dt">gbm.=</span><span class="kw">c</span>(<span class="dv">1</span><span class="op">:</span><span class="dv">6</span>,<span class="dv">8</span><span class="op">:</span><span class="dv">17</span>),<span class="dt">gbm.y=</span><span class="dv">18</span>,<span class="dt">family=</span><span class="st">&quot;bernoulli&quot;</span>,
+                     <span class="dt">tree.complexity =</span> <span class="dv">10</span>,<span class="dt">learning.rate=</span><span class="fl">0.001</span>,<span class="dt">bag.fraction=</span><span class="fl">0.8</span>,<span class="dt">max.trees =</span> <span class="dv">8000</span>)</code></pre></div>
+<pre><code>## 
+##  
+##  GBM STEP - version 2.9 
+##  
+## Performing cross-validation optimisation of a boosted regression tree model 
+## for Alignment_targ and using a family of bernoulli 
+## Using 531 observations and 16 predictors 
+## creating 10 initial models of 50 trees 
+## 
+##  folds are stratified by prevalence 
+## total mean deviance =  1.2623 
+## tolerance is fixed at  0.0013 
+## ntrees resid. dev. 
+## 50    1.256 
+## now adding trees... 
+## 100   1.2506 
+## 150   1.2455 
+## 200   1.2415 
+## 250   1.2377 
+## 300   1.2341 
+## 350   1.2305 
+## 400   1.2278 
+## 450   1.2251 
+## 500   1.223 
+## 550   1.2209 
+## 600   1.2189 
+## 650   1.2172 
+## 700   1.2159 
+## 750   1.215 
+## 800   1.2138 
+## 850   1.2128 
+## 900   1.2118 
+## 950   1.2109 
+## 1000   1.2107 
+## 1050   1.2104 
+## 1100   1.2099 
+## 1150   1.2098 
+## 1200   1.2095 
+## 1250   1.2093 
+## 1300   1.2092 
+## 1350   1.2092 
+## 1400   1.2091 
+## 1450   1.2093 
+## 1500   1.2098 
+## 1550   1.21 
+## 1600   1.2101 
+## 1650   1.2104 
+## 1700   1.2107 
+## 1750   1.2111</code></pre>
+<pre><code>## fitting final gbm model with a fixed number of 1400 trees for Alignment_targ</code></pre>
+<p><img src="_main_files/figure-html/unnamed-chunk-24-1.png" width="672" /></p>
+<pre><code>## 
+## mean total deviance = 1.262 
+## mean residual deviance = 1.003 
+##  
+## estimated cv deviance = 1.209 ; se = 0.021 
+##  
+## training data correlation = 0.635 
+## cv correlation =  0.235 ; se = 0.049 
+##  
+## training data AUC score = 0.873 
+## cv AUC score = 0.639 ; se = 0.025 
+##  
+## elapsed time -  0.35 minutes</code></pre>
+<p>To get a summary of the output that shows the variable importance rankings:</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">summary</span>(gbmModel)</code></pre></div>
+<p><img src="_main_files/figure-html/unnamed-chunk-25-1.png" width="672" /></p>
+<pre><code>##                           var    rel.inf
+## Intelligence     Intelligence 19.0020695
+## Speed                   Speed 12.2313119
+## TotalPower         TotalPower 11.2780910
+## Durability         Durability 11.0676091
+## Power                   Power  9.6616133
+## Combat                 Combat  9.4768883
+## Gender                 Gender  8.8761597
+## Strength             Strength  7.4926870
+## Creator               Creator  6.5287034
+## Race_Human         Race_Human  2.8874781
+## Race_Mutant       Race_Mutant  1.3156192
+## Race_God             Race_God  0.1817697
+## Race_Animal       Race_Animal  0.0000000
+## Race_Demon         Race_Demon  0.0000000
+## Race_Asgardian Race_Asgardian  0.0000000
+## Race_Android     Race_Android  0.0000000</code></pre>
+<p>You can also plot the partial dependence plots, and then take it further to explore interactions by plotting the perspective plots</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">gbm.plot</span>(gbmModel,<span class="dt">n.plots=</span><span class="dv">5</span>,<span class="dt">write.title=</span>F)</code></pre></div>
+<p><img src="_main_files/figure-html/unnamed-chunk-26-1.png" width="672" /></p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">## the gbm perspective plot for intelligence and speed versus the fitted values(z)
+<span class="kw">gbm.perspec</span>(gbmModel,<span class="dv">1</span>,<span class="dv">3</span>,<span class="dt">z.range=</span><span class="kw">c</span>(<span class="fl">0.15</span>,<span class="fl">0.6</span>),<span class="dt">theta=</span><span class="dv">205</span>)</code></pre></div>
+<pre><code>## maximum value = 0.57</code></pre>
+<p><img src="_main_files/figure-html/unnamed-chunk-26-2.png" width="672" /></p>
+</div>
+<div id="random-forest" class="section level4">
+<h4><span class="header-section-number">10.1.3.3</span> random forest</h4>
+<p>Random forest is much more flexible than gbm.step in some respects - for example, you aren’t being forced to use column indices!</p>
+<p>This model can be set up much like the CART model from before.</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">modeldat &lt;-<span class="st"> </span>OOEdata <span class="op">%&gt;%</span><span class="st"> </span>
+<span class="st">  </span>dplyr<span class="op">::</span><span class="kw">filter</span>(Alignment<span class="op">!=</span><span class="st">&#39;neutral&#39;</span>) <span class="op">%&gt;%</span>
+<span class="st">  </span>dplyr<span class="op">::</span><span class="kw">select</span>(Intelligence<span class="op">:</span>TotalPower, Race_Animal, Race_Human, Race_Demon, Race_God,
+                Race_Asgardian, Race_Mutant, Race_Android)
+
+## Have to make sure these things are formatted as factors
+modeldat &lt;-<span class="st"> </span>modeldat <span class="op">%&gt;%</span><span class="st"> </span>
+<span class="st">  </span><span class="kw">mutate</span>(<span class="dt">Alignment_targ =</span> <span class="kw">case_when</span>(Alignment <span class="op">==</span><span class="st"> &#39;good&#39;</span> <span class="op">~</span><span class="st"> </span><span class="dv">0</span>, Alignment <span class="op">==</span><span class="st"> &#39;bad&#39;</span> <span class="op">~</span><span class="st"> </span><span class="dv">1</span> )) <span class="op">%&gt;%</span>
+<span class="st">  </span><span class="kw">mutate_at</span>(<span class="kw">c</span>(<span class="st">&#39;Alignment_targ&#39;</span>,<span class="st">&#39;Gender&#39;</span>,<span class="st">&#39;Creator&#39;</span>), <span class="kw">funs</span>(<span class="kw">factor</span>(.)))
+
+
+form &lt;-<span class="st"> </span><span class="kw">as.formula</span>(<span class="kw">paste</span>(<span class="st">&quot;Alignment_targ ~ &quot;</span>,<span class="kw">paste</span>(<span class="kw">names</span>(modeldat),<span class="dt">collapse=</span><span class="st">&#39;+&#39;</span>)))
+form &lt;-<span class="st"> </span><span class="kw">update</span>(form, . <span class="op">~</span><span class="st"> </span>. <span class="op">-</span>Alignment) 
+form &lt;-<span class="st"> </span><span class="kw">update</span>(form, . <span class="op">~</span><span class="st"> </span>. <span class="op">-</span>Alignment_targ) 
+
+rf.model &lt;-<span class="st"> </span><span class="kw">randomForest</span>(<span class="dt">data=</span><span class="kw">data.frame</span>(modeldat),form,<span class="dt">mtry=</span><span class="dv">3</span>,<span class="dt">maxnodes=</span><span class="dv">10</span>)
+<span class="kw">importance</span>(rf.model)</code></pre></div>
+<pre><code>##                MeanDecreaseGini
+## Intelligence         5.97906362
+## Strength             2.71015149
+## Speed                3.02054765
+## Durability           3.38889346
+## Power                2.11231623
+## Combat               2.55682683
+## Gender               3.77661464
+## Creator              2.21680694
+## TotalPower           3.70953049
+## Race_Animal          0.09094122
+## Race_Human           0.62911709
+## Race_Demon           0.20356215
+## Race_God             0.92810221
+## Race_Asgardian       0.10114833
+## Race_Mutant          0.52449426
+## Race_Android         0.41870671</code></pre>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">partialPlot</span>(rf.model,<span class="kw">data.frame</span>(modeldat),Intelligence)</code></pre></div>
+<p><img src="_main_files/figure-html/unnamed-chunk-27-1.png" width="672" /></p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">partialPlot</span>(rf.model,<span class="kw">data.frame</span>(modeldat),Gender)</code></pre></div>
+<p><img src="_main_files/figure-html/unnamed-chunk-27-2.png" width="672" /></p>
+<p><strong><em>The partial dependence plot will focus on the FIRST class. So if you’re using 0/1, then 0 will be focused on in the interpretation of the plots. This can be changed with the ‘which.class’ argument in partialPlot</em></strong></p>
+</div>
+</div>
+<div id="regression-problem" class="section level3">
+<h3><span class="header-section-number">10.1.4</span> Regression problem</h3>
+<p>Here, we use gbm.step to run the regression problem. If you want to run it in random forest, give it a try! Ask your instructor for some help, or use Google! There are a lot of resources available.</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">modeldat &lt;-<span class="st"> </span>OOEdata <span class="op">%&gt;%</span><span class="st"> </span>
+<span class="st">  </span>dplyr<span class="op">::</span><span class="kw">filter</span>(Alignment<span class="op">!=</span><span class="st">&#39;neutral&#39;</span>) <span class="op">%&gt;%</span>
+<span class="st">  </span>dplyr<span class="op">::</span><span class="kw">select</span>(Intelligence<span class="op">:</span>TotalPower, Race_Animal, Race_Human, Race_Demon, Race_God,
+                Race_Asgardian, Race_Mutant, Race_Android)
+
+modeldat &lt;-<span class="st"> </span>modeldat <span class="op">%&gt;%</span><span class="st"> </span>
+<span class="st">  </span><span class="kw">mutate_at</span>(<span class="kw">c</span>(<span class="st">&#39;Alignment&#39;</span>,<span class="st">&#39;Gender&#39;</span>,<span class="st">&#39;Creator&#39;</span>), <span class="kw">funs</span>(<span class="kw">factor</span>(.)))
+
+modeldf &lt;-<span class="st"> </span><span class="kw">data.frame</span>(modeldat)
+
+## use names(modeldf) to find indices
+
+gbmModel &lt;-<span class="st"> </span><span class="kw">gbm.step</span>(<span class="dt">data=</span>modeldf,<span class="dt">gbm.x=</span><span class="kw">c</span>(<span class="dv">1</span>,<span class="dv">6</span><span class="op">:</span><span class="dv">9</span>,<span class="dv">11</span><span class="op">:</span><span class="dv">17</span>),<span class="dt">gbm.y=</span><span class="dv">10</span>,<span class="dt">family=</span><span class="st">&quot;laplace&quot;</span>,
+                     <span class="dt">tree.complexity =</span> <span class="dv">20</span>,<span class="dt">learning.rate=</span><span class="fl">0.001</span>,<span class="dt">bag.fraction=</span><span class="fl">0.5</span>,<span class="dt">max.trees =</span> <span class="dv">8000</span>)</code></pre></div>
+<pre><code>## 
+##  
+##  GBM STEP - version 2.9 
+##  
+## Performing cross-validation optimisation of a boosted regression tree model 
+## for TotalPower and using a family of laplace 
+## Using 531 observations and 12 predictors 
+## creating 10 initial models of 50 trees 
+## 
+##  folds are unstratified 
+## total mean deviance =  82.8383 
+## tolerance is fixed at  0.0828 
+## ntrees resid. dev. 
+## 50    81.8498 
+## now adding trees... 
+## 100   80.7488 
+## 150   79.714 
+## 200   78.7602 
+## 250   77.8476 
+## 300   76.9881 
+## 350   76.176 
+## 400   75.4368 
+## 450   74.7659 
+## 500   74.1771 
+## 550   73.589 
+## 600   73.0445 
+## 650   72.5335 
+## 700   72.0467 
+## 750   71.6144 
+## 800   71.1758 
+## 850   70.7849 
+## 900   70.3872 
+## 950   70.0014 
+## 1000   69.6746 
+## 1050   69.3573 
+## 1100   69.0595 
+## 1150   68.792 
+## 1200   68.5166 
+## 1250   68.2891 
+## 1300   68.0722 
+## 1350   67.8768 
+## 1400   67.6964 
+## 1450   67.5282 
+## 1500   67.3722 
+## 1550   67.2347 
+## 1600   67.092 
+## 1650   66.9663 
+## 1700   66.8533 
+## 1750   66.7477 
+## 1800   66.6437 
+## 1850   66.5526 
+## 1900   66.4648 
+## 1950   66.3756 
+## 2000   66.3115 
+## 2050   66.2497 
+## 2100   66.1841 
+## 2150   66.1106 
+## 2200   66.068 
+## 2250   66.0449 
+## 2300   65.9985 
+## 2350   65.9618 
+## 2400   65.9109 
+## 2450   65.8887 
+## 2500   65.8651 
+## 2550   65.8467 
+## 2600   65.84 
+## 2650   65.8064 
+## 2700   65.7823 
+## 2750   65.7694 
+## 2800   65.7667 
+## 2850   65.7548 
+## 2900   65.7558 
+## 2950   65.7533 
+## 3000   65.773 
+## 3050   65.7719 
+## 3100   65.7735 
+## 3150   65.7841 
+## 3200   65.8002 
+## 3250   65.8017 
+## 3300   65.8118</code></pre>
+<pre><code>## fitting final gbm model with a fixed number of 2950 trees for TotalPower</code></pre>
+<p><img src="_main_files/figure-html/unnamed-chunk-28-1.png" width="672" /></p>
+<pre><code>## 
+## mean total deviance = 82.838 
+## mean residual deviance = 54.543 
+##  
+## estimated cv deviance = 65.753 ; se = 1.063 
+##  
+## training data correlation = 0.724 
+## cv correlation =  0.583 ; se = 0.032 
+##  
+## elapsed time -  0.77 minutes</code></pre>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">summary</span>(gbmModel)</code></pre></div>
+<p><img src="_main_files/figure-html/unnamed-chunk-28-2.png" width="672" /></p>
+<pre><code>##                           var    rel.inf
+## Combat                 Combat 42.4419404
+## Intelligence     Intelligence 22.9033939
+## Race_Human         Race_Human  9.8977250
+## Creator               Creator  8.7276230
+## Gender                 Gender  7.5488534
+## Alignment           Alignment  3.9918090
+## Race_Mutant       Race_Mutant  3.6870195
+## Race_God             Race_God  0.8016359
+## Race_Animal       Race_Animal  0.0000000
+## Race_Demon         Race_Demon  0.0000000
+## Race_Asgardian Race_Asgardian  0.0000000
+## Race_Android     Race_Android  0.0000000</code></pre>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">gbm.plot</span>(gbmModel,<span class="dt">n.plots=</span><span class="dv">5</span>,<span class="dt">write.title=</span>F)</code></pre></div>
+<p><img src="_main_files/figure-html/unnamed-chunk-28-3.png" width="672" /></p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">## But we are interested in gender, so let&#39;s plot that.
+
+<span class="kw">gbm.plot</span>(gbmModel,<span class="dt">variable.no=</span><span class="dv">4</span>,<span class="dt">plot.layout=</span><span class="kw">c</span>(<span class="dv">1</span>,<span class="dv">1</span>))</code></pre></div>
+<p><img src="_main_files/figure-html/unnamed-chunk-28-4.png" width="672" /></p>
+<p>Interestingly, we see that there does seem to be some sort of bias towards more powerful male characters. However, bearing in mind that the predictive performance (as determined by the summary statistics) is not very high.</p>
+
+</div>
+</div>
+</div>
+            </section>
+
+          </div>
+        </div>
+      </div>
+<a href="species-distribution-modelling.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
+<a href="other-r-resources-for-southern-oceanantarctic-use.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
+    </div>
+  </div>
+<script src="libs/gitbook-2.6.7/js/app.min.js"></script>
+<script src="libs/gitbook-2.6.7/js/lunr.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-search.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-sharing.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-fontsettings.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-bookdown.js"></script>
+<script src="libs/gitbook-2.6.7/js/jquery.highlight.js"></script>
+<script>
+gitbook.require(["gitbook"], function(gitbook) {
+gitbook.start({
+"sharing": {
+"github": false,
+"facebook": true,
+"twitter": true,
+"google": false,
+"linkedin": false,
+"weibo": false,
+"instapaper": false,
+"vk": false,
+"all": ["facebook", "google", "twitter", "linkedin", "weibo", "instapaper"]
+},
+"fontsettings": {
+"theme": "white",
+"family": "sans",
+"size": 2
+},
+"edit": {
+"link": null,
+"text": null
+},
+"history": {
+"link": null,
+"text": null
+},
+"download": null,
+"toc": {
+"collapse": "subsection",
+"scroll_highlight": true
+},
+"toc_depth": 3
+});
+});
+</script>
+
+</body>
+
+</html>

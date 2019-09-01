@@ -1,0 +1,320 @@
+# SDM algorithms
+
+Introduction to different SDM algorithms.
+
+[Presentation (PDF)](./course_material/C6_Different algorithms.pdf)
+
+## Exercises - Practice with models
+
+For this exercise, we're going to play with a superhero dataset! Although this is an SDM focused course, we don't want to spoil the surprises coming when you start playing with the environmental data. 
+
+We want to run models for two questions:  
+
+1) CLASSIFICATION: Is there a bias towards alignment? (i.e. can we predict if a character will be good or bad)  
+2) REGRESSION: Are men stronger than women in the comics? (i.e., can we predict total power, and is Gender one of the most important predictors? Or is there something else that predicts total power)  
+
+
+As per the slides, we're going to do a few things:  
+
+1) Explore and clean our data  
+2) Use one-hot-encoding to help deal with many categories  
+3) Build a single decision tree and visualise it. Re-build the tree with different settings  
+4) Run a model with gbm.step and visualise the train/test plot, as well as the variable importance plot  
+5) Run the same model with random forests and look at the differences in the outputs    
+
+***Pick either the classification or regression problem. Solution for the classification problem are included in this document if you need a poke in the right direction. We run the GBM model ONLY for the regression problem here, but you could try out with RF if you wanted***
+
+
+Let's start by loading libraries
+
+```{r, warning=FALSE}
+library(tidyverse)  ## Isn't tidyverse awesome?
+library(dismo)  ## This package contains the gbm.step command
+library(randomForest)  ## This package contains the randomForest
+library(rpart)   ## This package contains a series of useful decision tree functions
+library(rpart.plot)
+library(gbm)
+```
+
+### Load and clean the data
+
+Now that we've got some libraries ready, let's load and clean our SUPERHERO dataset in preparation for our modelling.
+
+```{r echo = FALSE}
+## hide this, since the path may be confusing to readers
+Supes <- readr::read_csv('docs/course_material/exercises/data/SuperheroDataset.csv')
+```
+
+```{r eval = FALSE}
+Supes <- readr::read_csv('SuperheroDataset.csv')
+```
+
+For the purposes of this exercise, we're going to use the following columns: Name, Intelligence, Strength, Speed, Durability, Power, Combat, Gender, Race, Creator, Alignment, Total Power.  Use the tidyverse to extract those columns. 
+
+```{r}
+SuperData <- Supes %>%
+  dplyr::select(Name, Intelligence:Combat, Alignment:Race, Creator, TotalPower)
+```
+
+#### Exploring the data
+
+If you explore the data a little bit, you'll be able to see some of the interesting quirks of the dataset. Use ggplot2 (or base plot if you're feeling lazy ;) ). 
+
+```{r, warning=FALSE,message=FALSE}
+
+
+SuperData %>%
+  filter(!is.na(Intelligence))%>% 
+  ggplot(aes(x=Intelligence,y=Strength)) + geom_point() + geom_smooth(method=lm) + theme_bw()
+
+## Looking at the line, it seems like the problem is that there are some extreme low values
+##   of intelligence. Outliers perhaps?? Try to find out who those values belong to, and
+##   that may help you determine if they should be included in the analysis
+
+SuperData %>%
+  filter(!is.na(Combat))%>% 
+  ggplot(aes(x=Combat,y=Strength)) + geom_point() + geom_smooth(method=lm) + theme_bw()
+
+## We can also filter the data conditionally to explore the dataset with specific classes, e.g.:
+SuperData %>%
+  filter(!is.na(Combat),Gender=='Female')%>% 
+  ggplot(aes(x=Combat,y=Strength)) + geom_point() + geom_smooth(method=lm) + theme_bw()
+
+
+library(GGally)
+## This is a great library for exploring data quickly! Rather than coding everything bit by bit
+
+quant_df <- SuperData %>% dplyr::select(Intelligence:Gender,TotalPower)
+ggpairs(quant_df, progress = FALSE)
+
+```
+  
+Note that 'total power' is highly correlated with strength, speed, durability and power. This could impact how we interpret the regression problem later as these variables may wash out the signal we're trying to explore. Not a bad thing if we're just trying to make predictions! But if we're trying to answer a specific question, it could 'muddy the waters'.    
+
+If you have checked out some of the variables, you might notice two things:  
+
+1)  Race and Creator have too many categories!
+2)  There are a number of Creators that are only used once, or may not be appropriate to include.   
+
+```{r}
+length(unique(SuperData$Race)) ## Number of unique levels in Race
+length(unique(SuperData$Creator))  ## Same only for creator
+
+## Let's just check out Creator:
+unique(SuperData$Creator)
+
+SuperData %>% count(Creator)
+
+```
+
+There are many classes here that may not be appropriate to include. For example, creator Ian Fleming (creator of James Bond) only has one character.  This dataset also has Star Trek characters. So, we decide here to filter out the appropriate classes (keeping Marvel Comics, DC Comics, Dark Horse Comics, and Image Comics).  
+
+***Note the usage of %in%***
+
+```{r}
+FilteredSupes <- SuperData %>%
+  dplyr::filter(Creator %in% c('Marvel Comics','DC Comics','Dark Horse Comics','Image Comics')) %>%
+  dplyr::filter(!is.na(Intelligence))
+## we do this last part to remove NA data for cleanliness, though trees don't require you to do this!
+
+FilteredSupes
+
+## How many races do we now have??
+length(unique(FilteredSupes$Race))
+
+```
+
+Now let's explore this again.
+
+```{r, warning = FALSE, message = FALSE}
+quant_df <- FilteredSupes %>% dplyr::select(Intelligence:Gender,TotalPower)
+ggpairs(quant_df, progress = FALSE)
+
+```
+
+Not much has really changed, as we have not removed too many rows, which is good thing because it means that those data we removed won't impact the final conclusions in any major way. This just simplifies our data cleaning for this particular exercise. However, we still have lots of 'Race' categories. 
+
+```{r}
+FilteredSupes %>% count(Race)
+```
+Looking at the breakdown of Race, there are many with a count of 1. These can cause some issues when trying to do any cross validation... so we should remove them.
+
+```{r}
+FilteredSupes <- FilteredSupes %>% add_count(Race) %>% filter(n > 1)
+
+FilteredSupes %>% count(Race)
+```
+
+### One hot encoding!
+
+Race has MANY categories! This COULD cause the trees to get swamped by this predictor.  Also, by one-hot encoding, we can keep data that would otherwise get thrown out if just filtering out categories. For example, if we removed the 'cyborg' category by way of filtering, those character data would be removed as well (they might be useful). One hot encoding turns each category into a binary variable. Can be done easily in tidyverse!
+
+```{r}
+OOEdata <- FilteredSupes %>% 
+        separate_rows(Race)%>% 
+        mutate(count = 1) %>% 
+        spread(Race, count, fill = 0, sep = "_")
+
+OOEdata
+```
+Now, you can very easily explore each category!!   
+
+***Remember though, these need to be converted to factors or else they'll be confused as integers!!***  
+ 
+***magrittr*** package can help do this easily  
+
+```{r message = FALSE, warning = FALSE}
+library(magrittr)
+
+columns <- names(OOEdata)[12:length(names(OOEdata))]
+OOEdata <- OOEdata %<>% mutate_at(columns, funs(factor(.)))
+
+
+quant_df <- OOEdata %>%
+  dplyr::select(Intelligence:TotalPower, Race_Human, Race_Cyborg, Race_Mutant)
+
+ggpairs(quant_df, progress = FALSE)
+
+```
+
+This figure is very messy to look at here in R Markdown - but if you eliminate a few of the variables, or use R Studio's zoom button in the plot window, you should be able to explore this!
+
+### The models
+
+#### CART
+
+Let's start by building ourselves a single tree. Feel free to try this with different variables.
+
+##### Classification example
+```{r}
+## Let's remove 'neutral' characters from our dataset so we can look at if we can predict
+##   if they are good or evil. We'll also select just a few columns to work with for
+##   simplicity's sake
+
+modeldat <- OOEdata %>% 
+  dplyr::filter(Alignment!='neutral') %>%
+  dplyr::select(Intelligence:TotalPower, Race_Animal, Race_Human, Race_Demon, Race_God,
+                Race_Asgardian, Race_Mutant, Race_Android)
+
+form <- as.formula(paste("Alignment ~ ",paste(names(modeldat),collapse='+')))
+form <- update(form, . ~ . -Alignment) 
+
+## Check out help(rpart.control) for a list of the parameters that you can change!
+## Try playing with these to get an idea of how they impact a single tree
+
+## To run a regression model, change method to 'anova'
+treemod <- rpart(form, method='class',data=modeldat,cp=0.001,maxdepth=6)
+
+rpart.plot(treemod,cex=0.7)
+
+```
+
+
+#### GBM.step
+
+We're going to 'skip' a step here to a degree and use the gbm.step algorithm, an extension to gbm (generalized boosted regression modelling/ boosted regression trees). gbm.step will calculate the optimal tree to use by way of cross validation, rather than just building a pile of trees and letting the user decide.  
+
+We'll just use the model we had above (classification).  Unfortunately, gbm.step uses column index values, rather than names!
+
+***gbm.step is not particularly well oriented towards multiple class target / dependent variables***
+***gbm.step needs to use a data.frame (can't use a tibble), and in the target MUST be a factor***
+***gbm.step ALSO needs the TARGET variable to be in the form 0/1 ***
+
+```{r}
+
+modeldat <- modeldat %>% 
+  mutate(Alignment_targ = case_when(Alignment == 'good' ~ 0, Alignment == 'bad' ~ 1 )) %>%
+  mutate_at(c('Alignment_targ','Gender','Creator'), funs(factor(.)))
+
+modeldf <- data.frame(modeldat)
+modeldf$Alignment_targ <- as.numeric(as.character(modeldf$Alignment_targ))
+
+gbmModel <- gbm.step(data=modeldf,gbm.=c(1:6,8:17),gbm.y=18,family="bernoulli",
+                     tree.complexity = 10,learning.rate=0.001,bag.fraction=0.8,max.trees = 8000)
+
+```
+
+
+
+
+To get a summary of the output that shows the variable importance rankings:
+
+```{r}
+summary(gbmModel)
+```
+
+You can also plot the partial dependence plots, and then take it further to explore interactions by plotting the perspective plots
+
+```{r}
+gbm.plot(gbmModel,n.plots=5,write.title=F)
+
+## the gbm perspective plot for intelligence and speed versus the fitted values(z)
+gbm.perspec(gbmModel,1,3,z.range=c(0.15,0.6),theta=205)
+
+```
+
+
+#### random forest
+
+Random forest is much more flexible than gbm.step in some respects - for example, you aren't being forced to use column indices! 
+
+This model can be set up much like the CART model from before. 
+
+```{r}
+modeldat <- OOEdata %>% 
+  dplyr::filter(Alignment!='neutral') %>%
+  dplyr::select(Intelligence:TotalPower, Race_Animal, Race_Human, Race_Demon, Race_God,
+                Race_Asgardian, Race_Mutant, Race_Android)
+
+## Have to make sure these things are formatted as factors
+modeldat <- modeldat %>% 
+  mutate(Alignment_targ = case_when(Alignment == 'good' ~ 0, Alignment == 'bad' ~ 1 )) %>%
+  mutate_at(c('Alignment_targ','Gender','Creator'), funs(factor(.)))
+
+
+form <- as.formula(paste("Alignment_targ ~ ",paste(names(modeldat),collapse='+')))
+form <- update(form, . ~ . -Alignment) 
+form <- update(form, . ~ . -Alignment_targ) 
+
+rf.model <- randomForest(data=data.frame(modeldat),form,mtry=3,maxnodes=10)
+importance(rf.model)
+partialPlot(rf.model,data.frame(modeldat),Intelligence)
+partialPlot(rf.model,data.frame(modeldat),Gender)
+```
+
+***The partial dependence plot will focus on the FIRST class. So if you're using 0/1, then 0 will be focused on in the interpretation of the plots. This can be changed with the 'which.class' argument in partialPlot***
+
+
+### Regression problem
+
+Here, we use gbm.step to run the regression problem. If you want to run it in random forest, give it a try! Ask your instructor for some help, or use Google! There are a lot of resources available. 
+
+
+```{r}
+
+modeldat <- OOEdata %>% 
+  dplyr::filter(Alignment!='neutral') %>%
+  dplyr::select(Intelligence:TotalPower, Race_Animal, Race_Human, Race_Demon, Race_God,
+                Race_Asgardian, Race_Mutant, Race_Android)
+
+modeldat <- modeldat %>% 
+  mutate_at(c('Alignment','Gender','Creator'), funs(factor(.)))
+
+modeldf <- data.frame(modeldat)
+
+## use names(modeldf) to find indices
+
+gbmModel <- gbm.step(data=modeldf,gbm.x=c(1,6:9,11:17),gbm.y=10,family="laplace",
+                     tree.complexity = 20,learning.rate=0.001,bag.fraction=0.5,max.trees = 8000)
+
+summary(gbmModel)
+
+gbm.plot(gbmModel,n.plots=5,write.title=F)
+
+## But we are interested in gender, so let's plot that.
+
+gbm.plot(gbmModel,variable.no=4,plot.layout=c(1,1))
+```
+
+Interestingly, we see that there does seem to be some sort of bias towards more powerful male characters. However, bearing in mind that the predictive performance (as determined by the summary statistics) is not very high.  
+
