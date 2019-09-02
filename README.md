@@ -29,7 +29,7 @@ Our aim is that by the end of the course students will be equipped to:
 
 <img src="/images/Huw.jpg" alt="Huw" title="Huw" width="75"  align="left"/> Huw Griffiths (British Antarctic Survey) is a marine biologist who studies large-scale biogeographic and ecological patterns in space and time. He uses selected groups of animals to investigate trends in distribution in the Polar Regions, utilising large biological and physical databases to understand key processes.
 
-<img src="/images/Ryan.jpg" alt="Ryan" title="Ryan" width="75"  align="left"/> Ryan Reisinger (CEBC-CNRS) is an ecologist who models the movement behaviour, habitat use and distribution of marine predators, using telemetry and biologging data.
+<img src="/images/Ryan.jpg" alt="Ryan" title="Ryan" width="75"  align="right"/> Ryan Reisinger (CEBC-CNRS) is an ecologist who models the movement behaviour, habitat use and distribution of marine predators, using telemetry and biologging data.
 
 
 ## Course Length
