@@ -27,7 +27,7 @@ See https://scar.github.io/EGABIcourse19/.
 
 <img src="/images/Charlene_GH.jpg" alt="Charlene" title="Charlene" width="75"  align="right"/> Charlène Guillaumot (ULB, Bruxelles) is an ecological modeller.She studies the potential and limits of species distribution models and dynamic energy budget models on Southern Ocean case studies, and develops/adapts methodologies according to the encountered issues. 
 
-<img src="/images/Grant.jpg" alt="Grant" title="Grant" width="75"  align="left"/>Grant Humphries (HiDef Aerial Surveying Ltd) is a seabird biologist and data scientist who has worked on terrestrial and marine ecosystems with a focus on applying machine learning to complex ecosystems. You can chat with Grant about creating decision support tools in R and Python, and what his favourite programming language is.
+<img src="/images/Grant_GH.jpg" alt="Grant" title="Grant" width="75"  align="left"/>Grant Humphries (HiDef Aerial Surveying Ltd) is a seabird biologist and data scientist who has worked on terrestrial and marine ecosystems with a focus on applying machine learning to complex ecosystems. You can chat with Grant about creating decision support tools in R and Python, and what his favourite programming language is.
 
 <img src="/images/Ryan_GH.jpg" alt="Ryan" title="Ryan" width="75"  align="right"/> Ryan Reisinger (CEBC-CNRS) is an ecologist who models the movement behaviour, habitat use and distribution of marine predators, using telemetry and biologging data.
 
