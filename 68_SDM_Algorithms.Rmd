@@ -27,7 +27,7 @@ As per the slides, we're going to do a few things:
 
 Let's start by loading libraries
 
-```{r, warning=FALSE}
+```{r sdmalg1, warning=FALSE}
 library(tidyverse)  ## Isn't tidyverse awesome?
 library(dismo)  ## This package contains the gbm.step command
 library(randomForest)  ## This package contains the randomForest
@@ -40,18 +40,18 @@ library(gbm)
 
 Now that we've got some libraries ready, let's load and clean our SUPERHERO dataset in preparation for our modelling.
 
-```{r echo = FALSE}
+```{r sdmalg2, echo = FALSE}
 ## hide this, since the path may be confusing to readers
 Supes <- readr::read_csv('docs/course_material/exercises/data/SuperheroDataset.csv')
 ```
 
-```{r eval = FALSE}
+```{r sdmalg3, eval = FALSE}
 Supes <- readr::read_csv('SuperheroDataset.csv')
 ```
 
 For the purposes of this exercise, we're going to use the following columns: Name, Intelligence, Strength, Speed, Durability, Power, Combat, Gender, Race, Creator, Alignment, Total Power.  Use the tidyverse to extract those columns. 
 
-```{r}
+```{r sdmalg4}
 SuperData <- Supes %>%
   dplyr::select(Name, Intelligence:Combat, Alignment:Race, Creator, TotalPower)
 ```
@@ -60,7 +60,7 @@ SuperData <- Supes %>%
 
 If you explore the data a little bit, you'll be able to see some of the interesting quirks of the dataset. Use ggplot2 (or base plot if you're feeling lazy ;) ). 
 
-```{r, warning=FALSE,message=FALSE}
+```{r sdmalg5, warning=FALSE,message=FALSE}
 
 
 SuperData %>%
@@ -96,7 +96,7 @@ If you have checked out some of the variables, you might notice two things:
 1)  Race and Creator have too many categories!
 2)  There are a number of Creators that are only used once, or may not be appropriate to include.   
 
-```{r}
+```{r sdmalg6}
 length(unique(SuperData$Race)) ## Number of unique levels in Race
 length(unique(SuperData$Creator))  ## Same only for creator
 
@@ -111,7 +111,7 @@ There are many classes here that may not be appropriate to include. For example,
 
 ***Note the usage of %in%***
 
-```{r}
+```{r sdmalg7}
 FilteredSupes <- SuperData %>%
   dplyr::filter(Creator %in% c('Marvel Comics','DC Comics','Dark Horse Comics','Image Comics')) %>%
   dplyr::filter(!is.na(Intelligence))
@@ -126,7 +126,7 @@ length(unique(FilteredSupes$Race))
 
 Now let's explore this again.
 
-```{r, warning = FALSE, message = FALSE}
+```{r sdmalg8, warning = FALSE, message = FALSE}
 quant_df <- FilteredSupes %>% dplyr::select(Intelligence:Gender,TotalPower)
 ggpairs(quant_df, progress = FALSE)
 
@@ -134,12 +134,12 @@ ggpairs(quant_df, progress = FALSE)
 
 Not much has really changed, as we have not removed too many rows, which is good thing because it means that those data we removed won't impact the final conclusions in any major way. This just simplifies our data cleaning for this particular exercise. However, we still have lots of 'Race' categories. 
 
-```{r}
+```{r sdmalg9}
 FilteredSupes %>% count(Race)
 ```
 Looking at the breakdown of Race, there are many with a count of 1. These can cause some issues when trying to do any cross validation... so we should remove them.
 
-```{r}
+```{r sdmalg10}
 FilteredSupes <- FilteredSupes %>% add_count(Race) %>% filter(n > 1)
 
 FilteredSupes %>% count(Race)
@@ -149,7 +149,7 @@ FilteredSupes %>% count(Race)
 
 Race has MANY categories! This COULD cause the trees to get swamped by this predictor.  Also, by one-hot encoding, we can keep data that would otherwise get thrown out if just filtering out categories. For example, if we removed the 'cyborg' category by way of filtering, those character data would be removed as well (they might be useful). One hot encoding turns each category into a binary variable. Can be done easily in tidyverse!
 
-```{r}
+```{r sdmalg11}
 OOEdata <- FilteredSupes %>% 
         separate_rows(Race)%>% 
         mutate(count = 1) %>% 
@@ -163,7 +163,7 @@ Now, you can very easily explore each category!!
  
 ***magrittr*** package can help do this easily  
 
-```{r message = FALSE, warning = FALSE}
+```{r sdmalg12, message = FALSE, warning = FALSE}
 library(magrittr)
 
 columns <- names(OOEdata)[12:length(names(OOEdata))]
@@ -186,7 +186,7 @@ This figure is very messy to look at here in R Markdown - but if you eliminate a
 Let's start by building ourselves a single tree. Feel free to try this with different variables.
 
 ##### Classification example
-```{r}
+```{r sdmalg13}
 ## Let's remove 'neutral' characters from our dataset so we can look at if we can predict
 ##   if they are good or evil. We'll also select just a few columns to work with for
 ##   simplicity's sake
@@ -220,7 +220,7 @@ We'll just use the model we had above (classification).  Unfortunately, gbm.step
 ***gbm.step needs to use a data.frame (can't use a tibble), and in the target MUST be a factor***
 ***gbm.step ALSO needs the TARGET variable to be in the form 0/1 ***
 
-```{r}
+```{r sdmalg14}
 
 modeldat <- modeldat %>% 
   mutate(Alignment_targ = case_when(Alignment == 'good' ~ 0, Alignment == 'bad' ~ 1 )) %>%
@@ -239,13 +239,13 @@ gbmModel <- gbm.step(data=modeldf,gbm.=c(1:6,8:17),gbm.y=18,family="bernoulli",
 
 To get a summary of the output that shows the variable importance rankings:
 
-```{r}
+```{r sdmalg15}
 summary(gbmModel)
 ```
 
 You can also plot the partial dependence plots, and then take it further to explore interactions by plotting the perspective plots
 
-```{r}
+```{r sdmalg16}
 gbm.plot(gbmModel,n.plots=5,write.title=F)
 
 ## the gbm perspective plot for intelligence and speed versus the fitted values(z)
@@ -260,7 +260,7 @@ Random forest is much more flexible than gbm.step in some respects - for example
 
 This model can be set up much like the CART model from before. 
 
-```{r}
+```{r sdmalg17}
 modeldat <- OOEdata %>% 
   dplyr::filter(Alignment!='neutral') %>%
   dplyr::select(Intelligence:TotalPower, Race_Animal, Race_Human, Race_Demon, Race_God,
@@ -290,7 +290,7 @@ partialPlot(rf.model,data.frame(modeldat),Gender)
 Here, we use gbm.step to run the regression problem. If you want to run it in random forest, give it a try! Ask your instructor for some help, or use Google! There are a lot of resources available. 
 
 
-```{r}
+```{r sdmalg18}
 
 modeldat <- OOEdata %>% 
   dplyr::filter(Alignment!='neutral') %>%

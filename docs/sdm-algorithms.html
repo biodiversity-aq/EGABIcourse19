@@ -31,7 +31,7 @@
   
   
 <link rel="prev" href="species-distribution-modelling.html">
-<link rel="next" href="other-r-resources-for-southern-oceanantarctic-use.html">
+<link rel="next" href="sdm-extra-bits-and-pieces.html">
 <script src="libs/jquery-2.2.3/jquery.min.js"></script>
 <link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
 <link href="libs/gitbook-2.6.7/css/plugin-table.css" rel="stylesheet" />
@@ -124,7 +124,7 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
 </ul></li>
 <li class="chapter" data-level="5" data-path="introduction-to-r-and-the-tidyverse.html"><a href="introduction-to-r-and-the-tidyverse.html"><i class="fa fa-check"></i><b>5</b> Introduction to R and the Tidyverse</a><ul>
 <li class="chapter" data-level="5.1" data-path="introduction-to-r-and-the-tidyverse.html"><a href="introduction-to-r-and-the-tidyverse.html#exercise-r-script"><i class="fa fa-check"></i><b>5.1</b> Exercise R script</a></li>
-<li class="chapter" data-level="5.2" data-path="introduction-to-r-and-the-tidyverse.html"><a href="introduction-to-r-and-the-tidyverse.html#see-also"><i class="fa fa-check"></i><b>5.2</b> See also:</a></li>
+<li class="chapter" data-level="5.2" data-path="introduction-to-r-and-the-tidyverse.html"><a href="introduction-to-r-and-the-tidyverse.html#see-also"><i class="fa fa-check"></i><b>5.2</b> See also</a></li>
 </ul></li>
 <li class="chapter" data-level="6" data-path="open-data-and-data-cleaning.html"><a href="open-data-and-data-cleaning.html"><i class="fa fa-check"></i><b>6</b> Open data and data cleaning</a><ul>
 <li class="chapter" data-level="6.1" data-path="open-data-and-data-cleaning.html"><a href="open-data-and-data-cleaning.html#fair-principles"><i class="fa fa-check"></i><b>6.1</b> FAIR principles</a></li>
@@ -193,9 +193,14 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
 <li class="chapter" data-level="13.1.4" data-path="sdm-algorithms.html"><a href="sdm-algorithms.html#regression-problem"><i class="fa fa-check"></i><b>13.1.4</b> Regression problem</a></li>
 </ul></li>
 </ul></li>
-<li class="chapter" data-level="14" data-path="other-r-resources-for-southern-oceanantarctic-use.html"><a href="other-r-resources-for-southern-oceanantarctic-use.html"><i class="fa fa-check"></i><b>14</b> Other R resources for Southern Ocean/Antarctic use</a><ul>
-<li class="chapter" data-level="14.1" data-path="other-r-resources-for-southern-oceanantarctic-use.html"><a href="other-r-resources-for-southern-oceanantarctic-use.html#diet-data-sohungry"><i class="fa fa-check"></i><b>14.1</b> Diet data: sohungry</a></li>
-<li class="chapter" data-level="14.2" data-path="other-r-resources-for-southern-oceanantarctic-use.html"><a href="other-r-resources-for-southern-oceanantarctic-use.html#allometric-equations-solong"><i class="fa fa-check"></i><b>14.2</b> Allometric equations: solong</a></li>
+<li class="chapter" data-level="14" data-path="sdm-extra-bits-and-pieces.html"><a href="sdm-extra-bits-and-pieces.html"><i class="fa fa-check"></i><b>14</b> SDM extra bits and pieces</a><ul>
+<li class="chapter" data-level="14.1" data-path="sdm-extra-bits-and-pieces.html"><a href="sdm-extra-bits-and-pieces.html#spatial-partial-predictions"><i class="fa fa-check"></i><b>14.1</b> Spatial partial predictions</a><ul>
+<li class="chapter" data-level="14.1.1" data-path="sdm-extra-bits-and-pieces.html"><a href="sdm-extra-bits-and-pieces.html#example-1"><i class="fa fa-check"></i><b>14.1.1</b> Example</a></li>
+</ul></li>
+</ul></li>
+<li class="chapter" data-level="15" data-path="other-r-resources-for-southern-oceanantarctic-use.html"><a href="other-r-resources-for-southern-oceanantarctic-use.html"><i class="fa fa-check"></i><b>15</b> Other R resources for Southern Ocean/Antarctic use</a><ul>
+<li class="chapter" data-level="15.1" data-path="other-r-resources-for-southern-oceanantarctic-use.html"><a href="other-r-resources-for-southern-oceanantarctic-use.html#diet-data-sohungry"><i class="fa fa-check"></i><b>15.1</b> Diet data: sohungry</a></li>
+<li class="chapter" data-level="15.2" data-path="other-r-resources-for-southern-oceanantarctic-use.html"><a href="other-r-resources-for-southern-oceanantarctic-use.html#allometric-equations-solong"><i class="fa fa-check"></i><b>15.2</b> Allometric equations: solong</a></li>
 </ul></li>
 </ul>
 
@@ -241,34 +246,12 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
 </ol>
 <p><strong><em>Pick either the classification or regression problem. Solution for the classification problem are included in this document if you need a poke in the right direction. We run the GBM model ONLY for the regression problem here, but you could try out with RF if you wanted</em></strong></p>
 <p>Let’s start by loading libraries</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">library</span>(tidyverse)  ## Isn&#39;t tidyverse awesome?</code></pre></div>
-<pre><code>## -- Attaching packages --------------------------------------- tidyverse 1.2.1 --</code></pre>
-<pre><code>## v tibble  2.1.3     v readr   1.3.1
-## v tidyr   0.8.3     v stringr 1.4.0
-## v tibble  2.1.3     v forcats 0.4.0</code></pre>
-<pre><code>## -- Conflicts ------------------------------------------ tidyverse_conflicts() --
-## x nlme::collapse()    masks dplyr::collapse()
-## x tidyr::extract()    masks raadtools::extract(), raster::extract()
-## x dplyr::filter()     masks stats::filter()
-## x dplyr::group_rows() masks kableExtra::group_rows()
-## x dplyr::lag()        masks stats::lag()
-## x raster::select()    masks dplyr::select()</code></pre>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">library</span>(dismo)  ## This package contains the gbm.step command
-<span class="kw">library</span>(randomForest)  ## This package contains the randomForest</code></pre></div>
-<pre><code>## randomForest 4.6-14</code></pre>
-<pre><code>## Type rfNews() to see new features/changes/bug fixes.</code></pre>
-<pre><code>## 
-## Attaching package: &#39;randomForest&#39;</code></pre>
-<pre><code>## The following object is masked from &#39;package:ggplot2&#39;:
-## 
-##     margin</code></pre>
-<pre><code>## The following object is masked from &#39;package:dplyr&#39;:
-## 
-##     combine</code></pre>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">library</span>(rpart)   ## This package contains a series of useful decision tree functions
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">library</span>(tidyverse)  ## Isn&#39;t tidyverse awesome?
+<span class="kw">library</span>(dismo)  ## This package contains the gbm.step command
+<span class="kw">library</span>(randomForest)  ## This package contains the randomForest
+<span class="kw">library</span>(rpart)   ## This package contains a series of useful decision tree functions
 <span class="kw">library</span>(rpart.plot)
 <span class="kw">library</span>(gbm)</code></pre></div>
-<pre><code>## Loaded gbm 2.1.5</code></pre>
 <div id="load-and-clean-the-data" class="section level3">
 <h3><span class="header-section-number">13.1.1</span> Load and clean the data</h3>
 <p>Now that we’ve got some libraries ready, let’s load and clean our SUPERHERO dataset in preparation for our modelling.</p>
@@ -295,7 +278,7 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">SuperData <span class="op">%&gt;%</span>
 <span class="st">  </span><span class="kw">filter</span>(<span class="op">!</span><span class="kw">is.na</span>(Intelligence))<span class="op">%&gt;%</span><span class="st"> </span>
 <span class="st">  </span><span class="kw">ggplot</span>(<span class="kw">aes</span>(<span class="dt">x=</span>Intelligence,<span class="dt">y=</span>Strength)) <span class="op">+</span><span class="st"> </span><span class="kw">geom_point</span>() <span class="op">+</span><span class="st"> </span><span class="kw">geom_smooth</span>(<span class="dt">method=</span>lm) <span class="op">+</span><span class="st"> </span><span class="kw">theme_bw</span>()</code></pre></div>
-<p><img src="_main_files/figure-html/unnamed-chunk-19-1.png" width="672" /></p>
+<p><img src="_main_files/figure-html/sdmalg5-1.png" width="672" /></p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">## Looking at the line, it seems like the problem is that there are some extreme low values
 ##   of intelligence. Outliers perhaps?? Try to find out who those values belong to, and
 ##   that may help you determine if they should be included in the analysis
@@ -303,18 +286,18 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
 SuperData <span class="op">%&gt;%</span>
 <span class="st">  </span><span class="kw">filter</span>(<span class="op">!</span><span class="kw">is.na</span>(Combat))<span class="op">%&gt;%</span><span class="st"> </span>
 <span class="st">  </span><span class="kw">ggplot</span>(<span class="kw">aes</span>(<span class="dt">x=</span>Combat,<span class="dt">y=</span>Strength)) <span class="op">+</span><span class="st"> </span><span class="kw">geom_point</span>() <span class="op">+</span><span class="st"> </span><span class="kw">geom_smooth</span>(<span class="dt">method=</span>lm) <span class="op">+</span><span class="st"> </span><span class="kw">theme_bw</span>()</code></pre></div>
-<p><img src="_main_files/figure-html/unnamed-chunk-19-2.png" width="672" /></p>
+<p><img src="_main_files/figure-html/sdmalg5-2.png" width="672" /></p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">## We can also filter the data conditionally to explore the dataset with specific classes, e.g.:
 SuperData <span class="op">%&gt;%</span>
 <span class="st">  </span><span class="kw">filter</span>(<span class="op">!</span><span class="kw">is.na</span>(Combat),Gender<span class="op">==</span><span class="st">&#39;Female&#39;</span>)<span class="op">%&gt;%</span><span class="st"> </span>
 <span class="st">  </span><span class="kw">ggplot</span>(<span class="kw">aes</span>(<span class="dt">x=</span>Combat,<span class="dt">y=</span>Strength)) <span class="op">+</span><span class="st"> </span><span class="kw">geom_point</span>() <span class="op">+</span><span class="st"> </span><span class="kw">geom_smooth</span>(<span class="dt">method=</span>lm) <span class="op">+</span><span class="st"> </span><span class="kw">theme_bw</span>()</code></pre></div>
-<p><img src="_main_files/figure-html/unnamed-chunk-19-3.png" width="672" /></p>
+<p><img src="_main_files/figure-html/sdmalg5-3.png" width="672" /></p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">library</span>(GGally)
 ## This is a great library for exploring data quickly! Rather than coding everything bit by bit
 
 quant_df &lt;-<span class="st"> </span>SuperData <span class="op">%&gt;%</span><span class="st"> </span>dplyr<span class="op">::</span><span class="kw">select</span>(Intelligence<span class="op">:</span>Gender,TotalPower)
 <span class="kw">ggpairs</span>(quant_df, <span class="dt">progress =</span> <span class="ot">FALSE</span>)</code></pre></div>
-<p><img src="_main_files/figure-html/unnamed-chunk-19-4.png" width="672" /></p>
+<p><img src="_main_files/figure-html/sdmalg5-4.png" width="672" /></p>
 <p>Note that ‘total power’ is highly correlated with strength, speed, durability and power. This could impact how we interpret the regression problem later as these variables may wash out the signal we’re trying to explore. Not a bad thing if we’re just trying to make predictions! But if we’re trying to answer a specific question, it could ‘muddy the waters’.</p>
 <p>If you have checked out some of the variables, you might notice two things:</p>
 <ol style="list-style-type: decimal">
@@ -442,7 +425,7 @@ FilteredSupes</code></pre></div>
 <p>Now let’s explore this again.</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">quant_df &lt;-<span class="st"> </span>FilteredSupes <span class="op">%&gt;%</span><span class="st"> </span>dplyr<span class="op">::</span><span class="kw">select</span>(Intelligence<span class="op">:</span>Gender,TotalPower)
 <span class="kw">ggpairs</span>(quant_df, <span class="dt">progress =</span> <span class="ot">FALSE</span>)</code></pre></div>
-<p><img src="_main_files/figure-html/unnamed-chunk-22-1.png" width="672" /></p>
+<p><img src="_main_files/figure-html/sdmalg8-1.png" width="672" /></p>
 <p>Not much has really changed, as we have not removed too many rows, which is good thing because it means that those data we removed won’t impact the final conclusions in any major way. This just simplifies our data cleaning for this particular exercise. However, we still have lots of ‘Race’ categories.</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">FilteredSupes <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">count</span>(Race)</code></pre></div>
 <pre><code>## # A tibble: 53 x 2
@@ -761,7 +744,7 @@ quant_df &lt;-<span class="st"> </span>OOEdata <span class="op">%&gt;%</span>
 <span class="st">  </span>dplyr<span class="op">::</span><span class="kw">select</span>(Intelligence<span class="op">:</span>TotalPower, Race_Human, Race_Cyborg, Race_Mutant)
 
 <span class="kw">ggpairs</span>(quant_df, <span class="dt">progress =</span> <span class="ot">FALSE</span>)</code></pre></div>
-<p><img src="_main_files/figure-html/unnamed-chunk-26-1.png" width="672" /></p>
+<p><img src="_main_files/figure-html/sdmalg12-1.png" width="672" /></p>
 <p>This figure is very messy to look at here in R Markdown - but if you eliminate a few of the variables, or use R Studio’s zoom button in the plot window, you should be able to explore this!</p>
 </div>
 <div id="the-models" class="section level3">
@@ -790,7 +773,7 @@ form &lt;-<span class="st"> </span><span class="kw">update</span>(form, . <span 
 treemod &lt;-<span class="st"> </span><span class="kw">rpart</span>(form, <span class="dt">method=</span><span class="st">&#39;class&#39;</span>,<span class="dt">data=</span>modeldat,<span class="dt">cp=</span><span class="fl">0.001</span>,<span class="dt">maxdepth=</span><span class="dv">6</span>)
 
 <span class="kw">rpart.plot</span>(treemod,<span class="dt">cex=</span><span class="fl">0.7</span>)</code></pre></div>
-<p><img src="_main_files/figure-html/unnamed-chunk-27-1.png" width="672" /></p>
+<p><img src="_main_files/figure-html/sdmalg13-1.png" width="672" /></p>
 </div>
 </div>
 <div id="gbm.step" class="section level4">
@@ -853,7 +836,7 @@ gbmModel &lt;-<span class="st"> </span><span class="kw">gbm.step</span>(<span cl
 ## 1500   1.2188 
 ## 1550   1.2194</code></pre>
 <pre><code>## fitting final gbm model with a fixed number of 1050 trees for Alignment_targ</code></pre>
-<p><img src="_main_files/figure-html/unnamed-chunk-28-1.png" width="672" /></p>
+<p><img src="_main_files/figure-html/sdmalg14-1.png" width="672" /></p>
 <pre><code>## 
 ## mean total deviance = 1.262 
 ## mean residual deviance = 1.048 
@@ -866,10 +849,10 @@ gbmModel &lt;-<span class="st"> </span><span class="kw">gbm.step</span>(<span cl
 ## training data AUC score = 0.857 
 ## cv AUC score = 0.645 ; se = 0.03 
 ##  
-## elapsed time -  0.31 minutes</code></pre>
+## elapsed time -  0.3 minutes</code></pre>
 <p>To get a summary of the output that shows the variable importance rankings:</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">summary</span>(gbmModel)</code></pre></div>
-<p><img src="_main_files/figure-html/unnamed-chunk-29-1.png" width="672" /></p>
+<p><img src="_main_files/figure-html/sdmalg15-1.png" width="672" /></p>
 <pre><code>##                           var    rel.inf
 ## Intelligence     Intelligence 20.6827250
 ## Speed                   Speed 11.4610143
@@ -889,11 +872,11 @@ gbmModel &lt;-<span class="st"> </span><span class="kw">gbm.step</span>(<span cl
 ## Race_Android     Race_Android  0.0000000</code></pre>
 <p>You can also plot the partial dependence plots, and then take it further to explore interactions by plotting the perspective plots</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">gbm.plot</span>(gbmModel,<span class="dt">n.plots=</span><span class="dv">5</span>,<span class="dt">write.title=</span>F)</code></pre></div>
-<p><img src="_main_files/figure-html/unnamed-chunk-30-1.png" width="672" /></p>
+<p><img src="_main_files/figure-html/sdmalg16-1.png" width="672" /></p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">## the gbm perspective plot for intelligence and speed versus the fitted values(z)
 <span class="kw">gbm.perspec</span>(gbmModel,<span class="dv">1</span>,<span class="dv">3</span>,<span class="dt">z.range=</span><span class="kw">c</span>(<span class="fl">0.15</span>,<span class="fl">0.6</span>),<span class="dt">theta=</span><span class="dv">205</span>)</code></pre></div>
 <pre><code>## maximum value = 0.53</code></pre>
-<p><img src="_main_files/figure-html/unnamed-chunk-30-2.png" width="672" /></p>
+<p><img src="_main_files/figure-html/sdmalg16-2.png" width="672" /></p>
 </div>
 <div id="random-forest" class="section level4">
 <h4><span class="header-section-number">13.1.3.3</span> random forest</h4>
@@ -934,9 +917,9 @@ rf.model &lt;-<span class="st"> </span><span class="kw">randomForest</span>(<spa
 ## Race_Mutant          0.57543918
 ## Race_Android         0.43527047</code></pre>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">partialPlot</span>(rf.model,<span class="kw">data.frame</span>(modeldat),Intelligence)</code></pre></div>
-<p><img src="_main_files/figure-html/unnamed-chunk-31-1.png" width="672" /></p>
+<p><img src="_main_files/figure-html/sdmalg17-1.png" width="672" /></p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">partialPlot</span>(rf.model,<span class="kw">data.frame</span>(modeldat),Gender)</code></pre></div>
-<p><img src="_main_files/figure-html/unnamed-chunk-31-2.png" width="672" /></p>
+<p><img src="_main_files/figure-html/sdmalg17-2.png" width="672" /></p>
 <p><strong><em>The partial dependence plot will focus on the FIRST class. So if you’re using 0/1, then 0 will be focused on in the interpretation of the plots. This can be changed with the ‘which.class’ argument in partialPlot</em></strong></p>
 </div>
 </div>
@@ -1049,7 +1032,7 @@ gbmModel &lt;-<span class="st"> </span><span class="kw">gbm.step</span>(<span cl
 ## 3800   65.2387 
 ## 3850   65.2405</code></pre>
 <pre><code>## fitting final gbm model with a fixed number of 3750 trees for TotalPower</code></pre>
-<p><img src="_main_files/figure-html/unnamed-chunk-32-1.png" width="672" /></p>
+<p><img src="_main_files/figure-html/sdmalg18-1.png" width="672" /></p>
 <pre><code>## 
 ## mean total deviance = 82.838 
 ## mean residual deviance = 52.837 
@@ -1059,9 +1042,9 @@ gbmModel &lt;-<span class="st"> </span><span class="kw">gbm.step</span>(<span cl
 ## training data correlation = 0.735 
 ## cv correlation =  0.601 ; se = 0.024 
 ##  
-## elapsed time -  0.92 minutes</code></pre>
+## elapsed time -  0.93 minutes</code></pre>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">summary</span>(gbmModel)</code></pre></div>
-<p><img src="_main_files/figure-html/unnamed-chunk-32-2.png" width="672" /></p>
+<p><img src="_main_files/figure-html/sdmalg18-2.png" width="672" /></p>
 <pre><code>##                           var    rel.inf
 ## Combat                 Combat 42.1908031
 ## Intelligence     Intelligence 23.3232063
@@ -1076,11 +1059,11 @@ gbmModel &lt;-<span class="st"> </span><span class="kw">gbm.step</span>(<span cl
 ## Race_Asgardian Race_Asgardian  0.0000000
 ## Race_Android     Race_Android  0.0000000</code></pre>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">gbm.plot</span>(gbmModel,<span class="dt">n.plots=</span><span class="dv">5</span>,<span class="dt">write.title=</span>F)</code></pre></div>
-<p><img src="_main_files/figure-html/unnamed-chunk-32-3.png" width="672" /></p>
+<p><img src="_main_files/figure-html/sdmalg18-3.png" width="672" /></p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">## But we are interested in gender, so let&#39;s plot that.
 
 <span class="kw">gbm.plot</span>(gbmModel,<span class="dt">variable.no=</span><span class="dv">4</span>,<span class="dt">plot.layout=</span><span class="kw">c</span>(<span class="dv">1</span>,<span class="dv">1</span>))</code></pre></div>
-<p><img src="_main_files/figure-html/unnamed-chunk-32-4.png" width="672" /></p>
+<p><img src="_main_files/figure-html/sdmalg18-4.png" width="672" /></p>
 <p>Interestingly, we see that there does seem to be some sort of bias towards more powerful male characters. However, bearing in mind that the predictive performance (as determined by the summary statistics) is not very high.</p>
 
 </div>
@@ -1092,7 +1075,7 @@ gbmModel &lt;-<span class="st"> </span><span class="kw">gbm.step</span>(<span cl
         </div>
       </div>
 <a href="species-distribution-modelling.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
-<a href="other-r-resources-for-southern-oceanantarctic-use.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
+<a href="sdm-extra-bits-and-pieces.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
     </div>
   </div>
 <script src="libs/gitbook-2.6.7/js/app.min.js"></script>
