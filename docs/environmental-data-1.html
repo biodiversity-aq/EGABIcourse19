@@ -124,7 +124,7 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
 </ul></li>
 <li class="chapter" data-level="5" data-path="introduction-to-r-and-the-tidyverse.html"><a href="introduction-to-r-and-the-tidyverse.html"><i class="fa fa-check"></i><b>5</b> Introduction to R and the Tidyverse</a><ul>
 <li class="chapter" data-level="5.1" data-path="introduction-to-r-and-the-tidyverse.html"><a href="introduction-to-r-and-the-tidyverse.html#exercise-r-script"><i class="fa fa-check"></i><b>5.1</b> Exercise R script</a></li>
-<li class="chapter" data-level="5.2" data-path="introduction-to-r-and-the-tidyverse.html"><a href="introduction-to-r-and-the-tidyverse.html#see-also"><i class="fa fa-check"></i><b>5.2</b> See also:</a></li>
+<li class="chapter" data-level="5.2" data-path="introduction-to-r-and-the-tidyverse.html"><a href="introduction-to-r-and-the-tidyverse.html#see-also"><i class="fa fa-check"></i><b>5.2</b> See also</a></li>
 </ul></li>
 <li class="chapter" data-level="6" data-path="open-data-and-data-cleaning.html"><a href="open-data-and-data-cleaning.html"><i class="fa fa-check"></i><b>6</b> Open data and data cleaning</a><ul>
 <li class="chapter" data-level="6.1" data-path="open-data-and-data-cleaning.html"><a href="open-data-and-data-cleaning.html#fair-principles"><i class="fa fa-check"></i><b>6.1</b> FAIR principles</a></li>
@@ -193,9 +193,14 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
 <li class="chapter" data-level="13.1.4" data-path="sdm-algorithms.html"><a href="sdm-algorithms.html#regression-problem"><i class="fa fa-check"></i><b>13.1.4</b> Regression problem</a></li>
 </ul></li>
 </ul></li>
-<li class="chapter" data-level="14" data-path="other-r-resources-for-southern-oceanantarctic-use.html"><a href="other-r-resources-for-southern-oceanantarctic-use.html"><i class="fa fa-check"></i><b>14</b> Other R resources for Southern Ocean/Antarctic use</a><ul>
-<li class="chapter" data-level="14.1" data-path="other-r-resources-for-southern-oceanantarctic-use.html"><a href="other-r-resources-for-southern-oceanantarctic-use.html#diet-data-sohungry"><i class="fa fa-check"></i><b>14.1</b> Diet data: sohungry</a></li>
-<li class="chapter" data-level="14.2" data-path="other-r-resources-for-southern-oceanantarctic-use.html"><a href="other-r-resources-for-southern-oceanantarctic-use.html#allometric-equations-solong"><i class="fa fa-check"></i><b>14.2</b> Allometric equations: solong</a></li>
+<li class="chapter" data-level="14" data-path="sdm-extra-bits-and-pieces.html"><a href="sdm-extra-bits-and-pieces.html"><i class="fa fa-check"></i><b>14</b> SDM extra bits and pieces</a><ul>
+<li class="chapter" data-level="14.1" data-path="sdm-extra-bits-and-pieces.html"><a href="sdm-extra-bits-and-pieces.html#spatial-partial-predictions"><i class="fa fa-check"></i><b>14.1</b> Spatial partial predictions</a><ul>
+<li class="chapter" data-level="14.1.1" data-path="sdm-extra-bits-and-pieces.html"><a href="sdm-extra-bits-and-pieces.html#example-1"><i class="fa fa-check"></i><b>14.1.1</b> Example</a></li>
+</ul></li>
+</ul></li>
+<li class="chapter" data-level="15" data-path="other-r-resources-for-southern-oceanantarctic-use.html"><a href="other-r-resources-for-southern-oceanantarctic-use.html"><i class="fa fa-check"></i><b>15</b> Other R resources for Southern Ocean/Antarctic use</a><ul>
+<li class="chapter" data-level="15.1" data-path="other-r-resources-for-southern-oceanantarctic-use.html"><a href="other-r-resources-for-southern-oceanantarctic-use.html#diet-data-sohungry"><i class="fa fa-check"></i><b>15.1</b> Diet data: sohungry</a></li>
+<li class="chapter" data-level="15.2" data-path="other-r-resources-for-southern-oceanantarctic-use.html"><a href="other-r-resources-for-southern-oceanantarctic-use.html#allometric-equations-solong"><i class="fa fa-check"></i><b>15.2</b> Allometric equations: solong</a></li>
 </ul></li>
 </ul>
 
@@ -354,11 +359,6 @@ result &lt;-<span class="st"> </span><span class="kw">bb_get</span>(src, <span c
 <p>Now load the <code>raadtools</code> package and tell it where our data collection has been stored:</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">library</span>(raadtools)
 <span class="kw">set_data_roots</span>(my_data_dir)</code></pre></div>
-<pre><code>## Uploading raad file cache as at 2019-09-02 08:47:16 (819 files listed)</code></pre>
-<pre><code>## global option &#39;raadfiles.data.roots&#39; set:
-## &#39;    &#39;
-## global option &#39;raadfiles.data.roots&#39; set:
-## &#39;/data/cache    2019-07-19 14:55:38&#39;</code></pre>
 <p>Let’s say that we have some points of interest in the Southern Ocean — perhaps a ship track, or some stations where we took marine samples, or as we’ll use here, the <a href="http://www.meop.net/">track of an elephant seal</a> as it moves from the Kerguelen Islands to Antarctica and back again (Data from IMOS 2018[^1], provided as part of the <code>SOmap</code> package).</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">data</span>(<span class="st">&quot;SOmap_data&quot;</span>, <span class="dt">package =</span> <span class="st">&quot;SOmap&quot;</span>)
 ele &lt;-<span class="st"> </span>SOmap_data<span class="op">$</span>mirounga_leonina <span class="op">%&gt;%</span><span class="st"> </span>dplyr<span class="op">::</span><span class="kw">filter</span>(id <span class="op">==</span><span class="st"> &quot;ct96-05-13&quot;</span>)</code></pre></div>
