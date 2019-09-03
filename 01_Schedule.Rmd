@@ -24,7 +24,7 @@ Time  Item
 ----  ----
 9:00  [What are species distribution models?][SDM introduction and review]
 10:00 Break
-10:15 Recent and past application of SDMs
+10:15 [Recent and past application of SDMs]
 11:15 Break
 11:30 Preparation for exercises
 12:30 Lunch
