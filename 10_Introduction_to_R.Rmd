@@ -280,7 +280,7 @@ starwars %>%
 ```
 
 
-## See also:
+## See also
 
 - The Software Carpentry [Introduction to R and RStudio](https://swcarpentry.github.io/r-novice-gapminder/01-rstudio-intro/).
 - An [Introduction to R](https://obis.org/manual/intror/) by the Ocean Biogeographic Information System (OBIS).
