@@ -276,9 +276,6 @@ my_aphia_id &lt;-<span class="st"> </span>tax[[<span class="dv">1</span>]]<span 
 <h2><span class="header-section-number">4.3</span> Occurrences</h2>
 <p>Get all data from the <a href="https://ipt.biodiversity.aq/resource?r=gamlr">Antarctic Euphausiacea occurence data from “German Antarctic Marine Living Resources” (GAMLR) Expeditions</a> data set:</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">library</span>(robis)
-
-##ds &lt;- dataset(taxonid = my_aphia_id)
-##x &lt;- occurrence(datasetid = ds$id[6])
 x &lt;-<span class="st"> </span><span class="kw">occurrence</span>(<span class="dt">datasetid =</span> <span class="st">&quot;cb16377b-56a8-4d95-802d-4eec02466773&quot;</span>)</code></pre></div>
 <p>Plot the complete distribution of samples in black, and <em>Euphausia crystallorophias</em> in green:</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">library</span>(SOmap)

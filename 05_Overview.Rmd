@@ -47,9 +47,6 @@ Get all data from the [Antarctic Euphausiacea occurence data from "German Antarc
 
 ```{r occ1, message = FALSE}
 library(robis)
-
-##ds <- dataset(taxonid = my_aphia_id)
-##x <- occurrence(datasetid = ds$id[6])
 x <- occurrence(datasetid = "cb16377b-56a8-4d95-802d-4eec02466773")
 ```
 
