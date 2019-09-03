@@ -56,7 +56,17 @@ What you should know before running a model.
 
 ## Exercise scripts
 
-[EXERCISE.docx](./course_material/exercises/scripts/EXERCISE.docx)
+**Exercise - Run your first SDM**
+
+[SDM_EXERCISE.pdf](./course_material/exercises/SDM_EXERCISE.pdf)
+
+**Final practical work**
+
+Run models, compare different model calibrations and compare your model outputs!
+
+[SDM_FINAL.pdf](./course_material/exercises/SDM_FINAL.pdf)
+
+**Other scripts**
 
 [calibration_BRT.R](./course_material/exercises/scripts/calibration_BRT.R)
 
