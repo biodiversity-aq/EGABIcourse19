@@ -1,6 +1,6 @@
 # SCAR-EGABI Tools for Southern Ocean Spatial Analysis and Modelling - Course
 
-<img src="/images/EGABI_logo_GH.png" alt="EG-ABI Logo" title="EG-ABI Logo" width="150"  align="right"/>
+<img src="/images/EGABI_logo.png" alt="EG-ABI Logo" title="EG-ABI Logo" width="150"  align="right"/>
 
 ### 2-6 September 2019, KULeuven, Leuven, Belgium
 ## Course Scope
@@ -23,17 +23,17 @@ See https://scar.github.io/EGABIcourse19/.
 
 ## Course Instructors
 
-<img src="/images/Anton_GH.jpg" alt="Anton" title="Anton" width="75"  align="left"/> Anton Van de Putte (Royal Belgian Institute for Natural Sciences, KULeuven) manages the SCAR Antarctic Biodiversity Portal and is a strong advocate of FAIR data and reproducible science. You can ask him questions about biological open data standards and data cleaning.
+<img src="/images/Anton.jpeg" alt="Anton" title="Anton" width="75"  align="left"/> Anton Van de Putte (Royal Belgian Institute for Natural Sciences, KULeuven) manages the SCAR Antarctic Biodiversity Portal and is a strong advocate of FAIR data and reproducible science. You can ask him questions about biological open data standards and data cleaning.
 
-<img src="/images/Charlene_GH.jpg" alt="Charlene" title="Charlene" width="75"  align="right"/> Charlène Guillaumot (ULB, Bruxelles) is an ecological modeller.She studies the potential and limits of species distribution models and dynamic energy budget models on Southern Ocean case studies, and develops/adapts methodologies according to the encountered issues. 
+<img src="/images/Charlene.jpg" alt="Charlene" title="Charlene" width="75"  align="right"/> Charlène Guillaumot (ULB, Bruxelles) is an ecological modeller.She studies the potential and limits of species distribution models and dynamic energy budget models on Southern Ocean case studies, and develops/adapts methodologies according to the encountered issues. 
 
-<img src="/images/Grant_GH.jpg" alt="Grant" title="Grant" width="75"  align="left"/>Grant Humphries (HiDef Aerial Surveying Ltd) is a seabird biologist and data scientist who has worked on terrestrial and marine ecosystems with a focus on applying machine learning to complex ecosystems. You can chat with Grant about creating decision support tools in R and Python, and what his favourite programming language is.
+<img src="/images/Grant.jpg" alt="Grant" title="Grant" width="75"  align="left"/>Grant Humphries (HiDef Aerial Surveying Ltd) is a seabird biologist and data scientist who has worked on terrestrial and marine ecosystems with a focus on applying machine learning to complex ecosystems. You can chat with Grant about creating decision support tools in R and Python, and what his favourite programming language is.
 
-<img src="/images/Ryan_GH.jpg" alt="Ryan" title="Ryan" width="75"  align="right"/> Ryan Reisinger (CEBC-CNRS) is an ecologist who models the movement behaviour, habitat use and distribution of marine predators, using telemetry and biologging data.
+<img src="/images/Ryan.jpg" alt="Ryan" title="Ryan" width="75"  align="right"/> Ryan Reisinger (CEBC-CNRS) is an ecologist who models the movement behaviour, habitat use and distribution of marine predators, using telemetry and biologging data.
 
-<img src="/images/Ben_GH.jpg" alt="Ben" title="Ben" width="75"  align="left"/> Ben Raymond (Australian Antarctic Division and the University of Tasmania) is a data-focused research scientist working across a range of Antarctic and Southern Ocean science. He is a co-proponent of the SCAR/rOpenSci R community initiative (https://scar.github.io/ropensci/)
+<img src="/images/Ben.jpg" alt="Ben" title="Ben" width="75"  align="left"/> Ben Raymond (Australian Antarctic Division and the University of Tasmania) is a data-focused research scientist working across a range of Antarctic and Southern Ocean science. He is a co-proponent of the SCAR/rOpenSci R community initiative (https://scar.github.io/ropensci/)
 
-<img src="/images/HuwGH.jpg" alt="Huw" title="Huw" width="75"  align="right"/> Huw Griffiths (British Antarctic Survey) is a marine biologist who studies large-scale biogeographic and ecological patterns in space and time. He uses selected groups of animals to investigate trends in distribution in the Polar Regions, utilising large biological and physical databases to understand key processes.
+<img src="/images/Huw.jpg" alt="Huw" title="Huw" width="75"  align="right"/> Huw Griffiths (British Antarctic Survey) is a marine biologist who studies large-scale biogeographic and ecological patterns in space and time. He uses selected groups of animals to investigate trends in distribution in the Polar Regions, utilising large biological and physical databases to understand key processes.
 
 
 ## Course Length
