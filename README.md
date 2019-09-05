@@ -1,6 +1,6 @@
 # SCAR-EGABI Tools for Southern Ocean Spatial Analysis and Modelling - Course
 
-<img src="/images/EGABI_logo.png" alt="EG-ABI Logo" title="EG-ABI Logo" width="150"  align="right"/>
+<img src="/images/EGABI_logo.svg" alt="EG-ABI Logo" title="EG-ABI Logo" width="150"  align="right"/>
 
 ### 2-6 September 2019, KULeuven, Leuven, Belgium
 ## Course Scope
