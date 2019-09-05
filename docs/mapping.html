@@ -506,17 +506,26 @@ temp<span class="op">$</span>coastline &lt;-<span class="st"> </span><span class
 temp<span class="op">$</span>ice &lt;-<span class="st"> </span><span class="ot">NULL</span>
 <span class="kw">plot</span>(temp)</code></pre></div>
 <p><img src="_main_files/figure-html/somap2e-1.png" width="672" /></p>
-<p>But note that some elements are required (in particular, the bathymetry layer can’t currently be removed because the code that draws this is also the code that creates the plot). This code would fail (not run here):</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">temp &lt;-<span class="st"> </span>mymap
+<p>But note that some elements are required. In particular, the bathymetry layer can’t currently be removed because the code that draws this is also the code that creates the plot page via <code>plot.new()</code>. The code below would fail outright if there was no existing existing plot. If there was an existing plot in the graphics device, this code would run but give unpredictable results because it would draw on top of the previously-setup plot:</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">## code not run here
+temp &lt;-<span class="st"> </span>mymap
 temp<span class="op">$</span>bathy &lt;-<span class="st"> </span><span class="ot">NULL</span>
 <span class="kw">plot</span>(temp)</code></pre></div>
-<p>However, we could replace the bathymetry data with another raster object. We need to be careful about the extent and projection of this raster. For example, simply replacing the bathymetry raster with the ice raster (which has the same polar stereographic projection but smaller extent) gives:</p>
+<p>One way around this would be to simply replace all of the bathymetric data values with <code>NA</code>s. The plotting code would still have the extent of the bathymetric layer that it needs in order to set up the plot, but no data would be shown:</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">temp &lt;-<span class="st"> </span>mymap
+## the bathy data is held in temp$bathy[[1]]$plotargs$x
+## and it&#39;s a raster, so we can set its values to NA with
+raster<span class="op">::</span><span class="kw">values</span>(temp<span class="op">$</span>bathy[[<span class="dv">1</span>]]<span class="op">$</span>plotargs<span class="op">$</span>x) &lt;-<span class="st"> </span><span class="ot">NA_real_</span>
+temp<span class="op">$</span>bathy_legend &lt;-<span class="st"> </span><span class="ot">NULL</span>
+<span class="kw">plot</span>(temp)</code></pre></div>
+<p><img src="_main_files/figure-html/somap2h2-1.png" width="672" /></p>
+<p>We could also replace the bathymetry data with another raster object. Note that we do need to be careful about the extent and projection of this raster. For example, replacing the bathymetry raster with the ice raster (which has the same polar stereographic projection but smaller extent) gives:</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">temp &lt;-<span class="st"> </span>mymap
 temp<span class="op">$</span>bathy[[<span class="dv">1</span>]]<span class="op">$</span>plotargs<span class="op">$</span>x &lt;-<span class="st"> </span>ice
 temp<span class="op">$</span>bathy_legend &lt;-<span class="st"> </span><span class="ot">NULL</span>
 <span class="kw">plot</span>(temp)</code></pre></div>
 <p><img src="_main_files/figure-html/somap2g-1.png" width="672" /></p>
-<p>But if we extend the ice raster to match the map extent:</p>
+<p>It’s chopped off because the extent of the ice raster is being used to set the plot extent. But if we extend the ice raster to match the map extent:</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">temp &lt;-<span class="st"> </span>mymap
 temp<span class="op">$</span>bathy[[<span class="dv">1</span>]]<span class="op">$</span>plotargs<span class="op">$</span>x &lt;-<span class="st"> </span>raster<span class="op">::</span><span class="kw">extend</span>(ice, mymap<span class="op">$</span>target)
 temp<span class="op">$</span>bathy_legend &lt;-<span class="st"> </span><span class="ot">NULL</span>

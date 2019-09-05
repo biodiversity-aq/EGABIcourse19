@@ -410,15 +410,28 @@ temp$ice <- NULL
 plot(temp)
 ```
 
-But note that some elements are required (in particular, the bathymetry layer can't currently be removed because the code that draws this is also the code that creates the plot). This code would fail (not run here):
+But note that some elements are required. In particular, the bathymetry layer can't currently be removed because the code that draws this is also the code that creates the plot page via `plot.new()`. The code below would fail outright if there was no existing existing plot. If there was an existing plot in the graphics device, this code would run but give unpredictable results because it would draw on top of the previously-setup plot:
 
 ```{r somap2f, eval = FALSE}
+## code not run here
 temp <- mymap
 temp$bathy <- NULL
 plot(temp)
 ```
 
-However, we could replace the bathymetry data with another raster object. We need to be careful about the extent and projection of this raster. For example, simply replacing the bathymetry raster with the ice raster (which has the same polar stereographic projection but smaller extent) gives:
+One way around this would be to simply replace all of the bathymetric data values with `NA`s. The plotting code would still have the extent of the bathymetric layer that it needs in order to set up the plot, but no data would be shown:
+
+```{r somap2h2}
+temp <- mymap
+## the bathy data is held in temp$bathy[[1]]$plotargs$x
+## and it's a raster, so we can set its values to NA with
+raster::values(temp$bathy[[1]]$plotargs$x) <- NA_real_
+temp$bathy_legend <- NULL
+plot(temp)
+
+```
+
+We could also replace the bathymetry data with another raster object. Note that we do need to be careful about the extent and projection of this raster. For example, replacing the bathymetry raster with the ice raster (which has the same polar stereographic projection but smaller extent) gives:
 
 ```{r somap2g}
 temp <- mymap
@@ -427,7 +440,7 @@ temp$bathy_legend <- NULL
 plot(temp)
 ```
 
-But if we extend the ice raster to match the map extent:
+It's chopped off because the extent of the ice raster is being used to set the plot extent. But if we extend the ice raster to match the map extent:
 
 ```{r somap2h}
 temp <- mymap
