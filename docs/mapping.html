@@ -166,6 +166,7 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
 <li class="chapter" data-level="10.2.2" data-path="mapping.html"><a href="mapping.html#non-circumpolar-maps"><i class="fa fa-check"></i><b>10.2.2</b> Non-circumpolar maps</a></li>
 <li class="chapter" data-level="10.2.3" data-path="mapping.html"><a href="mapping.html#plotting-via-ggplot2"><i class="fa fa-check"></i><b>10.2.3</b> Plotting via ggplot2</a></li>
 <li class="chapter" data-level="10.2.4" data-path="mapping.html"><a href="mapping.html#modifying-map-objects-advanced-usage"><i class="fa fa-check"></i><b>10.2.4</b> Modifying map objects (advanced usage)</a></li>
+<li class="chapter" data-level="10.2.5" data-path="mapping.html"><a href="mapping.html#other-somap-gotchas"><i class="fa fa-check"></i><b>10.2.5</b> Other SOmap gotchas</a></li>
 </ul></li>
 <li class="chapter" data-level="10.3" data-path="mapping.html"><a href="mapping.html#supporting-data-for-maps"><i class="fa fa-check"></i><b>10.3</b> Supporting data for maps</a><ul>
 <li class="chapter" data-level="10.3.1" data-path="mapping.html"><a href="mapping.html#quantarcticr"><i class="fa fa-check"></i><b>10.3.1</b> quantarcticR</a></li>
@@ -598,6 +599,22 @@ temp<span class="op">$</span>bathy_legend &lt;-<span class="st"> </span><span cl
 <span class="kw">plot</span>(temp)</code></pre></div>
 <p><img src="_main_files/figure-html/somap5e-1.png" width="672" /></p>
 </div>
+</div>
+</div>
+<div id="other-somap-gotchas" class="section level3">
+<h3><span class="header-section-number">10.2.5</span> Other SOmap gotchas</h3>
+<p>Some other things worth noting.</p>
+<div id="automatic-printing-and-for-loops" class="section level4">
+<h4><span class="header-section-number">10.2.5.1</span> Automatic printing and for-loops</h4>
+<p>If you type a variable/object name directly into the console then it triggers that object’s <code>print</code> method automatically. Typing <code>SOmap()</code> at the console returns an object of class <code>SOmap</code>, and because it’s happening at the console that object’s <code>print</code> method is called, which causes the map to be plotted in the current graphics device.</p>
+<p>However, R turns off automatic printing inside <code>for</code> loops and functions. So this code:</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="cf">for</span> (i <span class="cf">in</span> <span class="dv">1</span><span class="op">:</span><span class="dv">5</span>) {
+  <span class="kw">SOmap_auto</span>()
+}</code></pre></div>
+<p>won’t produce anything, because the <code>print</code> method never gets called. If you are generating maps using loops, you will need to explicitly call the <code>print</code> method:</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="cf">for</span> (i <span class="cf">in</span> <span class="dv">1</span><span class="op">:</span><span class="dv">5</span>) {
+  <span class="kw">print</span>(<span class="kw">SOmap_auto</span>())
+}</code></pre></div>
 </div>
 </div>
 </div>

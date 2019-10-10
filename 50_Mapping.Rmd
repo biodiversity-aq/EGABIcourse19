@@ -536,6 +536,30 @@ temp$bathy_legend <- NULL
 plot(temp)
 ```
 
+### Other SOmap gotchas
+
+Some other things worth noting.
+
+#### Automatic printing and for-loops
+
+If you type a variable/object name directly into the console then it triggers that object's `print` method automatically. Typing `SOmap()` at the console returns an object of class `SOmap`, and because it's happening at the console that object's `print` method is called, which causes the map to be plotted in the current graphics device.
+
+However, R turns off automatic printing inside `for` loops and functions. So this code:
+
+```{r eval = FALSE}
+for (i in 1:5) {
+  SOmap_auto()
+}
+```
+
+won't produce anything, because the `print` method never gets called. If you are generating maps using loops, you will need to explicitly call the `print` method:
+
+```{r eval = FALSE}
+for (i in 1:5) {
+  print(SOmap_auto())
+}
+```
+
 ## Supporting data for maps
 
 When constructing maps, we commonly want to show features like oceanographic fronts, ice extent, coastline, place names, and MPA boundaries. There are a few sources of such data:
