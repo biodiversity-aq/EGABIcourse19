@@ -248,12 +248,34 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
 </ol>
 <p><strong><em>Pick either the classification or regression problem. Solution for the classification problem are included in this document if you need a poke in the right direction. We run the GBM model ONLY for the regression problem here, but you could try out with RF if you wanted</em></strong></p>
 <p>Let’s start by loading libraries</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">library</span>(tidyverse)  ## Isn&#39;t tidyverse awesome?
-<span class="kw">library</span>(dismo)  ## This package contains the gbm.step command
-<span class="kw">library</span>(randomForest)  ## This package contains the randomForest
-<span class="kw">library</span>(rpart)   ## This package contains a series of useful decision tree functions
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">library</span>(tidyverse)  ## Isn&#39;t tidyverse awesome?</code></pre></div>
+<pre><code>## -- Attaching packages ---------------------------------- tidyverse 1.2.1 --</code></pre>
+<pre><code>## v tibble  2.1.3     v readr   1.3.1
+## v tidyr   0.8.3     v stringr 1.4.0
+## v tibble  2.1.3     v forcats 0.4.0</code></pre>
+<pre><code>## -- Conflicts ------------------------------------- tidyverse_conflicts() --
+## x nlme::collapse()    masks dplyr::collapse()
+## x tidyr::extract()    masks raadtools::extract(), raster::extract()
+## x dplyr::filter()     masks stats::filter()
+## x dplyr::group_rows() masks kableExtra::group_rows()
+## x dplyr::lag()        masks stats::lag()
+## x raster::select()    masks dplyr::select()</code></pre>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">library</span>(dismo)  ## This package contains the gbm.step command
+<span class="kw">library</span>(randomForest)  ## This package contains the randomForest</code></pre></div>
+<pre><code>## randomForest 4.6-14</code></pre>
+<pre><code>## Type rfNews() to see new features/changes/bug fixes.</code></pre>
+<pre><code>## 
+## Attaching package: &#39;randomForest&#39;</code></pre>
+<pre><code>## The following object is masked from &#39;package:ggplot2&#39;:
+## 
+##     margin</code></pre>
+<pre><code>## The following object is masked from &#39;package:dplyr&#39;:
+## 
+##     combine</code></pre>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">library</span>(rpart)   ## This package contains a series of useful decision tree functions
 <span class="kw">library</span>(rpart.plot)
 <span class="kw">library</span>(gbm)</code></pre></div>
+<pre><code>## Loaded gbm 2.1.5</code></pre>
 <div id="load-and-clean-the-data" class="section level3">
 <h3><span class="header-section-number">14.1.1</span> Load and clean the data</h3>
 <p>Now that we’ve got some libraries ready, let’s load and clean our SUPERHERO dataset in preparation for our modelling.</p>
@@ -270,34 +292,34 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
 ##   TotalPower = col_double()
 ## )</code></pre>
 <pre><code>## See spec(...) for full column specifications.</code></pre>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">Supes &lt;-<span class="st"> </span>readr<span class="op">::</span><span class="kw">read_csv</span>(<span class="st">&#39;SuperheroDataset.csv&#39;</span>)</code></pre></div>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">Supes &lt;-<span class="st"> </span>readr::<span class="kw">read_csv</span>(<span class="st">&#39;SuperheroDataset.csv&#39;</span>)</code></pre></div>
 <p>For the purposes of this exercise, we’re going to use the following columns: Name, Intelligence, Strength, Speed, Durability, Power, Combat, Gender, Race, Creator, Alignment, Total Power. Use the tidyverse to extract those columns.</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">SuperData &lt;-<span class="st"> </span>Supes <span class="op">%&gt;%</span>
-<span class="st">  </span>dplyr<span class="op">::</span><span class="kw">select</span>(Name, Intelligence<span class="op">:</span>Combat, Alignment<span class="op">:</span>Race, Creator, TotalPower)</code></pre></div>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">SuperData &lt;-<span class="st"> </span>Supes %&gt;%
+<span class="st">  </span>dplyr::<span class="kw">select</span>(Name, Intelligence:Combat, Alignment:Race, Creator, TotalPower)</code></pre></div>
 <div id="exploring-the-data" class="section level4">
 <h4><span class="header-section-number">14.1.1.1</span> Exploring the data</h4>
 <p>If you explore the data a little bit, you’ll be able to see some of the interesting quirks of the dataset. Use ggplot2 (or base plot if you’re feeling lazy ;) ).</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">SuperData <span class="op">%&gt;%</span>
-<span class="st">  </span><span class="kw">filter</span>(<span class="op">!</span><span class="kw">is.na</span>(Intelligence))<span class="op">%&gt;%</span><span class="st"> </span>
-<span class="st">  </span><span class="kw">ggplot</span>(<span class="kw">aes</span>(<span class="dt">x=</span>Intelligence,<span class="dt">y=</span>Strength)) <span class="op">+</span><span class="st"> </span><span class="kw">geom_point</span>() <span class="op">+</span><span class="st"> </span><span class="kw">geom_smooth</span>(<span class="dt">method=</span>lm) <span class="op">+</span><span class="st"> </span><span class="kw">theme_bw</span>()</code></pre></div>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">SuperData %&gt;%
+<span class="st">  </span><span class="kw">filter</span>(!<span class="kw">is.na</span>(Intelligence))%&gt;%<span class="st"> </span>
+<span class="st">  </span><span class="kw">ggplot</span>(<span class="kw">aes</span>(<span class="dt">x=</span>Intelligence,<span class="dt">y=</span>Strength)) +<span class="st"> </span><span class="kw">geom_point</span>() +<span class="st"> </span><span class="kw">geom_smooth</span>(<span class="dt">method=</span>lm) +<span class="st"> </span><span class="kw">theme_bw</span>()</code></pre></div>
 <p><img src="_main_files/figure-html/sdmalg5-1.png" width="672" /></p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">## Looking at the line, it seems like the problem is that there are some extreme low values
 ##   of intelligence. Outliers perhaps?? Try to find out who those values belong to, and
 ##   that may help you determine if they should be included in the analysis
 
-SuperData <span class="op">%&gt;%</span>
-<span class="st">  </span><span class="kw">filter</span>(<span class="op">!</span><span class="kw">is.na</span>(Combat))<span class="op">%&gt;%</span><span class="st"> </span>
-<span class="st">  </span><span class="kw">ggplot</span>(<span class="kw">aes</span>(<span class="dt">x=</span>Combat,<span class="dt">y=</span>Strength)) <span class="op">+</span><span class="st"> </span><span class="kw">geom_point</span>() <span class="op">+</span><span class="st"> </span><span class="kw">geom_smooth</span>(<span class="dt">method=</span>lm) <span class="op">+</span><span class="st"> </span><span class="kw">theme_bw</span>()</code></pre></div>
+SuperData %&gt;%
+<span class="st">  </span><span class="kw">filter</span>(!<span class="kw">is.na</span>(Combat))%&gt;%<span class="st"> </span>
+<span class="st">  </span><span class="kw">ggplot</span>(<span class="kw">aes</span>(<span class="dt">x=</span>Combat,<span class="dt">y=</span>Strength)) +<span class="st"> </span><span class="kw">geom_point</span>() +<span class="st"> </span><span class="kw">geom_smooth</span>(<span class="dt">method=</span>lm) +<span class="st"> </span><span class="kw">theme_bw</span>()</code></pre></div>
 <p><img src="_main_files/figure-html/sdmalg5-2.png" width="672" /></p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">## We can also filter the data conditionally to explore the dataset with specific classes, e.g.:
-SuperData <span class="op">%&gt;%</span>
-<span class="st">  </span><span class="kw">filter</span>(<span class="op">!</span><span class="kw">is.na</span>(Combat),Gender<span class="op">==</span><span class="st">&#39;Female&#39;</span>)<span class="op">%&gt;%</span><span class="st"> </span>
-<span class="st">  </span><span class="kw">ggplot</span>(<span class="kw">aes</span>(<span class="dt">x=</span>Combat,<span class="dt">y=</span>Strength)) <span class="op">+</span><span class="st"> </span><span class="kw">geom_point</span>() <span class="op">+</span><span class="st"> </span><span class="kw">geom_smooth</span>(<span class="dt">method=</span>lm) <span class="op">+</span><span class="st"> </span><span class="kw">theme_bw</span>()</code></pre></div>
+SuperData %&gt;%
+<span class="st">  </span><span class="kw">filter</span>(!<span class="kw">is.na</span>(Combat),Gender==<span class="st">&#39;Female&#39;</span>)%&gt;%<span class="st"> </span>
+<span class="st">  </span><span class="kw">ggplot</span>(<span class="kw">aes</span>(<span class="dt">x=</span>Combat,<span class="dt">y=</span>Strength)) +<span class="st"> </span><span class="kw">geom_point</span>() +<span class="st"> </span><span class="kw">geom_smooth</span>(<span class="dt">method=</span>lm) +<span class="st"> </span><span class="kw">theme_bw</span>()</code></pre></div>
 <p><img src="_main_files/figure-html/sdmalg5-3.png" width="672" /></p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">library</span>(GGally)
 ## This is a great library for exploring data quickly! Rather than coding everything bit by bit
 
-quant_df &lt;-<span class="st"> </span>SuperData <span class="op">%&gt;%</span><span class="st"> </span>dplyr<span class="op">::</span><span class="kw">select</span>(Intelligence<span class="op">:</span>Gender,TotalPower)
+quant_df &lt;-<span class="st"> </span>SuperData %&gt;%<span class="st"> </span>dplyr::<span class="kw">select</span>(Intelligence:Gender,TotalPower)
 <span class="kw">ggpairs</span>(quant_df, <span class="dt">progress =</span> <span class="ot">FALSE</span>)</code></pre></div>
 <p><img src="_main_files/figure-html/sdmalg5-4.png" width="672" /></p>
 <p>Note that ‘total power’ is highly correlated with strength, speed, durability and power. This could impact how we interpret the regression problem later as these variables may wash out the signal we’re trying to explore. Not a bad thing if we’re just trying to make predictions! But if we’re trying to answer a specific question, it could ‘muddy the waters’.</p>
@@ -306,12 +328,12 @@ quant_df &lt;-<span class="st"> </span>SuperData <span class="op">%&gt;%</span><
 <li>Race and Creator have too many categories!</li>
 <li>There are a number of Creators that are only used once, or may not be appropriate to include.</li>
 </ol>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">length</span>(<span class="kw">unique</span>(SuperData<span class="op">$</span>Race)) ## Number of unique levels in Race</code></pre></div>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">length</span>(<span class="kw">unique</span>(SuperData$Race)) ## Number of unique levels in Race</code></pre></div>
 <pre><code>## [1] 63</code></pre>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">length</span>(<span class="kw">unique</span>(SuperData<span class="op">$</span>Creator))  ## Same only for creator</code></pre></div>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">length</span>(<span class="kw">unique</span>(SuperData$Creator))  ## Same only for creator</code></pre></div>
 <pre><code>## [1] 23</code></pre>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">## Let&#39;s just check out Creator:
-<span class="kw">unique</span>(SuperData<span class="op">$</span>Creator)</code></pre></div>
+<span class="kw">unique</span>(SuperData$Creator)</code></pre></div>
 <pre><code>##  [1] &quot;Dark Horse Comics&quot; &quot;DC Comics&quot;         &quot;George Lucas&quot;     
 ##  [4] &quot;HarperCollins&quot;     &quot;Ian Fleming&quot;       &quot;Icon Comics&quot;      
 ##  [7] &quot;IDW Publishing&quot;    &quot;Image Comics&quot;      &quot;J. K. Rowling&quot;    
@@ -320,7 +342,7 @@ quant_df &lt;-<span class="st"> </span>SuperData <span class="op">%&gt;%</span><
 ## [16] &quot;Shueisha&quot;          &quot;Sony Pictures&quot;     &quot;South Park&quot;       
 ## [19] &quot;Star Trek&quot;         &quot;SyFy&quot;              &quot;Team Epic TV&quot;     
 ## [22] &quot;Universal Studios&quot; &quot;Wildstorm&quot;</code></pre>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">SuperData <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">count</span>(Creator)</code></pre></div>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">SuperData %&gt;%<span class="st"> </span><span class="kw">count</span>(Creator)</code></pre></div>
 <pre><code>## # A tibble: 23 x 2
 ##    Creator               n
 ##    &lt;chr&gt;             &lt;int&gt;
@@ -349,9 +371,9 @@ quant_df &lt;-<span class="st"> </span>SuperData <span class="op">%&gt;%</span><
 ## 23 Wildstorm             4</code></pre>
 <p>There are many classes here that may not be appropriate to include. For example, creator Ian Fleming (creator of James Bond) only has one character. This dataset also has Star Trek characters. So, we decide here to filter out the appropriate classes (keeping Marvel Comics, DC Comics, Dark Horse Comics, and Image Comics).</p>
 <p><strong><em>Note the usage of %in%</em></strong></p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">FilteredSupes &lt;-<span class="st"> </span>SuperData <span class="op">%&gt;%</span>
-<span class="st">  </span>dplyr<span class="op">::</span><span class="kw">filter</span>(Creator <span class="op">%in%</span><span class="st"> </span><span class="kw">c</span>(<span class="st">&#39;Marvel Comics&#39;</span>,<span class="st">&#39;DC Comics&#39;</span>,<span class="st">&#39;Dark Horse Comics&#39;</span>,<span class="st">&#39;Image Comics&#39;</span>)) <span class="op">%&gt;%</span>
-<span class="st">  </span>dplyr<span class="op">::</span><span class="kw">filter</span>(<span class="op">!</span><span class="kw">is.na</span>(Intelligence))
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">FilteredSupes &lt;-<span class="st"> </span>SuperData %&gt;%
+<span class="st">  </span>dplyr::<span class="kw">filter</span>(Creator %in%<span class="st"> </span><span class="kw">c</span>(<span class="st">&#39;Marvel Comics&#39;</span>,<span class="st">&#39;DC Comics&#39;</span>,<span class="st">&#39;Dark Horse Comics&#39;</span>,<span class="st">&#39;Image Comics&#39;</span>)) %&gt;%
+<span class="st">  </span>dplyr::<span class="kw">filter</span>(!<span class="kw">is.na</span>(Intelligence))
 ## we do this last part to remove NA data for cleanliness, though trees don&#39;t require you to do this!
 
 FilteredSupes</code></pre></div>
@@ -422,14 +444,14 @@ FilteredSupes</code></pre></div>
 ## 30 good      Male   Human           DC Comics                530
 ## # ... with 556 more rows</code></pre>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">## How many races do we now have??
-<span class="kw">length</span>(<span class="kw">unique</span>(FilteredSupes<span class="op">$</span>Race))</code></pre></div>
+<span class="kw">length</span>(<span class="kw">unique</span>(FilteredSupes$Race))</code></pre></div>
 <pre><code>## [1] 53</code></pre>
 <p>Now let’s explore this again.</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">quant_df &lt;-<span class="st"> </span>FilteredSupes <span class="op">%&gt;%</span><span class="st"> </span>dplyr<span class="op">::</span><span class="kw">select</span>(Intelligence<span class="op">:</span>Gender,TotalPower)
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">quant_df &lt;-<span class="st"> </span>FilteredSupes %&gt;%<span class="st"> </span>dplyr::<span class="kw">select</span>(Intelligence:Gender,TotalPower)
 <span class="kw">ggpairs</span>(quant_df, <span class="dt">progress =</span> <span class="ot">FALSE</span>)</code></pre></div>
 <p><img src="_main_files/figure-html/sdmalg8-1.png" width="672" /></p>
 <p>Not much has really changed, as we have not removed too many rows, which is good thing because it means that those data we removed won’t impact the final conclusions in any major way. This just simplifies our data cleaning for this particular exercise. However, we still have lots of ‘Race’ categories.</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">FilteredSupes <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">count</span>(Race)</code></pre></div>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">FilteredSupes %&gt;%<span class="st"> </span><span class="kw">count</span>(Race)</code></pre></div>
 <pre><code>## # A tibble: 53 x 2
 ##    Race                    n
 ##    &lt;chr&gt;               &lt;int&gt;
@@ -465,9 +487,9 @@ FilteredSupes</code></pre></div>
 ## 30 Kakarantharaian         1
 ## # ... with 23 more rows</code></pre>
 <p>Looking at the breakdown of Race, there are many with a count of 1. These can cause some issues when trying to do any cross validation… so we should remove them.</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">FilteredSupes &lt;-<span class="st"> </span>FilteredSupes <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">add_count</span>(Race) <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">filter</span>(n <span class="op">&gt;</span><span class="st"> </span><span class="dv">1</span>)
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">FilteredSupes &lt;-<span class="st"> </span>FilteredSupes %&gt;%<span class="st"> </span><span class="kw">add_count</span>(Race) %&gt;%<span class="st"> </span><span class="kw">filter</span>(n &gt;<span class="st"> </span><span class="dv">1</span>)
 
-FilteredSupes <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">count</span>(Race)</code></pre></div>
+FilteredSupes %&gt;%<span class="st"> </span><span class="kw">count</span>(Race)</code></pre></div>
 <pre><code>## # A tibble: 25 x 2
 ##    Race                  n
 ##    &lt;chr&gt;             &lt;int&gt;
@@ -501,9 +523,9 @@ FilteredSupes <span class="op">%&gt;%</span><span class="st"> </span><span class
 <div id="one-hot-encoding" class="section level3">
 <h3><span class="header-section-number">14.1.2</span> One hot encoding!</h3>
 <p>Race has MANY categories! This COULD cause the trees to get swamped by this predictor. Also, by one-hot encoding, we can keep data that would otherwise get thrown out if just filtering out categories. For example, if we removed the ‘cyborg’ category by way of filtering, those character data would be removed as well (they might be useful). One hot encoding turns each category into a binary variable. Can be done easily in tidyverse!</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">OOEdata &lt;-<span class="st"> </span>FilteredSupes <span class="op">%&gt;%</span><span class="st"> </span>
-<span class="st">        </span><span class="kw">separate_rows</span>(Race)<span class="op">%&gt;%</span><span class="st"> </span>
-<span class="st">        </span><span class="kw">mutate</span>(<span class="dt">count =</span> <span class="dv">1</span>) <span class="op">%&gt;%</span><span class="st"> </span>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">OOEdata &lt;-<span class="st"> </span>FilteredSupes %&gt;%<span class="st"> </span>
+<span class="st">        </span><span class="kw">separate_rows</span>(Race)%&gt;%<span class="st"> </span>
+<span class="st">        </span><span class="kw">mutate</span>(<span class="dt">count =</span> <span class="dv">1</span>) %&gt;%<span class="st"> </span>
 <span class="st">        </span><span class="kw">spread</span>(Race, count, <span class="dt">fill =</span> <span class="dv">0</span>, <span class="dt">sep =</span> <span class="st">&quot;_&quot;</span>)
 
 OOEdata</code></pre></div>
@@ -738,12 +760,12 @@ OOEdata</code></pre></div>
 <p><strong><em>magrittr</em></strong> package can help do this easily</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">library</span>(magrittr)
 
-columns &lt;-<span class="st"> </span><span class="kw">names</span>(OOEdata)[<span class="dv">12</span><span class="op">:</span><span class="kw">length</span>(<span class="kw">names</span>(OOEdata))]
-OOEdata &lt;-<span class="st"> </span>OOEdata <span class="op">%&lt;&gt;%</span><span class="st"> </span><span class="kw">mutate_at</span>(columns, <span class="kw">funs</span>(<span class="kw">factor</span>(.)))
+columns &lt;-<span class="st"> </span><span class="kw">names</span>(OOEdata)[<span class="dv">12</span>:<span class="kw">length</span>(<span class="kw">names</span>(OOEdata))]
+OOEdata &lt;-<span class="st"> </span>OOEdata %&lt;&gt;%<span class="st"> </span><span class="kw">mutate_at</span>(columns, <span class="kw">funs</span>(<span class="kw">factor</span>(.)))
 
 
-quant_df &lt;-<span class="st"> </span>OOEdata <span class="op">%&gt;%</span>
-<span class="st">  </span>dplyr<span class="op">::</span><span class="kw">select</span>(Intelligence<span class="op">:</span>TotalPower, Race_Human, Race_Cyborg, Race_Mutant)
+quant_df &lt;-<span class="st"> </span>OOEdata %&gt;%
+<span class="st">  </span>dplyr::<span class="kw">select</span>(Intelligence:TotalPower, Race_Human, Race_Cyborg, Race_Mutant)
 
 <span class="kw">ggpairs</span>(quant_df, <span class="dt">progress =</span> <span class="ot">FALSE</span>)</code></pre></div>
 <p><img src="_main_files/figure-html/sdmalg12-1.png" width="672" /></p>
@@ -760,13 +782,13 @@ quant_df &lt;-<span class="st"> </span>OOEdata <span class="op">%&gt;%</span>
 ##   if they are good or evil. We&#39;ll also select just a few columns to work with for
 ##   simplicity&#39;s sake
 
-modeldat &lt;-<span class="st"> </span>OOEdata <span class="op">%&gt;%</span><span class="st"> </span>
-<span class="st">  </span>dplyr<span class="op">::</span><span class="kw">filter</span>(Alignment<span class="op">!=</span><span class="st">&#39;neutral&#39;</span>) <span class="op">%&gt;%</span>
-<span class="st">  </span>dplyr<span class="op">::</span><span class="kw">select</span>(Intelligence<span class="op">:</span>TotalPower, Race_Animal, Race_Human, Race_Demon, Race_God,
+modeldat &lt;-<span class="st"> </span>OOEdata %&gt;%<span class="st"> </span>
+<span class="st">  </span>dplyr::<span class="kw">filter</span>(Alignment!=<span class="st">&#39;neutral&#39;</span>) %&gt;%
+<span class="st">  </span>dplyr::<span class="kw">select</span>(Intelligence:TotalPower, Race_Animal, Race_Human, Race_Demon, Race_God,
                 Race_Asgardian, Race_Mutant, Race_Android)
 
 form &lt;-<span class="st"> </span><span class="kw">as.formula</span>(<span class="kw">paste</span>(<span class="st">&quot;Alignment ~ &quot;</span>,<span class="kw">paste</span>(<span class="kw">names</span>(modeldat),<span class="dt">collapse=</span><span class="st">&#39;+&#39;</span>)))
-form &lt;-<span class="st"> </span><span class="kw">update</span>(form, . <span class="op">~</span><span class="st"> </span>. <span class="op">-</span>Alignment) 
+form &lt;-<span class="st"> </span><span class="kw">update</span>(form, . ~<span class="st"> </span>. -Alignment) 
 
 ## Check out help(rpart.control) for a list of the parameters that you can change!
 ## Try playing with these to get an idea of how they impact a single tree
@@ -783,14 +805,14 @@ treemod &lt;-<span class="st"> </span><span class="kw">rpart</span>(form, <span 
 <p>We’re going to ‘skip’ a step here to a degree and use the gbm.step algorithm, an extension to gbm (generalized boosted regression modelling/ boosted regression trees). gbm.step will calculate the optimal tree to use by way of cross validation, rather than just building a pile of trees and letting the user decide.</p>
 <p>We’ll just use the model we had above (classification). Unfortunately, gbm.step uses column index values, rather than names!</p>
 <p><strong><em>gbm.step is not particularly well oriented towards multiple class target / dependent variables</em></strong> <strong><em>gbm.step needs to use a data.frame (can’t use a tibble), and in the target MUST be a factor</em></strong> <strong><em>gbm.step ALSO needs the TARGET variable to be in the form 0/1 </em></strong></p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">modeldat &lt;-<span class="st"> </span>modeldat <span class="op">%&gt;%</span><span class="st"> </span>
-<span class="st">  </span><span class="kw">mutate</span>(<span class="dt">Alignment_targ =</span> <span class="kw">case_when</span>(Alignment <span class="op">==</span><span class="st"> &#39;good&#39;</span> <span class="op">~</span><span class="st"> </span><span class="dv">0</span>, Alignment <span class="op">==</span><span class="st"> &#39;bad&#39;</span> <span class="op">~</span><span class="st"> </span><span class="dv">1</span> )) <span class="op">%&gt;%</span>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">modeldat &lt;-<span class="st"> </span>modeldat %&gt;%<span class="st"> </span>
+<span class="st">  </span><span class="kw">mutate</span>(<span class="dt">Alignment_targ =</span> <span class="kw">case_when</span>(Alignment ==<span class="st"> &#39;good&#39;</span> ~<span class="st"> </span><span class="dv">0</span>, Alignment ==<span class="st"> &#39;bad&#39;</span> ~<span class="st"> </span><span class="dv">1</span> )) %&gt;%
 <span class="st">  </span><span class="kw">mutate_at</span>(<span class="kw">c</span>(<span class="st">&#39;Alignment_targ&#39;</span>,<span class="st">&#39;Gender&#39;</span>,<span class="st">&#39;Creator&#39;</span>), <span class="kw">funs</span>(<span class="kw">factor</span>(.)))
 
 modeldf &lt;-<span class="st"> </span><span class="kw">data.frame</span>(modeldat)
-modeldf<span class="op">$</span>Alignment_targ &lt;-<span class="st"> </span><span class="kw">as.numeric</span>(<span class="kw">as.character</span>(modeldf<span class="op">$</span>Alignment_targ))
+modeldf$Alignment_targ &lt;-<span class="st"> </span><span class="kw">as.numeric</span>(<span class="kw">as.character</span>(modeldf$Alignment_targ))
 
-gbmModel &lt;-<span class="st"> </span><span class="kw">gbm.step</span>(<span class="dt">data=</span>modeldf,<span class="dt">gbm.=</span><span class="kw">c</span>(<span class="dv">1</span><span class="op">:</span><span class="dv">6</span>,<span class="dv">8</span><span class="op">:</span><span class="dv">17</span>),<span class="dt">gbm.y=</span><span class="dv">18</span>,<span class="dt">family=</span><span class="st">&quot;bernoulli&quot;</span>,
+gbmModel &lt;-<span class="st"> </span><span class="kw">gbm.step</span>(<span class="dt">data=</span>modeldf,<span class="dt">gbm.=</span><span class="kw">c</span>(<span class="dv">1</span>:<span class="dv">6</span>,<span class="dv">8</span>:<span class="dv">17</span>),<span class="dt">gbm.y=</span><span class="dv">18</span>,<span class="dt">family=</span><span class="st">&quot;bernoulli&quot;</span>,
                      <span class="dt">tree.complexity =</span> <span class="dv">10</span>,<span class="dt">learning.rate=</span><span class="fl">0.001</span>,<span class="dt">bag.fraction=</span><span class="fl">0.8</span>,<span class="dt">max.trees =</span> <span class="dv">8000</span>)</code></pre></div>
 <pre><code>## 
 ##  
@@ -805,69 +827,69 @@ gbmModel &lt;-<span class="st"> </span><span class="kw">gbm.step</span>(<span cl
 ## total mean deviance =  1.2623 
 ## tolerance is fixed at  0.0013 
 ## ntrees resid. dev. 
-## 50    1.256 
+## 50    1.2562 
 ## now adding trees... 
-## 100   1.2506 
+## 100   1.2507 
 ## 150   1.2457 
-## 200   1.2411 
-## 250   1.2376 
-## 300   1.2343 
-## 350   1.2314 
-## 400   1.2289 
-## 450   1.2266 
-## 500   1.2244 
-## 550   1.2228 
-## 600   1.2212 
-## 650   1.22 
-## 700   1.219 
-## 750   1.2182 
-## 800   1.2178 
-## 850   1.2171 
-## 900   1.2167 
-## 950   1.2162 
-## 1000   1.2162 
-## 1050   1.216 
-## 1100   1.2164 
-## 1150   1.2164 
-## 1200   1.2162 
-## 1250   1.2165 
-## 1300   1.2167 
-## 1350   1.2171 
-## 1400   1.2176 
-## 1450   1.2183 
-## 1500   1.2188 
-## 1550   1.2194</code></pre>
+## 200   1.2416 
+## 250   1.2382 
+## 300   1.235 
+## 350   1.2322 
+## 400   1.2298 
+## 450   1.2277 
+## 500   1.2256 
+## 550   1.224 
+## 600   1.2226 
+## 650   1.2214 
+## 700   1.2207 
+## 750   1.2201 
+## 800   1.2194 
+## 850   1.219 
+## 900   1.2183 
+## 950   1.2184 
+## 1000   1.2182 
+## 1050   1.2178 
+## 1100   1.2179 
+## 1150   1.2179 
+## 1200   1.218 
+## 1250   1.2183 
+## 1300   1.2187 
+## 1350   1.2192 
+## 1400   1.2192 
+## 1450   1.2198 
+## 1500   1.2204 
+## 1550   1.221</code></pre>
 <pre><code>## fitting final gbm model with a fixed number of 1050 trees for Alignment_targ</code></pre>
 <p><img src="_main_files/figure-html/sdmalg14-1.png" width="672" /></p>
 <pre><code>## 
 ## mean total deviance = 1.262 
-## mean residual deviance = 1.048 
+## mean residual deviance = 1.049 
 ##  
-## estimated cv deviance = 1.216 ; se = 0.018 
+## estimated cv deviance = 1.218 ; se = 0.025 
 ##  
-## training data correlation = 0.608 
-## cv correlation =  0.219 ; se = 0.047 
+## training data correlation = 0.61 
+## cv correlation =  0.223 ; se = 0.059 
 ##  
-## training data AUC score = 0.857 
-## cv AUC score = 0.645 ; se = 0.03 
+## training data AUC score = 0.856 
+## cv AUC score = 0.637 ; se = 0.036 
 ##  
 ## elapsed time -  0.3 minutes</code></pre>
 <p>To get a summary of the output that shows the variable importance rankings:</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">summary</span>(gbmModel)</code></pre></div>
 <p><img src="_main_files/figure-html/sdmalg15-1.png" width="672" /></p>
 <pre><code>##                           var    rel.inf
-## Intelligence     Intelligence 20.6827250
-## Speed                   Speed 11.4610143
-## Durability         Durability 11.2729006
-## TotalPower         TotalPower 10.8897347
-## Gender                 Gender  9.8297482
-## Power                   Power  9.6046351
-## Combat                 Combat  8.8328880
-## Creator               Creator  6.8139959
-## Strength             Strength  6.5173526
-## Race_Human         Race_Human  2.8977875
-## Race_Mutant       Race_Mutant  1.0265049
-## Race_God             Race_God  0.1707131
+## Intelligence     Intelligence 20.5992067
+## Speed                   Speed 11.9336893
+## TotalPower         TotalPower 11.0557840
+## Durability         Durability 10.9474037
+## Gender                 Gender  9.8085259
+## Power                   Power  9.1455746
+## Combat                 Combat  8.9856860
+## Strength             Strength  7.0933922
+## Creator               Creator  6.5330009
+## Race_Human         Race_Human  2.6714001
+## Race_Mutant       Race_Mutant  1.0352206
+## Race_God             Race_God  0.1911162
 ## Race_Animal       Race_Animal  0.0000000
 ## Race_Demon         Race_Demon  0.0000000
 ## Race_Asgardian Race_Asgardian  0.0000000
@@ -877,47 +899,47 @@ gbmModel &lt;-<span class="st"> </span><span class="kw">gbm.step</span>(<span cl
 <p><img src="_main_files/figure-html/sdmalg16-1.png" width="672" /></p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">## the gbm perspective plot for intelligence and speed versus the fitted values(z)
 <span class="kw">gbm.perspec</span>(gbmModel,<span class="dv">1</span>,<span class="dv">3</span>,<span class="dt">z.range=</span><span class="kw">c</span>(<span class="fl">0.15</span>,<span class="fl">0.6</span>),<span class="dt">theta=</span><span class="dv">205</span>)</code></pre></div>
-<pre><code>## maximum value = 0.53</code></pre>
+<pre><code>## maximum value = 0.54</code></pre>
 <p><img src="_main_files/figure-html/sdmalg16-2.png" width="672" /></p>
 </div>
 <div id="random-forest" class="section level4">
 <h4><span class="header-section-number">14.1.3.3</span> random forest</h4>
 <p>Random forest is much more flexible than gbm.step in some respects - for example, you aren’t being forced to use column indices!</p>
 <p>This model can be set up much like the CART model from before.</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">modeldat &lt;-<span class="st"> </span>OOEdata <span class="op">%&gt;%</span><span class="st"> </span>
-<span class="st">  </span>dplyr<span class="op">::</span><span class="kw">filter</span>(Alignment<span class="op">!=</span><span class="st">&#39;neutral&#39;</span>) <span class="op">%&gt;%</span>
-<span class="st">  </span>dplyr<span class="op">::</span><span class="kw">select</span>(Intelligence<span class="op">:</span>TotalPower, Race_Animal, Race_Human, Race_Demon, Race_God,
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">modeldat &lt;-<span class="st"> </span>OOEdata %&gt;%<span class="st"> </span>
+<span class="st">  </span>dplyr::<span class="kw">filter</span>(Alignment!=<span class="st">&#39;neutral&#39;</span>) %&gt;%
+<span class="st">  </span>dplyr::<span class="kw">select</span>(Intelligence:TotalPower, Race_Animal, Race_Human, Race_Demon, Race_God,
                 Race_Asgardian, Race_Mutant, Race_Android)
 
 ## Have to make sure these things are formatted as factors
-modeldat &lt;-<span class="st"> </span>modeldat <span class="op">%&gt;%</span><span class="st"> </span>
-<span class="st">  </span><span class="kw">mutate</span>(<span class="dt">Alignment_targ =</span> <span class="kw">case_when</span>(Alignment <span class="op">==</span><span class="st"> &#39;good&#39;</span> <span class="op">~</span><span class="st"> </span><span class="dv">0</span>, Alignment <span class="op">==</span><span class="st"> &#39;bad&#39;</span> <span class="op">~</span><span class="st"> </span><span class="dv">1</span> )) <span class="op">%&gt;%</span>
+modeldat &lt;-<span class="st"> </span>modeldat %&gt;%<span class="st"> </span>
+<span class="st">  </span><span class="kw">mutate</span>(<span class="dt">Alignment_targ =</span> <span class="kw">case_when</span>(Alignment ==<span class="st"> &#39;good&#39;</span> ~<span class="st"> </span><span class="dv">0</span>, Alignment ==<span class="st"> &#39;bad&#39;</span> ~<span class="st"> </span><span class="dv">1</span> )) %&gt;%
 <span class="st">  </span><span class="kw">mutate_at</span>(<span class="kw">c</span>(<span class="st">&#39;Alignment_targ&#39;</span>,<span class="st">&#39;Gender&#39;</span>,<span class="st">&#39;Creator&#39;</span>), <span class="kw">funs</span>(<span class="kw">factor</span>(.)))
 
 
 form &lt;-<span class="st"> </span><span class="kw">as.formula</span>(<span class="kw">paste</span>(<span class="st">&quot;Alignment_targ ~ &quot;</span>,<span class="kw">paste</span>(<span class="kw">names</span>(modeldat),<span class="dt">collapse=</span><span class="st">&#39;+&#39;</span>)))
-form &lt;-<span class="st"> </span><span class="kw">update</span>(form, . <span class="op">~</span><span class="st"> </span>. <span class="op">-</span>Alignment) 
-form &lt;-<span class="st"> </span><span class="kw">update</span>(form, . <span class="op">~</span><span class="st"> </span>. <span class="op">-</span>Alignment_targ) 
+form &lt;-<span class="st"> </span><span class="kw">update</span>(form, . ~<span class="st"> </span>. -Alignment) 
+form &lt;-<span class="st"> </span><span class="kw">update</span>(form, . ~<span class="st"> </span>. -Alignment_targ) 
 
 rf.model &lt;-<span class="st"> </span><span class="kw">randomForest</span>(<span class="dt">data=</span><span class="kw">data.frame</span>(modeldat),form,<span class="dt">mtry=</span><span class="dv">3</span>,<span class="dt">maxnodes=</span><span class="dv">10</span>)
 <span class="kw">importance</span>(rf.model)</code></pre></div>
 <pre><code>##                MeanDecreaseGini
-## Intelligence         5.61640111
-## Strength             2.75120205
-## Speed                3.26378212
-## Durability           3.68751428
-## Power                2.00164506
-## Combat               2.69710754
-## Gender               3.65273986
-## Creator              1.95510481
-## TotalPower           3.53433695
-## Race_Animal          0.08585302
-## Race_Human           0.77356915
-## Race_Demon           0.19936608
-## Race_God             0.70108698
-## Race_Asgardian       0.13385622
-## Race_Mutant          0.57543918
-## Race_Android         0.43527047</code></pre>
+## Intelligence         6.05098679
+## Strength             3.03554856
+## Speed                2.84587013
+## Durability           3.73971684
+## Power                2.32266672
+## Combat               2.47631381
+## Gender               3.72602957
+## Creator              1.95849028
+## TotalPower           3.41079472
+## Race_Animal          0.08300021
+## Race_Human           0.64630039
+## Race_Demon           0.25325414
+## Race_God             0.68554982
+## Race_Asgardian       0.06994368
+## Race_Mutant          0.43814728
+## Race_Android         0.43067807</code></pre>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">partialPlot</span>(rf.model,<span class="kw">data.frame</span>(modeldat),Intelligence)</code></pre></div>
 <p><img src="_main_files/figure-html/sdmalg17-1.png" width="672" /></p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">partialPlot</span>(rf.model,<span class="kw">data.frame</span>(modeldat),Gender)</code></pre></div>
@@ -928,19 +950,19 @@ rf.model &lt;-<span class="st"> </span><span class="kw">randomForest</span>(<spa
 <div id="regression-problem" class="section level3">
 <h3><span class="header-section-number">14.1.4</span> Regression problem</h3>
 <p>Here, we use gbm.step to run the regression problem. If you want to run it in random forest, give it a try! Ask your instructor for some help, or use Google! There are a lot of resources available.</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">modeldat &lt;-<span class="st"> </span>OOEdata <span class="op">%&gt;%</span><span class="st"> </span>
-<span class="st">  </span>dplyr<span class="op">::</span><span class="kw">filter</span>(Alignment<span class="op">!=</span><span class="st">&#39;neutral&#39;</span>) <span class="op">%&gt;%</span>
-<span class="st">  </span>dplyr<span class="op">::</span><span class="kw">select</span>(Intelligence<span class="op">:</span>TotalPower, Race_Animal, Race_Human, Race_Demon, Race_God,
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">modeldat &lt;-<span class="st"> </span>OOEdata %&gt;%<span class="st"> </span>
+<span class="st">  </span>dplyr::<span class="kw">filter</span>(Alignment!=<span class="st">&#39;neutral&#39;</span>) %&gt;%
+<span class="st">  </span>dplyr::<span class="kw">select</span>(Intelligence:TotalPower, Race_Animal, Race_Human, Race_Demon, Race_God,
                 Race_Asgardian, Race_Mutant, Race_Android)
 
-modeldat &lt;-<span class="st"> </span>modeldat <span class="op">%&gt;%</span><span class="st"> </span>
+modeldat &lt;-<span class="st"> </span>modeldat %&gt;%<span class="st"> </span>
 <span class="st">  </span><span class="kw">mutate_at</span>(<span class="kw">c</span>(<span class="st">&#39;Alignment&#39;</span>,<span class="st">&#39;Gender&#39;</span>,<span class="st">&#39;Creator&#39;</span>), <span class="kw">funs</span>(<span class="kw">factor</span>(.)))
 
 modeldf &lt;-<span class="st"> </span><span class="kw">data.frame</span>(modeldat)
 
 ## use names(modeldf) to find indices
 
-gbmModel &lt;-<span class="st"> </span><span class="kw">gbm.step</span>(<span class="dt">data=</span>modeldf,<span class="dt">gbm.x=</span><span class="kw">c</span>(<span class="dv">1</span>,<span class="dv">6</span><span class="op">:</span><span class="dv">9</span>,<span class="dv">11</span><span class="op">:</span><span class="dv">17</span>),<span class="dt">gbm.y=</span><span class="dv">10</span>,<span class="dt">family=</span><span class="st">&quot;laplace&quot;</span>,
+gbmModel &lt;-<span class="st"> </span><span class="kw">gbm.step</span>(<span class="dt">data=</span>modeldf,<span class="dt">gbm.x=</span><span class="kw">c</span>(<span class="dv">1</span>,<span class="dv">6</span>:<span class="dv">9</span>,<span class="dv">11</span>:<span class="dv">17</span>),<span class="dt">gbm.y=</span><span class="dv">10</span>,<span class="dt">family=</span><span class="st">&quot;laplace&quot;</span>,
                      <span class="dt">tree.complexity =</span> <span class="dv">20</span>,<span class="dt">learning.rate=</span><span class="fl">0.001</span>,<span class="dt">bag.fraction=</span><span class="fl">0.5</span>,<span class="dt">max.trees =</span> <span class="dv">8000</span>)</code></pre></div>
 <pre><code>## 
 ##  
@@ -955,107 +977,105 @@ gbmModel &lt;-<span class="st"> </span><span class="kw">gbm.step</span>(<span cl
 ## total mean deviance =  82.8383 
 ## tolerance is fixed at  0.0828 
 ## ntrees resid. dev. 
-## 50    82.1646 
+## 50    81.9783 
 ## now adding trees... 
-## 100   81.0515 
-## 150   80.0099 
-## 200   78.9957 
-## 250   78.0747 
-## 300   77.2117 
-## 350   76.3914 
-## 400   75.6181 
-## 450   74.9669 
-## 500   74.3643 
-## 550   73.8041 
-## 600   73.2439 
-## 650   72.7152 
-## 700   72.2177 
-## 750   71.7404 
-## 800   71.2944 
-## 850   70.9094 
-## 900   70.5368 
-## 950   70.1607 
-## 1000   69.828 
-## 1050   69.5046 
-## 1100   69.2004 
-## 1150   68.9086 
-## 1200   68.6309 
-## 1250   68.3832 
-## 1300   68.1409 
-## 1350   67.9372 
-## 1400   67.7401 
-## 1450   67.5465 
-## 1500   67.3648 
-## 1550   67.2172 
-## 1600   67.0695 
-## 1650   66.9401 
-## 1700   66.812 
-## 1750   66.6705 
-## 1800   66.5596 
-## 1850   66.44 
-## 1900   66.3336 
-## 1950   66.2491 
-## 2000   66.159 
-## 2050   66.0834 
-## 2100   65.9997 
-## 2150   65.9248 
-## 2200   65.8618 
-## 2250   65.7962 
-## 2300   65.7352 
-## 2350   65.6773 
-## 2400   65.622 
-## 2450   65.5787 
-## 2500   65.5579 
-## 2550   65.5355 
-## 2600   65.5166 
-## 2650   65.4954 
-## 2700   65.47 
-## 2750   65.4401 
-## 2800   65.4134 
-## 2850   65.3928 
-## 2900   65.3896 
-## 2950   65.3746 
-## 3000   65.3472 
-## 3050   65.3328 
-## 3100   65.3125 
-## 3150   65.3111 
-## 3200   65.3022 
-## 3250   65.2793 
-## 3300   65.2659 
-## 3350   65.2544 
-## 3400   65.2394 
-## 3450   65.2298 
-## 3500   65.2258 
-## 3550   65.2305 
-## 3600   65.2263 
-## 3650   65.2308 
-## 3700   65.2257 
-## 3750   65.2244 
-## 3800   65.2387 
-## 3850   65.2405</code></pre>
-<pre><code>## fitting final gbm model with a fixed number of 3750 trees for TotalPower</code></pre>
+## 100   80.8959 
+## 150   79.8729 
+## 200   78.8618 
+## 250   77.9282 
+## 300   77.0672 
+## 350   76.2683 
+## 400   75.5307 
+## 450   74.8541 
+## 500   74.2275 
+## 550   73.6477 
+## 600   73.131 
+## 650   72.6274 
+## 700   72.1666 
+## 750   71.7407 
+## 800   71.3443 
+## 850   70.9434 
+## 900   70.5647 
+## 950   70.2005 
+## 1000   69.8613 
+## 1050   69.5311 
+## 1100   69.2117 
+## 1150   68.917 
+## 1200   68.6389 
+## 1250   68.3814 
+## 1300   68.1493 
+## 1350   67.9313 
+## 1400   67.7368 
+## 1450   67.551 
+## 1500   67.3831 
+## 1550   67.2342 
+## 1600   67.0918 
+## 1650   66.92 
+## 1700   66.7858 
+## 1750   66.651 
+## 1800   66.5458 
+## 1850   66.4298 
+## 1900   66.3027 
+## 1950   66.1899 
+## 2000   66.1056 
+## 2050   66.0139 
+## 2100   65.9382 
+## 2150   65.8776 
+## 2200   65.813 
+## 2250   65.7649 
+## 2300   65.7038 
+## 2350   65.6419 
+## 2400   65.6039 
+## 2450   65.5705 
+## 2500   65.527 
+## 2550   65.4907 
+## 2600   65.4539 
+## 2650   65.4461 
+## 2700   65.4212 
+## 2750   65.4105 
+## 2800   65.3828 
+## 2850   65.3582 
+## 2900   65.3596 
+## 2950   65.3554 
+## 3000   65.349 
+## 3050   65.3398 
+## 3100   65.3305 
+## 3150   65.3092 
+## 3200   65.2969 
+## 3250   65.2941 
+## 3300   65.2755 
+## 3350   65.2698 
+## 3400   65.2643 
+## 3450   65.2594 
+## 3500   65.2578 
+## 3550   65.2476 
+## 3600   65.249 
+## 3650   65.2401 
+## 3700   65.2352 
+## 3750   65.239</code></pre>
+<pre><code>## fitting final gbm model with a fixed number of 3700 trees for TotalPower</code></pre>
 <p><img src="_main_files/figure-html/sdmalg18-1.png" width="672" /></p>
 <pre><code>## 
 ## mean total deviance = 82.838 
-## mean residual deviance = 52.837 
+## mean residual deviance = 52.955 
 ##  
-## estimated cv deviance = 65.224 ; se = 1.725 
+## estimated cv deviance = 65.235 ; se = 2.25 
 ##  
-## training data correlation = 0.735 
-## cv correlation =  0.601 ; se = 0.024 
+## training data correlation = 0.734 
+## cv correlation =  0.598 ; se = 0.032 
 ##  
-## elapsed time -  0.93 minutes</code></pre>
+## elapsed time -  0.89 minutes</code></pre>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">summary</span>(gbmModel)</code></pre></div>
 <p><img src="_main_files/figure-html/sdmalg18-2.png" width="672" /></p>
 <pre><code>##                           var    rel.inf
-## Combat                 Combat 42.1908031
-## Intelligence     Intelligence 23.3232063
-## Race_Human         Race_Human  9.1917188
-## Creator               Creator  8.9862461
-## Gender                 Gender  7.7090968
-## Alignment           Alignment  4.2868607
-## Race_Mutant       Race_Mutant  3.5157636
-## Race_God             Race_God  0.7963046
+## Combat                 Combat 42.0959831
+## Intelligence     Intelligence 23.6436979
+## Race_Human         Race_Human  9.2883294
+## Creator               Creator  9.0825277
+## Gender                 Gender  7.5298538
+## Alignment           Alignment  4.2547307
+## Race_Mutant       Race_Mutant  3.3072987
+## Race_God             Race_God  0.7975787
 ## Race_Animal       Race_Animal  0.0000000
 ## Race_Demon         Race_Demon  0.0000000
 ## Race_Asgardian Race_Asgardian  0.0000000

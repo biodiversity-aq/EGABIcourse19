@@ -299,7 +299,7 @@ lr=<span class="fl">0.011</span> <span class="co"># learning rate</span>
 bf=<span class="fl">0.8</span> <span class="co"># bag fraction</span>
 
 model.res&lt;-<span class="st"> </span><span class="kw">gbm.step_v2</span> (<span class="dt">data=</span>MATRIX_OCC_ENVI, 
-                         <span class="dt">gbm.x =</span> <span class="dv">2</span><span class="op">:</span><span class="kw">ncol</span>(MATRIX_OCC_ENVI),
+                         <span class="dt">gbm.x =</span> <span class="dv">2</span>:<span class="kw">ncol</span>(MATRIX_OCC_ENVI),
                          <span class="dt">gbm.y =</span> <span class="dv">1</span>,
                          <span class="dt">family =</span> <span class="st">&quot;bernoulli&quot;</span>,
                          <span class="dt">n.folds=</span><span class="dv">4</span>,
@@ -319,14 +319,14 @@ model8&lt;-model.res  <span class="co"># tc4 lr0.011 bf=0.8 nbt 10000 </span>
 
 
 <span class="co"># GENERATE THE PLOTS </span>
-tree.list1 &lt;-<span class="st"> </span><span class="kw">seq</span>(<span class="dv">100</span>, model1<span class="op">$</span>gbm.call<span class="op">$</span>best.trees, <span class="dt">by =</span> <span class="dv">100</span>)
-tree.list2 &lt;-<span class="st"> </span><span class="kw">seq</span>(<span class="dv">100</span>, model2<span class="op">$</span>gbm.call<span class="op">$</span>best.trees, <span class="dt">by =</span> <span class="dv">100</span>)
-tree.list3 &lt;-<span class="st"> </span><span class="kw">seq</span>(<span class="dv">100</span>, model3<span class="op">$</span>gbm.call<span class="op">$</span>best.trees, <span class="dt">by =</span> <span class="dv">100</span>)
-tree.list4 &lt;-<span class="st"> </span><span class="kw">seq</span>(<span class="dv">100</span>, model4<span class="op">$</span>gbm.call<span class="op">$</span>best.trees, <span class="dt">by =</span> <span class="dv">100</span>)
-tree.list5 &lt;-<span class="st"> </span><span class="kw">seq</span>(<span class="dv">100</span>, model5<span class="op">$</span>gbm.call<span class="op">$</span>best.trees, <span class="dt">by =</span> <span class="dv">100</span>)
-tree.list6 &lt;-<span class="st"> </span><span class="kw">seq</span>(<span class="dv">100</span>, model6<span class="op">$</span>gbm.call<span class="op">$</span>best.trees, <span class="dt">by =</span> <span class="dv">100</span>)
-tree.list7 &lt;-<span class="st"> </span><span class="kw">seq</span>(<span class="dv">100</span>, model7<span class="op">$</span>gbm.call<span class="op">$</span>best.trees, <span class="dt">by =</span> <span class="dv">100</span>)
-tree.list8 &lt;-<span class="st"> </span><span class="kw">seq</span>(<span class="dv">100</span>, model8<span class="op">$</span>gbm.call<span class="op">$</span>best.trees, <span class="dt">by =</span> <span class="dv">100</span>)
+tree.list1 &lt;-<span class="st"> </span><span class="kw">seq</span>(<span class="dv">100</span>, model1$gbm.call$best.trees, <span class="dt">by =</span> <span class="dv">100</span>)
+tree.list2 &lt;-<span class="st"> </span><span class="kw">seq</span>(<span class="dv">100</span>, model2$gbm.call$best.trees, <span class="dt">by =</span> <span class="dv">100</span>)
+tree.list3 &lt;-<span class="st"> </span><span class="kw">seq</span>(<span class="dv">100</span>, model3$gbm.call$best.trees, <span class="dt">by =</span> <span class="dv">100</span>)
+tree.list4 &lt;-<span class="st"> </span><span class="kw">seq</span>(<span class="dv">100</span>, model4$gbm.call$best.trees, <span class="dt">by =</span> <span class="dv">100</span>)
+tree.list5 &lt;-<span class="st"> </span><span class="kw">seq</span>(<span class="dv">100</span>, model5$gbm.call$best.trees, <span class="dt">by =</span> <span class="dv">100</span>)
+tree.list6 &lt;-<span class="st"> </span><span class="kw">seq</span>(<span class="dv">100</span>, model6$gbm.call$best.trees, <span class="dt">by =</span> <span class="dv">100</span>)
+tree.list7 &lt;-<span class="st"> </span><span class="kw">seq</span>(<span class="dv">100</span>, model7$gbm.call$best.trees, <span class="dt">by =</span> <span class="dv">100</span>)
+tree.list8 &lt;-<span class="st"> </span><span class="kw">seq</span>(<span class="dv">100</span>, model8$gbm.call$best.trees, <span class="dt">by =</span> <span class="dv">100</span>)
 
 pred1 &lt;-<span class="st"> </span><span class="kw">predict.gbm</span>(model1,MATRIX_OCC_ENVI, <span class="dt">n.trees =</span> tree.list1, <span class="st">&quot;response&quot;</span>)
 pred2 &lt;-<span class="st"> </span><span class="kw">predict.gbm</span>(model2,MATRIX_OCC_ENVI, <span class="dt">n.trees =</span> tree.list2, <span class="st">&quot;response&quot;</span>)
@@ -337,41 +337,41 @@ pred6 &lt;-<span class="st"> </span><span class="kw">predict.gbm</span>(model6,M
 pred7 &lt;-<span class="st"> </span><span class="kw">predict.gbm</span>(model7,MATRIX_OCC_ENVI, <span class="dt">n.trees =</span> tree.list7, <span class="st">&quot;response&quot;</span>)
 pred8 &lt;-<span class="st"> </span><span class="kw">predict.gbm</span>(model8,MATRIX_OCC_ENVI, <span class="dt">n.trees =</span> tree.list8, <span class="st">&quot;response&quot;</span>)
 
-graphe.deviance1 &lt;-<span class="st"> </span><span class="kw">rep</span>(<span class="dv">0</span>,<span class="kw">max</span>(tree.list1)<span class="op">/</span><span class="dv">100</span>)
-<span class="cf">for</span> (i <span class="cf">in</span> <span class="dv">1</span><span class="op">:</span><span class="kw">length</span>(graphe.deviance1)) {
-  graphe.deviance1 [i] &lt;-<span class="st"> </span><span class="kw">calc.deviance</span>(MATRIX_OCC_ENVI<span class="op">$</span>id, pred1[,i],<span class="dt">calc.mean=</span>T)
+graphe.deviance1 &lt;-<span class="st"> </span><span class="kw">rep</span>(<span class="dv">0</span>,<span class="kw">max</span>(tree.list1)/<span class="dv">100</span>)
+for (i in <span class="dv">1</span>:<span class="kw">length</span>(graphe.deviance1)) {
+  graphe.deviance1 [i] &lt;-<span class="st"> </span><span class="kw">calc.deviance</span>(MATRIX_OCC_ENVI$id, pred1[,i],<span class="dt">calc.mean=</span>T)
 }
-graphe.deviance2 &lt;-<span class="st"> </span><span class="kw">rep</span>(<span class="dv">0</span>,<span class="kw">max</span>(tree.list2)<span class="op">/</span><span class="dv">100</span>)
-<span class="cf">for</span> (i <span class="cf">in</span> <span class="dv">1</span><span class="op">:</span><span class="kw">length</span>(graphe.deviance2)) {
-  graphe.deviance2 [i] &lt;-<span class="st"> </span><span class="kw">calc.deviance</span>(MATRIX_OCC_ENVI<span class="op">$</span>id, pred2[,i],<span class="dt">calc.mean=</span>T)
+graphe.deviance2 &lt;-<span class="st"> </span><span class="kw">rep</span>(<span class="dv">0</span>,<span class="kw">max</span>(tree.list2)/<span class="dv">100</span>)
+for (i in <span class="dv">1</span>:<span class="kw">length</span>(graphe.deviance2)) {
+  graphe.deviance2 [i] &lt;-<span class="st"> </span><span class="kw">calc.deviance</span>(MATRIX_OCC_ENVI$id, pred2[,i],<span class="dt">calc.mean=</span>T)
 }
-graphe.deviance3 &lt;-<span class="st"> </span><span class="kw">rep</span>(<span class="dv">0</span>,<span class="kw">max</span>(tree.list3)<span class="op">/</span><span class="dv">100</span>)
-<span class="cf">for</span> (i <span class="cf">in</span> <span class="dv">1</span><span class="op">:</span><span class="kw">length</span>(graphe.deviance3)) {
-  graphe.deviance3 [i] &lt;-<span class="st"> </span><span class="kw">calc.deviance</span>(MATRIX_OCC_ENVI<span class="op">$</span>id, pred3[,i],<span class="dt">calc.mean=</span>T)
+graphe.deviance3 &lt;-<span class="st"> </span><span class="kw">rep</span>(<span class="dv">0</span>,<span class="kw">max</span>(tree.list3)/<span class="dv">100</span>)
+for (i in <span class="dv">1</span>:<span class="kw">length</span>(graphe.deviance3)) {
+  graphe.deviance3 [i] &lt;-<span class="st"> </span><span class="kw">calc.deviance</span>(MATRIX_OCC_ENVI$id, pred3[,i],<span class="dt">calc.mean=</span>T)
 }
-graphe.deviance4 &lt;-<span class="st"> </span><span class="kw">rep</span>(<span class="dv">0</span>,<span class="kw">max</span>(tree.list4)<span class="op">/</span><span class="dv">100</span>)
-<span class="cf">for</span> (i <span class="cf">in</span> <span class="dv">1</span><span class="op">:</span><span class="kw">length</span>(graphe.deviance4)) {
-  graphe.deviance4 [i] &lt;-<span class="st"> </span><span class="kw">calc.deviance</span>(MATRIX_OCC_ENVI<span class="op">$</span>id, pred4[,i],<span class="dt">calc.mean=</span>T)
+graphe.deviance4 &lt;-<span class="st"> </span><span class="kw">rep</span>(<span class="dv">0</span>,<span class="kw">max</span>(tree.list4)/<span class="dv">100</span>)
+for (i in <span class="dv">1</span>:<span class="kw">length</span>(graphe.deviance4)) {
+  graphe.deviance4 [i] &lt;-<span class="st"> </span><span class="kw">calc.deviance</span>(MATRIX_OCC_ENVI$id, pred4[,i],<span class="dt">calc.mean=</span>T)
 }
-graphe.deviance5 &lt;-<span class="st"> </span><span class="kw">rep</span>(<span class="dv">0</span>,<span class="kw">max</span>(tree.list5)<span class="op">/</span><span class="dv">100</span>)
-<span class="cf">for</span> (i <span class="cf">in</span> <span class="dv">1</span><span class="op">:</span><span class="kw">length</span>(graphe.deviance5)) {
-  graphe.deviance5 [i] &lt;-<span class="st"> </span><span class="kw">calc.deviance</span>(MATRIX_OCC_ENVI<span class="op">$</span>id, pred5[,i],<span class="dt">calc.mean=</span>T)
+graphe.deviance5 &lt;-<span class="st"> </span><span class="kw">rep</span>(<span class="dv">0</span>,<span class="kw">max</span>(tree.list5)/<span class="dv">100</span>)
+for (i in <span class="dv">1</span>:<span class="kw">length</span>(graphe.deviance5)) {
+  graphe.deviance5 [i] &lt;-<span class="st"> </span><span class="kw">calc.deviance</span>(MATRIX_OCC_ENVI$id, pred5[,i],<span class="dt">calc.mean=</span>T)
 }
-graphe.deviance6 &lt;-<span class="st"> </span><span class="kw">rep</span>(<span class="dv">0</span>,<span class="kw">max</span>(tree.list6)<span class="op">/</span><span class="dv">100</span>)
-<span class="cf">for</span> (i <span class="cf">in</span> <span class="dv">1</span><span class="op">:</span><span class="kw">length</span>(graphe.deviance6)) {
-  graphe.deviance6 [i] &lt;-<span class="st"> </span><span class="kw">calc.deviance</span>(MATRIX_OCC_ENVI<span class="op">$</span>id, pred6[,i],<span class="dt">calc.mean=</span>T)
+graphe.deviance6 &lt;-<span class="st"> </span><span class="kw">rep</span>(<span class="dv">0</span>,<span class="kw">max</span>(tree.list6)/<span class="dv">100</span>)
+for (i in <span class="dv">1</span>:<span class="kw">length</span>(graphe.deviance6)) {
+  graphe.deviance6 [i] &lt;-<span class="st"> </span><span class="kw">calc.deviance</span>(MATRIX_OCC_ENVI$id, pred6[,i],<span class="dt">calc.mean=</span>T)
 }
-graphe.deviance7 &lt;-<span class="st"> </span><span class="kw">rep</span>(<span class="dv">0</span>,<span class="kw">max</span>(tree.list7)<span class="op">/</span><span class="dv">100</span>)
-<span class="cf">for</span> (i <span class="cf">in</span> <span class="dv">1</span><span class="op">:</span><span class="kw">length</span>(graphe.deviance7)) {
-  graphe.deviance7 [i] &lt;-<span class="st"> </span><span class="kw">calc.deviance</span>(MATRIX_OCC_ENVI<span class="op">$</span>id, pred7[,i],<span class="dt">calc.mean=</span>T)
+graphe.deviance7 &lt;-<span class="st"> </span><span class="kw">rep</span>(<span class="dv">0</span>,<span class="kw">max</span>(tree.list7)/<span class="dv">100</span>)
+for (i in <span class="dv">1</span>:<span class="kw">length</span>(graphe.deviance7)) {
+  graphe.deviance7 [i] &lt;-<span class="st"> </span><span class="kw">calc.deviance</span>(MATRIX_OCC_ENVI$id, pred7[,i],<span class="dt">calc.mean=</span>T)
 }
-graphe.deviance8 &lt;-<span class="st"> </span><span class="kw">rep</span>(<span class="dv">0</span>,<span class="kw">max</span>(tree.list8)<span class="op">/</span><span class="dv">100</span>)
-<span class="cf">for</span> (i <span class="cf">in</span> <span class="dv">1</span><span class="op">:</span><span class="kw">length</span>(graphe.deviance8)) {
-  graphe.deviance8 [i] &lt;-<span class="st"> </span><span class="kw">calc.deviance</span>(MATRIX_OCC_ENVI<span class="op">$</span>id, pred8[,i],<span class="dt">calc.mean=</span>T)
+graphe.deviance8 &lt;-<span class="st"> </span><span class="kw">rep</span>(<span class="dv">0</span>,<span class="kw">max</span>(tree.list8)/<span class="dv">100</span>)
+for (i in <span class="dv">1</span>:<span class="kw">length</span>(graphe.deviance8)) {
+  graphe.deviance8 [i] &lt;-<span class="st"> </span><span class="kw">calc.deviance</span>(MATRIX_OCC_ENVI$id, pred8[,i],<span class="dt">calc.mean=</span>T)
 }
 
 <span class="kw">par</span>(<span class="dt">mai=</span><span class="kw">c</span>(<span class="fl">0.5</span>,<span class="fl">0.5</span>,<span class="fl">0.5</span>,<span class="fl">0.5</span>))
-<span class="kw">plot</span>(tree.list1,graphe.deviance1,<span class="dt">xlim =</span> <span class="kw">c</span>(<span class="op">-</span><span class="dv">100</span>,<span class="dv">4000</span>), <span class="dt">ylim=</span><span class="kw">c</span>(<span class="dv">0</span>,<span class="dv">1</span>),<span class="dt">type=</span><span class="st">&#39;l&#39;</span>, <span class="dt">xlab =</span> <span class="st">&quot;number of trees&quot;</span>,<span class="dt">ylab =</span> <span class="st">&quot;predictive deviance&quot;</span>, <span class="dt">cex.lab =</span> <span class="fl">1.5</span>) 
+<span class="kw">plot</span>(tree.list1,graphe.deviance1,<span class="dt">xlim =</span> <span class="kw">c</span>(-<span class="dv">100</span>,<span class="dv">4000</span>), <span class="dt">ylim=</span><span class="kw">c</span>(<span class="dv">0</span>,<span class="dv">1</span>),<span class="dt">type=</span><span class="st">&#39;l&#39;</span>, <span class="dt">xlab =</span> <span class="st">&quot;number of trees&quot;</span>,<span class="dt">ylab =</span> <span class="st">&quot;predictive deviance&quot;</span>, <span class="dt">cex.lab =</span> <span class="fl">1.5</span>) 
 <span class="kw">lines</span>(tree.list2,graphe.deviance2,<span class="dt">col=</span><span class="st">&quot;blue&quot;</span>)
 <span class="kw">lines</span>(tree.list3,graphe.deviance3,<span class="dt">col=</span><span class="st">&quot;red&quot;</span>)
 <span class="kw">lines</span>(tree.list4,graphe.deviance4,<span class="dt">col=</span><span class="st">&quot;green&quot;</span>)
@@ -381,24 +381,24 @@ graphe.deviance8 &lt;-<span class="st"> </span><span class="kw">rep</span>(<span
 <span class="kw">lines</span>(tree.list8,graphe.deviance8,<span class="dt">col=</span><span class="st">&quot;purple&quot;</span>)
 <span class="kw">legend</span>(<span class="st">&quot;topright&quot;</span>,<span class="dt">legend=</span><span class="kw">c</span>(<span class="st">&quot;tc3 lr0.001 bf=0.8&quot;</span>,<span class="st">&quot;tc4 lr0.001 bf=0.8&quot;</span>,<span class="st">&quot;tc4 lr0.005 bf=0.8 &quot;</span>,<span class="st">&quot;tc3 lr0.005 bf=0.8&quot;</span>,<span class="st">&quot;tc4 lr0.01 bf=0.8&quot;</span>,<span class="st">&quot;tc4 lr0.008 bf=0.8&quot;</span>,<span class="st">&quot;tc4 lr0.005 bf=0.9&quot;</span>,<span class="st">&quot;tc4 lr0.011 bf=0.8&quot;</span>),<span class="dt">col=</span><span class="kw">c</span>(<span class="st">&quot;black&quot;</span>,<span class="st">&quot;blue&quot;</span>,<span class="st">&quot;red&quot;</span>,<span class="st">&quot;green&quot;</span>,<span class="st">&quot;orange&quot;</span>,<span class="st">&quot;pink&quot;</span>,<span class="st">&quot;deepskyblue&quot;</span>,<span class="st">&quot;purple&quot;</span>),<span class="dt">pch=</span><span class="dv">16</span>,<span class="dt">cex=</span><span class="fl">0.7</span>)</code></pre></div>
 <p><a href="./course_material/exercises/scripts/clock4_crossValidation.R">clock4_crossValidation.R</a></p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">clock4 &lt;-<span class="st"> </span><span class="cf">function</span>(occ, bg.coords){
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">clock4 &lt;-<span class="st"> </span>function(occ, bg.coords){
   <span class="co"># the spatial sampling aims at defining areas containing either test or training data </span>
   <span class="co"># for the CLOCK-4 method, 4 triangle areas are defined, cutting the Southern Ocean circle into 4 equal areas. Three of these 4 areas contain the data that will be used to train the model, the other remaining one, the data that will be used to test the model after predictions </span>
   <span class="co"># the areas used to train and test the model are randomly defined at each loop step </span>
   
   <span class="co">#initialise vectors that are used to generate the spatial sampling structure</span>
   random_longA &lt;-<span class="st"> </span><span class="kw">seq</span>(<span class="dv">0</span>,<span class="dv">179</span>,<span class="dv">1</span>)
-  random_longB &lt;-<span class="st"> </span><span class="kw">seq</span>(<span class="op">-</span><span class="dv">180</span>,<span class="op">-</span><span class="dv">1</span>,<span class="dv">1</span>)
+  random_longB &lt;-<span class="st"> </span><span class="kw">seq</span>(-<span class="dv">180</span>,-<span class="dv">1</span>,<span class="dv">1</span>)
   random_longC &lt;-<span class="st"> </span><span class="kw">seq</span>(<span class="dv">0</span>,<span class="dv">180</span>,<span class="dv">1</span>)
-  random_longD &lt;-<span class="st"> </span><span class="kw">seq</span>(<span class="op">-</span><span class="dv">179</span>,<span class="dv">0</span>,<span class="dv">1</span>)
+  random_longD &lt;-<span class="st"> </span><span class="kw">seq</span>(-<span class="dv">179</span>,<span class="dv">0</span>,<span class="dv">1</span>)
   random_long &lt;-<span class="st"> </span><span class="kw">c</span>(random_longA,random_longB,random_longC,random_longD)
   
   <span class="co"># sample a number between -180 and 180 to define the random sampling transect </span>
   tirage &lt;-<span class="st"> </span><span class="kw">sample</span>(<span class="kw">seq</span>(<span class="dv">181</span>,<span class="dv">541</span>,<span class="dv">1</span>),<span class="dv">1</span>)
   random_long_tirage &lt;-<span class="st"> </span>random_long[tirage]
-  random_long_tirage_A1 &lt;-<span class="st"> </span>random_long[tirage<span class="op">+</span><span class="dv">90</span>]
-  random_long_tirage_A2 &lt;-<span class="st"> </span>random_long[tirage<span class="op">+</span><span class="dv">180</span>]
-  random_long_tirage_A3 &lt;-<span class="st"> </span>random_long[tirage<span class="op">-</span><span class="dv">90</span>]
+  random_long_tirage_A1 &lt;-<span class="st"> </span>random_long[tirage<span class="dv">+90</span>]
+  random_long_tirage_A2 &lt;-<span class="st"> </span>random_long[tirage<span class="dv">+180</span>]
+  random_long_tirage_A3 &lt;-<span class="st"> </span>random_long[tirage<span class="dv">-90</span>]
   <span class="co">#random_long_tirage_A4 &lt;- random_long[tirage-180]</span>
   
 
@@ -428,76 +428,76 @@ graphe.deviance8 &lt;-<span class="st"> </span><span class="kw">rep</span>(<span
   <span class="co">#---------------------</span>
   
   ### ZONE 1 ####
-  <span class="cf">if</span> (random_long_tirage <span class="op">&lt;=</span><span class="st"> </span><span class="dv">0</span> <span class="op">&amp;</span><span class="st"> </span>random_long_tirage_A1 <span class="op">&lt;=</span><span class="dv">0</span>){ <span class="co"># imply that A2 &gt;= 0 and A3&gt;=0</span>
-    training_presences.occ1 &lt;-<span class="st"> </span><span class="kw">which</span>(presence_tot[,<span class="dv">1</span>] <span class="op">&gt;</span><span class="st"> </span>random_long_tirage <span class="op">&amp;</span><span class="st"> </span>presence_tot[,<span class="dv">1</span>] <span class="op">&lt;</span><span class="st"> </span>random_long_tirage_A1)
-    training_backgr.occ1 &lt;-<span class="st"> </span><span class="kw">which</span>(background_data[,<span class="dv">1</span>] <span class="op">&gt;</span><span class="st"> </span>random_long_tirage <span class="op">&amp;</span><span class="st"> </span>background_data[,<span class="dv">1</span>] <span class="op">&lt;</span><span class="st"> </span>random_long_tirage_A1)
+  if (random_long_tirage &lt;=<span class="st"> </span><span class="dv">0</span> &amp;<span class="st"> </span>random_long_tirage_A1 &lt;=<span class="dv">0</span>){ <span class="co"># imply that A2 &gt;= 0 and A3&gt;=0</span>
+    training_presences.occ1 &lt;-<span class="st"> </span><span class="kw">which</span>(presence_tot[,<span class="dv">1</span>] &gt;<span class="st"> </span>random_long_tirage &amp;<span class="st"> </span>presence_tot[,<span class="dv">1</span>] &lt;<span class="st"> </span>random_long_tirage_A1)
+    training_backgr.occ1 &lt;-<span class="st"> </span><span class="kw">which</span>(background_data[,<span class="dv">1</span>] &gt;<span class="st"> </span>random_long_tirage &amp;<span class="st"> </span>background_data[,<span class="dv">1</span>] &lt;<span class="st"> </span>random_long_tirage_A1)
   } 
-  <span class="cf">if</span> (random_long_tirage <span class="op">&gt;=</span><span class="st"> </span><span class="dv">0</span> <span class="op">&amp;</span><span class="st"> </span>random_long_tirage_A1 <span class="op">&gt;=</span><span class="dv">0</span>){
-    training_presences.occ1 &lt;-<span class="st"> </span><span class="kw">which</span>(presence_tot[,<span class="dv">1</span>] <span class="op">&gt;</span><span class="st"> </span>random_long_tirage <span class="op">&amp;</span><span class="st"> </span>presence_tot[,<span class="dv">1</span>] <span class="op">&lt;</span><span class="st"> </span>random_long_tirage_A1)
-    training_backgr.occ1 &lt;-<span class="st"> </span><span class="kw">which</span>(background_data[,<span class="dv">1</span>] <span class="op">&gt;</span><span class="st"> </span>random_long_tirage <span class="op">&amp;</span><span class="st"> </span>background_data[,<span class="dv">1</span>] <span class="op">&lt;</span><span class="st"> </span>random_long_tirage_A1)
+  if (random_long_tirage &gt;=<span class="st"> </span><span class="dv">0</span> &amp;<span class="st"> </span>random_long_tirage_A1 &gt;=<span class="dv">0</span>){
+    training_presences.occ1 &lt;-<span class="st"> </span><span class="kw">which</span>(presence_tot[,<span class="dv">1</span>] &gt;<span class="st"> </span>random_long_tirage &amp;<span class="st"> </span>presence_tot[,<span class="dv">1</span>] &lt;<span class="st"> </span>random_long_tirage_A1)
+    training_backgr.occ1 &lt;-<span class="st"> </span><span class="kw">which</span>(background_data[,<span class="dv">1</span>] &gt;<span class="st"> </span>random_long_tirage &amp;<span class="st"> </span>background_data[,<span class="dv">1</span>] &lt;<span class="st"> </span>random_long_tirage_A1)
   }
   
-  <span class="cf">if</span> (random_long_tirage <span class="op">&gt;=</span><span class="st"> </span><span class="dv">0</span> <span class="op">&amp;</span><span class="st"> </span>random_long_tirage_A1 <span class="op">&lt;=</span><span class="dv">0</span>){
-    training_presences.occ1_part1 &lt;-<span class="st"> </span><span class="kw">which</span>(presence_tot[,<span class="dv">1</span>] <span class="op">&gt;</span><span class="st"> </span>random_long_tirage <span class="op">&amp;</span><span class="st"> </span>presence_tot[,<span class="dv">1</span>] <span class="op">&lt;</span><span class="st"> </span><span class="dv">180</span> )
-    training_presences.occ1_part2 &lt;-<span class="st"> </span><span class="kw">which</span>(presence_tot[,<span class="dv">1</span>] <span class="op">&gt;</span><span class="st"> </span><span class="op">-</span><span class="dv">180</span> <span class="op">&amp;</span><span class="st"> </span>presence_tot[,<span class="dv">1</span>] <span class="op">&lt;</span><span class="st"> </span>random_long_tirage_A1 )
-    training_backgr.occ1_part1 &lt;-<span class="st"> </span><span class="kw">which</span>(background_data[,<span class="dv">1</span>] <span class="op">&gt;</span><span class="st"> </span>random_long_tirage <span class="op">&amp;</span><span class="st"> </span>background_data[,<span class="dv">1</span>] <span class="op">&lt;</span><span class="st"> </span><span class="dv">180</span> )
-    training_backgr.occ1_part2 &lt;-<span class="st"> </span><span class="kw">which</span>(background_data[,<span class="dv">1</span>] <span class="op">&gt;</span><span class="st"> </span><span class="op">-</span><span class="dv">180</span> <span class="op">&amp;</span><span class="st"> </span>background_data[,<span class="dv">1</span>] <span class="op">&lt;</span><span class="st"> </span>random_long_tirage_A1 )
+  if (random_long_tirage &gt;=<span class="st"> </span><span class="dv">0</span> &amp;<span class="st"> </span>random_long_tirage_A1 &lt;=<span class="dv">0</span>){
+    training_presences.occ1_part1 &lt;-<span class="st"> </span><span class="kw">which</span>(presence_tot[,<span class="dv">1</span>] &gt;<span class="st"> </span>random_long_tirage &amp;<span class="st"> </span>presence_tot[,<span class="dv">1</span>] &lt;<span class="st"> </span><span class="dv">180</span> )
+    training_presences.occ1_part2 &lt;-<span class="st"> </span><span class="kw">which</span>(presence_tot[,<span class="dv">1</span>] &gt;<span class="st"> </span>-<span class="dv">180</span> &amp;<span class="st"> </span>presence_tot[,<span class="dv">1</span>] &lt;<span class="st"> </span>random_long_tirage_A1 )
+    training_backgr.occ1_part1 &lt;-<span class="st"> </span><span class="kw">which</span>(background_data[,<span class="dv">1</span>] &gt;<span class="st"> </span>random_long_tirage &amp;<span class="st"> </span>background_data[,<span class="dv">1</span>] &lt;<span class="st"> </span><span class="dv">180</span> )
+    training_backgr.occ1_part2 &lt;-<span class="st"> </span><span class="kw">which</span>(background_data[,<span class="dv">1</span>] &gt;<span class="st"> </span>-<span class="dv">180</span> &amp;<span class="st"> </span>background_data[,<span class="dv">1</span>] &lt;<span class="st"> </span>random_long_tirage_A1 )
   }
   
-  <span class="cf">if</span> (random_long_tirage <span class="op">&lt;=</span><span class="st"> </span><span class="dv">0</span> <span class="op">&amp;</span><span class="st"> </span>random_long_tirage_A1 <span class="op">&gt;=</span><span class="dv">0</span>){
-    training_presences.occ1_part1 &lt;-<span class="st"> </span><span class="kw">which</span>(presence_tot[,<span class="dv">1</span>] <span class="op">&gt;</span><span class="st"> </span>random_long_tirage <span class="op">&amp;</span><span class="st"> </span>presence_tot[,<span class="dv">1</span>] <span class="op">&lt;</span><span class="st"> </span><span class="dv">0</span> )
-    training_presences.occ1_part2 &lt;-<span class="st"> </span><span class="kw">which</span>(presence_tot[,<span class="dv">1</span>] <span class="op">&gt;</span><span class="st"> </span><span class="dv">0</span> <span class="op">&amp;</span><span class="st"> </span>presence_tot[,<span class="dv">1</span>] <span class="op">&lt;</span><span class="st"> </span>random_long_tirage_A1 )
-    training_backgr.occ1_part1 &lt;-<span class="st"> </span><span class="kw">which</span>(background_data[,<span class="dv">1</span>] <span class="op">&gt;</span><span class="st"> </span>random_long_tirage <span class="op">&amp;</span><span class="st"> </span>background_data[,<span class="dv">1</span>] <span class="op">&lt;</span><span class="st"> </span><span class="dv">0</span> )
-    training_backgr.occ1_part2 &lt;-<span class="st"> </span><span class="kw">which</span>(background_data[,<span class="dv">1</span>] <span class="op">&gt;</span><span class="st"> </span><span class="dv">0</span> <span class="op">&amp;</span><span class="st"> </span>background_data[,<span class="dv">1</span>] <span class="op">&lt;</span><span class="st"> </span>random_long_tirage_A1 )
+  if (random_long_tirage &lt;=<span class="st"> </span><span class="dv">0</span> &amp;<span class="st"> </span>random_long_tirage_A1 &gt;=<span class="dv">0</span>){
+    training_presences.occ1_part1 &lt;-<span class="st"> </span><span class="kw">which</span>(presence_tot[,<span class="dv">1</span>] &gt;<span class="st"> </span>random_long_tirage &amp;<span class="st"> </span>presence_tot[,<span class="dv">1</span>] &lt;<span class="st"> </span><span class="dv">0</span> )
+    training_presences.occ1_part2 &lt;-<span class="st"> </span><span class="kw">which</span>(presence_tot[,<span class="dv">1</span>] &gt;<span class="st"> </span><span class="dv">0</span> &amp;<span class="st"> </span>presence_tot[,<span class="dv">1</span>] &lt;<span class="st"> </span>random_long_tirage_A1 )
+    training_backgr.occ1_part1 &lt;-<span class="st"> </span><span class="kw">which</span>(background_data[,<span class="dv">1</span>] &gt;<span class="st"> </span>random_long_tirage &amp;<span class="st"> </span>background_data[,<span class="dv">1</span>] &lt;<span class="st"> </span><span class="dv">0</span> )
+    training_backgr.occ1_part2 &lt;-<span class="st"> </span><span class="kw">which</span>(background_data[,<span class="dv">1</span>] &gt;<span class="st"> </span><span class="dv">0</span> &amp;<span class="st"> </span>background_data[,<span class="dv">1</span>] &lt;<span class="st"> </span>random_long_tirage_A1 )
   }
   
   ### ZONE 2 ####
   
-  <span class="cf">if</span> (random_long_tirage_A1 <span class="op">&lt;=</span><span class="st"> </span><span class="dv">0</span> <span class="op">&amp;</span><span class="st"> </span>random_long_tirage_A2 <span class="op">&lt;=</span><span class="dv">0</span>){
-    training_presences.occ2 &lt;-<span class="st"> </span><span class="kw">which</span>(presence_tot[,<span class="dv">1</span>] <span class="op">&gt;</span><span class="st"> </span>random_long_tirage_A1 <span class="op">&amp;</span><span class="st"> </span>presence_tot[,<span class="dv">1</span>] <span class="op">&lt;</span><span class="st"> </span>random_long_tirage_A2 )
-    training_backgr.occ2 &lt;-<span class="st"> </span><span class="kw">which</span>(background_data[,<span class="dv">1</span>] <span class="op">&gt;</span><span class="st"> </span>random_long_tirage_A1 <span class="op">&amp;</span><span class="st"> </span>background_data[,<span class="dv">1</span>] <span class="op">&lt;</span><span class="st"> </span>random_long_tirage_A2)
+  if (random_long_tirage_A1 &lt;=<span class="st"> </span><span class="dv">0</span> &amp;<span class="st"> </span>random_long_tirage_A2 &lt;=<span class="dv">0</span>){
+    training_presences.occ2 &lt;-<span class="st"> </span><span class="kw">which</span>(presence_tot[,<span class="dv">1</span>] &gt;<span class="st"> </span>random_long_tirage_A1 &amp;<span class="st"> </span>presence_tot[,<span class="dv">1</span>] &lt;<span class="st"> </span>random_long_tirage_A2 )
+    training_backgr.occ2 &lt;-<span class="st"> </span><span class="kw">which</span>(background_data[,<span class="dv">1</span>] &gt;<span class="st"> </span>random_long_tirage_A1 &amp;<span class="st"> </span>background_data[,<span class="dv">1</span>] &lt;<span class="st"> </span>random_long_tirage_A2)
   } 
-  <span class="cf">if</span> (random_long_tirage_A1 <span class="op">&gt;=</span><span class="st"> </span><span class="dv">0</span> <span class="op">&amp;</span><span class="st"> </span>random_long_tirage_A2 <span class="op">&gt;=</span><span class="dv">0</span>){
-    training_presences.occ2 &lt;-<span class="st"> </span><span class="kw">which</span>(presence_tot[,<span class="dv">1</span>] <span class="op">&gt;</span><span class="st"> </span>random_long_tirage_A1 <span class="op">&amp;</span><span class="st"> </span>presence_tot[,<span class="dv">1</span>] <span class="op">&lt;</span><span class="st"> </span>random_long_tirage_A2 )
-    training_backgr.occ2 &lt;-<span class="st"> </span><span class="kw">which</span>(background_data[,<span class="dv">1</span>] <span class="op">&gt;</span><span class="st"> </span>random_long_tirage_A1 <span class="op">&amp;</span><span class="st"> </span>background_data[,<span class="dv">1</span>] <span class="op">&lt;</span><span class="st"> </span>random_long_tirage_A2)
+  if (random_long_tirage_A1 &gt;=<span class="st"> </span><span class="dv">0</span> &amp;<span class="st"> </span>random_long_tirage_A2 &gt;=<span class="dv">0</span>){
+    training_presences.occ2 &lt;-<span class="st"> </span><span class="kw">which</span>(presence_tot[,<span class="dv">1</span>] &gt;<span class="st"> </span>random_long_tirage_A1 &amp;<span class="st"> </span>presence_tot[,<span class="dv">1</span>] &lt;<span class="st"> </span>random_long_tirage_A2 )
+    training_backgr.occ2 &lt;-<span class="st"> </span><span class="kw">which</span>(background_data[,<span class="dv">1</span>] &gt;<span class="st"> </span>random_long_tirage_A1 &amp;<span class="st"> </span>background_data[,<span class="dv">1</span>] &lt;<span class="st"> </span>random_long_tirage_A2)
   }
   
-  <span class="cf">if</span> (random_long_tirage_A1 <span class="op">&gt;=</span><span class="st"> </span><span class="dv">0</span> <span class="op">&amp;</span><span class="st"> </span>random_long_tirage_A2 <span class="op">&lt;=</span><span class="dv">0</span>){
-    training_presences.occ2_part1 &lt;-<span class="st"> </span><span class="kw">which</span>(presence_tot[,<span class="dv">1</span>] <span class="op">&gt;</span><span class="st"> </span>random_long_tirage_A1 <span class="op">&amp;</span><span class="st"> </span>presence_tot[,<span class="dv">1</span>] <span class="op">&lt;</span><span class="st"> </span><span class="dv">180</span>)
-    training_presences.occ2_part2 &lt;-<span class="st"> </span><span class="kw">which</span>(presence_tot[,<span class="dv">1</span>] <span class="op">&gt;</span><span class="st"> </span><span class="op">-</span><span class="dv">180</span> <span class="op">&amp;</span><span class="st"> </span>presence_tot[,<span class="dv">1</span>] <span class="op">&lt;</span><span class="st"> </span>random_long_tirage_A2)
-    training_backgr.occ2_part1 &lt;-<span class="st"> </span><span class="kw">which</span>(background_data[,<span class="dv">1</span>] <span class="op">&gt;</span><span class="st"> </span>random_long_tirage_A1 <span class="op">&amp;</span><span class="st"> </span>background_data[,<span class="dv">1</span>] <span class="op">&lt;</span><span class="st"> </span><span class="dv">180</span>)
-    training_backgr.occ2_part2 &lt;-<span class="st"> </span><span class="kw">which</span>(background_data[,<span class="dv">1</span>] <span class="op">&gt;</span><span class="st"> </span><span class="op">-</span><span class="dv">180</span> <span class="op">&amp;</span><span class="st"> </span>background_data[,<span class="dv">1</span>] <span class="op">&lt;</span><span class="st"> </span>random_long_tirage_A2)
+  if (random_long_tirage_A1 &gt;=<span class="st"> </span><span class="dv">0</span> &amp;<span class="st"> </span>random_long_tirage_A2 &lt;=<span class="dv">0</span>){
+    training_presences.occ2_part1 &lt;-<span class="st"> </span><span class="kw">which</span>(presence_tot[,<span class="dv">1</span>] &gt;<span class="st"> </span>random_long_tirage_A1 &amp;<span class="st"> </span>presence_tot[,<span class="dv">1</span>] &lt;<span class="st"> </span><span class="dv">180</span>)
+    training_presences.occ2_part2 &lt;-<span class="st"> </span><span class="kw">which</span>(presence_tot[,<span class="dv">1</span>] &gt;<span class="st"> </span>-<span class="dv">180</span> &amp;<span class="st"> </span>presence_tot[,<span class="dv">1</span>] &lt;<span class="st"> </span>random_long_tirage_A2)
+    training_backgr.occ2_part1 &lt;-<span class="st"> </span><span class="kw">which</span>(background_data[,<span class="dv">1</span>] &gt;<span class="st"> </span>random_long_tirage_A1 &amp;<span class="st"> </span>background_data[,<span class="dv">1</span>] &lt;<span class="st"> </span><span class="dv">180</span>)
+    training_backgr.occ2_part2 &lt;-<span class="st"> </span><span class="kw">which</span>(background_data[,<span class="dv">1</span>] &gt;<span class="st"> </span>-<span class="dv">180</span> &amp;<span class="st"> </span>background_data[,<span class="dv">1</span>] &lt;<span class="st"> </span>random_long_tirage_A2)
   }
   
-  <span class="cf">if</span> (random_long_tirage_A1 <span class="op">&lt;=</span><span class="st"> </span><span class="dv">0</span> <span class="op">&amp;</span><span class="st"> </span>random_long_tirage_A2 <span class="op">&gt;=</span><span class="dv">0</span>){
-    training_presences.occ2_part1 &lt;-<span class="st"> </span><span class="kw">which</span>(presence_tot[,<span class="dv">1</span>] <span class="op">&gt;</span><span class="st"> </span>random_long_tirage_A1 <span class="op">&amp;</span><span class="st"> </span>presence_tot[,<span class="dv">1</span>] <span class="op">&lt;</span><span class="st"> </span><span class="dv">0</span> )
-    training_presences.occ2_part2 &lt;-<span class="st"> </span><span class="kw">which</span>(presence_tot[,<span class="dv">1</span>] <span class="op">&gt;</span><span class="st"> </span><span class="dv">0</span> <span class="op">&amp;</span><span class="st"> </span>presence_tot[,<span class="dv">1</span>] <span class="op">&lt;</span><span class="st"> </span>random_long_tirage_A2 )
-    training_backgr.occ2_part1 &lt;-<span class="st"> </span><span class="kw">which</span>(background_data[,<span class="dv">1</span>] <span class="op">&gt;</span><span class="st"> </span>random_long_tirage_A1 <span class="op">&amp;</span><span class="st"> </span>background_data[,<span class="dv">1</span>] <span class="op">&lt;</span><span class="st"> </span><span class="dv">0</span> )
-    training_backgr.occ2_part2 &lt;-<span class="st"> </span><span class="kw">which</span>(background_data[,<span class="dv">1</span>] <span class="op">&gt;</span><span class="st"> </span><span class="dv">0</span> <span class="op">&amp;</span><span class="st"> </span>background_data[,<span class="dv">1</span>] <span class="op">&lt;</span><span class="st"> </span>random_long_tirage_A2 )
+  if (random_long_tirage_A1 &lt;=<span class="st"> </span><span class="dv">0</span> &amp;<span class="st"> </span>random_long_tirage_A2 &gt;=<span class="dv">0</span>){
+    training_presences.occ2_part1 &lt;-<span class="st"> </span><span class="kw">which</span>(presence_tot[,<span class="dv">1</span>] &gt;<span class="st"> </span>random_long_tirage_A1 &amp;<span class="st"> </span>presence_tot[,<span class="dv">1</span>] &lt;<span class="st"> </span><span class="dv">0</span> )
+    training_presences.occ2_part2 &lt;-<span class="st"> </span><span class="kw">which</span>(presence_tot[,<span class="dv">1</span>] &gt;<span class="st"> </span><span class="dv">0</span> &amp;<span class="st"> </span>presence_tot[,<span class="dv">1</span>] &lt;<span class="st"> </span>random_long_tirage_A2 )
+    training_backgr.occ2_part1 &lt;-<span class="st"> </span><span class="kw">which</span>(background_data[,<span class="dv">1</span>] &gt;<span class="st"> </span>random_long_tirage_A1 &amp;<span class="st"> </span>background_data[,<span class="dv">1</span>] &lt;<span class="st"> </span><span class="dv">0</span> )
+    training_backgr.occ2_part2 &lt;-<span class="st"> </span><span class="kw">which</span>(background_data[,<span class="dv">1</span>] &gt;<span class="st"> </span><span class="dv">0</span> &amp;<span class="st"> </span>background_data[,<span class="dv">1</span>] &lt;<span class="st"> </span>random_long_tirage_A2 )
   }
   
   ### ZONE 3 ####
-  <span class="cf">if</span> (random_long_tirage_A2 <span class="op">&lt;=</span><span class="st"> </span><span class="dv">0</span> <span class="op">&amp;</span><span class="st"> </span>random_long_tirage_A3 <span class="op">&lt;=</span><span class="dv">0</span>){
-    training_presences.occ3 &lt;-<span class="st"> </span><span class="kw">which</span>(presence_tot[,<span class="dv">1</span>] <span class="op">&gt;</span><span class="st"> </span>random_long_tirage_A2 <span class="op">&amp;</span><span class="st"> </span>presence_tot[,<span class="dv">1</span>] <span class="op">&lt;</span><span class="st"> </span>random_long_tirage_A3 )
-    training_backgr.occ3 &lt;-<span class="st"> </span><span class="kw">which</span>(background_data[,<span class="dv">1</span>] <span class="op">&gt;</span><span class="st"> </span>random_long_tirage_A2 <span class="op">&amp;</span><span class="st"> </span>background_data[,<span class="dv">1</span>] <span class="op">&lt;</span><span class="st"> </span>random_long_tirage_A3)
+  if (random_long_tirage_A2 &lt;=<span class="st"> </span><span class="dv">0</span> &amp;<span class="st"> </span>random_long_tirage_A3 &lt;=<span class="dv">0</span>){
+    training_presences.occ3 &lt;-<span class="st"> </span><span class="kw">which</span>(presence_tot[,<span class="dv">1</span>] &gt;<span class="st"> </span>random_long_tirage_A2 &amp;<span class="st"> </span>presence_tot[,<span class="dv">1</span>] &lt;<span class="st"> </span>random_long_tirage_A3 )
+    training_backgr.occ3 &lt;-<span class="st"> </span><span class="kw">which</span>(background_data[,<span class="dv">1</span>] &gt;<span class="st"> </span>random_long_tirage_A2 &amp;<span class="st"> </span>background_data[,<span class="dv">1</span>] &lt;<span class="st"> </span>random_long_tirage_A3)
   } 
-  <span class="cf">if</span> (random_long_tirage_A2 <span class="op">&gt;=</span><span class="st"> </span><span class="dv">0</span> <span class="op">&amp;</span><span class="st"> </span>random_long_tirage_A3 <span class="op">&gt;=</span><span class="dv">0</span>){
-    training_presences.occ3 &lt;-<span class="st"> </span><span class="kw">which</span>(presence_tot[,<span class="dv">1</span>] <span class="op">&gt;</span><span class="st"> </span>random_long_tirage_A2 <span class="op">&amp;</span><span class="st"> </span>presence_tot[,<span class="dv">1</span>] <span class="op">&lt;</span><span class="st"> </span>random_long_tirage_A3 )
-    training_backgr.occ3 &lt;-<span class="st"> </span><span class="kw">which</span>(background_data[,<span class="dv">1</span>] <span class="op">&gt;</span><span class="st"> </span>random_long_tirage_A2 <span class="op">&amp;</span><span class="st"> </span>background_data[,<span class="dv">1</span>] <span class="op">&lt;</span><span class="st"> </span>random_long_tirage_A3)
+  if (random_long_tirage_A2 &gt;=<span class="st"> </span><span class="dv">0</span> &amp;<span class="st"> </span>random_long_tirage_A3 &gt;=<span class="dv">0</span>){
+    training_presences.occ3 &lt;-<span class="st"> </span><span class="kw">which</span>(presence_tot[,<span class="dv">1</span>] &gt;<span class="st"> </span>random_long_tirage_A2 &amp;<span class="st"> </span>presence_tot[,<span class="dv">1</span>] &lt;<span class="st"> </span>random_long_tirage_A3 )
+    training_backgr.occ3 &lt;-<span class="st"> </span><span class="kw">which</span>(background_data[,<span class="dv">1</span>] &gt;<span class="st"> </span>random_long_tirage_A2 &amp;<span class="st"> </span>background_data[,<span class="dv">1</span>] &lt;<span class="st"> </span>random_long_tirage_A3)
   }
   
-  <span class="cf">if</span> (random_long_tirage_A2 <span class="op">&gt;=</span><span class="st"> </span><span class="dv">0</span> <span class="op">&amp;</span><span class="st"> </span>random_long_tirage_A3 <span class="op">&lt;=</span><span class="dv">0</span>){
-    training_presences.occ3_part1 &lt;-<span class="st"> </span><span class="kw">which</span>(presence_tot[,<span class="dv">1</span>] <span class="op">&gt;</span><span class="st"> </span>random_long_tirage_A2 <span class="op">&amp;</span><span class="st"> </span>presence_tot[,<span class="dv">1</span>] <span class="op">&lt;</span><span class="st"> </span><span class="dv">180</span> )
-    training_presences.occ3_part2 &lt;-<span class="st"> </span><span class="kw">which</span>(presence_tot[,<span class="dv">1</span>] <span class="op">&gt;</span><span class="st"> </span><span class="op">-</span><span class="dv">180</span> <span class="op">&amp;</span><span class="st"> </span>presence_tot[,<span class="dv">1</span>] <span class="op">&lt;</span><span class="st"> </span>random_long_tirage_A3 )
-    training_backgr.occ3_part1 &lt;-<span class="st"> </span><span class="kw">which</span>(background_data[,<span class="dv">1</span>] <span class="op">&gt;</span><span class="st"> </span>random_long_tirage_A2 <span class="op">&amp;</span><span class="st"> </span>background_data[,<span class="dv">1</span>] <span class="op">&lt;</span><span class="st"> </span><span class="dv">180</span> )
-    training_backgr.occ3_part2 &lt;-<span class="st"> </span><span class="kw">which</span>(background_data[,<span class="dv">1</span>] <span class="op">&gt;</span><span class="st"> </span><span class="op">-</span><span class="dv">180</span> <span class="op">&amp;</span><span class="st"> </span>background_data[,<span class="dv">1</span>] <span class="op">&lt;</span><span class="st"> </span>random_long_tirage_A3 )
+  if (random_long_tirage_A2 &gt;=<span class="st"> </span><span class="dv">0</span> &amp;<span class="st"> </span>random_long_tirage_A3 &lt;=<span class="dv">0</span>){
+    training_presences.occ3_part1 &lt;-<span class="st"> </span><span class="kw">which</span>(presence_tot[,<span class="dv">1</span>] &gt;<span class="st"> </span>random_long_tirage_A2 &amp;<span class="st"> </span>presence_tot[,<span class="dv">1</span>] &lt;<span class="st"> </span><span class="dv">180</span> )
+    training_presences.occ3_part2 &lt;-<span class="st"> </span><span class="kw">which</span>(presence_tot[,<span class="dv">1</span>] &gt;<span class="st"> </span>-<span class="dv">180</span> &amp;<span class="st"> </span>presence_tot[,<span class="dv">1</span>] &lt;<span class="st"> </span>random_long_tirage_A3 )
+    training_backgr.occ3_part1 &lt;-<span class="st"> </span><span class="kw">which</span>(background_data[,<span class="dv">1</span>] &gt;<span class="st"> </span>random_long_tirage_A2 &amp;<span class="st"> </span>background_data[,<span class="dv">1</span>] &lt;<span class="st"> </span><span class="dv">180</span> )
+    training_backgr.occ3_part2 &lt;-<span class="st"> </span><span class="kw">which</span>(background_data[,<span class="dv">1</span>] &gt;<span class="st"> </span>-<span class="dv">180</span> &amp;<span class="st"> </span>background_data[,<span class="dv">1</span>] &lt;<span class="st"> </span>random_long_tirage_A3 )
   }
   
-  <span class="cf">if</span> (random_long_tirage_A2 <span class="op">&lt;=</span><span class="st"> </span><span class="dv">0</span> <span class="op">&amp;</span><span class="st"> </span>random_long_tirage_A3 <span class="op">&gt;=</span><span class="dv">0</span>){
-    training_presences.occ3_part1 &lt;-<span class="st"> </span><span class="kw">which</span>(presence_tot[,<span class="dv">1</span>] <span class="op">&gt;</span><span class="st"> </span>random_long_tirage_A2 <span class="op">&amp;</span><span class="st"> </span>presence_tot[,<span class="dv">1</span>] <span class="op">&lt;</span><span class="st"> </span><span class="dv">0</span> )
-    training_presences.occ3_part2 &lt;-<span class="st"> </span><span class="kw">which</span>(presence_tot[,<span class="dv">1</span>] <span class="op">&gt;</span><span class="st"> </span><span class="dv">0</span> <span class="op">&amp;</span><span class="st"> </span>presence_tot[,<span class="dv">1</span>] <span class="op">&lt;</span><span class="st"> </span>random_long_tirage_A3 )
-    training_backgr.occ3_part1 &lt;-<span class="st"> </span><span class="kw">which</span>(background_data[,<span class="dv">1</span>] <span class="op">&gt;</span><span class="st"> </span>random_long_tirage_A2 <span class="op">&amp;</span><span class="st"> </span>background_data[,<span class="dv">1</span>] <span class="op">&lt;</span><span class="st"> </span><span class="dv">0</span> )
-    training_backgr.occ3_part2 &lt;-<span class="st"> </span><span class="kw">which</span>(background_data[,<span class="dv">1</span>] <span class="op">&gt;</span><span class="st"> </span><span class="dv">0</span> <span class="op">&amp;</span><span class="st"> </span>background_data[,<span class="dv">1</span>] <span class="op">&lt;</span><span class="st"> </span>random_long_tirage_A3 )
+  if (random_long_tirage_A2 &lt;=<span class="st"> </span><span class="dv">0</span> &amp;<span class="st"> </span>random_long_tirage_A3 &gt;=<span class="dv">0</span>){
+    training_presences.occ3_part1 &lt;-<span class="st"> </span><span class="kw">which</span>(presence_tot[,<span class="dv">1</span>] &gt;<span class="st"> </span>random_long_tirage_A2 &amp;<span class="st"> </span>presence_tot[,<span class="dv">1</span>] &lt;<span class="st"> </span><span class="dv">0</span> )
+    training_presences.occ3_part2 &lt;-<span class="st"> </span><span class="kw">which</span>(presence_tot[,<span class="dv">1</span>] &gt;<span class="st"> </span><span class="dv">0</span> &amp;<span class="st"> </span>presence_tot[,<span class="dv">1</span>] &lt;<span class="st"> </span>random_long_tirage_A3 )
+    training_backgr.occ3_part1 &lt;-<span class="st"> </span><span class="kw">which</span>(background_data[,<span class="dv">1</span>] &gt;<span class="st"> </span>random_long_tirage_A2 &amp;<span class="st"> </span>background_data[,<span class="dv">1</span>] &lt;<span class="st"> </span><span class="dv">0</span> )
+    training_backgr.occ3_part2 &lt;-<span class="st"> </span><span class="kw">which</span>(background_data[,<span class="dv">1</span>] &gt;<span class="st"> </span><span class="dv">0</span> &amp;<span class="st"> </span>background_data[,<span class="dv">1</span>] &lt;<span class="st"> </span>random_long_tirage_A3 )
   }
   
   ### set the groups 
@@ -506,13 +506,13 @@ graphe.deviance8 &lt;-<span class="st"> </span><span class="kw">rep</span>(<span
   training_presence_grp3_all &lt;-<span class="st"> </span><span class="kw">as.vector</span>(<span class="kw">na.omit</span>(<span class="kw">c</span>(training_presences.occ3,training_presences.occ3_part1,training_presences.occ3_part2)))
 
 
-  <span class="cf">for</span> (i <span class="cf">in</span> training_presence_grp1_all){
+  for (i in training_presence_grp1_all){
     occ.grp[i] &lt;-<span class="st"> </span><span class="dv">1</span>
   }
-  <span class="cf">for</span> (i <span class="cf">in</span> training_presence_grp2_all){
+  for (i in training_presence_grp2_all){
     occ.grp[i] &lt;-<span class="st"> </span><span class="dv">2</span>
   }
-  <span class="cf">for</span> (i <span class="cf">in</span> training_presence_grp3_all){
+  for (i in training_presence_grp3_all){
     occ.grp[i] &lt;-<span class="st"> </span><span class="dv">3</span>
   }
   occ.grp[<span class="kw">which</span>(<span class="kw">is.na</span>(occ.grp))]=<span class="dv">4</span>
@@ -522,13 +522,13 @@ graphe.deviance8 &lt;-<span class="st"> </span><span class="kw">rep</span>(<span
   training_backgr_grp2_all &lt;-<span class="st"> </span><span class="kw">as.vector</span>(<span class="kw">na.omit</span>(<span class="kw">c</span>(training_backgr.occ2,training_backgr.occ2_part1,training_backgr.occ2_part2)))
   training_backgr_grp3_all &lt;-<span class="st"> </span><span class="kw">as.vector</span>(<span class="kw">na.omit</span>(<span class="kw">c</span>(training_backgr.occ3,training_backgr.occ3_part1,training_backgr.occ3_part2)))
 
-  <span class="cf">for</span> (i <span class="cf">in</span> training_backgr_grp1_all){
+  for (i in training_backgr_grp1_all){
     bg.coords.grp[i] &lt;-<span class="st"> </span><span class="dv">1</span>
   }
-  <span class="cf">for</span> (i <span class="cf">in</span> training_backgr_grp2_all){
+  for (i in training_backgr_grp2_all){
     bg.coords.grp[i] &lt;-<span class="st"> </span><span class="dv">2</span>
   }
-  <span class="cf">for</span> (i <span class="cf">in</span> training_backgr_grp3_all){
+  for (i in training_backgr_grp3_all){
     bg.coords.grp[i] &lt;-<span class="st"> </span><span class="dv">3</span>
   }
   bg.coords.grp[<span class="kw">which</span>(<span class="kw">is.na</span>(bg.coords.grp))]=<span class="dv">4</span>
@@ -540,7 +540,7 @@ graphe.deviance8 &lt;-<span class="st"> </span><span class="kw">rep</span>(<span
 <p><a href="./course_material/exercises/scripts/Function_gbm.R">Function_gbm.R</a></p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">### gbm.stepv2
 
-.roc &lt;-<span class="cf">function</span> (obsdat, preddat) {
+.roc &lt;-function (obsdat, preddat) {
   <span class="co"># code adapted from Ferrier, Pearce and Watson&#39;s code, by J.Elith</span>
   <span class="co">#</span>
   <span class="co"># see:</span>
@@ -558,19 +558,19 @@ graphe.deviance8 &lt;-<span class="st"> </span><span class="kw">rep</span>(<span
   
   <span class="co"># in dismo, this is used in the gbm routines, but not elsewhere (see evaluate).</span>
   
-  <span class="cf">if</span> (<span class="kw">length</span>(obsdat) <span class="op">!=</span><span class="st"> </span><span class="kw">length</span>(preddat)) { 
+  if (<span class="kw">length</span>(obsdat) !=<span class="st"> </span><span class="kw">length</span>(preddat)) { 
     <span class="kw">stop</span>(<span class="st">&quot;obs and preds must be equal lengths&quot;</span>)
   }
-  n.x &lt;-<span class="st"> </span><span class="kw">length</span>(obsdat[obsdat <span class="op">==</span><span class="st"> </span><span class="dv">0</span>])
-  n.y &lt;-<span class="st"> </span><span class="kw">length</span>(obsdat[obsdat <span class="op">==</span><span class="st"> </span><span class="dv">1</span>])
-  xy &lt;-<span class="st"> </span><span class="kw">c</span>(preddat[obsdat <span class="op">==</span><span class="st"> </span><span class="dv">0</span>], preddat[obsdat <span class="op">==</span><span class="st"> </span><span class="dv">1</span>])
+  n.x &lt;-<span class="st"> </span><span class="kw">length</span>(obsdat[obsdat ==<span class="st"> </span><span class="dv">0</span>])
+  n.y &lt;-<span class="st"> </span><span class="kw">length</span>(obsdat[obsdat ==<span class="st"> </span><span class="dv">1</span>])
+  xy &lt;-<span class="st"> </span><span class="kw">c</span>(preddat[obsdat ==<span class="st"> </span><span class="dv">0</span>], preddat[obsdat ==<span class="st"> </span><span class="dv">1</span>])
   rnk &lt;-<span class="st"> </span><span class="kw">rank</span>(xy)
-  wilc &lt;-<span class="st"> </span>((n.x <span class="op">*</span><span class="st"> </span>n.y) <span class="op">+</span><span class="st"> </span>((n.x <span class="op">*</span><span class="st"> </span>(n.x <span class="op">+</span><span class="st"> </span><span class="dv">1</span>))<span class="op">/</span><span class="dv">2</span>) <span class="op">-</span><span class="st"> </span><span class="kw">sum</span>(rnk[<span class="dv">1</span><span class="op">:</span>n.x]))<span class="op">/</span>(n.x <span class="op">*</span><span class="st"> </span>n.y)
+  wilc &lt;-<span class="st"> </span>((n.x *<span class="st"> </span>n.y) +<span class="st"> </span>((n.x *<span class="st"> </span>(n.x +<span class="st"> </span><span class="dv">1</span>))/<span class="dv">2</span>) -<span class="st"> </span><span class="kw">sum</span>(rnk[<span class="dv">1</span>:n.x]))/(n.x *<span class="st"> </span>n.y)
   <span class="kw">return</span>(<span class="kw">round</span>(wilc, <span class="dv">4</span>))
 }
 
 
-.calibration &lt;-<span class="st"> </span><span class="cf">function</span>(obs, preds, <span class="dt">family =</span> <span class="st">&quot;binomial&quot;</span>)  {
+.calibration &lt;-<span class="st"> </span>function(obs, preds, <span class="dt">family =</span> <span class="st">&quot;binomial&quot;</span>)  {
   <span class="co">#</span>
   <span class="co"># j elith/j leathwick 17th March 2005</span>
   <span class="co"># calculates calibration statistics for either binomial or count data</span>
@@ -579,45 +579,45 @@ graphe.deviance8 &lt;-<span class="st"> </span><span class="kw">rep</span>(<span
   <span class="co"># the family</span>
   <span class="co">#</span>
   
-  <span class="cf">if</span> (family <span class="op">==</span><span class="st"> &quot;bernoulli&quot;</span>) {
+  if (family ==<span class="st"> &quot;bernoulli&quot;</span>) {
     family &lt;-<span class="st"> &quot;binomial&quot;</span>
   }
   
-  pred.range &lt;-<span class="st"> </span><span class="kw">max</span>(preds) <span class="op">-</span><span class="st"> </span><span class="kw">min</span>(preds)
+  pred.range &lt;-<span class="st"> </span><span class="kw">max</span>(preds) -<span class="st"> </span><span class="kw">min</span>(preds)
   
-  <span class="cf">if</span>(pred.range <span class="op">&gt;</span><span class="st"> </span><span class="fl">1.2</span> <span class="op">&amp;</span><span class="st"> </span>family <span class="op">==</span><span class="st"> &quot;binomial&quot;</span>) {
+  if(pred.range &gt;<span class="st"> </span><span class="fl">1.2</span> &amp;<span class="st"> </span>family ==<span class="st"> &quot;binomial&quot;</span>) {
     <span class="kw">print</span>(<span class="kw">paste</span>(<span class="st">&quot;range of response variable is &quot;</span>, <span class="kw">round</span>(pred.range, <span class="dv">2</span>)), <span class="dt">sep =</span> <span class="st">&quot;&quot;</span>, <span class="dt">quote =</span> F)
     <span class="kw">print</span>(<span class="st">&quot;check family specification&quot;</span>, <span class="dt">quote =</span> F)
     <span class="kw">return</span>()
   }
   
-  <span class="cf">if</span>(family <span class="op">==</span><span class="st"> &quot;binomial&quot;</span>) {
-    pred &lt;-<span class="st"> </span>preds <span class="op">+</span><span class="st"> </span><span class="fl">1e-005</span>
-    pred[pred <span class="op">&gt;=</span><span class="st"> </span><span class="dv">1</span>] &lt;-<span class="st"> </span><span class="fl">0.99999</span>
-    mod &lt;-<span class="st"> </span><span class="kw">glm</span>(obs <span class="op">~</span><span class="st"> </span><span class="kw">log</span>((pred)<span class="op">/</span>(<span class="dv">1</span> <span class="op">-</span><span class="st"> </span>(pred))), <span class="dt">family =</span> binomial)
-    lp &lt;-<span class="st"> </span><span class="kw">log</span>((pred)<span class="op">/</span>(<span class="dv">1</span> <span class="op">-</span><span class="st"> </span>(pred)))
-    a0b1 &lt;-<span class="st"> </span><span class="kw">glm</span>(obs <span class="op">~</span><span class="st"> </span><span class="kw">offset</span>(lp) <span class="op">-</span><span class="st"> </span><span class="dv">1</span>, <span class="dt">family =</span> binomial)
-    miller1 &lt;-<span class="st"> </span><span class="dv">1</span> <span class="op">-</span><span class="st"> </span><span class="kw">pchisq</span>(a0b1<span class="op">$</span>deviance <span class="op">-</span><span class="st"> </span>mod<span class="op">$</span>deviance, <span class="dv">2</span>)
-    ab1 &lt;-<span class="st"> </span><span class="kw">glm</span>(obs <span class="op">~</span><span class="st"> </span><span class="kw">offset</span>(lp), <span class="dt">family =</span> binomial)
-    miller2 &lt;-<span class="st"> </span><span class="dv">1</span> <span class="op">-</span><span class="st"> </span><span class="kw">pchisq</span>(a0b1<span class="op">$</span>deviance <span class="op">-</span><span class="st"> </span>ab1<span class="op">$</span>deviance, <span class="dv">1</span>)
-    miller3 &lt;-<span class="st"> </span><span class="dv">1</span> <span class="op">-</span><span class="st"> </span><span class="kw">pchisq</span>(ab1<span class="op">$</span>deviance <span class="op">-</span><span class="st"> </span>mod<span class="op">$</span>deviance, <span class="dv">1</span>)
-  } <span class="cf">else</span> <span class="cf">if</span>(family <span class="op">==</span><span class="st"> &quot;poisson&quot;</span>) {
-    mod &lt;-<span class="st"> </span><span class="kw">glm</span>(obs <span class="op">~</span><span class="st"> </span><span class="kw">log</span>(preds), <span class="dt">family =</span> poisson)
+  if(family ==<span class="st"> &quot;binomial&quot;</span>) {
+    pred &lt;-<span class="st"> </span>preds +<span class="st"> </span><span class="fl">1e-005</span>
+    pred[pred &gt;=<span class="st"> </span><span class="dv">1</span>] &lt;-<span class="st"> </span><span class="fl">0.99999</span>
+    mod &lt;-<span class="st"> </span><span class="kw">glm</span>(obs ~<span class="st"> </span><span class="kw">log</span>((pred)/(<span class="dv">1</span> -<span class="st"> </span>(pred))), <span class="dt">family =</span> binomial)
+    lp &lt;-<span class="st"> </span><span class="kw">log</span>((pred)/(<span class="dv">1</span> -<span class="st"> </span>(pred)))
+    a0b1 &lt;-<span class="st"> </span><span class="kw">glm</span>(obs ~<span class="st"> </span><span class="kw">offset</span>(lp) -<span class="st"> </span><span class="dv">1</span>, <span class="dt">family =</span> binomial)
+    miller1 &lt;-<span class="st"> </span><span class="dv">1</span> -<span class="st"> </span><span class="kw">pchisq</span>(a0b1$deviance -<span class="st"> </span>mod$deviance, <span class="dv">2</span>)
+    ab1 &lt;-<span class="st"> </span><span class="kw">glm</span>(obs ~<span class="st"> </span><span class="kw">offset</span>(lp), <span class="dt">family =</span> binomial)
+    miller2 &lt;-<span class="st"> </span><span class="dv">1</span> -<span class="st"> </span><span class="kw">pchisq</span>(a0b1$deviance -<span class="st"> </span>ab1$deviance, <span class="dv">1</span>)
+    miller3 &lt;-<span class="st"> </span><span class="dv">1</span> -<span class="st"> </span><span class="kw">pchisq</span>(ab1$deviance -<span class="st"> </span>mod$deviance, <span class="dv">1</span>)
+  } else if(family ==<span class="st"> &quot;poisson&quot;</span>) {
+    mod &lt;-<span class="st"> </span><span class="kw">glm</span>(obs ~<span class="st"> </span><span class="kw">log</span>(preds), <span class="dt">family =</span> poisson)
     lp &lt;-<span class="st"> </span><span class="kw">log</span>(preds)
-    a0b1 &lt;-<span class="st"> </span><span class="kw">glm</span>(obs <span class="op">~</span><span class="st"> </span><span class="kw">offset</span>(lp) <span class="op">-</span><span class="st"> </span><span class="dv">1</span>, <span class="dt">family =</span> poisson)
-    miller1 &lt;-<span class="st"> </span><span class="dv">1</span> <span class="op">-</span><span class="st"> </span><span class="kw">pchisq</span>(a0b1<span class="op">$</span>deviance <span class="op">-</span><span class="st"> </span>mod<span class="op">$</span>deviance, <span class="dv">2</span>)
-    ab1 &lt;-<span class="st"> </span><span class="kw">glm</span>(obs <span class="op">~</span><span class="st"> </span><span class="kw">offset</span>(lp), <span class="dt">family =</span> poisson)
-    miller2 &lt;-<span class="st"> </span><span class="dv">1</span> <span class="op">-</span><span class="st"> </span><span class="kw">pchisq</span>(a0b1<span class="op">$</span>deviance <span class="op">-</span><span class="st"> </span>ab1<span class="op">$</span>deviance, <span class="dv">1</span>)
-    miller3 &lt;-<span class="st"> </span><span class="dv">1</span> <span class="op">-</span><span class="st"> </span><span class="kw">pchisq</span>(ab1<span class="op">$</span>deviance <span class="op">-</span><span class="st"> </span>mod<span class="op">$</span>deviance, <span class="dv">1</span>)
+    a0b1 &lt;-<span class="st"> </span><span class="kw">glm</span>(obs ~<span class="st"> </span><span class="kw">offset</span>(lp) -<span class="st"> </span><span class="dv">1</span>, <span class="dt">family =</span> poisson)
+    miller1 &lt;-<span class="st"> </span><span class="dv">1</span> -<span class="st"> </span><span class="kw">pchisq</span>(a0b1$deviance -<span class="st"> </span>mod$deviance, <span class="dv">2</span>)
+    ab1 &lt;-<span class="st"> </span><span class="kw">glm</span>(obs ~<span class="st"> </span><span class="kw">offset</span>(lp), <span class="dt">family =</span> poisson)
+    miller2 &lt;-<span class="st"> </span><span class="dv">1</span> -<span class="st"> </span><span class="kw">pchisq</span>(a0b1$deviance -<span class="st"> </span>ab1$deviance, <span class="dv">1</span>)
+    miller3 &lt;-<span class="st"> </span><span class="dv">1</span> -<span class="st"> </span><span class="kw">pchisq</span>(ab1$deviance -<span class="st"> </span>mod$deviance, <span class="dv">1</span>)
   }
   
-  calibration.result &lt;-<span class="st"> </span><span class="kw">c</span>(mod<span class="op">$</span>coef, miller1, miller2, miller3)
+  calibration.result &lt;-<span class="st"> </span><span class="kw">c</span>(mod$coef, miller1, miller2, miller3)
   <span class="kw">names</span>(calibration.result) &lt;-<span class="st"> </span><span class="kw">c</span>(<span class="st">&quot;intercept&quot;</span>, <span class="st">&quot;slope&quot;</span>, <span class="st">&quot;testa0b1&quot;</span>, <span class="st">&quot;testa0|b1&quot;</span>, <span class="st">&quot;testb1|a&quot;</span>)
   <span class="kw">return</span>(calibration.result)
 }
 
 ## VI.
-gbm.step_v2 &lt;-<span class="st"> </span><span class="cf">function</span> (data, gbm.x, gbm.y, <span class="dt">offset =</span> <span class="ot">NULL</span>, <span class="dt">fold.vector =</span> <span class="ot">NULL</span>, 
+gbm.step_v2 &lt;-<span class="st"> </span>function (data, gbm.x, gbm.y, <span class="dt">offset =</span> <span class="ot">NULL</span>, <span class="dt">fold.vector =</span> <span class="ot">NULL</span>, 
                         <span class="dt">tree.complexity =</span> <span class="dv">1</span>, <span class="dt">learning.rate =</span> <span class="fl">0.01</span>, <span class="dt">bag.fraction =</span> <span class="fl">0.75</span>, 
                         <span class="dt">site.weights =</span> <span class="kw">rep</span>(<span class="dv">1</span>, <span class="kw">nrow</span>(data)), <span class="dt">var.monotone =</span> <span class="kw">rep</span>(<span class="dv">0</span>, 
                                                                               <span class="kw">length</span>(gbm.x)), 
@@ -627,32 +627,32 @@ gbm.step_v2 &lt;-<span class="st"> </span><span class="cf">function</span> (data
                         <span class="dt">verbose =</span> <span class="ot">TRUE</span>, <span class="dt">silent =</span> <span class="ot">FALSE</span>, <span class="dt">keep.fold.models =</span> <span class="ot">FALSE</span>, 
                         <span class="dt">keep.fold.vector =</span> <span class="ot">FALSE</span>, <span class="dt">keep.fold.fit =</span> <span class="ot">FALSE</span>, ...) 
 {
-  <span class="cf">if</span> (<span class="op">!</span><span class="kw">requireNamespace</span>(<span class="st">&quot;gbm&quot;</span>)) {
+  if (!<span class="kw">requireNamespace</span>(<span class="st">&quot;gbm&quot;</span>)) {
     <span class="kw">stop</span>(<span class="st">&quot;you need to install the gbm package to run this function&quot;</span>)
   }
   <span class="kw">requireNamespace</span>(<span class="st">&quot;splines&quot;</span>)
-  <span class="cf">if</span> (silent) 
+  if (silent) 
     verbose &lt;-<span class="st"> </span><span class="ot">FALSE</span>
   z1 &lt;-<span class="st"> </span><span class="kw">Sys.time</span>()
   x.data &lt;-<span class="st"> </span>data[, gbm.x, drop =<span class="st"> </span><span class="ot">FALSE</span>]
   y.data &lt;-<span class="st"> </span>data[, gbm.y]
   sp.name &lt;-<span class="st"> </span><span class="kw">names</span>(data)[gbm.y]
-  <span class="cf">if</span> (family <span class="op">==</span><span class="st"> &quot;bernoulli&quot;</span>) {
+  if (family ==<span class="st"> &quot;bernoulli&quot;</span>) {
     prevalence &lt;-<span class="st"> </span><span class="kw">mean</span>(y.data)
   }
   n.cases &lt;-<span class="st"> </span><span class="kw">nrow</span>(data)
   n.preds &lt;-<span class="st"> </span><span class="kw">length</span>(gbm.x)
-  <span class="cf">if</span> (<span class="op">!</span>silent) {
+  if (!silent) {
     <span class="kw">cat</span>(<span class="st">&quot;</span><span class="ch">\n</span><span class="st">&quot;</span>, <span class="st">&quot;</span><span class="ch">\n</span><span class="st">&quot;</span>, <span class="st">&quot;GBM STEP - version 2.9&quot;</span>, <span class="st">&quot;</span><span class="ch">\n</span><span class="st">&quot;</span>, <span class="st">&quot;</span><span class="ch">\n</span><span class="st">&quot;</span>)
     <span class="kw">cat</span>(<span class="st">&quot;Performing cross-validation optimisation of a boosted regression tree model </span><span class="ch">\n</span><span class="st">&quot;</span>)
     <span class="kw">cat</span>(<span class="st">&quot;for&quot;</span>, sp.name, <span class="st">&quot;and using a family of&quot;</span>, family, 
         <span class="st">&quot;</span><span class="ch">\n</span><span class="st">&quot;</span>)
     <span class="kw">cat</span>(<span class="st">&quot;Using&quot;</span>, n.cases, <span class="st">&quot;observations and&quot;</span>, n.preds, <span class="st">&quot;predictors </span><span class="ch">\n</span><span class="st">&quot;</span>)
   }
-  <span class="cf">if</span> (<span class="kw">is.null</span>(fold.vector)) {
-    <span class="cf">if</span> (prev.stratify <span class="op">&amp;</span><span class="st"> </span>family <span class="op">==</span><span class="st"> &quot;bernoulli&quot;</span>) {
-      presence.mask &lt;-<span class="st"> </span>data[, gbm.y] <span class="op">==</span><span class="st"> </span><span class="dv">1</span>
-      absence.mask &lt;-<span class="st"> </span>data[, gbm.y] <span class="op">==</span><span class="st"> </span><span class="dv">0</span>
+  if (<span class="kw">is.null</span>(fold.vector)) {
+    if (prev.stratify &amp;<span class="st"> </span>family ==<span class="st"> &quot;bernoulli&quot;</span>) {
+      presence.mask &lt;-<span class="st"> </span>data[, gbm.y] ==<span class="st"> </span><span class="dv">1</span>
+      absence.mask &lt;-<span class="st"> </span>data[, gbm.y] ==<span class="st"> </span><span class="dv">0</span>
       n.pres &lt;-<span class="st"> </span><span class="kw">sum</span>(presence.mask)
       n.abs &lt;-<span class="st"> </span><span class="kw">sum</span>(absence.mask)
       selector &lt;-<span class="st"> </span><span class="kw">rep</span>(<span class="dv">0</span>, n.cases)
@@ -663,12 +663,12 @@ gbm.step_v2 &lt;-<span class="st"> </span><span class="cf">function</span> (data
       temp &lt;-<span class="st"> </span>temp[<span class="kw">order</span>(<span class="kw">runif</span>(n.abs, <span class="dv">1</span>, <span class="dv">100</span>))]
       selector[absence.mask] &lt;-<span class="st"> </span>temp
     }
-    <span class="cf">else</span> {
+    else {
       selector &lt;-<span class="st"> </span><span class="kw">rep</span>(<span class="kw">seq</span>(<span class="dv">1</span>, n.folds, <span class="dt">by =</span> <span class="dv">1</span>), <span class="dt">length =</span> n.cases)
       selector &lt;-<span class="st"> </span>selector[<span class="kw">order</span>(<span class="kw">runif</span>(n.cases, <span class="dv">1</span>, <span class="dv">100</span>))]
     }
-  } <span class="cf">else</span> {
-    <span class="cf">if</span> (<span class="kw">length</span>(fold.vector) <span class="op">!=</span><span class="st"> </span>n.cases) {
+  } else {
+    if (<span class="kw">length</span>(fold.vector) !=<span class="st"> </span>n.cases) {
       <span class="kw">stop</span>(<span class="st">&quot;supplied fold vector is of wrong length&quot;</span>)
     }
     <span class="kw">cat</span>(<span class="st">&quot;loading user-supplied fold vector </span><span class="ch">\n</span><span class="st">&quot;</span>)
@@ -678,80 +678,80 @@ gbm.step_v2 &lt;-<span class="st"> </span><span class="cf">function</span> (data
   cv.loss.matrix &lt;-<span class="st"> </span><span class="kw">matrix</span>(<span class="dv">0</span>, <span class="dt">nrow =</span> n.folds, <span class="dt">ncol =</span> <span class="dv">1</span>)
   training.loss.matrix &lt;-<span class="st"> </span><span class="kw">matrix</span>(<span class="dv">0</span>, <span class="dt">nrow =</span> n.folds, <span class="dt">ncol =</span> <span class="dv">1</span>)
   trees.fitted &lt;-<span class="st"> </span>n.trees
-  model.list &lt;-<span class="st"> </span><span class="kw">list</span>(<span class="kw">paste</span>(<span class="st">&quot;model&quot;</span>, <span class="dv">1</span><span class="op">:</span>n.folds, <span class="dt">sep =</span> <span class="st">&quot;&quot;</span>))
-  <span class="cf">if</span> (<span class="kw">is.null</span>(offset)) {
+  model.list &lt;-<span class="st"> </span><span class="kw">list</span>(<span class="kw">paste</span>(<span class="st">&quot;model&quot;</span>, <span class="dv">1</span>:n.folds, <span class="dt">sep =</span> <span class="st">&quot;&quot;</span>))
+  if (<span class="kw">is.null</span>(offset)) {
     gbm.call &lt;-<span class="st"> </span><span class="kw">paste</span>(<span class="st">&quot;gbm::gbm(y.subset ~ .,data=x.subset, n.trees = n.trees, interaction.depth = tree.complexity, shrinkage = learning.rate, bag.fraction = bag.fraction, weights = weight.subset, distribution = as.character(family), var.monotone = var.monotone, verbose = FALSE)&quot;</span>, 
                       <span class="dt">sep =</span> <span class="st">&quot;&quot;</span>)
-  } <span class="cf">else</span> {
+  } else {
     gbm.call &lt;-<span class="st"> </span><span class="kw">paste</span>(<span class="st">&quot;gbm::gbm(y.subset ~ . + offset(offset.subset), data=x.subset, n.trees = n.trees, interaction.depth = tree.complexity, shrinkage = learning.rate, bag.fraction = bag.fraction, weights = weight.subset, distribution = as.character(family), var.monotone = var.monotone, verbose = FALSE)&quot;</span>, 
                       <span class="dt">sep =</span> <span class="st">&quot;&quot;</span>)
   }
   n.fitted &lt;-<span class="st"> </span>n.trees
   y_i &lt;-<span class="st"> </span>y.data
-  u_i &lt;-<span class="st"> </span><span class="kw">sum</span>(y.data <span class="op">*</span><span class="st"> </span>site.weights)<span class="op">/</span><span class="kw">sum</span>(site.weights)
+  u_i &lt;-<span class="st"> </span><span class="kw">sum</span>(y.data *<span class="st"> </span>site.weights)/<span class="kw">sum</span>(site.weights)
   u_i &lt;-<span class="st"> </span><span class="kw">rep</span>(u_i, <span class="kw">length</span>(y_i))
   total.deviance &lt;-<span class="st"> </span><span class="kw">calc.deviance</span>(y_i, u_i, <span class="dt">weights =</span> site.weights, 
                                   <span class="dt">family =</span> family, <span class="dt">calc.mean =</span> <span class="ot">FALSE</span>)
-  mean.total.deviance &lt;-<span class="st"> </span>total.deviance<span class="op">/</span>n.cases
+  mean.total.deviance &lt;-<span class="st"> </span>total.deviance/n.cases
   tolerance.test &lt;-<span class="st"> </span>tolerance
-  <span class="cf">if</span> (tolerance.method <span class="op">==</span><span class="st"> &quot;auto&quot;</span>) {
-    tolerance.test &lt;-<span class="st"> </span>mean.total.deviance <span class="op">*</span><span class="st"> </span>tolerance
+  if (tolerance.method ==<span class="st"> &quot;auto&quot;</span>) {
+    tolerance.test &lt;-<span class="st"> </span>mean.total.deviance *<span class="st"> </span>tolerance
   }
-  <span class="cf">if</span> (<span class="op">!</span>silent) {
+  if (!silent) {
     <span class="kw">cat</span>(<span class="st">&quot;creating&quot;</span>, n.folds, <span class="st">&quot;initial models of&quot;</span>, n.trees, 
         <span class="st">&quot;trees&quot;</span>, <span class="st">&quot;</span><span class="ch">\n</span><span class="st">&quot;</span>)
-    <span class="cf">if</span> (prev.stratify <span class="op">&amp;</span><span class="st"> </span>family <span class="op">==</span><span class="st"> &quot;bernoulli&quot;</span>) {
+    if (prev.stratify &amp;<span class="st"> </span>family ==<span class="st"> &quot;bernoulli&quot;</span>) {
       <span class="kw">cat</span>(<span class="st">&quot;</span><span class="ch">\n</span><span class="st">&quot;</span>, <span class="st">&quot;folds are stratified by prevalence&quot;</span>, <span class="st">&quot;</span><span class="ch">\n</span><span class="st">&quot;</span>)
-    } <span class="cf">else</span> {
+    } else {
       <span class="kw">cat</span>(<span class="st">&quot;</span><span class="ch">\n</span><span class="st">&quot;</span>, <span class="st">&quot;folds are unstratified&quot;</span>, <span class="st">&quot;</span><span class="ch">\n</span><span class="st">&quot;</span>)
     }
     <span class="kw">cat</span>(<span class="st">&quot;total mean deviance = &quot;</span>, <span class="kw">round</span>(mean.total.deviance, 
                                         <span class="dv">4</span>), <span class="st">&quot;</span><span class="ch">\n</span><span class="st">&quot;</span>)
     <span class="kw">cat</span>(<span class="st">&quot;tolerance is fixed at &quot;</span>, <span class="kw">round</span>(tolerance.test, <span class="dv">4</span>), 
         <span class="st">&quot;</span><span class="ch">\n</span><span class="st">&quot;</span>)
-    <span class="cf">if</span> (tolerance.method <span class="op">!=</span><span class="st"> &quot;fixed&quot;</span> <span class="op">&amp;</span><span class="st"> </span>tolerance.method <span class="op">!=</span><span class="st"> </span>
+    if (tolerance.method !=<span class="st"> &quot;fixed&quot;</span> &amp;<span class="st"> </span>tolerance.method !=<span class="st"> </span>
 <span class="st">        &quot;auto&quot;</span>) {
       <span class="kw">stop</span>(<span class="st">&quot;invalid argument for tolerance method - should be auto or fixed&quot;</span>)
     }
   }
-  <span class="cf">if</span> (verbose) {
+  if (verbose) {
     <span class="kw">cat</span>(<span class="st">&quot;ntrees resid. dev.&quot;</span>, <span class="st">&quot;</span><span class="ch">\n</span><span class="st">&quot;</span>)
   }
   
-  <span class="cf">for</span> (i <span class="cf">in</span> <span class="dv">1</span><span class="op">:</span>n.folds) {
-    model.mask &lt;-<span class="st"> </span>selector <span class="op">!=</span><span class="st"> </span>i
-    pred.mask &lt;-<span class="st"> </span>selector <span class="op">==</span><span class="st"> </span>i
+  for (i in <span class="dv">1</span>:n.folds) {
+    model.mask &lt;-<span class="st"> </span>selector !=<span class="st"> </span>i
+    pred.mask &lt;-<span class="st"> </span>selector ==<span class="st"> </span>i
     y.subset &lt;-<span class="st"> </span>y.data[model.mask]
     x.subset &lt;-<span class="st"> </span>x.data[model.mask, , drop =<span class="st"> </span><span class="ot">FALSE</span>]
     weight.subset &lt;-<span class="st"> </span>site.weights[model.mask]
-    <span class="cf">if</span> (<span class="op">!</span><span class="kw">is.null</span>(offset)) {
+    if (!<span class="kw">is.null</span>(offset)) {
       offset.subset &lt;-<span class="st"> </span>offset[model.mask]
     }
-    <span class="cf">else</span> {
+    else {
       offset.subset &lt;-<span class="st"> </span><span class="ot">NULL</span>
     }
     model.list[[i]] &lt;-<span class="st"> </span><span class="kw">eval</span>(<span class="kw">parse</span>(<span class="dt">text =</span> gbm.call))
-    fitted.values &lt;-<span class="st"> </span>model.list[[i]]<span class="op">$</span>fit
-    <span class="cf">if</span> (<span class="op">!</span><span class="kw">is.null</span>(offset)) {
-      fitted.values &lt;-<span class="st"> </span>fitted.values <span class="op">+</span><span class="st"> </span>offset[model.mask]
+    fitted.values &lt;-<span class="st"> </span>model.list[[i]]$fit
+    if (!<span class="kw">is.null</span>(offset)) {
+      fitted.values &lt;-<span class="st"> </span>fitted.values +<span class="st"> </span>offset[model.mask]
     }
-    <span class="cf">if</span> (family <span class="op">==</span><span class="st"> &quot;bernoulli&quot;</span>) {
-      fitted.values &lt;-<span class="st"> </span><span class="kw">exp</span>(fitted.values)<span class="op">/</span>(<span class="dv">1</span> <span class="op">+</span><span class="st"> </span><span class="kw">exp</span>(fitted.values))
+    if (family ==<span class="st"> &quot;bernoulli&quot;</span>) {
+      fitted.values &lt;-<span class="st"> </span><span class="kw">exp</span>(fitted.values)/(<span class="dv">1</span> +<span class="st"> </span><span class="kw">exp</span>(fitted.values))
     }
-    <span class="cf">else</span> <span class="cf">if</span> (family <span class="op">==</span><span class="st"> &quot;poisson&quot;</span>) {
+    else if (family ==<span class="st"> &quot;poisson&quot;</span>) {
       fitted.values &lt;-<span class="st"> </span><span class="kw">exp</span>(fitted.values)
     }
-    pred.values[pred.mask] &lt;-<span class="st"> </span>gbm<span class="op">::</span><span class="kw">predict.gbm</span>(model.list[[i]], 
+    pred.values[pred.mask] &lt;-<span class="st"> </span>gbm::<span class="kw">predict.gbm</span>(model.list[[i]], 
                                                x.data[pred.mask, , <span class="dt">drop =</span> <span class="ot">FALSE</span>], <span class="dt">n.trees =</span> n.trees)
-    <span class="cf">if</span> (<span class="op">!</span><span class="kw">is.null</span>(offset)) {
-      pred.values[pred.mask] &lt;-<span class="st"> </span>pred.values[pred.mask] <span class="op">+</span><span class="st"> </span>
+    if (!<span class="kw">is.null</span>(offset)) {
+      pred.values[pred.mask] &lt;-<span class="st"> </span>pred.values[pred.mask] +<span class="st"> </span>
 <span class="st">        </span>offset[pred.mask]
     }
-    <span class="cf">if</span> (family <span class="op">==</span><span class="st"> &quot;bernoulli&quot;</span>) {
-      pred.values[pred.mask] &lt;-<span class="st"> </span><span class="kw">exp</span>(pred.values[pred.mask])<span class="op">/</span>(<span class="dv">1</span> <span class="op">+</span><span class="st"> </span>
+    if (family ==<span class="st"> &quot;bernoulli&quot;</span>) {
+      pred.values[pred.mask] &lt;-<span class="st"> </span><span class="kw">exp</span>(pred.values[pred.mask])/(<span class="dv">1</span> +<span class="st"> </span>
 <span class="st">                                                               </span><span class="kw">exp</span>(pred.values[pred.mask]))
     }
-    <span class="cf">else</span> <span class="cf">if</span> (family <span class="op">==</span><span class="st"> &quot;poisson&quot;</span>) {
+    else if (family ==<span class="st"> &quot;poisson&quot;</span>) {
       pred.values[pred.mask] &lt;-<span class="st"> </span><span class="kw">exp</span>(pred.values[pred.mask])
     }
     y_i &lt;-<span class="st"> </span>y.subset
@@ -767,52 +767,52 @@ gbm.step_v2 &lt;-<span class="st"> </span><span class="cf">function</span> (data
   }
   delta.deviance &lt;-<span class="st"> </span><span class="dv">1</span>
   cv.loss.values &lt;-<span class="st"> </span><span class="kw">apply</span>(cv.loss.matrix, <span class="dv">2</span>, mean)
-  <span class="cf">if</span> (verbose) {
+  if (verbose) {
     <span class="kw">cat</span>(n.fitted, <span class="st">&quot;  &quot;</span>, <span class="kw">round</span>(cv.loss.values, <span class="dv">4</span>), <span class="st">&quot;</span><span class="ch">\n</span><span class="st">&quot;</span>)
   }
-  <span class="cf">if</span> (<span class="op">!</span>silent) {
+  if (!silent) {
     <span class="kw">cat</span>(<span class="st">&quot;now adding trees...&quot;</span>, <span class="st">&quot;</span><span class="ch">\n</span><span class="st">&quot;</span>)
   }
   j &lt;-<span class="st"> </span><span class="dv">1</span>
-  <span class="cf">while</span> (delta.deviance <span class="op">&gt;</span><span class="st"> </span>tolerance.test <span class="op">&amp;</span><span class="st"> </span>n.fitted <span class="op">&lt;</span><span class="st"> </span>max.trees) {
+  while (delta.deviance &gt;<span class="st"> </span>tolerance.test &amp;<span class="st"> </span>n.fitted &lt;<span class="st"> </span>max.trees) {
     training.loss.matrix &lt;-<span class="st"> </span><span class="kw">cbind</span>(training.loss.matrix, <span class="kw">rep</span>(<span class="dv">0</span>, 
                                                             n.folds))
     cv.loss.matrix &lt;-<span class="st"> </span><span class="kw">cbind</span>(cv.loss.matrix, <span class="kw">rep</span>(<span class="dv">0</span>, n.folds))
-    n.fitted &lt;-<span class="st"> </span>n.fitted <span class="op">+</span><span class="st"> </span>step.size
+    n.fitted &lt;-<span class="st"> </span>n.fitted +<span class="st"> </span>step.size
     trees.fitted &lt;-<span class="st"> </span><span class="kw">c</span>(trees.fitted, n.fitted)
-    j &lt;-<span class="st"> </span>j <span class="op">+</span><span class="st"> </span><span class="dv">1</span>
-    <span class="cf">for</span> (i <span class="cf">in</span> <span class="dv">1</span><span class="op">:</span>n.folds) {
-      model.mask &lt;-<span class="st"> </span>selector <span class="op">!=</span><span class="st"> </span>i
-      pred.mask &lt;-<span class="st"> </span>selector <span class="op">==</span><span class="st"> </span>i
+    j &lt;-<span class="st"> </span>j +<span class="st"> </span><span class="dv">1</span>
+    for (i in <span class="dv">1</span>:n.folds) {
+      model.mask &lt;-<span class="st"> </span>selector !=<span class="st"> </span>i
+      pred.mask &lt;-<span class="st"> </span>selector ==<span class="st"> </span>i
       y.subset &lt;-<span class="st"> </span>y.data[model.mask]
       x.subset &lt;-<span class="st"> </span>x.data[model.mask, , drop =<span class="st"> </span><span class="ot">FALSE</span>]
       weight.subset &lt;-<span class="st"> </span>site.weights[model.mask]
-      <span class="cf">if</span> (<span class="op">!</span><span class="kw">is.null</span>(offset)) {
+      if (!<span class="kw">is.null</span>(offset)) {
         offset.subset &lt;-<span class="st"> </span>offset[model.mask]
       }
-      model.list[[i]] &lt;-<span class="st"> </span>gbm<span class="op">::</span><span class="kw">gbm.more</span>(model.list[[i]], 
+      model.list[[i]] &lt;-<span class="st"> </span>gbm::<span class="kw">gbm.more</span>(model.list[[i]], 
                                        <span class="dt">weights =</span> weight.subset, step.size)
-      fitted.values &lt;-<span class="st"> </span>model.list[[i]]<span class="op">$</span>fit
-      <span class="cf">if</span> (<span class="op">!</span><span class="kw">is.null</span>(offset)) {
-        fitted.values &lt;-<span class="st"> </span>fitted.values <span class="op">+</span><span class="st"> </span>offset[model.mask]
+      fitted.values &lt;-<span class="st"> </span>model.list[[i]]$fit
+      if (!<span class="kw">is.null</span>(offset)) {
+        fitted.values &lt;-<span class="st"> </span>fitted.values +<span class="st"> </span>offset[model.mask]
       }
-      <span class="cf">if</span> (family <span class="op">==</span><span class="st"> &quot;bernoulli&quot;</span>) {
-        fitted.values &lt;-<span class="st"> </span><span class="kw">exp</span>(fitted.values)<span class="op">/</span>(<span class="dv">1</span> <span class="op">+</span><span class="st"> </span><span class="kw">exp</span>(fitted.values))
+      if (family ==<span class="st"> &quot;bernoulli&quot;</span>) {
+        fitted.values &lt;-<span class="st"> </span><span class="kw">exp</span>(fitted.values)/(<span class="dv">1</span> +<span class="st"> </span><span class="kw">exp</span>(fitted.values))
       }
-      <span class="cf">else</span> <span class="cf">if</span> (family <span class="op">==</span><span class="st"> &quot;poisson&quot;</span>) {
+      else if (family ==<span class="st"> &quot;poisson&quot;</span>) {
         fitted.values &lt;-<span class="st"> </span><span class="kw">exp</span>(fitted.values)
       }
-      pred.values[pred.mask] &lt;-<span class="st"> </span>gbm<span class="op">::</span><span class="kw">predict.gbm</span>(model.list[[i]], 
+      pred.values[pred.mask] &lt;-<span class="st"> </span>gbm::<span class="kw">predict.gbm</span>(model.list[[i]], 
                                                  x.data[pred.mask, , <span class="dt">drop =</span> <span class="ot">FALSE</span>], <span class="dt">n.trees =</span> n.fitted)
-      <span class="cf">if</span> (<span class="op">!</span><span class="kw">is.null</span>(offset)) {
-        pred.values[pred.mask] &lt;-<span class="st"> </span>pred.values[pred.mask] <span class="op">+</span><span class="st"> </span>
+      if (!<span class="kw">is.null</span>(offset)) {
+        pred.values[pred.mask] &lt;-<span class="st"> </span>pred.values[pred.mask] +<span class="st"> </span>
 <span class="st">          </span>offset[pred.mask]
       }
-      <span class="cf">if</span> (family <span class="op">==</span><span class="st"> &quot;bernoulli&quot;</span>) {
-        pred.values[pred.mask] &lt;-<span class="st"> </span><span class="kw">exp</span>(pred.values[pred.mask])<span class="op">/</span>(<span class="dv">1</span> <span class="op">+</span><span class="st"> </span>
+      if (family ==<span class="st"> &quot;bernoulli&quot;</span>) {
+        pred.values[pred.mask] &lt;-<span class="st"> </span><span class="kw">exp</span>(pred.values[pred.mask])/(<span class="dv">1</span> +<span class="st"> </span>
 <span class="st">                                                                 </span><span class="kw">exp</span>(pred.values[pred.mask]))
       }
-      <span class="cf">else</span> <span class="cf">if</span> (family <span class="op">==</span><span class="st"> &quot;poisson&quot;</span>) {
+      else if (family ==<span class="st"> &quot;poisson&quot;</span>) {
         pred.values[pred.mask] &lt;-<span class="st"> </span><span class="kw">exp</span>(pred.values[pred.mask])
       }
       y_i &lt;-<span class="st"> </span>y.subset
@@ -827,44 +827,44 @@ gbm.step_v2 &lt;-<span class="st"> </span><span class="cf">function</span> (data
                                             <span class="dt">family =</span> family)
     }
     cv.loss.values &lt;-<span class="st"> </span><span class="kw">apply</span>(cv.loss.matrix, <span class="dv">2</span>, mean)
-    <span class="cf">if</span> (j <span class="op">&lt;</span><span class="st"> </span><span class="dv">5</span>) {
-      <span class="cf">if</span> (cv.loss.values[j] <span class="op">&gt;</span><span class="st"> </span>cv.loss.values[j <span class="op">-</span><span class="st"> </span><span class="dv">1</span>]) {
-        <span class="cf">if</span> (<span class="op">!</span>silent) {
+    if (j &lt;<span class="st"> </span><span class="dv">5</span>) {
+      if (cv.loss.values[j] &gt;<span class="st"> </span>cv.loss.values[j -<span class="st"> </span><span class="dv">1</span>]) {
+        if (!silent) {
           <span class="kw">cat</span>(<span class="st">&quot;restart model with a smaller learning rate or smaller step size...&quot;</span>)
         }
         <span class="kw">return</span>()
       }
     }
-    <span class="cf">if</span> (j <span class="op">&gt;=</span><span class="st"> </span><span class="dv">20</span>) {
-      test1 &lt;-<span class="st"> </span><span class="kw">mean</span>(cv.loss.values[(j <span class="op">-</span><span class="st"> </span><span class="dv">9</span>)<span class="op">:</span>j])
-      test2 &lt;-<span class="st"> </span><span class="kw">mean</span>(cv.loss.values[(j <span class="op">-</span><span class="st"> </span><span class="dv">19</span>)<span class="op">:</span>(j <span class="op">-</span><span class="st"> </span><span class="dv">9</span>)])
-      delta.deviance &lt;-<span class="st"> </span>test2 <span class="op">-</span><span class="st"> </span>test1
+    if (j &gt;=<span class="st"> </span><span class="dv">20</span>) {
+      test1 &lt;-<span class="st"> </span><span class="kw">mean</span>(cv.loss.values[(j -<span class="st"> </span><span class="dv">9</span>):j])
+      test2 &lt;-<span class="st"> </span><span class="kw">mean</span>(cv.loss.values[(j -<span class="st"> </span><span class="dv">19</span>):(j -<span class="st"> </span><span class="dv">9</span>)])
+      delta.deviance &lt;-<span class="st"> </span>test2 -<span class="st"> </span>test1
     }
-    <span class="cf">if</span> (verbose) {
+    if (verbose) {
       <span class="kw">cat</span>(n.fitted, <span class="st">&quot; &quot;</span>, <span class="kw">round</span>(cv.loss.values[j], <span class="dv">4</span>), <span class="st">&quot;</span><span class="ch">\n</span><span class="st">&quot;</span>)
       <span class="kw">flush.console</span>()
     }
   }
   training.loss.values &lt;-<span class="st"> </span><span class="kw">apply</span>(training.loss.matrix, <span class="dv">2</span>, mean)
   cv.loss.ses &lt;-<span class="st"> </span><span class="kw">rep</span>(<span class="dv">0</span>, <span class="kw">length</span>(cv.loss.values))
-  cv.loss.ses &lt;-<span class="st"> </span><span class="kw">sqrt</span>(<span class="kw">apply</span>(cv.loss.matrix, <span class="dv">2</span>, var))<span class="op">/</span><span class="kw">sqrt</span>(n.folds)
+  cv.loss.ses &lt;-<span class="st"> </span><span class="kw">sqrt</span>(<span class="kw">apply</span>(cv.loss.matrix, <span class="dv">2</span>, var))/<span class="kw">sqrt</span>(n.folds)
   y.bar &lt;-<span class="st"> </span><span class="kw">min</span>(cv.loss.values)
-  target.trees &lt;-<span class="st"> </span>trees.fitted[<span class="kw">match</span>(<span class="ot">TRUE</span>, cv.loss.values <span class="op">==</span><span class="st"> </span>
+  target.trees &lt;-<span class="st"> </span>trees.fitted[<span class="kw">match</span>(<span class="ot">TRUE</span>, cv.loss.values ==<span class="st"> </span>
 <span class="st">                                       </span>y.bar)]
-  <span class="cf">if</span> (plot.main) {
-    y.min &lt;-<span class="st"> </span><span class="kw">min</span>(cv.loss.values <span class="op">-</span><span class="st"> </span>cv.loss.ses)
-    y.max &lt;-<span class="st"> </span><span class="kw">max</span>(cv.loss.values <span class="op">+</span><span class="st"> </span>cv.loss.ses)
-    <span class="cf">if</span> (plot.folds) {
+  if (plot.main) {
+    y.min &lt;-<span class="st"> </span><span class="kw">min</span>(cv.loss.values -<span class="st"> </span>cv.loss.ses)
+    y.max &lt;-<span class="st"> </span><span class="kw">max</span>(cv.loss.values +<span class="st"> </span>cv.loss.ses)
+    if (plot.folds) {
       y.min &lt;-<span class="st"> </span><span class="kw">min</span>(cv.loss.matrix)
       y.max &lt;-<span class="st"> </span><span class="kw">max</span>(cv.loss.matrix)
     }
     <span class="kw">plot</span>(trees.fitted, cv.loss.values, <span class="dt">type =</span> <span class="st">&quot;l&quot;</span>, <span class="dt">ylab =</span> <span class="st">&quot;holdout deviance&quot;</span>, 
          <span class="dt">xlab =</span> <span class="st">&quot;no. of trees&quot;</span>, <span class="dt">ylim =</span> <span class="kw">c</span>(y.min, y.max), ...)
     <span class="kw">abline</span>(<span class="dt">h =</span> y.bar, <span class="dt">col =</span> <span class="dv">2</span>)
-    <span class="kw">lines</span>(trees.fitted, cv.loss.values <span class="op">+</span><span class="st"> </span>cv.loss.ses, <span class="dt">lty =</span> <span class="dv">2</span>)
-    <span class="kw">lines</span>(trees.fitted, cv.loss.values <span class="op">-</span><span class="st"> </span>cv.loss.ses, <span class="dt">lty =</span> <span class="dv">2</span>)
-    <span class="cf">if</span> (plot.folds) {
-      <span class="cf">for</span> (i <span class="cf">in</span> <span class="dv">1</span><span class="op">:</span>n.folds) {
+    <span class="kw">lines</span>(trees.fitted, cv.loss.values +<span class="st"> </span>cv.loss.ses, <span class="dt">lty =</span> <span class="dv">2</span>)
+    <span class="kw">lines</span>(trees.fitted, cv.loss.values -<span class="st"> </span>cv.loss.ses, <span class="dt">lty =</span> <span class="dv">2</span>)
+    if (plot.folds) {
+      for (i in <span class="dv">1</span>:n.folds) {
         <span class="kw">lines</span>(trees.fitted, cv.loss.matrix[i, ], <span class="dt">lty =</span> <span class="dv">3</span>)
       }
     }
@@ -878,7 +878,7 @@ gbm.step_v2 &lt;-<span class="st"> </span><span class="cf">function</span> (data
   cv.calibration.stats &lt;-<span class="st"> </span><span class="kw">matrix</span>(<span class="dv">0</span>, <span class="dt">ncol =</span> <span class="dv">5</span>, <span class="dt">nrow =</span> n.folds)
   
 
-  <span class="cf">if</span> (family <span class="op">==</span><span class="st"> &quot;bernoulli&quot;</span>) {
+  if (family ==<span class="st"> &quot;bernoulli&quot;</span>) {
     threshold.stats &lt;-<span class="st"> </span><span class="kw">rep</span>(<span class="dv">0</span>, n.folds)
     
     
@@ -899,28 +899,28 @@ gbm.step_v2 &lt;-<span class="st"> </span><span class="cf">function</span> (data
   }
   fitted.matrix &lt;-<span class="st"> </span><span class="kw">matrix</span>(<span class="ot">NA</span>, <span class="dt">nrow =</span> n.cases, <span class="dt">ncol =</span> n.folds)
   fold.fit &lt;-<span class="st"> </span><span class="kw">rep</span>(<span class="dv">0</span>, n.cases)
-  <span class="cf">for</span> (i <span class="cf">in</span> <span class="dv">1</span><span class="op">:</span>n.folds) {
-    pred.mask &lt;-<span class="st"> </span>selector <span class="op">==</span><span class="st"> </span>i
-    model.mask &lt;-<span class="st"> </span>selector <span class="op">!=</span><span class="st"> </span>i
-    fits &lt;-<span class="st"> </span>gbm<span class="op">::</span><span class="kw">predict.gbm</span>(model.list[[i]], x.data[model.mask, 
+  for (i in <span class="dv">1</span>:n.folds) {
+    pred.mask &lt;-<span class="st"> </span>selector ==<span class="st"> </span>i
+    model.mask &lt;-<span class="st"> </span>selector !=<span class="st"> </span>i
+    fits &lt;-<span class="st"> </span>gbm::<span class="kw">predict.gbm</span>(model.list[[i]], x.data[model.mask, 
                                                      , <span class="dt">drop =</span> <span class="ot">FALSE</span>], <span class="dt">n.trees =</span> target.trees)
-    <span class="cf">if</span> (<span class="op">!</span><span class="kw">is.null</span>(offset)) {
-      fits &lt;-<span class="st"> </span>fits <span class="op">+</span><span class="st"> </span>offset[model.mask]
+    if (!<span class="kw">is.null</span>(offset)) {
+      fits &lt;-<span class="st"> </span>fits +<span class="st"> </span>offset[model.mask]
     }
-    <span class="cf">if</span> (family <span class="op">==</span><span class="st"> &quot;bernoulli&quot;</span>) {
-      fits &lt;-<span class="st"> </span><span class="kw">exp</span>(fits)<span class="op">/</span>(<span class="dv">1</span> <span class="op">+</span><span class="st"> </span><span class="kw">exp</span>(fits))
-    } <span class="cf">else</span> <span class="cf">if</span> (family <span class="op">==</span><span class="st"> &quot;poisson&quot;</span>) {
+    if (family ==<span class="st"> &quot;bernoulli&quot;</span>) {
+      fits &lt;-<span class="st"> </span><span class="kw">exp</span>(fits)/(<span class="dv">1</span> +<span class="st"> </span><span class="kw">exp</span>(fits))
+    } else if (family ==<span class="st"> &quot;poisson&quot;</span>) {
       fits &lt;-<span class="st"> </span><span class="kw">exp</span>(fits)
     }
     fitted.matrix[model.mask, i] &lt;-<span class="st"> </span>fits
-    fits &lt;-<span class="st"> </span>gbm<span class="op">::</span><span class="kw">predict.gbm</span>(model.list[[i]], x.data[pred.mask, 
+    fits &lt;-<span class="st"> </span>gbm::<span class="kw">predict.gbm</span>(model.list[[i]], x.data[pred.mask, 
                                                      , <span class="dt">drop =</span> <span class="ot">FALSE</span>], <span class="dt">n.trees =</span> target.trees)
-    <span class="cf">if</span> (<span class="op">!</span><span class="kw">is.null</span>(offset)) 
-      fits &lt;-<span class="st"> </span>fits <span class="op">+</span><span class="st"> </span>offset[pred.mask]
+    if (!<span class="kw">is.null</span>(offset)) 
+      fits &lt;-<span class="st"> </span>fits +<span class="st"> </span>offset[pred.mask]
     fold.fit[pred.mask] &lt;-<span class="st"> </span>fits
-    <span class="cf">if</span> (family <span class="op">==</span><span class="st"> &quot;bernoulli&quot;</span>) {
-      fits &lt;-<span class="st"> </span><span class="kw">exp</span>(fits)<span class="op">/</span>(<span class="dv">1</span> <span class="op">+</span><span class="st"> </span><span class="kw">exp</span>(fits))
-    }<span class="cf">else</span> <span class="cf">if</span> (family <span class="op">==</span><span class="st"> &quot;poisson&quot;</span>) {
+    if (family ==<span class="st"> &quot;bernoulli&quot;</span>) {
+      fits &lt;-<span class="st"> </span><span class="kw">exp</span>(fits)/(<span class="dv">1</span> +<span class="st"> </span><span class="kw">exp</span>(fits))
+    }else if (family ==<span class="st"> &quot;poisson&quot;</span>) {
       fits &lt;-<span class="st"> </span><span class="kw">exp</span>(fits)
     }
     fitted.matrix[pred.mask, i] &lt;-<span class="st"> </span>fits
@@ -930,25 +930,25 @@ gbm.step_v2 &lt;-<span class="st"> </span><span class="cf">function</span> (data
     cv.deviance.stats[i] &lt;-<span class="st"> </span><span class="kw">calc.deviance</span>(y_i, u_i, weight.preds, 
                                           <span class="dt">family =</span> family)
     cv.cor.stats[i] &lt;-<span class="st"> </span><span class="kw">cor</span>(y_i, u_i)
-    <span class="cf">if</span> (family <span class="op">==</span><span class="st"> &quot;bernoulli&quot;</span>) {
+    if (family ==<span class="st"> &quot;bernoulli&quot;</span>) {
       cv.roc.stats[i] &lt;-<span class="st"> </span><span class="kw">.roc</span>(y_i, u_i)
       cv.calibration.stats[i, ] &lt;-<span class="st"> </span><span class="kw">.calibration</span>(y_i, u_i, 
                                                 <span class="st">&quot;binomial&quot;</span>)
       threshold.stats[i] &lt;-<span class="st"> </span><span class="kw">approx</span>(<span class="kw">ppoints</span>(u_i), <span class="kw">sort</span>(u_i, 
-                                                      <span class="dt">decreasing =</span> T), prevalence)<span class="op">$</span>y
+                                                      <span class="dt">decreasing =</span> T), prevalence)$y
       
       ############################
       ## JA editions / 08/02/19 ##
       ############################
       
-      c_i &lt;-<span class="st"> </span><span class="kw">c</span>(<span class="dv">1</span>, <span class="dv">0</span>)[<span class="kw">as.factor</span>(u_i <span class="op">&lt;=</span><span class="st"> </span>threshold.stats[i])]
+      c_i &lt;-<span class="st"> </span><span class="kw">c</span>(<span class="dv">1</span>, <span class="dv">0</span>)[<span class="kw">as.factor</span>(u_i &lt;=<span class="st"> </span>threshold.stats[i])]
       tab1 &lt;-<span class="st"> </span><span class="kw">table</span>(c_i, y_i)
       
       <span class="co"># Correctly classified test data</span>
-      cv.corr.class[i] &lt;-<span class="st"> </span><span class="kw">sum</span>(<span class="kw">diag</span>(tab1)) <span class="op">/</span><span class="st"> </span><span class="kw">sum</span>(tab1)
+      cv.corr.class[i] &lt;-<span class="st"> </span><span class="kw">sum</span>(<span class="kw">diag</span>(tab1)) /<span class="st"> </span><span class="kw">sum</span>(tab1)
       
       <span class="co"># % cv / total data</span>
-      cv.length[i] &lt;-<span class="st"> </span><span class="kw">table</span>(y_i)[<span class="st">&quot;1&quot;</span>] <span class="op">/</span><span class="st"> </span><span class="kw">table</span>(y.data)[<span class="st">&quot;1&quot;</span>]
+      cv.length[i] &lt;-<span class="st"> </span><span class="kw">table</span>(y_i)[<span class="st">&quot;1&quot;</span>] /<span class="st"> </span><span class="kw">table</span>(y.data)[<span class="st">&quot;1&quot;</span>]
       
       <span class="co"># TSS</span>
       <span class="co"># Sensitivity =  TP/(TP + FN) </span>
@@ -958,11 +958,11 @@ gbm.step_v2 &lt;-<span class="st"> </span><span class="cf">function</span> (data
       tn &lt;-<span class="st"> </span>tab1[<span class="st">&quot;0&quot;</span>, <span class="st">&quot;0&quot;</span>]
       fp &lt;-<span class="st"> </span>tab1[<span class="st">&quot;1&quot;</span>, <span class="st">&quot;0&quot;</span>]
       
-      sen &lt;-<span class="st"> </span>tp<span class="op">/</span>(tp <span class="op">+</span><span class="st"> </span>fn)
-      spe &lt;-<span class="st"> </span>tn<span class="op">/</span>(tn <span class="op">+</span><span class="st"> </span>fp)
+      sen &lt;-<span class="st"> </span>tp/(tp +<span class="st"> </span>fn)
+      spe &lt;-<span class="st"> </span>tn/(tn +<span class="st"> </span>fp)
 
       <span class="co"># TSS</span>
-      tss.stat[i] &lt;-<span class="st"> </span>spe <span class="op">+</span><span class="st"> </span>sen <span class="op">-</span><span class="dv">1</span>
+      tss.stat[i] &lt;-<span class="st"> </span>spe +<span class="st"> </span>sen -<span class="dv">1</span>
 
       ####################
       ## End / 08/02/19 ##
@@ -970,40 +970,40 @@ gbm.step_v2 &lt;-<span class="st"> </span><span class="cf">function</span> (data
       
       
     }
-    <span class="cf">if</span> (family <span class="op">==</span><span class="st"> &quot;poisson&quot;</span>) {
+    if (family ==<span class="st"> &quot;poisson&quot;</span>) {
       cv.calibration.stats[i, ] &lt;-<span class="st"> </span><span class="kw">.calibration</span>(y_i, u_i, 
                                                 <span class="st">&quot;poisson&quot;</span>)
     }
   }
   fitted.vars &lt;-<span class="st"> </span><span class="kw">apply</span>(fitted.matrix, <span class="dv">1</span>, var, <span class="dt">na.rm =</span> <span class="ot">TRUE</span>)
   cv.dev &lt;-<span class="st"> </span><span class="kw">mean</span>(cv.deviance.stats, <span class="dt">na.rm =</span> <span class="ot">TRUE</span>)
-  cv.dev.se &lt;-<span class="st"> </span><span class="kw">sqrt</span>(<span class="kw">var</span>(cv.deviance.stats))<span class="op">/</span><span class="kw">sqrt</span>(n.folds)
+  cv.dev.se &lt;-<span class="st"> </span><span class="kw">sqrt</span>(<span class="kw">var</span>(cv.deviance.stats))/<span class="kw">sqrt</span>(n.folds)
   cv.cor &lt;-<span class="st"> </span><span class="kw">mean</span>(cv.cor.stats, <span class="dt">na.rm =</span> <span class="ot">TRUE</span>)
-  cv.cor.se &lt;-<span class="st"> </span><span class="kw">sqrt</span>(<span class="kw">var</span>(cv.cor.stats, <span class="dt">use =</span> <span class="st">&quot;complete.obs&quot;</span>))<span class="op">/</span><span class="kw">sqrt</span>(n.folds)
+  cv.cor.se &lt;-<span class="st"> </span><span class="kw">sqrt</span>(<span class="kw">var</span>(cv.cor.stats, <span class="dt">use =</span> <span class="st">&quot;complete.obs&quot;</span>))/<span class="kw">sqrt</span>(n.folds)
   cv.roc &lt;-<span class="st"> </span><span class="dv">0</span>
   cv.roc.se &lt;-<span class="st"> </span><span class="dv">0</span>
-  <span class="cf">if</span> (family <span class="op">==</span><span class="st"> &quot;bernoulli&quot;</span>) {
+  if (family ==<span class="st"> &quot;bernoulli&quot;</span>) {
     cv.roc &lt;-<span class="st"> </span><span class="kw">mean</span>(cv.roc.stats, <span class="dt">na.rm =</span> <span class="ot">TRUE</span>)
-    cv.roc.se &lt;-<span class="st"> </span><span class="kw">sqrt</span>(<span class="kw">var</span>(cv.roc.stats, <span class="dt">use =</span> <span class="st">&quot;complete.obs&quot;</span>))<span class="op">/</span><span class="kw">sqrt</span>(n.folds)
+    cv.roc.se &lt;-<span class="st"> </span><span class="kw">sqrt</span>(<span class="kw">var</span>(cv.roc.stats, <span class="dt">use =</span> <span class="st">&quot;complete.obs&quot;</span>))/<span class="kw">sqrt</span>(n.folds)
     cv.threshold &lt;-<span class="st"> </span><span class="kw">mean</span>(threshold.stats, <span class="dt">na.rm =</span> T)
-    cv.threshold.se &lt;-<span class="st"> </span><span class="kw">sqrt</span>(<span class="kw">var</span>(threshold.stats, <span class="dt">use =</span> <span class="st">&quot;complete.obs&quot;</span>))<span class="op">/</span><span class="kw">sqrt</span>(n.folds)
+    cv.threshold.se &lt;-<span class="st"> </span><span class="kw">sqrt</span>(<span class="kw">var</span>(threshold.stats, <span class="dt">use =</span> <span class="st">&quot;complete.obs&quot;</span>))/<span class="kw">sqrt</span>(n.folds)
   }
   cv.calibration &lt;-<span class="st"> </span><span class="dv">0</span>
   cv.calibration.se &lt;-<span class="st"> </span><span class="dv">0</span>
-  <span class="cf">if</span> (family <span class="op">==</span><span class="st"> &quot;poisson&quot;</span> <span class="op">|</span><span class="st"> </span>family <span class="op">==</span><span class="st"> &quot;bernoulli&quot;</span>) {
+  if (family ==<span class="st"> &quot;poisson&quot;</span> |<span class="st"> </span>family ==<span class="st"> &quot;bernoulli&quot;</span>) {
     cv.calibration &lt;-<span class="st"> </span><span class="kw">apply</span>(cv.calibration.stats, <span class="dv">2</span>, mean)
     cv.calibration.se &lt;-<span class="st"> </span><span class="kw">apply</span>(cv.calibration.stats, <span class="dv">2</span>, var)
-    cv.calibration.se &lt;-<span class="st"> </span><span class="kw">sqrt</span>(cv.calibration.se)<span class="op">/</span><span class="kw">sqrt</span>(n.folds)
+    cv.calibration.se &lt;-<span class="st"> </span><span class="kw">sqrt</span>(cv.calibration.se)/<span class="kw">sqrt</span>(n.folds)
   }
-  <span class="cf">if</span> (<span class="kw">is.null</span>(offset)) {
+  if (<span class="kw">is.null</span>(offset)) {
     gbm.call &lt;-<span class="st"> </span><span class="kw">paste</span>(<span class="st">&quot;gbm::gbm(y.data ~ .,data=x.data, n.trees = target.trees, interaction.depth = tree.complexity, shrinkage = learning.rate, bag.fraction = bag.fraction, weights = site.weights, distribution = as.character(family), var.monotone = var.monotone, verbose = FALSE)&quot;</span>, 
                       <span class="dt">sep =</span> <span class="st">&quot;&quot;</span>)
   }
-  <span class="cf">else</span> {
+  else {
     gbm.call &lt;-<span class="st"> </span><span class="kw">paste</span>(<span class="st">&quot;gbm::gbm(y.data ~ . + offset(offset),data=x.data, n.trees = target.trees, interaction.depth = tree.complexity, shrinkage = learning.rate, bag.fraction = bag.fraction, weights = site.weights, distribution = as.character(family), var.monotone = var.monotone,  verbose = FALSE)&quot;</span>, 
                       <span class="dt">sep =</span> <span class="st">&quot;&quot;</span>)
   }
-  <span class="cf">if</span> (<span class="op">!</span>silent) {
+  if (!silent) {
     <span class="kw">message</span>(<span class="st">&quot;fitting final gbm model with a fixed number of &quot;</span>, 
             target.trees, <span class="st">&quot; trees for &quot;</span>, sp.name)
   }
@@ -1011,13 +1011,13 @@ gbm.step_v2 &lt;-<span class="st"> </span><span class="cf">function</span> (data
   best.trees &lt;-<span class="st"> </span>target.trees
   gbm.summary &lt;-<span class="st"> </span><span class="kw">summary</span>(gbm.object, <span class="dt">n.trees =</span> target.trees, 
                          <span class="dt">plotit =</span> <span class="ot">FALSE</span>)
-  fits &lt;-<span class="st"> </span>gbm<span class="op">::</span><span class="kw">predict.gbm</span>(gbm.object, x.data, <span class="dt">n.trees =</span> target.trees)
-  <span class="cf">if</span> (<span class="op">!</span><span class="kw">is.null</span>(offset)) 
-    fits &lt;-<span class="st"> </span>fits <span class="op">+</span><span class="st"> </span>offset
-  <span class="cf">if</span> (family <span class="op">==</span><span class="st"> &quot;bernoulli&quot;</span>) {
-    fits &lt;-<span class="st"> </span><span class="kw">exp</span>(fits)<span class="op">/</span>(<span class="dv">1</span> <span class="op">+</span><span class="st"> </span><span class="kw">exp</span>(fits))
+  fits &lt;-<span class="st"> </span>gbm::<span class="kw">predict.gbm</span>(gbm.object, x.data, <span class="dt">n.trees =</span> target.trees)
+  if (!<span class="kw">is.null</span>(offset)) 
+    fits &lt;-<span class="st"> </span>fits +<span class="st"> </span>offset
+  if (family ==<span class="st"> &quot;bernoulli&quot;</span>) {
+    fits &lt;-<span class="st"> </span><span class="kw">exp</span>(fits)/(<span class="dv">1</span> +<span class="st"> </span><span class="kw">exp</span>(fits))
   }
-  <span class="cf">else</span> <span class="cf">if</span> (family <span class="op">==</span><span class="st"> &quot;poisson&quot;</span>) {
+  else if (family ==<span class="st"> &quot;poisson&quot;</span>) {
     fits &lt;-<span class="st"> </span><span class="kw">exp</span>(fits)
   }
   fitted.values &lt;-<span class="st"> </span>fits
@@ -1028,11 +1028,11 @@ gbm.step_v2 &lt;-<span class="st"> </span><span class="cf">function</span> (data
   self.cor &lt;-<span class="st"> </span><span class="kw">cor</span>(y_i, u_i)
   self.calibration &lt;-<span class="st"> </span><span class="dv">0</span>
   self.roc &lt;-<span class="st"> </span><span class="dv">0</span>
-  <span class="cf">if</span> (family <span class="op">==</span><span class="st"> &quot;bernoulli&quot;</span>) {
-    deviance.contribs &lt;-<span class="st"> </span>(y_i <span class="op">*</span><span class="st"> </span><span class="kw">log</span>(u_i)) <span class="op">+</span><span class="st"> </span>((<span class="dv">1</span> <span class="op">-</span><span class="st"> </span>y_i) <span class="op">*</span><span class="st"> </span>
-<span class="st">                                               </span><span class="kw">log</span>(<span class="dv">1</span> <span class="op">-</span><span class="st"> </span>u_i))
-    residuals &lt;-<span class="st"> </span><span class="kw">sqrt</span>(<span class="kw">abs</span>(deviance.contribs <span class="op">*</span><span class="st"> </span><span class="dv">2</span>))
-    residuals &lt;-<span class="st"> </span><span class="kw">ifelse</span>((y_i <span class="op">-</span><span class="st"> </span>u_i) <span class="op">&lt;</span><span class="st"> </span><span class="dv">0</span>, <span class="dv">0</span> <span class="op">-</span><span class="st"> </span>residuals, residuals)
+  if (family ==<span class="st"> &quot;bernoulli&quot;</span>) {
+    deviance.contribs &lt;-<span class="st"> </span>(y_i *<span class="st"> </span><span class="kw">log</span>(u_i)) +<span class="st"> </span>((<span class="dv">1</span> -<span class="st"> </span>y_i) *<span class="st"> </span>
+<span class="st">                                               </span><span class="kw">log</span>(<span class="dv">1</span> -<span class="st"> </span>u_i))
+    residuals &lt;-<span class="st"> </span><span class="kw">sqrt</span>(<span class="kw">abs</span>(deviance.contribs *<span class="st"> </span><span class="dv">2</span>))
+    residuals &lt;-<span class="st"> </span><span class="kw">ifelse</span>((y_i -<span class="st"> </span>u_i) &lt;<span class="st"> </span><span class="dv">0</span>, <span class="dv">0</span> -<span class="st"> </span>residuals, residuals)
     self.roc &lt;-<span class="st"> </span><span class="kw">.roc</span>(y_i, u_i)
     self.calibration &lt;-<span class="st"> </span><span class="kw">.calibration</span>(y_i, u_i, <span class="st">&quot;binomial&quot;</span>)
     
@@ -1043,27 +1043,27 @@ gbm.step_v2 &lt;-<span class="st"> </span><span class="cf">function</span> (data
     ############################
     
     self.th &lt;-<span class="st"> </span><span class="kw">approx</span>(<span class="kw">ppoints</span>(u_i), <span class="kw">sort</span>(u_i, 
-                              <span class="dt">decreasing =</span> T), prevalence)<span class="op">$</span>y
+                              <span class="dt">decreasing =</span> T), prevalence)$y
     
     ####################
     ## End / 08/02/19 ##
     ####################
     
   }
-  <span class="cf">if</span> (family <span class="op">==</span><span class="st"> &quot;poisson&quot;</span>) {
-    deviance.contribs &lt;-<span class="st"> </span><span class="kw">ifelse</span>(y_i <span class="op">==</span><span class="st"> </span><span class="dv">0</span>, <span class="dv">0</span>, (y_i <span class="op">*</span><span class="st"> </span><span class="kw">log</span>(y_i<span class="op">/</span>u_i))) <span class="op">-</span><span class="st"> </span>
-<span class="st">      </span>(y_i <span class="op">-</span><span class="st"> </span>u_i)
-    residuals &lt;-<span class="st"> </span><span class="kw">sqrt</span>(<span class="kw">abs</span>(deviance.contribs <span class="op">*</span><span class="st"> </span><span class="dv">2</span>))
-    residuals &lt;-<span class="st"> </span><span class="kw">ifelse</span>((y_i <span class="op">-</span><span class="st"> </span>u_i) <span class="op">&lt;</span><span class="st"> </span><span class="dv">0</span>, <span class="dv">0</span> <span class="op">-</span><span class="st"> </span>residuals, residuals)
+  if (family ==<span class="st"> &quot;poisson&quot;</span>) {
+    deviance.contribs &lt;-<span class="st"> </span><span class="kw">ifelse</span>(y_i ==<span class="st"> </span><span class="dv">0</span>, <span class="dv">0</span>, (y_i *<span class="st"> </span><span class="kw">log</span>(y_i/u_i))) -<span class="st"> </span>
+<span class="st">      </span>(y_i -<span class="st"> </span>u_i)
+    residuals &lt;-<span class="st"> </span><span class="kw">sqrt</span>(<span class="kw">abs</span>(deviance.contribs *<span class="st"> </span><span class="dv">2</span>))
+    residuals &lt;-<span class="st"> </span><span class="kw">ifelse</span>((y_i -<span class="st"> </span>u_i) &lt;<span class="st"> </span><span class="dv">0</span>, <span class="dv">0</span> -<span class="st"> </span>residuals, residuals)
     self.calibration &lt;-<span class="st"> </span><span class="kw">.calibration</span>(y_i, u_i, <span class="st">&quot;poisson&quot;</span>)
   }
-  <span class="cf">if</span> (family <span class="op">==</span><span class="st"> &quot;gaussian&quot;</span> <span class="op">|</span><span class="st"> </span>family <span class="op">==</span><span class="st"> &quot;laplace&quot;</span>) {
-    residuals &lt;-<span class="st"> </span>y_i <span class="op">-</span><span class="st"> </span>u_i
+  if (family ==<span class="st"> &quot;gaussian&quot;</span> |<span class="st"> </span>family ==<span class="st"> &quot;laplace&quot;</span>) {
+    residuals &lt;-<span class="st"> </span>y_i -<span class="st"> </span>u_i
   }
-  mean.resid.deviance &lt;-<span class="st"> </span>resid.deviance<span class="op">/</span>n.cases
+  mean.resid.deviance &lt;-<span class="st"> </span>resid.deviance/n.cases
   z2 &lt;-<span class="st"> </span><span class="kw">Sys.time</span>()
-  elapsed.time.minutes &lt;-<span class="st"> </span><span class="kw">round</span>(<span class="kw">as.numeric</span>(z2 <span class="op">-</span><span class="st"> </span>z1)<span class="op">/</span><span class="dv">60</span>, <span class="dv">2</span>)
-  <span class="cf">if</span> (verbose) {
+  elapsed.time.minutes &lt;-<span class="st"> </span><span class="kw">round</span>(<span class="kw">as.numeric</span>(z2 -<span class="st"> </span>z1)/<span class="dv">60</span>, <span class="dv">2</span>)
+  if (verbose) {
     <span class="kw">cat</span>(<span class="st">&quot;</span><span class="ch">\n</span><span class="st">&quot;</span>)
     <span class="kw">cat</span>(<span class="st">&quot;mean total deviance =&quot;</span>, <span class="kw">round</span>(mean.total.deviance, 
                                        <span class="dv">3</span>), <span class="st">&quot;</span><span class="ch">\n</span><span class="st">&quot;</span>)
@@ -1075,7 +1075,7 @@ gbm.step_v2 &lt;-<span class="st"> </span><span class="cf">function</span> (data
         <span class="st">&quot;</span><span class="ch">\n</span><span class="st">&quot;</span>)
     <span class="kw">cat</span>(<span class="st">&quot;cv correlation = &quot;</span>, <span class="kw">round</span>(cv.cor, <span class="dv">3</span>), <span class="st">&quot;; se =&quot;</span>, 
         <span class="kw">round</span>(cv.cor.se, <span class="dv">3</span>), <span class="st">&quot;</span><span class="ch">\n</span><span class="st">&quot;</span>, <span class="st">&quot;</span><span class="ch">\n</span><span class="st">&quot;</span>)
-    <span class="cf">if</span> (family <span class="op">==</span><span class="st"> &quot;bernoulli&quot;</span>) {
+    if (family ==<span class="st"> &quot;bernoulli&quot;</span>) {
       <span class="kw">cat</span>(<span class="st">&quot;training data AUC score =&quot;</span>, <span class="kw">round</span>(self.roc, 
                                              <span class="dv">3</span>), <span class="st">&quot;</span><span class="ch">\n</span><span class="st">&quot;</span>)
       <span class="kw">cat</span>(<span class="st">&quot;cv AUC score =&quot;</span>, <span class="kw">round</span>(cv.roc, <span class="dv">3</span>), <span class="st">&quot;; se =&quot;</span>, 
@@ -1084,7 +1084,7 @@ gbm.step_v2 &lt;-<span class="st"> </span><span class="cf">function</span> (data
     <span class="kw">cat</span>(<span class="st">&quot;elapsed time - &quot;</span>, <span class="kw">round</span>(elapsed.time.minutes, <span class="dv">2</span>), 
         <span class="st">&quot;minutes&quot;</span>, <span class="st">&quot;</span><span class="ch">\n</span><span class="st">&quot;</span>)
   }
-  <span class="cf">if</span> (n.fitted <span class="op">==</span><span class="st"> </span>max.trees <span class="op">&amp;</span><span class="st"> </span><span class="op">!</span>silent) {
+  if (n.fitted ==<span class="st"> </span>max.trees &amp;<span class="st"> </span>!silent) {
     <span class="kw">cat</span>(<span class="st">&quot;</span><span class="ch">\n</span><span class="st">&quot;</span>, <span class="st">&quot;########### warning ##########&quot;</span>, <span class="st">&quot;</span><span class="ch">\n</span><span class="st">&quot;</span>, <span class="st">&quot;</span><span class="ch">\n</span><span class="st">&quot;</span>)
     <span class="kw">cat</span>(<span class="st">&quot;maximum tree limit reached - results may not be optimal&quot;</span>, 
         <span class="st">&quot;</span><span class="ch">\n</span><span class="st">&quot;</span>)
@@ -1106,57 +1106,57 @@ gbm.step_v2 &lt;-<span class="st"> </span><span class="cf">function</span> (data
                    <span class="dt">correlation.mean =</span> cv.cor, <span class="dt">correlation.se =</span> cv.cor.se, 
                    <span class="dt">discrimination.mean =</span> cv.roc, <span class="dt">discrimination.se =</span> cv.roc.se, 
                    <span class="dt">calibration.mean =</span> cv.calibration, <span class="dt">calibration.se =</span> cv.calibration.se)
-  <span class="cf">if</span> (family <span class="op">==</span><span class="st"> &quot;bernoulli&quot;</span>) {
-    cv.stats<span class="op">$</span>cv.threshold &lt;-<span class="st"> </span>cv.threshold
-    cv.stats<span class="op">$</span>cv.threshold.se &lt;-<span class="st"> </span>cv.threshold.se
+  if (family ==<span class="st"> &quot;bernoulli&quot;</span>) {
+    cv.stats$cv.threshold &lt;-<span class="st"> </span>cv.threshold
+    cv.stats$cv.threshold.se &lt;-<span class="st"> </span>cv.threshold.se
   }
-  gbm.object<span class="op">$</span>gbm.call &lt;-<span class="st"> </span>gbm.detail
-  gbm.object<span class="op">$</span>fitted &lt;-<span class="st"> </span>fitted.values
-  gbm.object<span class="op">$</span>fitted.vars &lt;-<span class="st"> </span>fitted.vars
-  gbm.object<span class="op">$</span>residuals &lt;-<span class="st"> </span>residuals
-  gbm.object<span class="op">$</span>contributions &lt;-<span class="st"> </span>gbm.summary
-  gbm.object<span class="op">$</span>self.statistics &lt;-<span class="st"> </span>training.stats
-  gbm.object<span class="op">$</span>cv.statistics &lt;-<span class="st"> </span>cv.stats
-  gbm.object<span class="op">$</span>weights &lt;-<span class="st"> </span>site.weights
-  gbm.object<span class="op">$</span>trees.fitted &lt;-<span class="st"> </span>trees.fitted
-  gbm.object<span class="op">$</span>training.loss.values &lt;-<span class="st"> </span>training.loss.values
-  gbm.object<span class="op">$</span>cv.values &lt;-<span class="st"> </span>cv.loss.values
-  gbm.object<span class="op">$</span>cv.loss.ses &lt;-<span class="st"> </span>cv.loss.ses
-  gbm.object<span class="op">$</span>cv.loss.matrix &lt;-<span class="st"> </span>cv.loss.matrix
-  gbm.object<span class="op">$</span>cv.roc.matrix &lt;-<span class="st"> </span>cv.roc.stats
+  gbm.object$gbm.call &lt;-<span class="st"> </span>gbm.detail
+  gbm.object$fitted &lt;-<span class="st"> </span>fitted.values
+  gbm.object$fitted.vars &lt;-<span class="st"> </span>fitted.vars
+  gbm.object$residuals &lt;-<span class="st"> </span>residuals
+  gbm.object$contributions &lt;-<span class="st"> </span>gbm.summary
+  gbm.object$self.statistics &lt;-<span class="st"> </span>training.stats
+  gbm.object$cv.statistics &lt;-<span class="st"> </span>cv.stats
+  gbm.object$weights &lt;-<span class="st"> </span>site.weights
+  gbm.object$trees.fitted &lt;-<span class="st"> </span>trees.fitted
+  gbm.object$training.loss.values &lt;-<span class="st"> </span>training.loss.values
+  gbm.object$cv.values &lt;-<span class="st"> </span>cv.loss.values
+  gbm.object$cv.loss.ses &lt;-<span class="st"> </span>cv.loss.ses
+  gbm.object$cv.loss.matrix &lt;-<span class="st"> </span>cv.loss.matrix
+  gbm.object$cv.roc.matrix &lt;-<span class="st"> </span>cv.roc.stats
   
   ############################
   ## JA editions / 08/02/19 ##
   ############################
   
-  gbm.object<span class="op">$</span>cv.cor.matrix &lt;-<span class="st"> </span>cv.cor.stats
-  gbm.object<span class="op">$</span>cv.th.matrix &lt;-<span class="st"> </span>threshold.stats
-  gbm.object<span class="op">$</span>cv.corr.class &lt;-<span class="st"> </span>cv.corr.class
-  gbm.object<span class="op">$</span>self.th &lt;-<span class="st"> </span>self.th
-  gbm.object<span class="op">$</span>cv.length &lt;-<span class="st"> </span>cv.length
-  gbm.object<span class="op">$</span>tss.cv &lt;-<span class="st"> </span>tss.stat
+  gbm.object$cv.cor.matrix &lt;-<span class="st"> </span>cv.cor.stats
+  gbm.object$cv.th.matrix &lt;-<span class="st"> </span>threshold.stats
+  gbm.object$cv.corr.class &lt;-<span class="st"> </span>cv.corr.class
+  gbm.object$self.th &lt;-<span class="st"> </span>self.th
+  gbm.object$cv.length &lt;-<span class="st"> </span>cv.length
+  gbm.object$tss.cv &lt;-<span class="st"> </span>tss.stat
   
   ####################
   ## End / 08/02/19 ##
   ####################
   
-  <span class="cf">if</span> (keep.fold.models) {
-    gbm.object<span class="op">$</span>fold.models &lt;-<span class="st"> </span>model.list
+  if (keep.fold.models) {
+    gbm.object$fold.models &lt;-<span class="st"> </span>model.list
   }
-  <span class="cf">else</span> {
-    gbm.object<span class="op">$</span>fold.models &lt;-<span class="st"> </span><span class="ot">NULL</span>
+  else {
+    gbm.object$fold.models &lt;-<span class="st"> </span><span class="ot">NULL</span>
   }
-  <span class="cf">if</span> (keep.fold.vector) {
-    gbm.object<span class="op">$</span>fold.vector &lt;-<span class="st"> </span>selector
+  if (keep.fold.vector) {
+    gbm.object$fold.vector &lt;-<span class="st"> </span>selector
   }
-  <span class="cf">else</span> {
-    gbm.object<span class="op">$</span>fold.vector &lt;-<span class="st"> </span><span class="ot">NULL</span>
+  else {
+    gbm.object$fold.vector &lt;-<span class="st"> </span><span class="ot">NULL</span>
   }
-  <span class="cf">if</span> (keep.fold.fit) {
-    gbm.object<span class="op">$</span>fold.fit &lt;-<span class="st"> </span>fold.fit
+  if (keep.fold.fit) {
+    gbm.object$fold.fit &lt;-<span class="st"> </span>fold.fit
   }
-  <span class="cf">else</span> {
-    gbm.object<span class="op">$</span>fold.fit &lt;-<span class="st"> </span><span class="ot">NULL</span>
+  else {
+    gbm.object$fold.fit &lt;-<span class="st"> </span><span class="ot">NULL</span>
   }
   <span class="kw">return</span>(gbm.object)
 }
@@ -1169,44 +1169,44 @@ gbm.step_v2 &lt;-<span class="st"> </span><span class="cf">function</span> (data
 #########  MAKE BLOCK EVALUATION GROUPS #############
 #########################################################
 
-get.block &lt;-<span class="st"> </span><span class="cf">function</span>(occ, bg.coords){
+get.block &lt;-<span class="st"> </span>function(occ, bg.coords){
   <span class="co"># SPLIT OCC POINTS INTO FOUR SPATIAL GROUPS</span>
   noccs &lt;-<span class="st"> </span><span class="kw">nrow</span>(occ)
-  n1 &lt;-<span class="st"> </span><span class="kw">ceiling</span>(<span class="kw">nrow</span>(occ)<span class="op">/</span><span class="dv">2</span>)
-  n2 &lt;-<span class="st"> </span><span class="kw">floor</span>(<span class="kw">nrow</span>(occ)<span class="op">/</span><span class="dv">2</span>)
-  n3 &lt;-<span class="st"> </span><span class="kw">ceiling</span>(n1<span class="op">/</span><span class="dv">2</span>)
-  n4 &lt;-<span class="st"> </span><span class="kw">ceiling</span>(n2<span class="op">/</span><span class="dv">2</span>)
-  grpA &lt;-<span class="st"> </span>occ[<span class="kw">order</span>(occ[, <span class="dv">2</span>]),][<span class="dv">1</span><span class="op">:</span>n1,]
-  grpB &lt;-<span class="st"> </span>occ[<span class="kw">rev</span>(<span class="kw">order</span>(occ[, <span class="dv">2</span>])),][<span class="dv">1</span><span class="op">:</span>n2,]
-  grp1 &lt;-<span class="st"> </span>grpA[<span class="kw">order</span>(grpA[, <span class="dv">1</span>]),][<span class="dv">1</span><span class="op">:</span>(n3),]
-  grp2 &lt;-<span class="st"> </span>grpA[<span class="op">!</span><span class="kw">rownames</span>(grpA)<span class="op">%in%</span><span class="kw">rownames</span>(grp1),]
-  grp3 &lt;-<span class="st"> </span>grpB[<span class="kw">order</span>(grpB[, <span class="dv">1</span>]),][<span class="dv">1</span><span class="op">:</span>(n4),]
-  grp4 &lt;-<span class="st"> </span>grpB[<span class="op">!</span><span class="kw">rownames</span>(grpB)<span class="op">%in%</span><span class="kw">rownames</span>(grp3),]
+  n1 &lt;-<span class="st"> </span><span class="kw">ceiling</span>(<span class="kw">nrow</span>(occ)/<span class="dv">2</span>)
+  n2 &lt;-<span class="st"> </span><span class="kw">floor</span>(<span class="kw">nrow</span>(occ)/<span class="dv">2</span>)
+  n3 &lt;-<span class="st"> </span><span class="kw">ceiling</span>(n1/<span class="dv">2</span>)
+  n4 &lt;-<span class="st"> </span><span class="kw">ceiling</span>(n2/<span class="dv">2</span>)
+  grpA &lt;-<span class="st"> </span>occ[<span class="kw">order</span>(occ[, <span class="dv">2</span>]),][<span class="dv">1</span>:n1,]
+  grpB &lt;-<span class="st"> </span>occ[<span class="kw">rev</span>(<span class="kw">order</span>(occ[, <span class="dv">2</span>])),][<span class="dv">1</span>:n2,]
+  grp1 &lt;-<span class="st"> </span>grpA[<span class="kw">order</span>(grpA[, <span class="dv">1</span>]),][<span class="dv">1</span>:(n3),]
+  grp2 &lt;-<span class="st"> </span>grpA[!<span class="kw">rownames</span>(grpA)%in%<span class="kw">rownames</span>(grp1),]
+  grp3 &lt;-<span class="st"> </span>grpB[<span class="kw">order</span>(grpB[, <span class="dv">1</span>]),][<span class="dv">1</span>:(n4),]
+  grp4 &lt;-<span class="st"> </span>grpB[!<span class="kw">rownames</span>(grpB)%in%<span class="kw">rownames</span>(grp3),]
   
   <span class="co"># SPLIT BACKGROUND POINTS BASED ON SPATIAL GROUPS</span>
-  bvert &lt;-<span class="st"> </span><span class="kw">mean</span>(<span class="kw">max</span>(grp1[, <span class="dv">1</span>]), <span class="kw">min</span>(grp2[, <span class="dv">1</span>])) <span class="op">+</span><span class="st"> </span><span class="fl">0.5</span>
-  tvert &lt;-<span class="st"> </span><span class="kw">mean</span>(<span class="kw">max</span>(grp3[, <span class="dv">1</span>]), <span class="kw">min</span>(grp4[, <span class="dv">1</span>])) <span class="op">+</span><span class="st"> </span><span class="fl">0.5</span>
-  horz &lt;-<span class="st"> </span><span class="kw">mean</span>(<span class="kw">max</span>(grpA[, <span class="dv">2</span>]), <span class="kw">min</span>(grpB[, <span class="dv">2</span>])) <span class="op">+</span><span class="st"> </span><span class="fl">0.5</span>
-  bggrp1 &lt;-<span class="st"> </span>bg.coords[bg.coords[, <span class="dv">2</span>] <span class="op">&lt;=</span><span class="st"> </span>horz <span class="op">&amp;</span><span class="st"> </span>bg.coords[, <span class="dv">1</span>]<span class="op">&lt;</span>bvert,]
-  bggrp2 &lt;-<span class="st"> </span>bg.coords[bg.coords[, <span class="dv">2</span>] <span class="op">&lt;</span><span class="st"> </span>horz <span class="op">&amp;</span><span class="st"> </span>bg.coords[, <span class="dv">1</span>]<span class="op">&gt;=</span>bvert,]
-  bggrp3 &lt;-<span class="st"> </span>bg.coords[bg.coords[, <span class="dv">2</span>] <span class="op">&gt;</span><span class="st"> </span>horz <span class="op">&amp;</span><span class="st"> </span>bg.coords[, <span class="dv">1</span>]<span class="op">&lt;=</span>tvert,]
-  bggrp4 &lt;-<span class="st"> </span>bg.coords[bg.coords[, <span class="dv">2</span>] <span class="op">&gt;=</span><span class="st"> </span>horz <span class="op">&amp;</span><span class="st"> </span>bg.coords[, <span class="dv">1</span>]<span class="op">&gt;</span>tvert,]
+  bvert &lt;-<span class="st"> </span><span class="kw">mean</span>(<span class="kw">max</span>(grp1[, <span class="dv">1</span>]), <span class="kw">min</span>(grp2[, <span class="dv">1</span>])) +<span class="st"> </span><span class="fl">0.5</span>
+  tvert &lt;-<span class="st"> </span><span class="kw">mean</span>(<span class="kw">max</span>(grp3[, <span class="dv">1</span>]), <span class="kw">min</span>(grp4[, <span class="dv">1</span>])) +<span class="st"> </span><span class="fl">0.5</span>
+  horz &lt;-<span class="st"> </span><span class="kw">mean</span>(<span class="kw">max</span>(grpA[, <span class="dv">2</span>]), <span class="kw">min</span>(grpB[, <span class="dv">2</span>])) +<span class="st"> </span><span class="fl">0.5</span>
+  bggrp1 &lt;-<span class="st"> </span>bg.coords[bg.coords[, <span class="dv">2</span>] &lt;=<span class="st"> </span>horz &amp;<span class="st"> </span>bg.coords[, <span class="dv">1</span>]&lt;bvert,]
+  bggrp2 &lt;-<span class="st"> </span>bg.coords[bg.coords[, <span class="dv">2</span>] &lt;<span class="st"> </span>horz &amp;<span class="st"> </span>bg.coords[, <span class="dv">1</span>]&gt;=bvert,]
+  bggrp3 &lt;-<span class="st"> </span>bg.coords[bg.coords[, <span class="dv">2</span>] &gt;<span class="st"> </span>horz &amp;<span class="st"> </span>bg.coords[, <span class="dv">1</span>]&lt;=tvert,]
+  bggrp4 &lt;-<span class="st"> </span>bg.coords[bg.coords[, <span class="dv">2</span>] &gt;=<span class="st"> </span>horz &amp;<span class="st"> </span>bg.coords[, <span class="dv">1</span>]&gt;tvert,]
   
-  rr &lt;-<span class="st"> </span>bg.coords[bg.coords[, <span class="dv">2</span>] <span class="op">&gt;</span><span class="st"> </span>horz <span class="op">&amp;</span><span class="st"> </span>bg.coords[, <span class="dv">1</span>] <span class="op">&lt;=</span><span class="st"> </span>bvert <span class="op">&amp;</span><span class="st"> </span>bg.coords[, <span class="dv">1</span>] <span class="op">&gt;=</span><span class="st"> </span>tvert,]
+  rr &lt;-<span class="st"> </span>bg.coords[bg.coords[, <span class="dv">2</span>] &gt;<span class="st"> </span>horz &amp;<span class="st"> </span>bg.coords[, <span class="dv">1</span>] &lt;=<span class="st"> </span>bvert &amp;<span class="st"> </span>bg.coords[, <span class="dv">1</span>] &gt;=<span class="st"> </span>tvert,]
   
   r &lt;-<span class="st"> </span><span class="kw">data.frame</span>()
-  <span class="cf">if</span> (<span class="kw">nrow</span>(grp1) <span class="op">&gt;</span><span class="st"> </span><span class="dv">0</span>) grp1<span class="op">$</span>grp &lt;-<span class="st"> </span><span class="dv">1</span>; r &lt;-<span class="st"> </span><span class="kw">rbind</span>(r, grp1)
-  <span class="cf">if</span> (<span class="kw">nrow</span>(grp2) <span class="op">&gt;</span><span class="st"> </span><span class="dv">0</span>) grp2<span class="op">$</span>grp &lt;-<span class="st"> </span><span class="dv">2</span>; r &lt;-<span class="st"> </span><span class="kw">rbind</span>(r, grp2)
-  <span class="cf">if</span> (<span class="kw">nrow</span>(grp3) <span class="op">&gt;</span><span class="st"> </span><span class="dv">0</span>) grp3<span class="op">$</span>grp &lt;-<span class="st"> </span><span class="dv">3</span>; r &lt;-<span class="st"> </span><span class="kw">rbind</span>(r, grp3)
-  <span class="cf">if</span> (<span class="kw">nrow</span>(grp4) <span class="op">&gt;</span><span class="st"> </span><span class="dv">0</span>) grp4<span class="op">$</span>grp &lt;-<span class="st"> </span><span class="dv">4</span>; r &lt;-<span class="st"> </span><span class="kw">rbind</span>(r, grp4)
-  occ.grp &lt;-<span class="st"> </span>r[<span class="kw">order</span>(<span class="kw">as.numeric</span>(<span class="kw">rownames</span>(r))),]<span class="op">$</span>grp
+  if (<span class="kw">nrow</span>(grp1) &gt;<span class="st"> </span><span class="dv">0</span>) grp1$grp &lt;-<span class="st"> </span><span class="dv">1</span>; r &lt;-<span class="st"> </span><span class="kw">rbind</span>(r, grp1)
+  if (<span class="kw">nrow</span>(grp2) &gt;<span class="st"> </span><span class="dv">0</span>) grp2$grp &lt;-<span class="st"> </span><span class="dv">2</span>; r &lt;-<span class="st"> </span><span class="kw">rbind</span>(r, grp2)
+  if (<span class="kw">nrow</span>(grp3) &gt;<span class="st"> </span><span class="dv">0</span>) grp3$grp &lt;-<span class="st"> </span><span class="dv">3</span>; r &lt;-<span class="st"> </span><span class="kw">rbind</span>(r, grp3)
+  if (<span class="kw">nrow</span>(grp4) &gt;<span class="st"> </span><span class="dv">0</span>) grp4$grp &lt;-<span class="st"> </span><span class="dv">4</span>; r &lt;-<span class="st"> </span><span class="kw">rbind</span>(r, grp4)
+  occ.grp &lt;-<span class="st"> </span>r[<span class="kw">order</span>(<span class="kw">as.numeric</span>(<span class="kw">rownames</span>(r))),]$grp
   
   bgr &lt;-<span class="st"> </span><span class="kw">data.frame</span>()
-  <span class="cf">if</span> (<span class="kw">nrow</span>(bggrp1) <span class="op">&gt;</span><span class="st"> </span><span class="dv">0</span>) bggrp1<span class="op">$</span>grp &lt;-<span class="st"> </span><span class="dv">1</span>; bgr &lt;-<span class="st"> </span><span class="kw">rbind</span>(bgr, bggrp1)
-  <span class="cf">if</span> (<span class="kw">nrow</span>(bggrp2) <span class="op">&gt;</span><span class="st"> </span><span class="dv">0</span>) bggrp2<span class="op">$</span>grp &lt;-<span class="st"> </span><span class="dv">2</span>; bgr &lt;-<span class="st"> </span><span class="kw">rbind</span>(bgr, bggrp2)
-  <span class="cf">if</span> (<span class="kw">nrow</span>(bggrp3) <span class="op">&gt;</span><span class="st"> </span><span class="dv">0</span>) bggrp3<span class="op">$</span>grp &lt;-<span class="st"> </span><span class="dv">3</span>; bgr &lt;-<span class="st"> </span><span class="kw">rbind</span>(bgr, bggrp3)
-  <span class="cf">if</span> (<span class="kw">nrow</span>(bggrp4) <span class="op">&gt;</span><span class="st"> </span><span class="dv">0</span>) bggrp4<span class="op">$</span>grp &lt;-<span class="st"> </span><span class="dv">4</span>; bgr &lt;-<span class="st"> </span><span class="kw">rbind</span>(bgr, bggrp4)
-  bg.grp &lt;-<span class="st"> </span>bgr[<span class="kw">order</span>(<span class="kw">as.numeric</span>(<span class="kw">rownames</span>(bgr))),]<span class="op">$</span>grp
+  if (<span class="kw">nrow</span>(bggrp1) &gt;<span class="st"> </span><span class="dv">0</span>) bggrp1$grp &lt;-<span class="st"> </span><span class="dv">1</span>; bgr &lt;-<span class="st"> </span><span class="kw">rbind</span>(bgr, bggrp1)
+  if (<span class="kw">nrow</span>(bggrp2) &gt;<span class="st"> </span><span class="dv">0</span>) bggrp2$grp &lt;-<span class="st"> </span><span class="dv">2</span>; bgr &lt;-<span class="st"> </span><span class="kw">rbind</span>(bgr, bggrp2)
+  if (<span class="kw">nrow</span>(bggrp3) &gt;<span class="st"> </span><span class="dv">0</span>) bggrp3$grp &lt;-<span class="st"> </span><span class="dv">3</span>; bgr &lt;-<span class="st"> </span><span class="kw">rbind</span>(bgr, bggrp3)
+  if (<span class="kw">nrow</span>(bggrp4) &gt;<span class="st"> </span><span class="dv">0</span>) bggrp4$grp &lt;-<span class="st"> </span><span class="dv">4</span>; bgr &lt;-<span class="st"> </span><span class="kw">rbind</span>(bgr, bggrp4)
+  bg.grp &lt;-<span class="st"> </span>bgr[<span class="kw">order</span>(<span class="kw">as.numeric</span>(<span class="kw">rownames</span>(bgr))),]$grp
   
   out &lt;-<span class="st"> </span><span class="kw">list</span>(<span class="dt">occ.grp=</span>occ.grp, <span class="dt">bg.grp=</span>bg.grp)
   <span class="kw">return</span>(out)
@@ -1215,30 +1215,30 @@ get.block &lt;-<span class="st"> </span><span class="cf">function</span>(occ, bg
 ## III.
 
 <span class="co"># Fonction pour calculer les nouveaux coordonnées issues d&#39;une rotation d&#39;un nuage de points  </span>
-rota &lt;-<span class="st"> </span><span class="cf">function</span>(<span class="dt">matxy =</span> MyMat, <span class="dt">theta =</span> pi<span class="op">/</span><span class="dv">3</span>, <span class="dt">center =</span> center){
+rota &lt;-<span class="st"> </span>function(<span class="dt">matxy =</span> MyMat, <span class="dt">theta =</span> pi/<span class="dv">3</span>, <span class="dt">center =</span> center){
   
   matxy &lt;-<span class="st"> </span><span class="kw">as.matrix</span>(matxy)
   <span class="kw">colnames</span>(matxy) &lt;-<span class="st"> </span><span class="kw">c</span>(<span class="st">&quot;x&quot;</span>, <span class="st">&quot;y&quot;</span>)
   
   <span class="co">#3. define a 60 degree counter-clockwise rotation matrix</span>
-  R &lt;-<span class="st"> </span><span class="kw">rbind</span>(<span class="kw">c</span>(<span class="kw">cos</span>(theta), <span class="op">-</span><span class="kw">sin</span>(theta)), 
+  R &lt;-<span class="st"> </span><span class="kw">rbind</span>(<span class="kw">c</span>(<span class="kw">cos</span>(theta), -<span class="kw">sin</span>(theta)), 
              <span class="kw">c</span>(<span class="kw">sin</span>(theta), <span class="kw">cos</span>(theta)))
   
   <span class="co"># do the rotation...</span>
   s &lt;-<span class="st"> </span>matxy <span class="co">#- center    # shift points in the plane so that the center of rotation is at the origin</span>
-  <span class="cf">for</span>(hh <span class="cf">in</span> <span class="dv">1</span><span class="op">:</span><span class="kw">nrow</span>(matxy)){
-    s[hh, ] &lt;-<span class="st"> </span>matxy[hh,] <span class="op">-</span><span class="st"> </span>center
+  for(hh in <span class="dv">1</span>:<span class="kw">nrow</span>(matxy)){
+    s[hh, ] &lt;-<span class="st"> </span>matxy[hh,] -<span class="st"> </span>center
   }
   
-  so &lt;-<span class="st"> </span><span class="kw">cbind</span>(<span class="dt">x =</span> s[,<span class="st">&quot;x&quot;</span>] <span class="op">*</span><span class="st"> </span>R[<span class="dv">1</span>,<span class="dv">1</span>] <span class="op">+</span><span class="st"> </span>s[,<span class="st">&quot;y&quot;</span>] <span class="op">*</span><span class="st"> </span>R[<span class="dv">1</span>,<span class="dv">2</span>],
-              <span class="dt">y =</span> s[,<span class="st">&quot;x&quot;</span>] <span class="op">*</span><span class="st"> </span>R[<span class="dv">2</span>,<span class="dv">1</span>] <span class="op">+</span><span class="st"> </span>s[,<span class="st">&quot;y&quot;</span>] <span class="op">*</span><span class="st"> </span>R[<span class="dv">2</span>,<span class="dv">2</span>])
+  so &lt;-<span class="st"> </span><span class="kw">cbind</span>(<span class="dt">x =</span> s[,<span class="st">&quot;x&quot;</span>] *<span class="st"> </span>R[<span class="dv">1</span>,<span class="dv">1</span>] +<span class="st"> </span>s[,<span class="st">&quot;y&quot;</span>] *<span class="st"> </span>R[<span class="dv">1</span>,<span class="dv">2</span>],
+              <span class="dt">y =</span> s[,<span class="st">&quot;x&quot;</span>] *<span class="st"> </span>R[<span class="dv">2</span>,<span class="dv">1</span>] +<span class="st"> </span>s[,<span class="st">&quot;y&quot;</span>] *<span class="st"> </span>R[<span class="dv">2</span>,<span class="dv">2</span>])
   
   <span class="co">#so = R %*% s           # apply the rotation about the origin</span>
   <span class="co">#vo = so + center   # shift again so the origin goes back to the desired center of rotation</span>
   
   vo &lt;-<span class="st"> </span>matxy <span class="co">#- center    # shift points in the plane so that the center of rotation is at the origin</span>
-  <span class="cf">for</span>(hh <span class="cf">in</span> <span class="dv">1</span><span class="op">:</span><span class="kw">nrow</span>(matxy)){
-    vo[hh, ] &lt;-<span class="st"> </span>so[hh,] <span class="op">+</span><span class="st"> </span>center
+  for(hh in <span class="dv">1</span>:<span class="kw">nrow</span>(matxy)){
+    vo[hh, ] &lt;-<span class="st"> </span>so[hh,] +<span class="st"> </span>center
   }
   
   <span class="co"># this can be done in one line as:</span>
@@ -1299,19 +1299,19 @@ cv.boot &lt;-<span class="st"> </span><span class="dv">2</span> <span class="co"
 stack.pred&lt;-<span class="kw">subset</span>(predictors_stack,<span class="dv">1</span>);<span class="kw">values</span>(stack.pred)&lt;-<span class="ot">NA</span>
 <span class="co">#testvaluesp&lt;-rep(NA,nrow(fichier_data)) ; testvaluesa &lt;- testvaluesp</span>
 
-model_stats &lt;-<span class="st"> </span><span class="kw">matrix</span>(<span class="ot">NA</span>, <span class="dv">6</span>, cv.boot<span class="op">*</span><span class="dv">4</span>,<span class="dt">dimnames =</span> <span class="kw">list</span>(<span class="kw">c</span>(<span class="st">&quot;AUC&quot;</span>, <span class="st">&quot;COR&quot;</span>, <span class="st">&quot;TSS&quot;</span>, <span class="st">&quot;maxSSS&quot;</span>, <span class="st">&quot;valid_test_data&quot;</span>,<span class="st">&quot;prop_test&quot;</span>), <span class="ot">NULL</span>))
+model_stats &lt;-<span class="st"> </span><span class="kw">matrix</span>(<span class="ot">NA</span>, <span class="dv">6</span>, cv.boot*<span class="dv">4</span>,<span class="dt">dimnames =</span> <span class="kw">list</span>(<span class="kw">c</span>(<span class="st">&quot;AUC&quot;</span>, <span class="st">&quot;COR&quot;</span>, <span class="st">&quot;TSS&quot;</span>, <span class="st">&quot;maxSSS&quot;</span>, <span class="st">&quot;valid_test_data&quot;</span>,<span class="st">&quot;prop_test&quot;</span>), <span class="ot">NULL</span>))
 
 <span class="co"># Stores the contribution</span>
 contTr &lt;-<span class="st"> </span><span class="kw">matrix</span>(<span class="ot">NA</span>, <span class="kw">dim</span>(predictors_stack)[<span class="dv">3</span>], cv.boot, <span class="dt">dimnames =</span> <span class="kw">list</span>(<span class="kw">names</span>(predictors_stack), <span class="ot">NULL</span>))
-n.seed &lt;-<span class="st"> </span><span class="kw">seq</span>(<span class="dv">1</span>,<span class="dv">60</span>,<span class="dv">1</span>)[<span class="op">-</span><span class="kw">c</span>(<span class="dv">4</span>,<span class="dv">5</span>,<span class="dv">17</span>,<span class="dv">28</span>,<span class="dv">32</span>,<span class="dv">41</span>,<span class="dv">45</span>,<span class="dv">46</span>,<span class="dv">48</span>,<span class="dv">53</span>)] <span class="co"># controls and fixes the random sampling (to compare results more accurately) </span>
+n.seed &lt;-<span class="st"> </span><span class="kw">seq</span>(<span class="dv">1</span>,<span class="dv">60</span>,<span class="dv">1</span>)[-<span class="kw">c</span>(<span class="dv">4</span>,<span class="dv">5</span>,<span class="dv">17</span>,<span class="dv">28</span>,<span class="dv">32</span>,<span class="dv">41</span>,<span class="dv">45</span>,<span class="dv">46</span>,<span class="dv">48</span>,<span class="dv">53</span>)] <span class="co"># controls and fixes the random sampling (to compare results more accurately) </span>
 
-<span class="cf">for</span> (j <span class="cf">in</span> <span class="dv">1</span><span class="op">:</span>cv.boot){
+for (j in <span class="dv">1</span>:cv.boot){
 
   <span class="co">#------------------------------------------------------------</span>
   #### create the matrix of occurrence-environment 
   <span class="co">#------------------------------------------------</span>
   envi.presences &lt;-<span class="st"> </span><span class="kw">unique</span>(<span class="kw">extract</span> (predictors_stack,occ.sterechinus[,<span class="kw">c</span>(<span class="dv">2</span>,<span class="dv">1</span>)]))
-  presence.data &lt;-<span class="st"> </span>occ.sterechinus[<span class="op">-</span><span class="kw">which</span>(<span class="kw">duplicated</span>(<span class="kw">extract</span>(predictors_stack,occ.sterechinus[,<span class="kw">c</span>(<span class="dv">2</span>,<span class="dv">1</span>)]))),<span class="kw">c</span>(<span class="dv">2</span>,<span class="dv">1</span>)]; <span class="kw">colnames</span>(presence.data)&lt;-<span class="st"> </span><span class="kw">c</span>(<span class="st">&quot;longitude&quot;</span>,<span class="st">&quot;latitude&quot;</span>)
+  presence.data &lt;-<span class="st"> </span>occ.sterechinus[-<span class="kw">which</span>(<span class="kw">duplicated</span>(<span class="kw">extract</span>(predictors_stack,occ.sterechinus[,<span class="kw">c</span>(<span class="dv">2</span>,<span class="dv">1</span>)]))),<span class="kw">c</span>(<span class="dv">2</span>,<span class="dv">1</span>)]; <span class="kw">colnames</span>(presence.data)&lt;-<span class="st"> </span><span class="kw">c</span>(<span class="st">&quot;longitude&quot;</span>,<span class="st">&quot;latitude&quot;</span>)
   <span class="co"># the function &#39;unique&#39; enables to remove the duplicates that may be contained in the dataset (occurrences found in a same pixel); &#39;duplicated&#39; aims at spotting which of these rows are similar </span>
   <span class="co">#head(envi.presences)</span>
   <span class="co"># the presence data will be associated to ID=1</span>
@@ -1319,7 +1319,7 @@ n.seed &lt;-<span class="st"> </span><span class="kw">seq</span>(<span class="dv
   <span class="kw">set.seed</span>(n.seed[j])
   <span class="co"># sampling of background data : in the loop, changes at each replicate </span>
   <span class="co"># 1000 background data are randomly sampled in the environment, according to the weighting scheme of the KDE layer </span>
-  background_data &lt;-<span class="st"> </span><span class="kw">xyFromCell</span>(KDE, <span class="kw">sample</span>(<span class="kw">which</span>(<span class="op">!</span><span class="kw">is.na</span>(<span class="kw">values</span>(KDE))), <span class="dv">200</span>, <span class="dt">prob=</span><span class="kw">values</span>(KDE)[<span class="op">!</span><span class="kw">is.na</span>(<span class="kw">values</span>(KDE))]))
+  background_data &lt;-<span class="st"> </span><span class="kw">xyFromCell</span>(KDE, <span class="kw">sample</span>(<span class="kw">which</span>(!<span class="kw">is.na</span>(<span class="kw">values</span>(KDE))), <span class="dv">200</span>, <span class="dt">prob=</span><span class="kw">values</span>(KDE)[!<span class="kw">is.na</span>(<span class="kw">values</span>(KDE))]))
 
   <span class="kw">colnames</span>(background_data) &lt;-<span class="st"> </span><span class="kw">colnames</span>(presence.data)
   <span class="co"># extract environmental conditions where the background data are sampled </span>
@@ -1334,22 +1334,22 @@ n.seed &lt;-<span class="st"> </span><span class="kw">seq</span>(<span class="dv
   <span class="co"># Split of the occurrence-background dataset into folds of test/training data (spatially segregated)</span>
   dat1 &lt;-<span class="st"> </span><span class="kw">rbind</span>(<span class="kw">cbind</span>(background_data, <span class="dt">Isp=</span><span class="kw">rep</span>(<span class="dv">0</span>,<span class="kw">nrow</span>(background_data))), <span class="kw">cbind</span>(presence.data,<span class="dt">Isp=</span><span class="kw">rep</span>(<span class="dv">1</span>,<span class="kw">nrow</span>(presence.data)))); <span class="kw">colnames</span>(dat1)&lt;-<span class="st"> </span><span class="kw">c</span>(<span class="st">&quot;longitude&quot;</span>,<span class="st">&quot;latitude&quot;</span>,<span class="st">&quot;Isp&quot;</span>)
   <span class="co">#tail(dat1)</span>
-  idP &lt;-<span class="st"> </span><span class="kw">which</span>(dat1<span class="op">$</span>Isp <span class="op">==</span><span class="st"> </span><span class="dv">1</span>) <span class="co">#  id of presence data to split them </span>
+  idP &lt;-<span class="st"> </span><span class="kw">which</span>(dat1$Isp ==<span class="st"> </span><span class="dv">1</span>) <span class="co">#  id of presence data to split them </span>
   MyFold &lt;-<span class="st"> </span><span class="kw">rep</span>(<span class="ot">NA</span>, <span class="kw">nrow</span>(dat1)) <span class="co"># an empty box to store the group of the data (1 to 4 afterwards)</span>
   
   <span class="kw">source</span>(<span class="st">&quot;scripts/clock4_crossValidation.R&quot;</span>)
-  clock4F &lt;-<span class="st"> </span><span class="kw">clock4</span>(dat1[idP, <span class="kw">c</span>(<span class="st">&quot;longitude&quot;</span>, <span class="st">&quot;latitude&quot;</span>)], dat1[<span class="op">-</span>idP, <span class="kw">c</span>(<span class="st">&quot;longitude&quot;</span>, <span class="st">&quot;latitude&quot;</span>)])
+  clock4F &lt;-<span class="st"> </span><span class="kw">clock4</span>(dat1[idP, <span class="kw">c</span>(<span class="st">&quot;longitude&quot;</span>, <span class="st">&quot;latitude&quot;</span>)], dat1[-idP, <span class="kw">c</span>(<span class="st">&quot;longitude&quot;</span>, <span class="st">&quot;latitude&quot;</span>)])
   
   <span class="co"># Extracts the folds</span>
-  MyFold[idP] &lt;-<span class="st"> </span>clock4F<span class="op">$</span>occ.grp
-  MyFold[<span class="op">-</span>idP] &lt;-<span class="st"> </span>clock4F<span class="op">$</span>bg.coords.grp
+  MyFold[idP] &lt;-<span class="st"> </span>clock4F$occ.grp
+  MyFold[-idP] &lt;-<span class="st"> </span>clock4F$bg.coords.grp
   <span class="kw">plot</span>(dat1[,<span class="kw">c</span>(<span class="st">&quot;longitude&quot;</span>, <span class="st">&quot;latitude&quot;</span>)], <span class="dt">pch =</span> <span class="dv">20</span>, <span class="dt">col =</span> <span class="kw">c</span>(<span class="st">&quot;red&quot;</span>, <span class="st">&quot;blue&quot;</span>,<span class="st">&quot;black&quot;</span>,<span class="st">&quot;purple&quot;</span>)[<span class="kw">as.factor</span>(MyFold)])
   
   <span class="co">#--------------------------</span>
   #### launch the model  ! 
   <span class="co">#--------------------------</span>
   model.res&lt;-<span class="st"> </span><span class="kw">gbm.step_v2</span> (<span class="dt">data=</span>MATRIX_OCC_ENVI, 
-                         <span class="dt">gbm.x =</span> <span class="dv">2</span><span class="op">:</span><span class="kw">ncol</span>(MATRIX_OCC_ENVI),
+                         <span class="dt">gbm.x =</span> <span class="dv">2</span>:<span class="kw">ncol</span>(MATRIX_OCC_ENVI),
                          <span class="dt">gbm.y =</span> <span class="dv">1</span>,
                          <span class="dt">family =</span> <span class="st">&quot;bernoulli&quot;</span>,
                          <span class="dt">n.folds=</span><span class="dv">4</span>,
@@ -1362,33 +1362,33 @@ n.seed &lt;-<span class="st"> </span><span class="kw">seq</span>(<span class="dv
   #### Extract data and model outputs 
   <span class="co">#------------------------------------------------------------</span>
   <span class="co"># Predictions </span>
-  p&lt;-<span class="kw">predict</span>(predictors_stack,model.res,<span class="dt">n.trees=</span>model.res<span class="op">$</span>gbm.call<span class="op">$</span>best.trees,<span class="dt">type=</span><span class="st">&quot;response&quot;</span>, <span class="dt">na.rm=</span>F)
+  p&lt;-<span class="kw">predict</span>(predictors_stack,model.res,<span class="dt">n.trees=</span>model.res$gbm.call$best.trees,<span class="dt">type=</span><span class="st">&quot;response&quot;</span>, <span class="dt">na.rm=</span>F)
   stack.pred&lt;-<span class="kw">stack</span>(stack.pred,p) <span class="co"># stack all the maps replicates </span>
   
   ########
   ## CV ## (= on CV folds)
   ########
-    j_cv &lt;-<span class="st"> </span>((j<span class="op">-</span><span class="dv">1</span>) <span class="op">*</span><span class="st"> </span><span class="dv">4</span><span class="op">+</span><span class="dv">1</span>)<span class="op">:</span>(j<span class="op">*</span><span class="dv">4</span>) <span class="co"># to count the folds </span>
+    j_cv &lt;-<span class="st"> </span>((j<span class="dv">-1</span>) *<span class="st"> </span><span class="dv">4+1</span>):(j*<span class="dv">4</span>) <span class="co"># to count the folds </span>
   
-  model_stats[<span class="st">&quot;AUC&quot;</span>, j_cv] &lt;-<span class="st"> </span>model.res<span class="op">$</span>cv.roc.matrix
-  model_stats[<span class="st">&quot;COR&quot;</span>, j_cv] &lt;-<span class="st"> </span>model.res<span class="op">$</span>cv.cor.matrix
-  model_stats[<span class="st">&quot;TSS&quot;</span>, j_cv] &lt;-<span class="st"> </span>model.res<span class="op">$</span>tss.cv
-  model_stats[<span class="st">&quot;maxSSS&quot;</span>, j_cv] &lt;-<span class="st"> </span>model.res<span class="op">$</span>cv.th.matrix
+  model_stats[<span class="st">&quot;AUC&quot;</span>, j_cv] &lt;-<span class="st"> </span>model.res$cv.roc.matrix
+  model_stats[<span class="st">&quot;COR&quot;</span>, j_cv] &lt;-<span class="st"> </span>model.res$cv.cor.matrix
+  model_stats[<span class="st">&quot;TSS&quot;</span>, j_cv] &lt;-<span class="st"> </span>model.res$tss.cv
+  model_stats[<span class="st">&quot;maxSSS&quot;</span>, j_cv] &lt;-<span class="st"> </span>model.res$cv.th.matrix
 
   ## correctly classified test data 
-  model_stats[<span class="st">&quot;valid_test_data&quot;</span>, j_cv] &lt;-<span class="st"> </span>model.res<span class="op">$</span>cv.corr.class<span class="op">*</span><span class="dv">100</span>
-  model_stats[<span class="st">&quot;prop_test&quot;</span>, j_cv] &lt;-<span class="st"> </span>model.res<span class="op">$</span>cv.length<span class="op">*</span><span class="dv">100</span>
+  model_stats[<span class="st">&quot;valid_test_data&quot;</span>, j_cv] &lt;-<span class="st"> </span>model.res$cv.corr.class*<span class="dv">100</span>
+  model_stats[<span class="st">&quot;prop_test&quot;</span>, j_cv] &lt;-<span class="st"> </span>model.res$cv.length*<span class="dv">100</span>
   
   <span class="co"># Get contributions </span>
   RI &lt;-<span class="st"> </span><span class="kw">summary</span>(model.res, <span class="dt">plotit =</span> F) <span class="co"># extract the contribution</span>
-  contTr[<span class="kw">match</span>(RI<span class="op">$</span>var, <span class="kw">rownames</span>(contTr)), j] &lt;-<span class="st"> </span>RI[,<span class="st">&quot;rel.inf&quot;</span>]
+  contTr[<span class="kw">match</span>(RI$var, <span class="kw">rownames</span>(contTr)), j] &lt;-<span class="st"> </span>RI[,<span class="st">&quot;rel.inf&quot;</span>]
 
 }
 
 <span class="co">#------------------------</span>
 #### Maps of predictions 
 <span class="co">#------------------------</span>
-mean_stack &lt;-<span class="st"> </span>raster<span class="op">::</span><span class="kw">calc</span>(stack.pred, mean, <span class="dt">na.rm=</span>T); mean_stack &lt;-<span class="st"> </span><span class="kw">mask</span>(mean_stack, depth)
+mean_stack &lt;-<span class="st"> </span>raster::<span class="kw">calc</span>(stack.pred, mean, <span class="dt">na.rm=</span>T); mean_stack &lt;-<span class="st"> </span><span class="kw">mask</span>(mean_stack, depth)
 <span class="co">#sd_stack &lt;- raster::calc(stack.pred,sd, na.rm=T); sd_stack &lt;- mask(sd_stack, depth)</span>
 
 <span class="co"># you can plot the results </span>

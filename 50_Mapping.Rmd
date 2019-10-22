@@ -139,11 +139,6 @@ maps::map(mpmerc,  fill = TRUE, col = "grey", add = TRUE)
 
 ## SOmap
 
-```{r somapcheck, echo = FALSE, cache = FALSE}
-if (packageVersion("SOmap") < 0.5)
-  stop("This bookdown code currently requires the development version of SOmap.\nInstall with remotes::install_github(\"AustralianAntarcticDivision/SOmap\", ref = \"dev-0.5\")")
-```
-
 The `SOmap` package is intended to solve some of these problems, and provide an easier way to produce nice-looking maps of Antarctica and the Southern Ocean. It is primarily focused on maps in polar stereographic projection (although the `SOmap_auto` function extends this to other projections). `SOmap` won't necessarily get you exactly the map you want in every circumstance, but the idea is that in most cases it should get you close enough, and if need be you can make modifications to suit your exact purposes.
 
 Please bear in mind that `SOmap` is still in development, and so its functionality (function parameters and/or behaviour) may change.
@@ -155,10 +150,6 @@ Start by installing the `SOmap` package if you haven't done so already:
 ```{somap_install eval = FALSE}
 remotes::install_github("AustralianAntarcticDivision/SOmap")
 ```
-
-<div class="alert alert-info">
-**Temporary note:** the code here was written using the development version of `SOmap`. You may need to install the development version using `remotes::install_github("AustralianAntarcticDivision/SOmap", ref = "dev-0.5")`.
-</div>
 
 Then load the package:
 
@@ -580,6 +571,15 @@ Example usage:
 
 ```{r qR1}
 library(quantarcticR)
+```
+
+```{r qR1hidden, echo = FALSE, results = "asis", cache = FALSE}
+if (grepl("ben_ray", tempdir())) {
+  quantarcticR::qa_cache_dir("c:/data/Quantarctica3")
+}
+```
+
+```{r qR1b}
 ds <- qa_datasets() ## all available layers
 head(ds)
 
@@ -596,6 +596,7 @@ plot(layer_data[layer_data$MONTH == "October", ])
 ## or add to a SOmap
 SOmap(trim = -50, border_width = 0.5)
 SOplot(layer_data[layer_data$MONTH == "October", ], col = "red")
+
 
 ```
 

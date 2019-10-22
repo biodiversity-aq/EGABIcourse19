@@ -236,16 +236,15 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
 </ul>
 <p>In these cases, maintaining local copies of a range of data from third-party providers can be extremely beneficial, especially if that collection is hosted with a fast connection to local compute resources (virtual machines or high-performance computational facilities).</p>
 <p>Install from GitHub:</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">remotes<span class="op">::</span><span class="kw">install_github</span>(<span class="st">&quot;AustralianAntarcticDivision/blueant&quot;</span>)</code></pre></div>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">remotes::<span class="kw">install_github</span>(<span class="st">&quot;AustralianAntarcticDivision/blueant&quot;</span>)</code></pre></div>
 <p>And load the package before use.</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">library</span>(blueant)</code></pre></div>
-<pre><code>## Loading required package: bowerbird</code></pre>
 <div id="available-data-sets" class="section level3">
 <h3><span class="header-section-number">9.1.1</span> Available data sets</h3>
 <p>First, we can see the available data sets via the <code>sources</code> function.</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">srcs &lt;-<span class="st"> </span>blueant<span class="op">::</span><span class="kw">sources</span>()
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">srcs &lt;-<span class="st"> </span>blueant::<span class="kw">sources</span>()
 ## the names of the first few
-<span class="kw">head</span>(srcs<span class="op">$</span>name)</code></pre></div>
+<span class="kw">head</span>(srcs$name)</code></pre></div>
 <pre><code>## [1] &quot;NSIDC SMMR-SSM/I Nasateam sea ice concentration&quot;               
 ## [2] &quot;NSIDC SMMR-SSM/I Nasateam near-real-time sea ice concentration&quot;
 ## [3] &quot;NSIDC passive microwave supporting files&quot;                      
@@ -288,22 +287,88 @@ srcs[<span class="dv">1</span>, ]</code></pre></div>
 <p>Select the data source that we want:</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">data_source &lt;-<span class="st"> </span><span class="kw">sources</span>(<span class="st">&quot;Southern Ocean marine environmental data&quot;</span>)</code></pre></div>
 <p>Note that it’s a good idea to check the dataset size before downloading it, as some are quite large! (Though if you are running the download interactively, it will ask you before downloading a large data set).</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">data_source<span class="op">$</span>collection_size ## size in GB</code></pre></div>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">data_source$collection_size ## size in GB</code></pre></div>
 <pre><code>## [1] 0.1</code></pre>
 <p>And fetch the data:</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">result &lt;-<span class="st"> </span><span class="kw">bb_get</span>(data_source, <span class="dt">local_file_root =</span> my_data_dir, <span class="dt">verbose =</span> <span class="ot">TRUE</span>)</code></pre></div>
 <pre><code>## 
-## Mon Sep 02 08:46:36 2019
+## Tue Oct 22 13:15:53 2019
 ## Synchronizing dataset: Southern Ocean marine environmental data
-## Source URL https://data.aad.gov.au/eds/4742/download
 ## --------------------------------------------------------------------------------------------
 ## 
-##  this dataset path is: c:\data\cache/data.aad.gov.au/eds/4742
-##  building file list ... done.
-##  downloading file 1 of 1: https://data.aad.gov.au/eds/4742/download ...  file unchanged on server, not downloading.
-##   decompressing: c:\data\cache/data.aad.gov.au/eds/4742/download.zip ... no new files to extract (not overwriting existing files) ... done.
+##  this dataset path is: c:\data\cache/services.aad.gov.au/public/datasets/science/environmental_layers</code></pre>
+<pre><code>## Locating credentials</code></pre>
+<pre><code>## Checking for credentials in user-supplied values</code></pre>
+<pre><code>## Checking for credentials in Environment Variables</code></pre>
+<pre><code>## Searching for credentials file(s)</code></pre>
+<pre><code>## No user-supplied credentials, environment variables, instance metadata, or credentials file found!</code></pre>
+<pre><code>## Using user-supplied value for AWS Region (&#39;services&#39;)</code></pre>
+<pre><code>## Non-AWS base URL requested.</code></pre>
+<pre><code>## S3 Request URL: http://services.aad.gov.au/public/</code></pre>
+<pre><code>## Executing request without AWS credentials</code></pre>
+<pre><code>## Parsing AWS API response</code></pre>
+<pre><code>## Success: (200) OK</code></pre>
+<pre><code>##  downloading file 1 of 1: http://services.aad.gov.au/public/datasets/science/environmental_layers/POC_2005_2012_ampli.nc ...  done.
+##  downloading file 1 of 1: http://services.aad.gov.au/public/datasets/science/environmental_layers/POC_2005_2012_max.nc ...  done.
+##  downloading file 1 of 1: http://services.aad.gov.au/public/datasets/science/environmental_layers/POC_2005_2012_mean.nc ...  done.
+##  downloading file 1 of 1: http://services.aad.gov.au/public/datasets/science/environmental_layers/POC_2005_2012_min.nc ...  done.
+##  downloading file 1 of 1: http://services.aad.gov.au/public/datasets/science/environmental_layers/POC_2005_2012_sd.nc ...  done.
+##  downloading file 1 of 1: http://services.aad.gov.au/public/datasets/science/environmental_layers/chla_ampli_alltime_2005_2012.nc ...  done.
+##  downloading file 1 of 1: http://services.aad.gov.au/public/datasets/science/environmental_layers/chla_max_alltime_2005_2012.nc ...  done.
+##  downloading file 1 of 1: http://services.aad.gov.au/public/datasets/science/environmental_layers/chla_mean_alltime_2005_2012.nc ...  done.
+##  downloading file 1 of 1: http://services.aad.gov.au/public/datasets/science/environmental_layers/chla_min_alltime_2005_2012.nc ...  done.
+##  downloading file 1 of 1: http://services.aad.gov.au/public/datasets/science/environmental_layers/chla_sd_alltime_2005_2012.nc ...  done.
+##  downloading file 1 of 1: http://services.aad.gov.au/public/datasets/science/environmental_layers/depth.nc ...  done.
+##  downloading file 1 of 1: http://services.aad.gov.au/public/datasets/science/environmental_layers/distance_antarctica.nc ...  done.
+##  downloading file 1 of 1: http://services.aad.gov.au/public/datasets/science/environmental_layers/distance_canyon.nc ...  done.
+##  downloading file 1 of 1: http://services.aad.gov.au/public/datasets/science/environmental_layers/distance_max_ice_edge.nc ...  done.
+##  downloading file 1 of 1: http://services.aad.gov.au/public/datasets/science/environmental_layers/distance_shelf.nc ...  done.
+##  downloading file 1 of 1: http://services.aad.gov.au/public/datasets/science/environmental_layers/extreme_event_max_chl_2005_2012_ampli.nc ...  done.
+##  downloading file 1 of 1: http://services.aad.gov.au/public/datasets/science/environmental_layers/extreme_event_max_chl_2005_2012_max.nc ...  done.
+##  downloading file 1 of 1: http://services.aad.gov.au/public/datasets/science/environmental_layers/extreme_event_max_chl_2005_2012_mean.nc ...  done.
+##  downloading file 1 of 1: http://services.aad.gov.au/public/datasets/science/environmental_layers/extreme_event_max_chl_2005_2012_min.nc ...  done.
+##  downloading file 1 of 1: http://services.aad.gov.au/public/datasets/science/environmental_layers/extreme_event_max_sali_2005_2012_nb.nc ...  done.
+##  downloading file 1 of 1: http://services.aad.gov.au/public/datasets/science/environmental_layers/extreme_event_max_temp_2005_2012_nb.nc ...  done.
+##  downloading file 1 of 1: http://services.aad.gov.au/public/datasets/science/environmental_layers/extreme_event_min_chl_2005_2012_ampli.nc ...  done.
+##  downloading file 1 of 1: http://services.aad.gov.au/public/datasets/science/environmental_layers/extreme_event_min_chl_2005_2012_max.nc ...  done.
+##  downloading file 1 of 1: http://services.aad.gov.au/public/datasets/science/environmental_layers/extreme_event_min_chl_2005_2012_mean.nc ...  done.
+##  downloading file 1 of 1: http://services.aad.gov.au/public/datasets/science/environmental_layers/extreme_event_min_chl_2005_2012_min.nc ...  done.
+##  downloading file 1 of 1: http://services.aad.gov.au/public/datasets/science/environmental_layers/extreme_event_min_oxy_1955_2012_nb.nc ...  done.
+##  downloading file 1 of 1: http://services.aad.gov.au/public/datasets/science/environmental_layers/extreme_event_min_sali_2005_2012_nb.nc ...  done.
+##  downloading file 1 of 1: http://services.aad.gov.au/public/datasets/science/environmental_layers/extreme_event_min_temp_2005_2012_nb.nc ...  done.
+##  downloading file 1 of 1: http://services.aad.gov.au/public/datasets/science/environmental_layers/geomorphology.nc ...  done.
+##  downloading file 1 of 1: http://services.aad.gov.au/public/datasets/science/environmental_layers/ice_cover_max.nc ...  done.
+##  downloading file 1 of 1: http://services.aad.gov.au/public/datasets/science/environmental_layers/ice_cover_mean.nc ...  done.
+##  downloading file 1 of 1: http://services.aad.gov.au/public/datasets/science/environmental_layers/ice_cover_min.nc ...  done.
+##  downloading file 1 of 1: http://services.aad.gov.au/public/datasets/science/environmental_layers/ice_cover_range.nc ...  done.
+##  downloading file 1 of 1: http://services.aad.gov.au/public/datasets/science/environmental_layers/ice_thickness_max.nc ...  done.
+##  downloading file 1 of 1: http://services.aad.gov.au/public/datasets/science/environmental_layers/ice_thickness_mean.nc ...  done.
+##  downloading file 1 of 1: http://services.aad.gov.au/public/datasets/science/environmental_layers/ice_thickness_min.nc ...  done.
+##  downloading file 1 of 1: http://services.aad.gov.au/public/datasets/science/environmental_layers/ice_thickness_range.nc ...  done.
+##  downloading file 1 of 1: http://services.aad.gov.au/public/datasets/science/environmental_layers/metadata_details2.csv ...  done.
+##  downloading file 1 of 1: http://services.aad.gov.au/public/datasets/science/environmental_layers/mixed_layer_depth.nc ...  done.
+##  downloading file 1 of 1: http://services.aad.gov.au/public/datasets/science/environmental_layers/roughness.nc ...  done.
+##  downloading file 1 of 1: http://services.aad.gov.au/public/datasets/science/environmental_layers/seafloor_current_speed.nc ...  done.
+##  downloading file 1 of 1: http://services.aad.gov.au/public/datasets/science/environmental_layers/seafloor_oxy_19552012_ampli.nc ...  done.
+##  downloading file 1 of 1: http://services.aad.gov.au/public/datasets/science/environmental_layers/seafloor_oxy_19552012_max.nc ...  done.
+##  downloading file 1 of 1: http://services.aad.gov.au/public/datasets/science/environmental_layers/seafloor_oxy_19552012_mean.nc ...  done.
+##  downloading file 1 of 1: http://services.aad.gov.au/public/datasets/science/environmental_layers/seafloor_oxy_19552012_min.nc ...  done.
+##  downloading file 1 of 1: http://services.aad.gov.au/public/datasets/science/environmental_layers/seafloor_oxy_19552012_sd.nc ...  done.
+##  downloading file 1 of 1: http://services.aad.gov.au/public/datasets/science/environmental_layers/seafloor_sali_2005_2012_ampli.nc ...  done.
+##  downloading file 1 of 1: http://services.aad.gov.au/public/datasets/science/environmental_layers/seafloor_sali_2005_2012_max.nc ...  done.
+##  downloading file 1 of 1: http://services.aad.gov.au/public/datasets/science/environmental_layers/seafloor_sali_2005_2012_mean.nc ...  done.
+##  downloading file 1 of 1: http://services.aad.gov.au/public/datasets/science/environmental_layers/seafloor_sali_2005_2012_min.nc ...  done.
+##  downloading file 1 of 1: http://services.aad.gov.au/public/datasets/science/environmental_layers/seafloor_sali_2005_2012_sd.nc ...  done.
+##  downloading file 1 of 1: http://services.aad.gov.au/public/datasets/science/environmental_layers/seafloor_temp_2005_2012_ampli.nc ...  done.
+##  downloading file 1 of 1: http://services.aad.gov.au/public/datasets/science/environmental_layers/seafloor_temp_2005_2012_max.nc ...  done.
+##  downloading file 1 of 1: http://services.aad.gov.au/public/datasets/science/environmental_layers/seafloor_temp_2005_2012_mean.nc ...  done.
+##  downloading file 1 of 1: http://services.aad.gov.au/public/datasets/science/environmental_layers/seafloor_temp_2005_2012_min.nc ...  done.
+##  downloading file 1 of 1: http://services.aad.gov.au/public/datasets/science/environmental_layers/seafloor_temp_2005_2012_sd.nc ...  done.
+##  downloading file 1 of 1: http://services.aad.gov.au/public/datasets/science/environmental_layers/seasurface_current_speed.nc ...  done.
+##  downloading file 1 of 1: http://services.aad.gov.au/public/datasets/science/environmental_layers/sediments.nc ...  done.
+##  downloading file 1 of 1: http://services.aad.gov.au/public/datasets/science/environmental_layers/slope.nc ...  done.
 ## 
-## Mon Sep 02 08:46:38 2019 dataset synchronization complete: Southern Ocean marine environmental data</code></pre>
+## Tue Oct 22 13:16:29 2019 dataset synchronization complete: Southern Ocean marine environmental data</code></pre>
 <p>Now we have a local copy of our data. The sync can be run daily so that the local collection is always up to date - it will only download new files, or files that have changed since the last download. For more information on <code>bowerbird</code>, see the <a href="https://ropensci.github.io/bowerbird/articles/bowerbird.html">package vignette</a>.</p>
 <p>The <code>result</code> object holds information about the data that we downloaded:</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">result</code></pre></div>
@@ -311,36 +376,36 @@ srcs[<span class="dv">1</span>, ]</code></pre></div>
 ##   name                                     id                    
 ##   &lt;chr&gt;                                    &lt;chr&gt;                 
 ## 1 Southern Ocean marine environmental data 10.26179/5b8f30e30d4f3
-##   source_url                                status files            
-##   &lt;chr&gt;                                     &lt;lgl&gt;  &lt;list&gt;           
-## 1 https://data.aad.gov.au/eds/4742/download TRUE   &lt;tibble [61 x 3]&gt;</code></pre>
+##   source_url status files            
+##   &lt;chr&gt;      &lt;lgl&gt;  &lt;list&gt;           
+## 1 &lt;NA&gt;       TRUE   &lt;tibble [59 x 3]&gt;</code></pre>
 <p>The <code>result$files</code> element tells us about the files:</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">head</span>(result<span class="op">$</span>files[[<span class="dv">1</span>]])</code></pre></div>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">head</span>(result$files[[<span class="dv">1</span>]])</code></pre></div>
 <pre><code>## # A tibble: 6 x 3
-##   url                                      
-##   &lt;chr&gt;                                    
-## 1 https://data.aad.gov.au/eds/4742/download
-## 2 &lt;NA&gt;                                     
-## 3 &lt;NA&gt;                                     
-## 4 &lt;NA&gt;                                     
-## 5 &lt;NA&gt;                                     
-## 6 &lt;NA&gt;                                     
+##   url                                                                      
+##   &lt;chr&gt;                                                                    
+## 1 http://services.aad.gov.au/public/datasets/science/environmental_layers/~
+## 2 http://services.aad.gov.au/public/datasets/science/environmental_layers/~
+## 3 http://services.aad.gov.au/public/datasets/science/environmental_layers/~
+## 4 http://services.aad.gov.au/public/datasets/science/environmental_layers/~
+## 5 http://services.aad.gov.au/public/datasets/science/environmental_layers/~
+## 6 http://services.aad.gov.au/public/datasets/science/environmental_layers/~
 ##   file                                                                     
 ##   &lt;chr&gt;                                                                    
-## 1 &quot;c:\\data\\cache\\data.aad.gov.au\\eds\\4742\\download.zip&quot;              
-## 2 c:/data/cache/data.aad.gov.au/eds/4742/environmental_layers              
-## 3 c:/data/cache/data.aad.gov.au/eds/4742/environmental_layers/chla_ampli_a~
-## 4 c:/data/cache/data.aad.gov.au/eds/4742/environmental_layers/chla_max_all~
-## 5 c:/data/cache/data.aad.gov.au/eds/4742/environmental_layers/chla_mean_al~
-## 6 c:/data/cache/data.aad.gov.au/eds/4742/environmental_layers/chla_min_all~
-##   note         
-##   &lt;chr&gt;        
-## 1 existing copy
-## 2 decompressed 
-## 3 decompressed 
-## 4 decompressed 
-## 5 decompressed 
-## 6 decompressed</code></pre>
+## 1 &quot;c:\\data\\cache\\services.aad.gov.au\\public\\datasets\\science\\enviro~
+## 2 &quot;c:\\data\\cache\\services.aad.gov.au\\public\\datasets\\science\\enviro~
+## 3 &quot;c:\\data\\cache\\services.aad.gov.au\\public\\datasets\\science\\enviro~
+## 4 &quot;c:\\data\\cache\\services.aad.gov.au\\public\\datasets\\science\\enviro~
+## 5 &quot;c:\\data\\cache\\services.aad.gov.au\\public\\datasets\\science\\enviro~
+## 6 &quot;c:\\data\\cache\\services.aad.gov.au\\public\\datasets\\science\\enviro~
+##   note      
+##   &lt;chr&gt;     
+## 1 downloaded
+## 2 downloaded
+## 3 downloaded
+## 4 downloaded
+## 5 downloaded
+## 6 downloaded</code></pre>
 <p>These particular files are netCDF, and so could be read using e.g. the <code>raster</code> or <code>ncdf4</code> packages. However, different data from different providers will be different in terms of grids, resolutions, projections, variable-naming conventions, and other facets, which tends to complicate these operations. In the next section we’ll look at the <code>raadtools</code> package, which provides a set of tools for doing common operations on these types of data.</p>
 </div>
 </div>
@@ -355,40 +420,32 @@ srcs[<span class="dv">1</span>, ]</code></pre></div>
     <span class="kw">sources</span>(<span class="st">&quot;ETOPO2 bathymetry&quot;</span>))
 result &lt;-<span class="st"> </span><span class="kw">bb_get</span>(src, <span class="dt">local_file_root =</span> my_data_dir, <span class="dt">clobber =</span> <span class="dv">0</span>, <span class="dt">verbose =</span> <span class="ot">TRUE</span>, <span class="dt">confirm =</span> <span class="ot">NULL</span>)</code></pre></div>
 <pre><code>##  
-## Mon Sep 02 08:46:38 2019 
+## Tue Oct 22 13:16:29 2019 
 ## Synchronizing dataset: NSIDC SMMR-SSM/I Nasateam sea ice concentration 
 ##  
 ##  [... output truncated]</code></pre>
 <p>Now load the <code>raadtools</code> package and tell it where our data collection has been stored:</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">library</span>(raadtools)</code></pre></div>
-<pre><code>## Uploading raad file cache as at 2019-10-10 12:24:43 (964210 files listed)</code></pre>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">set_data_roots</span>(my_data_dir)</code></pre></div>
-<pre><code>## Uploading raad file cache as at 2019-10-10 12:24:43 (819 files listed)</code></pre>
-<pre><code>## global option &#39;raadfiles.data.roots&#39; set:
-## &#39;//aad.gov.au/files/AADC/Scientific_Data/Data/gridded_new/data               2019-10-09 18:53:16
-##  //aad.gov.au/files/AADC/Scientific_Data/Data/gridded_new/data_local         2019-10-09 20:39:14
-##  //aad.gov.au/files/AADC/Scientific_Data/Data/gridded_new/data_deprecated    2018-09-17 13:42:33&#39;
-## global option &#39;raadfiles.data.roots&#39; set:
-## &#39;/data/cache    2019-07-19 14:55:38&#39;</code></pre>
-<p>Let’s say that we have some points of interest in the Southern Ocean — perhaps a ship track, or some stations where we took marine samples, or as we’ll use here, the <a href="http://www.meop.net/">track of an elephant seal</a> as it moves from the Kerguelen Islands to Antarctica and back again (Data from IMOS 2018[^1], provided as part of the <code>SOmap</code> package).</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">library</span>(raadtools)
+<span class="kw">set_data_roots</span>(my_data_dir)</code></pre></div>
+<p>Let’s say that we have some points of interest in the Southern Ocean &amp;mdash; perhaps a ship track, or some stations where we took marine samples, or as we’ll use here, the <a href="http://www.meop.net/">track of an elephant seal</a> as it moves from the Kerguelen Islands to Antarctica and back again (Data from IMOS 2018[^1], provided as part of the <code>SOmap</code> package).</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">data</span>(<span class="st">&quot;SOmap_data&quot;</span>, <span class="dt">package =</span> <span class="st">&quot;SOmap&quot;</span>)
-ele &lt;-<span class="st"> </span>SOmap_data<span class="op">$</span>mirounga_leonina <span class="op">%&gt;%</span><span class="st"> </span>dplyr<span class="op">::</span><span class="kw">filter</span>(id <span class="op">==</span><span class="st"> &quot;ct96-05-13&quot;</span>)</code></pre></div>
+ele &lt;-<span class="st"> </span>SOmap_data$mirounga_leonina %&gt;%<span class="st"> </span>dplyr::<span class="kw">filter</span>(id ==<span class="st"> &quot;ct96-05-13&quot;</span>)</code></pre></div>
 <p>Define our spatial region of interest and extract the bathymetry data from this region, using the ETOPO2 files we just downloaded:</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">roi &lt;-<span class="st"> </span><span class="kw">round</span>(<span class="kw">c</span>(<span class="kw">range</span>(ele<span class="op">$</span>lon), <span class="kw">range</span>(ele<span class="op">$</span>lat)) <span class="op">+</span><span class="st"> </span><span class="kw">c</span>(<span class="op">-</span><span class="dv">2</span>, <span class="dv">2</span>, <span class="op">-</span><span class="dv">2</span>, <span class="dv">2</span>))
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">roi &lt;-<span class="st"> </span><span class="kw">round</span>(<span class="kw">c</span>(<span class="kw">range</span>(ele$lon), <span class="kw">range</span>(ele$lat)) +<span class="st"> </span><span class="kw">c</span>(-<span class="dv">2</span>, <span class="dv">2</span>, -<span class="dv">2</span>, <span class="dv">2</span>))
 bx &lt;-<span class="st"> </span><span class="kw">readtopo</span>(<span class="st">&quot;etopo2&quot;</span>, <span class="dt">xylim =</span> roi)</code></pre></div>
 <p>And now we can make a simple plot of our our track superimposed on the bathymetry:</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">plot</span>(bx)
-<span class="kw">lines</span>(ele<span class="op">$</span>lon, ele<span class="op">$</span>lat)</code></pre></div>
+<span class="kw">lines</span>(ele$lon, ele$lat)</code></pre></div>
 <p><img src="_main_files/figure-html/raadt5-1.png" width="672" /></p>
 <p>The real power of <code>raadtools</code> comes from its extraction functions. We can extract the depth values along our track using the <code>raadtools::extract()</code> function. We pass it the data-reader function to use (<code>readtopo</code>), the data to apply it to (<code>ele[, c(&quot;lon&quot;, &quot;lat&quot;)]</code>), and any other options to pass to the reader function (in this case, specifying the topographic data source <code>topo = &quot;etopo2&quot;</code>):</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">ele<span class="op">$</span>depth &lt;-<span class="st"> </span>raadtools<span class="op">::</span><span class="kw">extract</span>(readtopo, ele[, <span class="kw">c</span>(<span class="st">&quot;lon&quot;</span>, <span class="st">&quot;lat&quot;</span>)], <span class="dt">topo =</span> <span class="st">&quot;etopo2&quot;</span>)</code></pre></div>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">ele$depth &lt;-<span class="st"> </span>raadtools::<span class="kw">extract</span>(readtopo, ele[, <span class="kw">c</span>(<span class="st">&quot;lon&quot;</span>, <span class="st">&quot;lat&quot;</span>)], <span class="dt">topo =</span> <span class="st">&quot;etopo2&quot;</span>)</code></pre></div>
 <p>Plot the histogram of depth values, showing that most of the track points are located in relatively shallow waters:</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">with</span>(ele, <span class="kw">hist</span>(depth, <span class="dt">breaks =</span> <span class="dv">20</span>))</code></pre></div>
 <p><img src="_main_files/figure-html/raadt7-1.png" width="672" /></p>
-<p>This type of extraction will also work with time-varying data — for example, we can extract the sea-ice conditions along our track, based on each track point’s location and time:</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">ele<span class="op">$</span>ice &lt;-<span class="st"> </span>raadtools<span class="op">::</span><span class="kw">extract</span>(readice, ele[, <span class="kw">c</span>(<span class="st">&quot;lon&quot;</span>, <span class="st">&quot;lat&quot;</span>, <span class="st">&quot;date&quot;</span>)])</code></pre></div>
+<p>This type of extraction will also work with time-varying data &amp;mdash; for example, we can extract the sea-ice conditions along our track, based on each track point’s location and time:</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">ele$ice &lt;-<span class="st"> </span>raadtools::<span class="kw">extract</span>(readice, ele[, <span class="kw">c</span>(<span class="st">&quot;lon&quot;</span>, <span class="st">&quot;lat&quot;</span>, <span class="st">&quot;date&quot;</span>)])</code></pre></div>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">## points outside the ice grid will have missing ice values, so fill them with zeros
-ele<span class="op">$</span>ice[<span class="kw">is.na</span>(ele<span class="op">$</span>ice)] &lt;-<span class="st"> </span><span class="dv">0</span>
+ele$ice[<span class="kw">is.na</span>(ele$ice)] &lt;-<span class="st"> </span><span class="dv">0</span>
 <span class="kw">with</span>(ele, <span class="kw">plot</span>(date, ice, <span class="dt">type =</span> <span class="st">&quot;l&quot;</span>))</code></pre></div>
 <p><img src="_main_files/figure-html/raadt9-1.png" width="672" /></p>
 </div>

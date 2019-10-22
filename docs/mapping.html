@@ -226,17 +226,17 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
 <div id="maps-in-r" class="section level2">
 <h2><span class="header-section-number">10.1</span> Maps in R</h2>
 <p>The oldest and most <em>core</em> general mapping package in R is the <code>maps</code> package. It has a simple whole-world coastline data set for immediate use.</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">maps<span class="op">::</span><span class="kw">map</span>()</code></pre></div>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">maps::<span class="kw">map</span>()</code></pre></div>
 <p><img src="_main_files/figure-html/maps-package-1.png" width="672" /></p>
 <p>The data underlying this live map is available by capturing the output as an actual object. Notice that the coastline for Antarctica does not extend to the south pole, and that parts of Russia that are east of 180 longitude are not in the western part of the map.</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">m &lt;-<span class="st"> </span>maps<span class="op">::</span><span class="kw">map</span>(<span class="dt">plot =</span> <span class="ot">FALSE</span>)
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">m &lt;-<span class="st"> </span>maps::<span class="kw">map</span>(<span class="dt">plot =</span> <span class="ot">FALSE</span>)
 
-lonlat &lt;-<span class="st"> </span><span class="kw">cbind</span>(m<span class="op">$</span>x, m<span class="op">$</span>y)
+lonlat &lt;-<span class="st"> </span><span class="kw">cbind</span>(m$x, m$y)
 
 <span class="kw">plot</span>(lonlat, <span class="dt">pch =</span> <span class="st">&quot;+&quot;</span>, <span class="dt">cex =</span> <span class="fl">0.4</span>, <span class="dt">axes =</span> <span class="ot">FALSE</span>)
 <span class="kw">lines</span>(lonlat, <span class="dt">col =</span> <span class="st">&quot;dodgerblue&quot;</span>)
 
-<span class="kw">abline</span>(<span class="dt">h =</span> <span class="kw">c</span>(<span class="op">-</span><span class="dv">90</span>, <span class="dv">90</span>), <span class="dt">v =</span> <span class="kw">c</span>(<span class="op">-</span><span class="dv">180</span>, <span class="dv">180</span>))</code></pre></div>
+<span class="kw">abline</span>(<span class="dt">h =</span> <span class="kw">c</span>(-<span class="dv">90</span>, <span class="dv">90</span>), <span class="dt">v =</span> <span class="kw">c</span>(-<span class="dv">180</span>, <span class="dv">180</span>))</code></pre></div>
 <p><img src="_main_files/figure-html/maps-assign-1.png" width="672" /></p>
 <p>A very similar and more modern data set is available in the <code>maptools</code> package.</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">data</span>(<span class="st">&quot;wrld_simpl&quot;</span>, <span class="dt">package =</span> <span class="st">&quot;maptools&quot;</span>)
@@ -244,8 +244,8 @@ lonlat &lt;-<span class="st"> </span><span class="kw">cbind</span>(m<span class=
 <span class="kw">plot</span>(wrld_simpl)</code></pre></div>
 <p><img src="_main_files/figure-html/wrld-simpl-1.png" width="672" /></p>
 <p>This data set aligns exactly to the conventional -180/180 -90/90 extent of the longitude/latitude projection.</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">plot</span>(<span class="dv">0</span>, <span class="dt">type =</span> <span class="st">&quot;n&quot;</span>, <span class="dt">axes =</span> <span class="ot">FALSE</span>, <span class="dt">xlab =</span> <span class="st">&quot;&quot;</span>, <span class="dt">ylab =</span> <span class="st">&quot;&quot;</span>, <span class="dt">xlim =</span> <span class="kw">c</span>(<span class="op">-</span><span class="dv">180</span>, <span class="dv">180</span>), <span class="dt">ylim =</span> <span class="kw">c</span>(<span class="op">-</span><span class="dv">90</span>, <span class="dv">90</span>))
-<span class="kw">rect</span>(<span class="dt">xleft =</span> <span class="op">-</span><span class="dv">180</span>, <span class="dt">ybottom =</span> <span class="op">-</span><span class="dv">90</span>, <span class="dt">xright =</span> <span class="dv">180</span>, <span class="dt">ytop =</span> <span class="dv">90</span>, <span class="dt">border =</span> <span class="st">&quot;darkred&quot;</span>, <span class="dt">lwd =</span> <span class="dv">4</span>, <span class="dt">lty =</span> <span class="dv">2</span>)
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">plot</span>(<span class="dv">0</span>, <span class="dt">type =</span> <span class="st">&quot;n&quot;</span>, <span class="dt">axes =</span> <span class="ot">FALSE</span>, <span class="dt">xlab =</span> <span class="st">&quot;&quot;</span>, <span class="dt">ylab =</span> <span class="st">&quot;&quot;</span>, <span class="dt">xlim =</span> <span class="kw">c</span>(-<span class="dv">180</span>, <span class="dv">180</span>), <span class="dt">ylim =</span> <span class="kw">c</span>(-<span class="dv">90</span>, <span class="dv">90</span>))
+<span class="kw">rect</span>(<span class="dt">xleft =</span> -<span class="dv">180</span>, <span class="dt">ybottom =</span> -<span class="dv">90</span>, <span class="dt">xright =</span> <span class="dv">180</span>, <span class="dt">ytop =</span> <span class="dv">90</span>, <span class="dt">border =</span> <span class="st">&quot;darkred&quot;</span>, <span class="dt">lwd =</span> <span class="dv">4</span>, <span class="dt">lty =</span> <span class="dv">2</span>)
 <span class="kw">plot</span>(wrld_simpl, <span class="dt">add =</span> <span class="ot">TRUE</span>)</code></pre></div>
 <p><img src="_main_files/figure-html/lon180-lat90-1.png" width="672" /></p>
 <div id="exercises" class="section level3">
@@ -257,22 +257,22 @@ lonlat &lt;-<span class="st"> </span><span class="kw">cbind</span>(m<span class=
 <p>Answer 1: <code>range(m$x, na.rm = TRUE)</code> <code>range(m$y, na.rm = TRUE</code>) also <code>m$range</code></p>
 <p>Answer 2: <code>polygon(lonlat, col = &quot;grey&quot;)</code> does not work, and <code>map(mp, fill = TRUE, col = &quot;grey&quot;)</code> does not work, but <code>maps::map(fill = TRUE, col = &quot;grey&quot;)</code> does seem to work.</p>
 <p>What’s going on? Look at the very south-eastern corner of the map. The “coastline” has been extended to the very south boundary of the available area.</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">plot</span>(<span class="dv">0</span>, <span class="dt">type =</span> <span class="st">&quot;n&quot;</span>, <span class="dt">axes =</span> <span class="ot">FALSE</span>, <span class="dt">xlab =</span> <span class="st">&quot;&quot;</span>, <span class="dt">ylab =</span> <span class="st">&quot;&quot;</span>, <span class="dt">xlim =</span> <span class="kw">c</span>(<span class="op">-</span><span class="dv">150</span>, <span class="dv">180</span>), <span class="dt">ylim =</span> <span class="kw">c</span>(<span class="op">-</span><span class="dv">90</span>, <span class="op">-</span><span class="dv">60</span>))
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">plot</span>(<span class="dv">0</span>, <span class="dt">type =</span> <span class="st">&quot;n&quot;</span>, <span class="dt">axes =</span> <span class="ot">FALSE</span>, <span class="dt">xlab =</span> <span class="st">&quot;&quot;</span>, <span class="dt">ylab =</span> <span class="st">&quot;&quot;</span>, <span class="dt">xlim =</span> <span class="kw">c</span>(-<span class="dv">150</span>, <span class="dv">180</span>), <span class="dt">ylim =</span> <span class="kw">c</span>(-<span class="dv">90</span>, -<span class="dv">60</span>))
 <span class="kw">plot</span>(wrld_simpl, <span class="dt">add =</span> <span class="ot">TRUE</span>, <span class="dt">col =</span> <span class="st">&quot;grey&quot;</span>)
-<span class="kw">rect</span>(<span class="dt">xleft =</span> <span class="op">-</span><span class="dv">180</span>, <span class="dt">ybottom =</span> <span class="op">-</span><span class="dv">90</span>, <span class="dt">xright =</span> <span class="dv">180</span>, <span class="dt">ytop =</span> <span class="dv">90</span>, <span class="dt">border =</span> <span class="st">&quot;darkred&quot;</span>, <span class="dt">lwd =</span> <span class="dv">4</span>, <span class="dt">lty =</span> <span class="dv">2</span>)
+<span class="kw">rect</span>(<span class="dt">xleft =</span> -<span class="dv">180</span>, <span class="dt">ybottom =</span> -<span class="dv">90</span>, <span class="dt">xright =</span> <span class="dv">180</span>, <span class="dt">ytop =</span> <span class="dv">90</span>, <span class="dt">border =</span> <span class="st">&quot;darkred&quot;</span>, <span class="dt">lwd =</span> <span class="dv">4</span>, <span class="dt">lty =</span> <span class="dv">2</span>)
 
-maps<span class="op">::</span><span class="kw">map</span>(<span class="dt">add =</span> <span class="ot">TRUE</span>, <span class="dt">col =</span> <span class="st">&quot;dodgerblue&quot;</span>, <span class="dt">lwd =</span> <span class="dv">3</span>)</code></pre></div>
+maps::<span class="kw">map</span>(<span class="dt">add =</span> <span class="ot">TRUE</span>, <span class="dt">col =</span> <span class="st">&quot;dodgerblue&quot;</span>, <span class="dt">lwd =</span> <span class="dv">3</span>)</code></pre></div>
 <p><img src="_main_files/figure-html/south-east-1.png" width="672" /></p>
 <p>When we add the old maps coastline see that it does not extend to 90S and it does not traverse the southern boundary.</p>
 <p>One reason for this is that if we choose a projection where the east and west edges of the Antarctic coastline meet then we get what looks a fairly clean join.</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">## scale factor
 f &lt;-<span class="st"> </span><span class="fl">3e6</span>
-<span class="kw">plot</span>(rgdal<span class="op">::</span><span class="kw">project</span>(lonlat, <span class="st">&quot;+proj=laea +lat_0=-90 +datum=WGS84&quot;</span>), <span class="dt">asp =</span> <span class="dv">1</span>, <span class="dt">type =</span> <span class="st">&quot;l&quot;</span>,
-     <span class="dt">xlim =</span> <span class="kw">c</span>(<span class="op">-</span><span class="dv">1</span>, <span class="dv">1</span>) <span class="op">*</span><span class="st"> </span>f, <span class="dt">ylim =</span> <span class="kw">c</span>(<span class="op">-</span><span class="dv">1</span>, <span class="dv">1</span>) <span class="op">*</span><span class="st"> </span>f, <span class="dt">xlab =</span> <span class="st">&quot;&quot;</span>, <span class="dt">ylab =</span> <span class="st">&quot;&quot;</span>)</code></pre></div>
+<span class="kw">plot</span>(rgdal::<span class="kw">project</span>(lonlat, <span class="st">&quot;+proj=laea +lat_0=-90 +datum=WGS84&quot;</span>), <span class="dt">asp =</span> <span class="dv">1</span>, <span class="dt">type =</span> <span class="st">&quot;l&quot;</span>,
+     <span class="dt">xlim =</span> <span class="kw">c</span>(-<span class="dv">1</span>, <span class="dv">1</span>) *<span class="st"> </span>f, <span class="dt">ylim =</span> <span class="kw">c</span>(-<span class="dv">1</span>, <span class="dv">1</span>) *<span class="st"> </span>f, <span class="dt">xlab =</span> <span class="st">&quot;&quot;</span>, <span class="dt">ylab =</span> <span class="st">&quot;&quot;</span>)</code></pre></div>
 <p><img src="_main_files/figure-html/laea-1.png" width="672" /></p>
 <p>If we try the same with <code>wrld_simpl</code> it’s not as neat. We have a strange “seam” that points exactly to the south pole (our projection is centred on longitude = 0, and latitude = -90.</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">plot</span>(sp<span class="op">::</span><span class="kw">spTransform</span>(wrld_simpl, <span class="st">&quot;+proj=laea +lat_0=-90 +datum=WGS84&quot;</span>), <span class="dt">asp =</span> <span class="dv">1</span>,
-     <span class="dt">xlim =</span> <span class="kw">c</span>(<span class="op">-</span><span class="dv">1</span>, <span class="dv">1</span>) <span class="op">*</span><span class="st"> </span>f, <span class="dt">ylim =</span> <span class="kw">c</span>(<span class="op">-</span><span class="dv">1</span>, <span class="dv">1</span>) <span class="op">*</span><span class="st"> </span>f, <span class="dt">xlab =</span> <span class="st">&quot;&quot;</span>, <span class="dt">ylab =</span> <span class="st">&quot;&quot;</span>, <span class="dt">lwd =</span> <span class="dv">3</span>)
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">plot</span>(sp::<span class="kw">spTransform</span>(wrld_simpl, <span class="st">&quot;+proj=laea +lat_0=-90 +datum=WGS84&quot;</span>), <span class="dt">asp =</span> <span class="dv">1</span>,
+     <span class="dt">xlim =</span> <span class="kw">c</span>(-<span class="dv">1</span>, <span class="dv">1</span>) *<span class="st"> </span>f, <span class="dt">ylim =</span> <span class="kw">c</span>(-<span class="dv">1</span>, <span class="dv">1</span>) *<span class="st"> </span>f, <span class="dt">xlab =</span> <span class="st">&quot;&quot;</span>, <span class="dt">ylab =</span> <span class="st">&quot;&quot;</span>, <span class="dt">lwd =</span> <span class="dv">3</span>)
 <span class="kw">abline</span>(<span class="dt">v =</span> <span class="dv">0</span>, <span class="dt">h =</span> <span class="dv">0</span>, <span class="dt">lty =</span> <span class="dv">2</span>, <span class="dt">col =</span> <span class="st">&quot;grey&quot;</span>)</code></pre></div>
 <p><img src="_main_files/figure-html/wrld-1.png" width="672" /></p>
 </div>
@@ -287,39 +287,39 @@ f &lt;-<span class="st"> </span><span class="fl">3e6</span>
 ##  $ names: chr [1:1627] &quot;Aruba&quot; &quot;Afghanistan&quot; &quot;Angola&quot; &quot;Angola:Cabinda&quot; ...
 ##  - attr(*, &quot;class&quot;)= chr &quot;map&quot;</code></pre>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">mp &lt;-<span class="st"> </span>m
-pxy &lt;-<span class="st"> </span>rgdal<span class="op">::</span><span class="kw">project</span>(lonlat, <span class="st">&quot;+proj=laea +lat_0=-90 +datum=WGS84&quot;</span>)
-mp<span class="op">$</span>x &lt;-<span class="st"> </span>pxy[,<span class="dv">1</span>]
-mp<span class="op">$</span>y &lt;-<span class="st"> </span>pxy[,<span class="dv">2</span>]
-mp<span class="op">$</span>range &lt;-<span class="st"> </span><span class="kw">c</span>(<span class="kw">range</span>(mp<span class="op">$</span>x,<span class="dt">na.rm =</span> <span class="ot">TRUE</span>), <span class="kw">range</span>(mp<span class="op">$</span>y, <span class="dt">na.rm =</span> <span class="ot">TRUE</span>))
-mp<span class="op">$</span>range</code></pre></div>
+pxy &lt;-<span class="st"> </span>rgdal::<span class="kw">project</span>(lonlat, <span class="st">&quot;+proj=laea +lat_0=-90 +datum=WGS84&quot;</span>)
+mp$x &lt;-<span class="st"> </span>pxy[,<span class="dv">1</span>]
+mp$y &lt;-<span class="st"> </span>pxy[,<span class="dv">2</span>]
+mp$range &lt;-<span class="st"> </span><span class="kw">c</span>(<span class="kw">range</span>(mp$x,<span class="dt">na.rm =</span> <span class="ot">TRUE</span>), <span class="kw">range</span>(mp$y, <span class="dt">na.rm =</span> <span class="ot">TRUE</span>))
+mp$range</code></pre></div>
 <pre><code>## [1] -12709814  12704237 -12576156  12470787</code></pre>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">plot</span>(<span class="kw">c</span>(<span class="op">-</span><span class="dv">1</span>, <span class="dv">1</span>) <span class="op">*</span><span class="st"> </span>f, <span class="kw">c</span>(<span class="op">-</span><span class="dv">1</span>, <span class="dv">1</span>) <span class="op">*</span><span class="st"> </span>f, <span class="dt">type =</span> <span class="st">&quot;n&quot;</span>, <span class="dt">asp =</span> <span class="dv">1</span>)
-maps<span class="op">::</span><span class="kw">map</span>(mp, <span class="dt">add =</span> <span class="ot">TRUE</span>)</code></pre></div>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">plot</span>(<span class="kw">c</span>(-<span class="dv">1</span>, <span class="dv">1</span>) *<span class="st"> </span>f, <span class="kw">c</span>(-<span class="dv">1</span>, <span class="dv">1</span>) *<span class="st"> </span>f, <span class="dt">type =</span> <span class="st">&quot;n&quot;</span>, <span class="dt">asp =</span> <span class="dv">1</span>)
+maps::<span class="kw">map</span>(mp, <span class="dt">add =</span> <span class="ot">TRUE</span>)</code></pre></div>
 <p><img src="_main_files/figure-html/maps-data-1.png" width="672" /></p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">## but it doesn&#39;t take much to go awry
-<span class="kw">plot</span>(<span class="kw">c</span>(<span class="op">-</span><span class="dv">1</span>, <span class="dv">1</span>) <span class="op">*</span><span class="st"> </span>f, <span class="kw">c</span>(<span class="op">-</span><span class="dv">1</span>, <span class="dv">1</span>) <span class="op">*</span><span class="st"> </span>f, <span class="dt">type =</span> <span class="st">&quot;n&quot;</span>, <span class="dt">asp =</span> <span class="dv">1</span>)
-maps<span class="op">::</span><span class="kw">map</span>(mp, <span class="dt">add =</span> <span class="ot">TRUE</span>, <span class="dt">fill =</span> <span class="ot">TRUE</span>, <span class="dt">col =</span> <span class="st">&quot;grey&quot;</span>)</code></pre></div>
+<span class="kw">plot</span>(<span class="kw">c</span>(-<span class="dv">1</span>, <span class="dv">1</span>) *<span class="st"> </span>f, <span class="kw">c</span>(-<span class="dv">1</span>, <span class="dv">1</span>) *<span class="st"> </span>f, <span class="dt">type =</span> <span class="st">&quot;n&quot;</span>, <span class="dt">asp =</span> <span class="dv">1</span>)
+maps::<span class="kw">map</span>(mp, <span class="dt">add =</span> <span class="ot">TRUE</span>, <span class="dt">fill =</span> <span class="ot">TRUE</span>, <span class="dt">col =</span> <span class="st">&quot;grey&quot;</span>)</code></pre></div>
 <p><img src="_main_files/figure-html/maps-data-2.png" width="672" /></p>
 <p>The problem is that the maps database has enough internal structure to join lines correctly, with <code>NA</code> gaps between different connected linestrings, but not enough to draw these things as polygons. A similar problem occurs in the default projection. While <code>wrld_simpl</code> has been extend by placing two dummy coordinates at the east and west versions of the south pole, this data set does not have those.</p>
 <p>We have to look quite carefully to understand what is happening, but this is wrapping around overlapping itself and so close to the southern bound we barely notice.</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">plot</span>(<span class="dv">0</span>, <span class="dt">type =</span> <span class="st">&quot;n&quot;</span>, <span class="dt">axes =</span> <span class="ot">FALSE</span>, <span class="dt">xlab =</span> <span class="st">&quot;&quot;</span>, <span class="dt">ylab =</span> <span class="st">&quot;&quot;</span>, <span class="dt">xlim =</span> <span class="kw">c</span>(<span class="op">-</span><span class="dv">180</span>, <span class="op">-</span><span class="dv">110</span>), <span class="dt">ylim =</span> <span class="kw">c</span>(<span class="op">-</span><span class="dv">90</span>, <span class="op">-</span><span class="dv">60</span>))
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">plot</span>(<span class="dv">0</span>, <span class="dt">type =</span> <span class="st">&quot;n&quot;</span>, <span class="dt">axes =</span> <span class="ot">FALSE</span>, <span class="dt">xlab =</span> <span class="st">&quot;&quot;</span>, <span class="dt">ylab =</span> <span class="st">&quot;&quot;</span>, <span class="dt">xlim =</span> <span class="kw">c</span>(-<span class="dv">180</span>, -<span class="dv">110</span>), <span class="dt">ylim =</span> <span class="kw">c</span>(-<span class="dv">90</span>, -<span class="dv">60</span>))
 
-<span class="kw">rect</span>(<span class="dt">xleft =</span> <span class="op">-</span><span class="dv">180</span>, <span class="dt">ybottom =</span> <span class="op">-</span><span class="dv">90</span>, <span class="dt">xright =</span> <span class="dv">180</span>, <span class="dt">ytop =</span> <span class="dv">90</span>, <span class="dt">border =</span> <span class="st">&quot;darkred&quot;</span>, <span class="dt">lwd =</span> <span class="dv">4</span>, <span class="dt">lty =</span> <span class="dv">2</span>)
+<span class="kw">rect</span>(<span class="dt">xleft =</span> -<span class="dv">180</span>, <span class="dt">ybottom =</span> -<span class="dv">90</span>, <span class="dt">xright =</span> <span class="dv">180</span>, <span class="dt">ytop =</span> <span class="dv">90</span>, <span class="dt">border =</span> <span class="st">&quot;darkred&quot;</span>, <span class="dt">lwd =</span> <span class="dv">4</span>, <span class="dt">lty =</span> <span class="dv">2</span>)
 
-maps<span class="op">::</span><span class="kw">map</span>(<span class="dt">add =</span> <span class="ot">TRUE</span>,<span class="dt">col =</span> <span class="st">&quot;grey&quot;</span>, <span class="dt">fill =</span> <span class="ot">TRUE</span>)</code></pre></div>
+maps::<span class="kw">map</span>(<span class="dt">add =</span> <span class="ot">TRUE</span>,<span class="dt">col =</span> <span class="st">&quot;grey&quot;</span>, <span class="dt">fill =</span> <span class="ot">TRUE</span>)</code></pre></div>
 <p><img src="_main_files/figure-html/no-pole-1.png" width="672" /></p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">maps<span class="op">::</span><span class="kw">map</span>(<span class="dt">col =</span> <span class="st">&quot;grey&quot;</span>, <span class="dt">fill =</span> <span class="ot">TRUE</span>)</code></pre></div>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">maps::<span class="kw">map</span>(<span class="dt">col =</span> <span class="st">&quot;grey&quot;</span>, <span class="dt">fill =</span> <span class="ot">TRUE</span>)</code></pre></div>
 <p><img src="_main_files/figure-html/no-pole-2.png" width="672" /></p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">mpmerc &lt;-<span class="st"> </span>m
-pxy &lt;-<span class="st"> </span>rgdal<span class="op">::</span><span class="kw">project</span>(lonlat, <span class="st">&quot;+proj=merc +datum=WGS84&quot;</span>)
-mpmerc<span class="op">$</span>x &lt;-<span class="st"> </span>pxy[,<span class="dv">1</span>]
-mpmerc<span class="op">$</span>y &lt;-<span class="st"> </span>pxy[,<span class="dv">2</span>]
-mpmerc<span class="op">$</span>range &lt;-<span class="st"> </span><span class="kw">c</span>(<span class="kw">range</span>(mpmerc<span class="op">$</span>x,<span class="dt">na.rm =</span> <span class="ot">TRUE</span>), <span class="kw">range</span>(mpmerc<span class="op">$</span>y, <span class="dt">na.rm =</span> <span class="ot">TRUE</span>))
-mpmerc<span class="op">$</span>range</code></pre></div>
+pxy &lt;-<span class="st"> </span>rgdal::<span class="kw">project</span>(lonlat, <span class="st">&quot;+proj=merc +datum=WGS84&quot;</span>)
+mpmerc$x &lt;-<span class="st"> </span>pxy[,<span class="dv">1</span>]
+mpmerc$y &lt;-<span class="st"> </span>pxy[,<span class="dv">2</span>]
+mpmerc$range &lt;-<span class="st"> </span><span class="kw">c</span>(<span class="kw">range</span>(mpmerc$x,<span class="dt">na.rm =</span> <span class="ot">TRUE</span>), <span class="kw">range</span>(mpmerc$y, <span class="dt">na.rm =</span> <span class="ot">TRUE</span>))
+mpmerc$range</code></pre></div>
 <pre><code>## [1] -20037508  20037508 -20179524  18351859</code></pre>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">## the catastrophe made a little clearer 
-<span class="kw">plot</span>(<span class="dv">0</span>, <span class="dt">xlim =</span> <span class="kw">range</span>(mpmerc<span class="op">$</span>range[<span class="dv">1</span><span class="op">:</span><span class="dv">2</span>]), <span class="dt">ylim =</span> <span class="kw">c</span>(mpmerc<span class="op">$</span>range[<span class="dv">1</span>], <span class="dv">0</span>))
-maps<span class="op">::</span><span class="kw">map</span>(mpmerc,  <span class="dt">fill =</span> <span class="ot">TRUE</span>, <span class="dt">col =</span> <span class="st">&quot;grey&quot;</span>, <span class="dt">add =</span> <span class="ot">TRUE</span>)</code></pre></div>
+<span class="kw">plot</span>(<span class="dv">0</span>, <span class="dt">xlim =</span> <span class="kw">range</span>(mpmerc$range[<span class="dv">1</span>:<span class="dv">2</span>]), <span class="dt">ylim =</span> <span class="kw">c</span>(mpmerc$range[<span class="dv">1</span>], <span class="dv">0</span>))
+maps::<span class="kw">map</span>(mpmerc,  <span class="dt">fill =</span> <span class="ot">TRUE</span>, <span class="dt">col =</span> <span class="st">&quot;grey&quot;</span>, <span class="dt">add =</span> <span class="ot">TRUE</span>)</code></pre></div>
 <p><img src="_main_files/figure-html/no-pole-3.png" width="672" /></p>
 </div>
 </div>
@@ -331,9 +331,6 @@ maps<span class="op">::</span><span class="kw">map</span>(mpmerc,  <span class="
 <p>Start by installing the <code>SOmap</code> package if you haven’t done so already:</p>
 <pre class="somap_install"><code>remotes::install_github(&quot;AustralianAntarcticDivision/SOmap&quot;)
 </code></pre>
-<div class="alert alert-info">
-<p><strong>Temporary note:</strong> the code here was written using the development version of <code>SOmap</code>. You may need to install the development version using <code>remotes::install_github(&quot;AustralianAntarcticDivision/SOmap&quot;, ref = &quot;dev-0.5&quot;)</code>.</p>
-</div>
 <p>Then load the package:</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">library</span>(SOmap)
 ## also define a colour map to use for some examples
@@ -344,7 +341,7 @@ my_cmap &lt;-<span class="st"> </span><span class="kw">colorRampPalette</span>(<
 <p>A basic circumpolar map in polar stereographic projection:</p>
 <p><code>{r somap1 } SOmap()</code></p>
 <p><code>SOmanagement()</code> provides a number of contextual layers such as MPA boundaries and management zones.</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">SOmap</span>(<span class="dt">trim =</span> <span class="op">-</span><span class="dv">40</span>) ## plot to 40S
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">SOmap</span>(<span class="dt">trim =</span> -<span class="dv">40</span>) ## plot to 40S
 ## add the exclusive economic zones management layer
 <span class="kw">SOmanagement</span>(<span class="dt">eez =</span> <span class="ot">TRUE</span>)</code></pre></div>
 <p><img src="_main_files/figure-html/somap2-1.png" width="672" /></p>
@@ -352,7 +349,7 @@ my_cmap &lt;-<span class="st"> </span><span class="kw">colorRampPalette</span>(<
 <h4><span class="header-section-number">10.2.1.1</span> Adding points</h4>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">## some longitude/latitude data
 <span class="kw">library</span>(sp)
-my_points_ll &lt;-<span class="st"> </span><span class="kw">data.frame</span>(<span class="dt">lon =</span> <span class="kw">seq</span>(<span class="dv">0</span>, <span class="dv">350</span>, <span class="dt">by =</span> <span class="dv">10</span>), <span class="dt">lat =</span> <span class="op">-</span><span class="dv">55</span>, <span class="dt">z =</span> <span class="kw">runif</span>(<span class="dv">36</span>))
+my_points_ll &lt;-<span class="st"> </span><span class="kw">data.frame</span>(<span class="dt">lon =</span> <span class="kw">seq</span>(<span class="dv">0</span>, <span class="dv">350</span>, <span class="dt">by =</span> <span class="dv">10</span>), <span class="dt">lat =</span> -<span class="dv">55</span>, <span class="dt">z =</span> <span class="kw">runif</span>(<span class="dv">36</span>))
 <span class="kw">coordinates</span>(my_points_ll) &lt;-<span class="st"> </span><span class="kw">c</span>(<span class="st">&quot;lon&quot;</span>, <span class="st">&quot;lat&quot;</span>)
 <span class="kw">projection</span>(my_points_ll) &lt;-<span class="st"> &quot;+proj=longlat +datum=WGS84&quot;</span></code></pre></div>
 <p>Our data need to be reprojected to match our map before plotting. The <code>SOproj</code> function does this:</p>
@@ -372,8 +369,8 @@ my_points &lt;-<span class="st"> </span><span class="kw">SOproj</span>(my_points
 <p>First let’s construct some artificial raster data (in longitude-latitude space) for demonstration purposes:</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">library</span>(raster)
 temp &lt;-<span class="st"> </span><span class="kw">as.data.frame</span>(<span class="kw">expand.grid</span>(<span class="dt">lon =</span> <span class="kw">seq</span>(<span class="dv">100</span>, <span class="dv">140</span>, <span class="dt">by =</span> <span class="fl">0.25</span>),
-                                  <span class="dt">lat =</span> <span class="kw">seq</span>(<span class="op">-</span><span class="dv">65</span>, <span class="op">-</span><span class="dv">45</span>, <span class="dt">by =</span> <span class="fl">0.1</span>)))
-temp<span class="op">$</span>val &lt;-<span class="st"> </span><span class="kw">sqrt</span>((temp<span class="op">$</span>lon <span class="op">-</span><span class="st"> </span><span class="dv">120</span>)<span class="op">^</span><span class="dv">2</span><span class="op">/</span><span class="dv">3</span> <span class="op">+</span><span class="st"> </span>(temp<span class="op">$</span>lat <span class="op">-</span><span class="st"> </span><span class="op">-</span><span class="dv">40</span>)<span class="op">^</span><span class="dv">2</span><span class="op">/</span><span class="dv">5</span>)
+                                  <span class="dt">lat =</span> <span class="kw">seq</span>(-<span class="dv">65</span>, -<span class="dv">45</span>, <span class="dt">by =</span> <span class="fl">0.1</span>)))
+temp$val &lt;-<span class="st"> </span><span class="kw">sqrt</span>((temp$lon -<span class="st"> </span><span class="dv">120</span>)^<span class="dv">2</span>/<span class="dv">3</span> +<span class="st"> </span>(temp$lat -<span class="st"> </span>-<span class="dv">40</span>)^<span class="dv">2</span>/<span class="dv">5</span>)
 ## create raster object
 xr &lt;-<span class="st"> </span><span class="kw">rasterFromXYZ</span>(temp)
 <span class="kw">projection</span>(xr) &lt;-<span class="st"> &quot;+proj=longlat +datum=WGS84&quot;</span></code></pre></div>
@@ -400,7 +397,7 @@ xr &lt;-<span class="st"> </span><span class="kw">rasterFromXYZ</span>(temp)
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">## draw the base map
 <span class="kw">SOmap</span>()
 ## add our raster, controlling the colour range to span the values 0 to 30
-colour_breaks &lt;-<span class="st"> </span><span class="kw">seq</span>(<span class="dv">0</span>, <span class="dv">30</span>, <span class="dt">length.out =</span> <span class="kw">length</span>(my_cmap) <span class="op">+</span><span class="st"> </span><span class="dv">1</span>)
+colour_breaks &lt;-<span class="st"> </span><span class="kw">seq</span>(<span class="dv">0</span>, <span class="dv">30</span>, <span class="dt">length.out =</span> <span class="kw">length</span>(my_cmap) +<span class="st"> </span><span class="dv">1</span>)
 <span class="kw">SOplot</span>(xr, <span class="dt">legend =</span> <span class="ot">FALSE</span>, <span class="dt">col =</span> my_cmap, <span class="dt">breaks =</span> colour_breaks)
 ## add the legend, again controlling the colour range
 label_breaks &lt;-<span class="st"> </span><span class="kw">seq</span>(<span class="dv">0</span>, <span class="dv">30</span>, <span class="dt">length.out =</span> <span class="dv">7</span>)
@@ -414,13 +411,13 @@ label_breaks &lt;-<span class="st"> </span><span class="kw">seq</span>(<span cla
 <p><img src="_main_files/figure-html/somap_legend1-1.png" width="672" /></p>
 <p>The legend has been chopped off because the layout has not left enough space around the map for the curved legend. Currently, the best solution is probably to generate the <code>SOmap</code> object <em>with</em> the bathymetric legend, but then remove it before plotting (see the <a href="mapping.html#modifying-map-objects-advanced-usage">Modifying map objects</a> section for more details on this):</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">temp &lt;-<span class="st"> </span><span class="kw">SOmap</span>()
-temp<span class="op">$</span>bathy_legend &lt;-<span class="st"> </span><span class="ot">NULL</span> ## remove the bathy legend
+temp$bathy_legend &lt;-<span class="st"> </span><span class="ot">NULL</span> ## remove the bathy legend
 <span class="kw">plot</span>(temp)
 <span class="kw">SOleg</span>(<span class="dt">position =</span> <span class="st">&quot;topright&quot;</span>, <span class="dt">col =</span> my_cmap, <span class="dt">breaks =</span> label_breaks,
       <span class="dt">type =</span> <span class="st">&quot;continuous&quot;</span>, <span class="dt">label =</span> <span class="st">&quot;My variable&quot;</span>)</code></pre></div>
 <p><img src="_main_files/figure-html/somap_legend2-1.png" width="672" /></p>
 <p>Multiple rasters:</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">xr2 &lt;-<span class="st"> </span>raster<span class="op">::</span><span class="kw">shift</span>(xr, <span class="op">-</span><span class="dv">70</span>) ## offset in longitude
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">xr2 &lt;-<span class="st"> </span>raster::<span class="kw">shift</span>(xr, -<span class="dv">70</span>) ## offset in longitude
 <span class="kw">SOmap</span>()
 <span class="kw">SOplot</span>(xr, <span class="dt">legend =</span> <span class="ot">FALSE</span>, <span class="dt">col =</span> my_cmap)
 <span class="kw">SOplot</span>(xr2, <span class="dt">legend =</span> <span class="ot">FALSE</span>, <span class="dt">col =</span> my_cmap)</code></pre></div>
@@ -431,12 +428,12 @@ temp<span class="op">$</span>bathy_legend &lt;-<span class="st"> </span><span cl
 <h3><span class="header-section-number">10.2.2</span> Non-circumpolar maps</h3>
 <p>The <code>SOmap_auto</code> function will take your input data and make a guess at an appropriate projection and extent to use. Note that this is not always going to guess the <em>best</em> projection and extent, so you should view it as a starting point from which you can generate a map to your exact requirements.</p>
 <p>Use the elephant seal track data bundled with the package:</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">ellie &lt;-<span class="st"> </span>SOmap_data<span class="op">$</span>mirounga_leonina
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">ellie &lt;-<span class="st"> </span>SOmap_data$mirounga_leonina
 ## construct and plot the map
-<span class="kw">SOmap_auto</span>(ellie<span class="op">$</span>lon, ellie<span class="op">$</span>lat)</code></pre></div>
+<span class="kw">SOmap_auto</span>(ellie$lon, ellie$lat)</code></pre></div>
 <p><img src="_main_files/figure-html/soauto1-1.png" width="672" /></p>
 <p>Just a blank map to which you could add other things:</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">SOmap_auto</span>(ellie<span class="op">$</span>lon, ellie<span class="op">$</span>lat, <span class="dt">input_points =</span> <span class="ot">FALSE</span>, <span class="dt">input_lines =</span> <span class="ot">FALSE</span>)</code></pre></div>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">SOmap_auto</span>(ellie$lon, ellie$lat, <span class="dt">input_points =</span> <span class="ot">FALSE</span>, <span class="dt">input_lines =</span> <span class="ot">FALSE</span>)</code></pre></div>
 <p><img src="_main_files/figure-html/soauto2-1.png" width="672" /></p>
 <p>You can pass a raster as input data, but note that it won’t plot the raster (it uses its extent to infer an appropriate extent for the map):</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">SOmap_auto</span>(xr)</code></pre></div>
@@ -446,7 +443,7 @@ temp<span class="op">$</span>bathy_legend &lt;-<span class="st"> </span><span cl
 <span class="kw">SOplot</span>(xr, <span class="dt">col =</span> my_cmap)</code></pre></div>
 <p><img src="_main_files/figure-html/soauto4-1.png" width="672" /></p>
 <p>We can force a particular projection:</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">SOmap_auto</span>(xr, <span class="dt">target =</span> <span class="st">&quot;laea&quot;</span>, <span class="dt">centre_lon =</span> <span class="dv">147</span>, <span class="dt">centre_lat =</span> <span class="op">-</span><span class="dv">42</span>)
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">SOmap_auto</span>(xr, <span class="dt">target =</span> <span class="st">&quot;laea&quot;</span>, <span class="dt">centre_lon =</span> <span class="dv">147</span>, <span class="dt">centre_lat =</span> -<span class="dv">42</span>)
 <span class="kw">SOplot</span>(xr, <span class="dt">col =</span> my_cmap)</code></pre></div>
 <p><img src="_main_files/figure-html/soauto5-1.png" width="672" /></p>
 <p>Same but by supplying a full proj4 string to <code>target</code>:</p>
@@ -485,7 +482,7 @@ myplotgg &lt;-<span class="st"> </span><span class="kw">SOgg</span>(myplot) ## c
 ##  [5] &quot;bathy&quot;         &quot;box&quot;           &quot;plot_sequence&quot; &quot;coastline&quot;    
 ##  [9] &quot;ice&quot;           &quot;outer_mask&quot;    &quot;bathy_legend&quot;  &quot;border&quot;</code></pre>
 <p>The object contains a <code>plot_sequence</code> component, which defines the order in which each part of the plot is drawn. The other components of the object contain the code required to draw each part. Take e.g. the ice component (this is the ice shelves, glacier tongues, etc). This is a list (in this case with only one element). Each element of the list specifies a function to run along with arguments to pass to it:</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">str</span>(mymap<span class="op">$</span>ice)</code></pre></div>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">str</span>(mymap$ice)</code></pre></div>
 <pre><code>## List of 1
 ##  $ :List of 2
 ##   ..$ plotfun : chr &quot;plot&quot;
@@ -498,38 +495,38 @@ myplotgg &lt;-<span class="st"> </span><span class="kw">SOgg</span>(myplot) ## c
 ##   .. ..$ add   : logi TRUE
 ##   ..- attr(*, &quot;class&quot;)= chr &quot;SO_plotter&quot;</code></pre>
 <p>We can modify the function and/or its arguments:</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">mymap<span class="op">$</span>ice[[<span class="dv">1</span>]]<span class="op">$</span>plotargs<span class="op">$</span>col &lt;-<span class="st"> &quot;green&quot;</span></code></pre></div>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">mymap$ice[[<span class="dv">1</span>]]$plotargs$col &lt;-<span class="st"> &quot;green&quot;</span></code></pre></div>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">plot</span>(mymap)</code></pre></div>
 <p><img src="_main_files/figure-html/somap2d-1.png" width="672" /></p>
 <p>We can remove entire components:</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">temp &lt;-<span class="st"> </span>mymap
-temp<span class="op">$</span>coastline &lt;-<span class="st"> </span><span class="ot">NULL</span>
-temp<span class="op">$</span>ice &lt;-<span class="st"> </span><span class="ot">NULL</span>
+temp$coastline &lt;-<span class="st"> </span><span class="ot">NULL</span>
+temp$ice &lt;-<span class="st"> </span><span class="ot">NULL</span>
 <span class="kw">plot</span>(temp)</code></pre></div>
 <p><img src="_main_files/figure-html/somap2e-1.png" width="672" /></p>
 <p>But note that some elements are required. In particular, the bathymetry layer can’t currently be removed because the code that draws this is also the code that creates the plot page via <code>plot.new()</code>. The code below would fail outright if there was no existing existing plot. If there was an existing plot in the graphics device, this code would run but give unpredictable results because it would draw on top of the previously-setup plot:</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">## code not run here
 temp &lt;-<span class="st"> </span>mymap
-temp<span class="op">$</span>bathy &lt;-<span class="st"> </span><span class="ot">NULL</span>
+temp$bathy &lt;-<span class="st"> </span><span class="ot">NULL</span>
 <span class="kw">plot</span>(temp)</code></pre></div>
 <p>One way around this would be to simply replace all of the bathymetric data values with <code>NA</code>s. The plotting code would still have the extent of the bathymetric layer that it needs in order to set up the plot, but no data would be shown:</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">temp &lt;-<span class="st"> </span>mymap
 ## the bathy data is held in temp$bathy[[1]]$plotargs$x
 ## and it&#39;s a raster, so we can set its values to NA with
-raster<span class="op">::</span><span class="kw">values</span>(temp<span class="op">$</span>bathy[[<span class="dv">1</span>]]<span class="op">$</span>plotargs<span class="op">$</span>x) &lt;-<span class="st"> </span><span class="ot">NA_real_</span>
-temp<span class="op">$</span>bathy_legend &lt;-<span class="st"> </span><span class="ot">NULL</span>
+raster::<span class="kw">values</span>(temp$bathy[[<span class="dv">1</span>]]$plotargs$x) &lt;-<span class="st"> </span><span class="ot">NA_real_</span>
+temp$bathy_legend &lt;-<span class="st"> </span><span class="ot">NULL</span>
 <span class="kw">plot</span>(temp)</code></pre></div>
 <p><img src="_main_files/figure-html/somap2h2-1.png" width="672" /></p>
 <p>We could also replace the bathymetry data with another raster object. Note that we do need to be careful about the extent and projection of this raster. For example, replacing the bathymetry raster with the ice raster (which has the same polar stereographic projection but smaller extent) gives:</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">temp &lt;-<span class="st"> </span>mymap
-temp<span class="op">$</span>bathy[[<span class="dv">1</span>]]<span class="op">$</span>plotargs<span class="op">$</span>x &lt;-<span class="st"> </span>ice
-temp<span class="op">$</span>bathy_legend &lt;-<span class="st"> </span><span class="ot">NULL</span>
+temp$bathy[[<span class="dv">1</span>]]$plotargs$x &lt;-<span class="st"> </span>ice
+temp$bathy_legend &lt;-<span class="st"> </span><span class="ot">NULL</span>
 <span class="kw">plot</span>(temp)</code></pre></div>
 <p><img src="_main_files/figure-html/somap2g-1.png" width="672" /></p>
 <p>It’s chopped off because the extent of the ice raster is being used to set the plot extent. But if we extend the ice raster to match the map extent:</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">temp &lt;-<span class="st"> </span>mymap
-temp<span class="op">$</span>bathy[[<span class="dv">1</span>]]<span class="op">$</span>plotargs<span class="op">$</span>x &lt;-<span class="st"> </span>raster<span class="op">::</span><span class="kw">extend</span>(ice, mymap<span class="op">$</span>target)
-temp<span class="op">$</span>bathy_legend &lt;-<span class="st"> </span><span class="ot">NULL</span>
+temp$bathy[[<span class="dv">1</span>]]$plotargs$x &lt;-<span class="st"> </span>raster::<span class="kw">extend</span>(ice, mymap$target)
+temp$bathy_legend &lt;-<span class="st"> </span><span class="ot">NULL</span>
 <span class="kw">plot</span>(temp)</code></pre></div>
 <p><img src="_main_files/figure-html/somap2h-1.png" width="672" /></p>
 </div>
@@ -540,24 +537,24 @@ temp<span class="op">$</span>bathy_legend &lt;-<span class="st"> </span><span cl
 <h5><span class="header-section-number">10.2.4.2.1</span> Modifying the <code>ggplot</code> object.</h5>
 <p>Remember that printing or plotting a <code>SOmap_gg</code> object produces a <code>ggplot</code> object. This can be modified by adding e.g. layers or themes just like a normal <code>ggplot</code>. Remember to load the <code>ggplot2</code> library now that we are using <code>ggplot2</code> functions directly.</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">library</span>(ggplot2)
-my_ggplot <span class="op">+</span><span class="st"> </span><span class="kw">geom_point</span>(<span class="dt">data =</span> <span class="kw">as.data.frame</span>(my_points), <span class="kw">aes</span>(lon, lat, <span class="dt">colour =</span> z), <span class="dt">size =</span> <span class="dv">3</span>) <span class="op">+</span>
+my_ggplot +<span class="st"> </span><span class="kw">geom_point</span>(<span class="dt">data =</span> <span class="kw">as.data.frame</span>(my_points), <span class="kw">aes</span>(lon, lat, <span class="dt">colour =</span> z), <span class="dt">size =</span> <span class="dv">3</span>) +
 <span class="st">  </span><span class="kw">scale_colour_distiller</span>(<span class="dt">palette =</span> <span class="st">&quot;Spectral&quot;</span>)</code></pre></div>
 <p><img src="_main_files/figure-html/somap6-1.png" width="672" /></p>
 <p>Multiple rasters or multiple sets of points gets tricky if they are on different scales, because <code>ggplot2</code> is only designed to work with a single colour scale per geometry type. You can try your luck with the <code>ggnewscale</code> or <code>relayer</code> packages, although both are in a fairly experimental stage of development.</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">## remotes::install_github(&quot;clauswilke/relayer&quot;)
 <span class="kw">library</span>(relayer)
-<span class="kw">plot</span>(<span class="kw">SOgg</span>(<span class="kw">SOmap</span>(<span class="dt">straight =</span> <span class="ot">TRUE</span>))) <span class="op">+</span>
+<span class="kw">plot</span>(<span class="kw">SOgg</span>(<span class="kw">SOmap</span>(<span class="dt">straight =</span> <span class="ot">TRUE</span>))) +
 <span class="st">  </span><span class="kw">rename_geom_aes</span>(<span class="kw">geom_raster</span>(<span class="dt">data =</span> <span class="kw">as.data.frame</span>(<span class="kw">SOproj</span>(xr), <span class="dt">xy =</span> <span class="ot">TRUE</span>),
-                  <span class="kw">aes</span>(<span class="dt">x =</span> x, <span class="dt">y =</span> y, <span class="dt">fill2 =</span> val)), <span class="dt">new_aes =</span> <span class="kw">c</span>(<span class="dt">fill =</span> <span class="st">&quot;fill2&quot;</span>)) <span class="op">+</span>
+                  <span class="kw">aes</span>(<span class="dt">x =</span> x, <span class="dt">y =</span> y, <span class="dt">fill2 =</span> val)), <span class="dt">new_aes =</span> <span class="kw">c</span>(<span class="dt">fill =</span> <span class="st">&quot;fill2&quot;</span>)) +
 <span class="st">  </span><span class="kw">scale_fill_gradientn</span>(<span class="dt">aesthetics =</span> <span class="st">&quot;fill2&quot;</span>, <span class="dt">colors =</span> my_cmap, <span class="dt">na.value =</span> <span class="ot">NA</span>,
                        <span class="dt">name =</span> <span class="st">&quot;My variable&quot;</span>, <span class="dt">guide =</span> <span class="st">&quot;legend&quot;</span>)</code></pre></div>
 <p><img src="_main_files/figure-html/somap5f-1.png" width="672" /></p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">## remotes::install_github(&quot;eliocamp/ggnewscale&quot;)
 <span class="kw">library</span>(ggnewscale)
-<span class="kw">plot</span>(<span class="kw">SOgg</span>(<span class="kw">SOmap</span>(<span class="dt">straight =</span> <span class="ot">TRUE</span>))) <span class="op">+</span>
-<span class="st">  </span><span class="kw">new_scale_fill</span>() <span class="op">+</span>
+<span class="kw">plot</span>(<span class="kw">SOgg</span>(<span class="kw">SOmap</span>(<span class="dt">straight =</span> <span class="ot">TRUE</span>))) +
+<span class="st">  </span><span class="kw">new_scale_fill</span>() +
 <span class="st">  </span><span class="kw">geom_raster</span>(<span class="dt">data =</span> <span class="kw">as.data.frame</span>(<span class="kw">SOproj</span>(xr), <span class="dt">xy =</span> <span class="ot">TRUE</span>),
-                  <span class="kw">aes</span>(<span class="dt">x =</span> x, <span class="dt">y =</span> y, <span class="dt">fill =</span> val)) <span class="op">+</span>
+                  <span class="kw">aes</span>(<span class="dt">x =</span> x, <span class="dt">y =</span> y, <span class="dt">fill =</span> val)) +
 <span class="st">  </span><span class="kw">scale_fill_gradientn</span>(<span class="dt">colors =</span> my_cmap, <span class="dt">na.value =</span> <span class="ot">NA</span>, <span class="dt">name =</span> <span class="st">&quot;My variable&quot;</span>)</code></pre></div>
 <p><img src="_main_files/figure-html/somap5g-1.png" width="672" /></p>
 </div>
@@ -570,32 +567,32 @@ my_ggplot <span class="op">+</span><span class="st"> </span><span class="kw">geo
 ##  [9] &quot;scale_fill&quot;    &quot;bathy_legend&quot;  &quot;coastline&quot;     &quot;ice&quot;          
 ## [13] &quot;axis_labels&quot;   &quot;theme&quot;         &quot;border&quot;</code></pre>
 <p>However, instead of base plotting functions, <code>SOmap_gg</code> objects use <code>ggplot2</code> function calls, e.g.:</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">myplotgg<span class="op">$</span>ice[[<span class="dv">1</span>]]<span class="op">$</span>plotfun</code></pre></div>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">myplotgg$ice[[<span class="dv">1</span>]]$plotfun</code></pre></div>
 <pre><code>## [1] &quot;ggplot2::geom_sf&quot;</code></pre>
 <p>We can modify these functions and/or arguments in a similar manner to <code>SOmap</code> objects.</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">myplotgg<span class="op">$</span>ice[[<span class="dv">1</span>]]<span class="op">$</span>plotargs<span class="op">$</span>fill &lt;-<span class="st"> &quot;green&quot;</span></code></pre></div>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">myplotgg$ice[[<span class="dv">1</span>]]$plotargs$fill &lt;-<span class="st"> &quot;green&quot;</span></code></pre></div>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">plot</span>(myplotgg)</code></pre></div>
 <p><img src="_main_files/figure-html/somap5c-1.png" width="672" /></p>
 <p>Or remove the bathymetric raster layer:</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">temp &lt;-<span class="st"> </span>myplotgg
-temp<span class="op">$</span>bathy &lt;-<span class="st"> </span><span class="ot">NULL</span>
-temp<span class="op">$</span>bathy_legend &lt;-<span class="st"> </span><span class="ot">NULL</span>
+temp$bathy &lt;-<span class="st"> </span><span class="ot">NULL</span>
+temp$bathy_legend &lt;-<span class="st"> </span><span class="ot">NULL</span>
 <span class="kw">plot</span>(temp)</code></pre></div>
 <p><img src="_main_files/figure-html/somap5d-1.png" width="672" /></p>
 <p>Or replace it with a different raster (use the <code>ice</code> raster as an example):</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">temp &lt;-<span class="st"> </span>myplotgg
 ## convert ice raster to suitable data.frame
-ice_raster_as_df &lt;-<span class="st"> </span>raster<span class="op">::</span><span class="kw">as.data.frame</span>(<span class="kw">SOproj</span>(ice), <span class="dt">xy =</span> <span class="ot">TRUE</span>)
+ice_raster_as_df &lt;-<span class="st"> </span>raster::<span class="kw">as.data.frame</span>(<span class="kw">SOproj</span>(ice), <span class="dt">xy =</span> <span class="ot">TRUE</span>)
 <span class="kw">names</span>(ice_raster_as_df)[<span class="dv">3</span>] &lt;-<span class="st"> &quot;ice&quot;</span>
 ## add this to our object in place of bathy
-temp<span class="op">$</span>bathy &lt;-<span class="st"> </span><span class="kw">SO_plotter</span>(<span class="dt">plotfun =</span> <span class="st">&quot;ggplot2::geom_raster&quot;</span>,
+temp$bathy &lt;-<span class="st"> </span><span class="kw">SO_plotter</span>(<span class="dt">plotfun =</span> <span class="st">&quot;ggplot2::geom_raster&quot;</span>,
                          <span class="dt">plotargs =</span> <span class="kw">list</span>(<span class="dt">data =</span> ice_raster_as_df,
                                          <span class="dt">mapping =</span> <span class="kw">aes_string</span>(<span class="dt">fill =</span> <span class="st">&quot;ice&quot;</span>))
 )
 ## change the colour scale
-temp<span class="op">$</span>scale_fill[[<span class="dv">1</span>]]<span class="op">$</span>plotargs &lt;-<span class="st"> </span><span class="kw">list</span>(<span class="dt">colours =</span> my_cmap, <span class="dt">na.value =</span> <span class="st">&quot;#FFFFFF00&quot;</span>, <span class="dt">guide =</span> <span class="ot">FALSE</span>)
+temp$scale_fill[[<span class="dv">1</span>]]$plotargs &lt;-<span class="st"> </span><span class="kw">list</span>(<span class="dt">colours =</span> my_cmap, <span class="dt">na.value =</span> <span class="st">&quot;#FFFFFF00&quot;</span>, <span class="dt">guide =</span> <span class="ot">FALSE</span>)
 ## remove the bathy legend
-temp<span class="op">$</span>bathy_legend &lt;-<span class="st"> </span><span class="ot">NULL</span>
+temp$bathy_legend &lt;-<span class="st"> </span><span class="ot">NULL</span>
 <span class="kw">plot</span>(temp)</code></pre></div>
 <p><img src="_main_files/figure-html/somap5e-1.png" width="672" /></p>
 </div>
@@ -608,11 +605,11 @@ temp<span class="op">$</span>bathy_legend &lt;-<span class="st"> </span><span cl
 <h4><span class="header-section-number">10.2.5.1</span> Automatic printing and for-loops</h4>
 <p>If you type a variable/object name directly into the console then it triggers that object’s <code>print</code> method automatically. Typing <code>SOmap()</code> at the console returns an object of class <code>SOmap</code>, and because it’s happening at the console that object’s <code>print</code> method is called, which causes the map to be plotted in the current graphics device.</p>
 <p>However, R turns off automatic printing inside <code>for</code> loops and functions. So this code:</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="cf">for</span> (i <span class="cf">in</span> <span class="dv">1</span><span class="op">:</span><span class="dv">5</span>) {
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">for (i in <span class="dv">1</span>:<span class="dv">5</span>) {
   <span class="kw">SOmap_auto</span>()
 }</code></pre></div>
 <p>won’t produce anything, because the <code>print</code> method never gets called. If you are generating maps using loops, you will need to explicitly call the <code>print</code> method:</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="cf">for</span> (i <span class="cf">in</span> <span class="dv">1</span><span class="op">:</span><span class="dv">5</span>) {
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">for (i in <span class="dv">1</span>:<span class="dv">5</span>) {
   <span class="kw">print</span>(<span class="kw">SOmap_auto</span>())
 }</code></pre></div>
 </div>
@@ -629,14 +626,10 @@ temp<span class="op">$</span>bathy_legend &lt;-<span class="st"> </span><span cl
 <div id="quantarcticr" class="section level3">
 <h3><span class="header-section-number">10.3.1</span> quantarcticR</h3>
 <p>Note, this package is still in development, so the usage as shown here might change in later versions. Install if needed:</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">remotes<span class="op">::</span><span class="kw">install_github</span>(<span class="st">&quot;SCAR-sandpit/quantarcticR&quot;</span>)</code></pre></div>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">remotes::<span class="kw">install_github</span>(<span class="st">&quot;SCAR-sandpit/quantarcticR&quot;</span>)</code></pre></div>
 <p>Example usage:</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">library</span>(quantarcticR)</code></pre></div>
-<pre><code>## Quantarctica is made available under a CC-BY license. If you use it, please cite it:
-## Matsuoka K, Skoglund A, Roth G (2018) Quantarctica [Data set]. Norwegian Polar Institute. https://doi.org/10.21334/npolar.2018.8516e961
-## In addition, published works produced using Quantarctica are asked to cite each dataset that was used in the work. Please consult the abstract of each data set for the relevant citation.
-## 
-## QuantarcticR is using a temporary data directory for this session: see the `qa_cache_dir` function to change this.</code></pre>
+<p>[1] “c:/data/Quantarctica3”</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">ds &lt;-<span class="st"> </span><span class="kw">qa_datasets</span>() ## all available layers
 <span class="kw">head</span>(ds)</code></pre></div>
 <pre><code>## # A tibble: 6 x 5
@@ -650,20 +643,20 @@ temp<span class="op">$</span>bathy_legend &lt;-<span class="st"> </span><span cl
 ## 6 IBO-IOC GEBCO Features (multipoint)
 ##   main_file                                                                
 ##   &lt;chr&gt;                                                                    
-## 1 &quot;C:\\Users\\ben_ray\\AppData\\Local\\Temp\\Rtmpq0b7Uf/quantarcticR-cache~
-## 2 &quot;C:\\Users\\ben_ray\\AppData\\Local\\Temp\\Rtmpq0b7Uf/quantarcticR-cache~
-## 3 &quot;C:\\Users\\ben_ray\\AppData\\Local\\Temp\\Rtmpq0b7Uf/quantarcticR-cache~
-## 4 &quot;C:\\Users\\ben_ray\\AppData\\Local\\Temp\\Rtmpq0b7Uf/quantarcticR-cache~
-## 5 &quot;C:\\Users\\ben_ray\\AppData\\Local\\Temp\\Rtmpq0b7Uf/quantarcticR-cache~
-## 6 &quot;C:\\Users\\ben_ray\\AppData\\Local\\Temp\\Rtmpq0b7Uf/quantarcticR-cache~
+## 1 c:/data/Quantarctica3/Miscellaneous/OverviewPlaceNames/OverviewPlaceName~
+## 2 c:/data/Quantarctica3/Miscellaneous/Stations/COMNAP_Antarctic_Facilities~
+## 3 c:/data/Quantarctica3/Miscellaneous/Stations/Sub-antarctic_Stations.shp  
+## 4 c:/data/Quantarctica3/Miscellaneous/SCAR_CompositeGazetteer/SCAR_Composi~
+## 5 c:/data/Quantarctica3/Miscellaneous/IHO-IOC_GEBCO_UnderseaFeatureNames/G~
+## 6 c:/data/Quantarctica3/Miscellaneous/IHO-IOC_GEBCO_UnderseaFeatureNames/G~
 ##   type      cached download_size
 ##   &lt;chr&gt;     &lt;lgl&gt;    &lt;fs::bytes&gt;
-## 1 shapefile FALSE         19.74K
-## 2 shapefile FALSE        691.92K
-## 3 shapefile FALSE        691.92K
-## 4 shapefile FALSE        329.05M
-## 5 shapefile FALSE          1.25M
-## 6 shapefile FALSE          1.25M</code></pre>
+## 1 shapefile TRUE          19.74K
+## 2 shapefile TRUE         691.92K
+## 3 shapefile TRUE         691.92K
+## 4 shapefile TRUE         329.05M
+## 5 shapefile TRUE           1.25M
+## 6 shapefile TRUE           1.25M</code></pre>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">## more info about a particular layer
 my_layer &lt;-<span class="st"> </span><span class="kw">qa_dataset</span>(<span class="st">&quot;Median sea ice extent 1981-2010&quot;</span>)
 my_layer</code></pre></div>
@@ -685,17 +678,17 @@ my_layer</code></pre></div>
 ## 1 &lt;NULL&gt; &lt;NULL&gt;  shapefile          131K
 ##   main_file                                                                
 ##   &lt;chr&gt;                                                                    
-## 1 &quot;C:\\Users\\ben_ray\\AppData\\Local\\Temp\\Rtmpq0b7Uf/quantarcticR-cache~</code></pre>
+## 1 c:/data/Quantarctica3/SeaIce/Median Ice Extents/Median_SeaIce_Extents_19~</code></pre>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">## fetch the actual data for that layer
 layer_data &lt;-<span class="st"> </span><span class="kw">qa_get</span>(my_layer)
 
 ## plot it
-<span class="kw">plot</span>(layer_data[layer_data<span class="op">$</span>MONTH <span class="op">==</span><span class="st"> &quot;October&quot;</span>, ])</code></pre></div>
-<p><img src="_main_files/figure-html/qR1-1.png" width="672" /></p>
+<span class="kw">plot</span>(layer_data[layer_data$MONTH ==<span class="st"> &quot;October&quot;</span>, ])</code></pre></div>
+<p><img src="_main_files/figure-html/qR1b-1.png" width="672" /></p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">## or add to a SOmap
-<span class="kw">SOmap</span>(<span class="dt">trim =</span> <span class="op">-</span><span class="dv">50</span>, <span class="dt">border_width =</span> <span class="fl">0.5</span>)
-<span class="kw">SOplot</span>(layer_data[layer_data<span class="op">$</span>MONTH <span class="op">==</span><span class="st"> &quot;October&quot;</span>, ], <span class="dt">col =</span> <span class="st">&quot;red&quot;</span>)</code></pre></div>
-<p><img src="_main_files/figure-html/qR1-2.png" width="672" /></p>
+<span class="kw">SOmap</span>(<span class="dt">trim =</span> -<span class="dv">50</span>, <span class="dt">border_width =</span> <span class="fl">0.5</span>)
+<span class="kw">SOplot</span>(layer_data[layer_data$MONTH ==<span class="st"> &quot;October&quot;</span>, ], <span class="dt">col =</span> <span class="st">&quot;red&quot;</span>)</code></pre></div>
+<p><img src="_main_files/figure-html/qR1b-2.png" width="672" /></p>
 </div>
 <div id="antanym" class="section level3">
 <h3><span class="header-section-number">10.3.2</span> antanym</h3>

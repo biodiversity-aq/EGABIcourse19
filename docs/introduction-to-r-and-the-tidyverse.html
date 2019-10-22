@@ -253,16 +253,16 @@ X.csv &lt;-<span class="st"> </span><span class="kw">read.csv</span>(<span class
 
 ## the readr library can read in csvs as well, except this is done intelligently and fields
 ##   can be defined better
-X.csv_r &lt;-<span class="st"> </span>readr<span class="op">::</span><span class="kw">read_csv</span>(<span class="st">&#39;tidyverse_dummy_import.csv&#39;</span>,
+X.csv_r &lt;-<span class="st"> </span>readr::<span class="kw">read_csv</span>(<span class="st">&#39;tidyverse_dummy_import.csv&#39;</span>,
                            <span class="dt">col_types=</span><span class="kw">list</span>(<span class="dt">Occurrence_field =</span> <span class="kw">col_factor</span>()))
 
 ## The readxl library is for reading other excel formats and WORKS WELL FOR DATETIME columns
 ## However, it does not have a column type option for factors
 ##   (if you wanted to define a column as a factor)
-X.xlsx_t &lt;-<span class="st"> </span>readxl<span class="op">::</span><span class="kw">read_xlsx</span>(<span class="st">&#39;tidyverse_dummy_import.xlsx&#39;</span>,<span class="dv">1</span>,
+X.xlsx_t &lt;-<span class="st"> </span>readxl::<span class="kw">read_xlsx</span>(<span class="st">&#39;tidyverse_dummy_import.xlsx&#39;</span>,<span class="dv">1</span>,
                               <span class="dt">col_types =</span> <span class="kw">c</span>(<span class="st">&#39;guess&#39;</span>,<span class="st">&#39;numeric&#39;</span>,<span class="st">&#39;numeric&#39;</span>,<span class="st">&#39;text&#39;</span>,<span class="st">&#39;date&#39;</span>))
 ## you could make a column a factor, though, if you needed to:
-X.xlsx_t<span class="op">$</span>Occurrence_field &lt;-<span class="st"> </span><span class="kw">as.factor</span>(X.xlsx_t<span class="op">$</span>Occurrence_field)
+X.xlsx_t$Occurrence_field &lt;-<span class="st"> </span><span class="kw">as.factor</span>(X.xlsx_t$Occurrence_field)
 
 
 ###################################################################
@@ -270,7 +270,7 @@ X.xlsx_t<span class="op">$</span>Occurrence_field &lt;-<span class="st"> </span>
 ########################
 
 <span class="co"># select the name, gender and homeworld columns</span>
-starwars <span class="op">%&gt;%</span><span class="st"> </span>dplyr<span class="op">::</span><span class="kw">select</span>(name,gender,homeworld)
+starwars %&gt;%<span class="st"> </span>dplyr::<span class="kw">select</span>(name,gender,homeworld)
 ## note that we use dplyr::select(), not just select(), because there are several &quot;select&quot;
 ##   functions in different packages. Using the namespace prefix makes it clear which one
 ##   we are using and less prone to errors caused by e.g. packages being loaded in a
@@ -281,77 +281,77 @@ starwars[,<span class="kw">c</span>(<span class="st">&#39;name&#39;</span>,<span
 
 
 <span class="co"># filter rows with characters from Tatooine</span>
-starwars <span class="op">%&gt;%</span><span class="st"> </span>dplyr<span class="op">::</span><span class="kw">filter</span>(homeworld<span class="op">==</span><span class="st">&#39;Tatooine&#39;</span>)
+starwars %&gt;%<span class="st"> </span>dplyr::<span class="kw">filter</span>(homeworld==<span class="st">&#39;Tatooine&#39;</span>)
 <span class="co"># r base equivalent</span>
-starwars[<span class="kw">which</span>(starwars<span class="op">$</span>homeworld<span class="op">==</span><span class="st">&#39;Tatooine&#39;</span>),]
+starwars[<span class="kw">which</span>(starwars$homeworld==<span class="st">&#39;Tatooine&#39;</span>),]
 
 
 <span class="co"># stringing arguments</span>
-starwars <span class="op">%&gt;%</span>
-<span class="st">  </span>dplyr<span class="op">::</span><span class="kw">select</span>(name,gender,homeworld)<span class="op">%&gt;%</span>
-<span class="st">  </span>dplyr<span class="op">::</span><span class="kw">filter</span>(homeworld<span class="op">==</span><span class="st">&#39;Tatooine&#39;</span>)
+starwars %&gt;%
+<span class="st">  </span>dplyr::<span class="kw">select</span>(name,gender,homeworld)%&gt;%
+<span class="st">  </span>dplyr::<span class="kw">filter</span>(homeworld==<span class="st">&#39;Tatooine&#39;</span>)
 
 <span class="co">#r base equivalent</span>
-starwars[<span class="kw">which</span>(starwars<span class="op">$</span>homeworld<span class="op">==</span><span class="st">&#39;Tatooine&#39;</span>),<span class="kw">c</span>(<span class="st">&#39;name&#39;</span>,<span class="st">&#39;gender&#39;</span>,<span class="st">&#39;homeworld&#39;</span>)]
+starwars[<span class="kw">which</span>(starwars$homeworld==<span class="st">&#39;Tatooine&#39;</span>),<span class="kw">c</span>(<span class="st">&#39;name&#39;</span>,<span class="st">&#39;gender&#39;</span>,<span class="st">&#39;homeworld&#39;</span>)]
 
 
 ##################################
 #### grouping and summarising ####
 ##################################
-starwars <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">group_by</span>(homeworld)
+starwars %&gt;%<span class="st"> </span><span class="kw">group_by</span>(homeworld)
 
 ## This gets the mean height of characters, grouped by homeworld, and adds a count to
 ##   get sample size
-starwars <span class="op">%&gt;%</span>
-<span class="st">  </span><span class="kw">group_by</span>(homeworld) <span class="op">%&gt;%</span>
+starwars %&gt;%
+<span class="st">  </span><span class="kw">group_by</span>(homeworld) %&gt;%
 <span class="st">  </span><span class="kw">summarise</span>(<span class="dt">mean_height =</span> <span class="kw">mean</span>(height),<span class="dt">n =</span> <span class="kw">n</span>())
 
 
 ## This gets the mean height of characters, grouped by homeworld, and adds a count to
 ##   get sample size
-starwars <span class="op">%&gt;%</span>
-<span class="st">  </span><span class="kw">group_by</span>(homeworld,gender) <span class="op">%&gt;%</span>
-<span class="st">  </span><span class="kw">summarise</span>(<span class="dt">mean_height =</span> <span class="kw">mean</span>(height),<span class="dt">n =</span> <span class="kw">n</span>()) <span class="op">%&gt;%</span>
-<span class="st">  </span>dplyr<span class="op">::</span><span class="kw">filter</span>(<span class="op">!</span><span class="kw">is.na</span>(homeworld))
+starwars %&gt;%
+<span class="st">  </span><span class="kw">group_by</span>(homeworld,gender) %&gt;%
+<span class="st">  </span><span class="kw">summarise</span>(<span class="dt">mean_height =</span> <span class="kw">mean</span>(height),<span class="dt">n =</span> <span class="kw">n</span>()) %&gt;%
+<span class="st">  </span>dplyr::<span class="kw">filter</span>(!<span class="kw">is.na</span>(homeworld))
 
 
 ### Other ways to count!
-starwars <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">count</span>(homeworld,gender) <span class="op">%&gt;%</span><span class="st"> </span>dplyr<span class="op">::</span><span class="kw">filter</span>(<span class="op">!</span><span class="kw">is.na</span>(homeworld))
-starwars <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">add_count</span>(homeworld,gender) <span class="op">%&gt;%</span><span class="st"> </span>dplyr<span class="op">::</span><span class="kw">filter</span>(<span class="op">!</span><span class="kw">is.na</span>(homeworld))
+starwars %&gt;%<span class="st"> </span><span class="kw">count</span>(homeworld,gender) %&gt;%<span class="st"> </span>dplyr::<span class="kw">filter</span>(!<span class="kw">is.na</span>(homeworld))
+starwars %&gt;%<span class="st"> </span><span class="kw">add_count</span>(homeworld,gender) %&gt;%<span class="st"> </span>dplyr::<span class="kw">filter</span>(!<span class="kw">is.na</span>(homeworld))
 
 ################
 #### TASKS ####
 
 ## Create a table with mean median and standard deviation of mass for all humans with brown hair
-starwars <span class="op">%&gt;%</span>
-<span class="st">  </span><span class="kw">group_by</span>(hair_color,species) <span class="op">%&gt;%</span>
+starwars %&gt;%
+<span class="st">  </span><span class="kw">group_by</span>(hair_color,species) %&gt;%
 <span class="st">  </span><span class="kw">summarise</span>(<span class="dt">meanmass=</span><span class="kw">mean</span>(mass,<span class="dt">na.rm =</span> T),
             <span class="dt">medmass=</span><span class="kw">median</span>(mass,<span class="dt">na.rm =</span> T),
-            <span class="dt">sdmass=</span><span class="kw">sd</span>(mass,<span class="dt">na.rm =</span> T)) <span class="op">%&gt;%</span>
-<span class="st">  </span>dplyr<span class="op">::</span><span class="kw">filter</span>(species <span class="op">==</span><span class="st"> &#39;Human&#39;</span>,hair_color<span class="op">==</span><span class="st">&#39;brown&#39;</span>)
+            <span class="dt">sdmass=</span><span class="kw">sd</span>(mass,<span class="dt">na.rm =</span> T)) %&gt;%
+<span class="st">  </span>dplyr::<span class="kw">filter</span>(species ==<span class="st"> &#39;Human&#39;</span>,hair_color==<span class="st">&#39;brown&#39;</span>)
 
 ## Get the tallest and shortest non-human character
-starwars <span class="op">%&gt;%</span>
-<span class="st">  </span>dplyr<span class="op">::</span><span class="kw">filter</span>(species <span class="op">!=</span><span class="st"> &#39;Human&#39;</span>) <span class="op">%&gt;%</span>
+starwars %&gt;%
+<span class="st">  </span>dplyr::<span class="kw">filter</span>(species !=<span class="st"> &#39;Human&#39;</span>) %&gt;%
 <span class="st">  </span><span class="kw">arrange</span>(height)
 
-starwars <span class="op">%&gt;%</span>
-<span class="st">  </span>dplyr<span class="op">::</span><span class="kw">filter</span>(species <span class="op">!=</span><span class="st"> &#39;Human&#39;</span>) <span class="op">%&gt;%</span>
-<span class="st">  </span><span class="kw">arrange</span>(<span class="op">-</span>height)
+starwars %&gt;%
+<span class="st">  </span>dplyr::<span class="kw">filter</span>(species !=<span class="st"> &#39;Human&#39;</span>) %&gt;%
+<span class="st">  </span><span class="kw">arrange</span>(-height)
 
 ## How many droids were in Attack of the Clones?
-starwars <span class="op">%&gt;%</span>
-<span class="st">  </span><span class="kw">unnest</span>(films) <span class="op">%&gt;%</span>
-<span class="st">  </span><span class="kw">count</span>(species,films) <span class="op">%&gt;%</span>
-<span class="st">  </span>dplyr<span class="op">::</span><span class="kw">filter</span>(species<span class="op">==</span><span class="st">&#39;Droid&#39;</span>,films<span class="op">==</span><span class="st">&#39;Attack of the Clones&#39;</span>)
+starwars %&gt;%
+<span class="st">  </span><span class="kw">unnest</span>(films) %&gt;%
+<span class="st">  </span><span class="kw">count</span>(species,films) %&gt;%
+<span class="st">  </span>dplyr::<span class="kw">filter</span>(species==<span class="st">&#39;Droid&#39;</span>,films==<span class="st">&#39;Attack of the Clones&#39;</span>)
 
 
 ######################################
 #### Mutate ####
 
 <span class="co"># This will calculate a new column that is the ration of height to mass</span>
-starwars <span class="op">%&gt;%</span>
-<span class="st">  </span><span class="kw">mutate</span>(<span class="dt">hm_ratio =</span> height<span class="op">/</span>mass)
+starwars %&gt;%
+<span class="st">  </span><span class="kw">mutate</span>(<span class="dt">hm_ratio =</span> height/mass)
 
 
 
@@ -369,7 +369,7 @@ df2 &lt;-<span class="st"> </span><span class="kw">tibble</span>(
 )
 
 ## This will join the two tibbles by the id value.
-df1 <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">left_join</span>(df2,<span class="dt">by=</span><span class="st">&#39;id&#39;</span>)
+df1 %&gt;%<span class="st"> </span><span class="kw">left_join</span>(df2,<span class="dt">by=</span><span class="st">&#39;id&#39;</span>)
 
 
 
@@ -380,7 +380,7 @@ df1 <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">left
 ### This is a dataset that you might come across - different devices taking
 ##    measurements on the same day
 sst_data &lt;-<span class="st"> </span><span class="kw">data.frame</span>(
-  <span class="dt">time =</span> <span class="kw">as.Date</span>(<span class="st">&#39;2009-01-01&#39;</span>) <span class="op">+</span><span class="st"> </span><span class="dv">0</span><span class="op">:</span><span class="dv">9</span>,
+  <span class="dt">time =</span> <span class="kw">as.Date</span>(<span class="st">&#39;2009-01-01&#39;</span>) +<span class="st"> </span><span class="dv">0</span>:<span class="dv">9</span>,
   <span class="dt">unit_A =</span> <span class="kw">round</span>(<span class="kw">runif</span>(<span class="dv">10</span>, <span class="dv">6</span>, <span class="dv">9</span>),<span class="dv">2</span>),
   <span class="dt">unit_B =</span> <span class="kw">round</span>(<span class="kw">runif</span>(<span class="dv">10</span>, <span class="dv">7</span>, <span class="dv">10</span>),<span class="dv">2</span>),
   <span class="dt">unit_C =</span> <span class="kw">round</span>(<span class="kw">runif</span>(<span class="dv">10</span>, <span class="dv">6</span>, <span class="dv">10</span>),<span class="dv">2</span>)
@@ -388,12 +388,12 @@ sst_data &lt;-<span class="st"> </span><span class="kw">data.frame</span>(
 
 ## Gathering makes the dataframe go from wide to LONG format (Long format
 ##   typically used by ggplot2)
-sst_data <span class="op">%&gt;%</span>
-<span class="st">  </span><span class="kw">gather</span>(unit,sst,<span class="op">-</span>time)
+sst_data %&gt;%
+<span class="st">  </span><span class="kw">gather</span>(unit,sst,-time)
 
 ## spread is the opposite function to gather and goes from LONG to WIDE format
-sst_data <span class="op">%&gt;%</span>
-<span class="st">  </span><span class="kw">gather</span>(unit,sst,<span class="op">-</span>time) <span class="op">%&gt;%</span>
+sst_data %&gt;%
+<span class="st">  </span><span class="kw">gather</span>(unit,sst,-time) %&gt;%
 <span class="st">  </span><span class="kw">spread</span>(unit,sst)
 
 
@@ -402,12 +402,12 @@ sst_data <span class="op">%&gt;%</span>
 #### Nesting ####
 
 ## This nests the unit and sst columns into a table for every time column.
-nested_sst &lt;-<span class="st"> </span>sst_data <span class="op">%&gt;%</span>
-<span class="st">  </span><span class="kw">gather</span>(unit,sst,<span class="op">-</span>time) <span class="op">%&gt;%</span>
+nested_sst &lt;-<span class="st"> </span>sst_data %&gt;%
+<span class="st">  </span><span class="kw">gather</span>(unit,sst,-time) %&gt;%
 <span class="st">  </span><span class="kw">nest</span>(unit,sst)
 
 ## This can be used to view a specific data row table
-nested_sst<span class="op">$</span>data[[<span class="dv">1</span>]]
+nested_sst$data[[<span class="dv">1</span>]]
 
 ###############################
 #### Tasks 2 ####
@@ -424,22 +424,22 @@ film.rankings &lt;-<span class="st"> </span><span class="kw">tibble</span>(
 
 ## What films does the character Plo Koon appear in, ordered by rank? The final result
 ##   should be a single table drawn from a list column
-Plo.Koon &lt;-starwars <span class="op">%&gt;%</span>
-<span class="st">  </span>dplyr<span class="op">::</span><span class="kw">select</span>(name,films) <span class="op">%&gt;%</span>
-<span class="st">  </span><span class="kw">unnest</span>(films) <span class="op">%&gt;%</span>
-<span class="st">  </span><span class="kw">left_join</span>(film.rankings,<span class="dt">by=</span><span class="st">&#39;films&#39;</span>) <span class="op">%&gt;%</span>
-<span class="st">  </span><span class="kw">arrange</span>(name,rank) <span class="op">%&gt;%</span>
-<span class="st">  </span><span class="kw">nest</span>(films,rank) <span class="op">%&gt;%</span>
-<span class="st">  </span>dplyr<span class="op">::</span><span class="kw">filter</span>(name <span class="op">==</span><span class="st"> &#39;Plo Koon&#39;</span>)
+Plo.Koon &lt;-starwars %&gt;%
+<span class="st">  </span>dplyr::<span class="kw">select</span>(name,films) %&gt;%
+<span class="st">  </span><span class="kw">unnest</span>(films) %&gt;%
+<span class="st">  </span><span class="kw">left_join</span>(film.rankings,<span class="dt">by=</span><span class="st">&#39;films&#39;</span>) %&gt;%
+<span class="st">  </span><span class="kw">arrange</span>(name,rank) %&gt;%
+<span class="st">  </span><span class="kw">nest</span>(films,rank) %&gt;%
+<span class="st">  </span>dplyr::<span class="kw">filter</span>(name ==<span class="st"> &#39;Plo Koon&#39;</span>)
 
 
 
 ## Create a table that nests height and mass data for only humans in a column nested
 ##   by film name.
-nested.mass.height &lt;-<span class="st"> </span>starwars <span class="op">%&gt;%</span>
-<span class="st">  </span><span class="kw">unnest</span>(films)<span class="op">%&gt;%</span>
-<span class="st">  </span>dplyr<span class="op">::</span><span class="kw">select</span>(name,height,mass,films,species) <span class="op">%&gt;%</span>
-<span class="st">  </span>dplyr<span class="op">::</span><span class="kw">filter</span>(species<span class="op">==</span><span class="st">&#39;Human&#39;</span>)<span class="op">%&gt;%</span>
+nested.mass.height &lt;-<span class="st"> </span>starwars %&gt;%
+<span class="st">  </span><span class="kw">unnest</span>(films)%&gt;%
+<span class="st">  </span>dplyr::<span class="kw">select</span>(name,height,mass,films,species) %&gt;%
+<span class="st">  </span>dplyr::<span class="kw">filter</span>(species==<span class="st">&#39;Human&#39;</span>)%&gt;%
 <span class="st">  </span><span class="kw">nest</span>(name,height,mass)
 
 
@@ -461,28 +461,28 @@ X &lt;-<span class="st"> </span><span class="kw">c</span>(<span class="kw">list<
 
 ### This shows how you can use map to run functions over lists to get interesting model
 ##    results for large arrays of data.  Very helpful for summarising data quickly
-nested.mass.height <span class="op">%&gt;%</span>
+nested.mass.height %&gt;%
 <span class="st">  </span><span class="kw">mutate</span>(
     <span class="dt">model =</span> <span class="kw">map</span>(
-      data,<span class="op">~</span><span class="kw">lm</span>(mass<span class="op">~</span>height,<span class="dt">data=</span>.x)
+      data,~<span class="kw">lm</span>(mass~height,<span class="dt">data=</span>.x)
     ),
     <span class="dt">slope =</span> <span class="kw">map_dbl</span>(
-      model, <span class="op">~</span><span class="kw">coef</span>(.x)[<span class="st">&#39;height&#39;</span>]
+      model, ~<span class="kw">coef</span>(.x)[<span class="st">&#39;height&#39;</span>]
     ),
     <span class="dt">r.sq =</span> <span class="kw">map_dbl</span>(
-      model,<span class="op">~</span><span class="kw">glance</span>(.x)<span class="op">$</span><span class="st">&#39;r.squared&#39;</span>
+      model,~<span class="kw">glance</span>(.x)$<span class="st">&#39;r.squared&#39;</span>
     ),
     <span class="dt">sample_size =</span> <span class="kw">map_dbl</span>(
-      data,<span class="op">~</span><span class="kw">nrow</span>(.x)
+      data,~<span class="kw">nrow</span>(.x)
     ),
     <span class="dt">tallest =</span> <span class="kw">map</span>(
-      data,<span class="op">~</span>.x[<span class="kw">which.max</span>(.x<span class="op">$</span>height),<span class="st">&#39;name&#39;</span>]
+      data,~.x[<span class="kw">which.max</span>(.x$height),<span class="st">&#39;name&#39;</span>]
     ),
     <span class="dt">heaviest =</span> <span class="kw">map</span>(
-      data,<span class="op">~</span>.x[<span class="kw">which.max</span>(.x<span class="op">$</span>mass),<span class="st">&#39;name&#39;</span>]
+      data,~.x[<span class="kw">which.max</span>(.x$mass),<span class="st">&#39;name&#39;</span>]
     )
-  ) <span class="op">%&gt;%</span>
-<span class="st">  </span><span class="kw">unnest</span>(tallest,heaviest) <span class="op">%&gt;%</span>
+  ) %&gt;%
+<span class="st">  </span><span class="kw">unnest</span>(tallest,heaviest) %&gt;%
 <span class="st">  </span><span class="kw">rename</span>(<span class="dt">tallest=</span>name,<span class="dt">heaviest=</span>name1)
 
 #########################################################################
@@ -490,10 +490,10 @@ nested.mass.height <span class="op">%&gt;%</span>
 
 
 
-starwars <span class="op">%&gt;%</span>
-<span class="st">  </span>dplyr<span class="op">::</span><span class="kw">filter</span>(species<span class="op">==</span><span class="st">&#39;Human&#39;</span>,gender<span class="op">==</span><span class="st">&#39;male&#39;</span>) <span class="op">%&gt;%</span>
-<span class="st">  </span><span class="kw">ggplot</span>(<span class="kw">aes</span>(<span class="dt">x=</span>mass,<span class="dt">y=</span>height))<span class="op">+</span>
-<span class="st">    </span><span class="kw">geom_point</span>()<span class="op">+</span>
+starwars %&gt;%
+<span class="st">  </span>dplyr::<span class="kw">filter</span>(species==<span class="st">&#39;Human&#39;</span>,gender==<span class="st">&#39;male&#39;</span>) %&gt;%
+<span class="st">  </span><span class="kw">ggplot</span>(<span class="kw">aes</span>(<span class="dt">x=</span>mass,<span class="dt">y=</span>height))+
+<span class="st">    </span><span class="kw">geom_point</span>()+
 <span class="st">    </span><span class="kw">geom_smooth</span>(<span class="dt">method=</span>lm)</code></pre></div>
 </div>
 <div id="see-also" class="section level2">
@@ -501,7 +501,7 @@ starwars <span class="op">%&gt;%</span>
 <ul>
 <li>The Software Carpentry <a href="https://swcarpentry.github.io/r-novice-gapminder/01-rstudio-intro/">Introduction to R and RStudio</a>.</li>
 <li>An <a href="https://obis.org/manual/intror/">Introduction to R</a> by the Ocean Biogeographic Information System (OBIS).</li>
-<li><a href="./course_material/Getting-Started-in-R.pdf">Getting Started in R — Tidyverse Edition</a> by <a href="https://github.com/saghirb/Getting-Started-in-R/">Saghir Bashir</a>.</li>
+<li><a href="./course_material/Getting-Started-in-R.pdf">Getting Started in R &amp;mdash; Tidyverse Edition</a> by <a href="https://github.com/saghirb/Getting-Started-in-R/">Saghir Bashir</a>.</li>
 </ul>
 
 </div>

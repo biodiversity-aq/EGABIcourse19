@@ -229,17 +229,17 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
 <p>Make sure we have the packages we need from CRAN:</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">pkgs &lt;-<span class="st"> </span><span class="kw">c</span>(<span class="st">&quot;dplyr&quot;</span>, <span class="st">&quot;ncdf4&quot;</span>, <span class="st">&quot;raster&quot;</span>, <span class="st">&quot;remotes&quot;</span>, <span class="st">&quot;robis&quot;</span>, <span class="st">&quot;worrms&quot;</span>)
 pkgs &lt;-<span class="st"> </span><span class="kw">setdiff</span>(pkgs, <span class="kw">installed.packages</span>()[, <span class="dv">1</span>])
-<span class="cf">if</span> (<span class="kw">length</span>(pkgs) <span class="op">&gt;</span><span class="st"> </span><span class="dv">0</span>) <span class="kw">install.packages</span>(pkgs)
+if (<span class="kw">length</span>(pkgs) &gt;<span class="st"> </span><span class="dv">0</span>) <span class="kw">install.packages</span>(pkgs)
 
 <span class="kw">library</span>(dplyr)</code></pre></div>
 <p>And from GitHub:</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">## packages with required minimum version
 pkgs &lt;-<span class="st"> </span><span class="kw">c</span>(<span class="st">&quot;SCAR/antanym&quot;</span> =<span class="st"> </span><span class="ot">NA</span>, <span class="st">&quot;AustralianAntarcticDivision/blueant&quot;</span> =<span class="st"> </span><span class="ot">NA</span>,
-          <span class="st">&quot;AustralianAntarcticDivision/SOmap&quot;</span> =<span class="st">  &quot;0.3.0&quot;</span>)
-<span class="cf">for</span> (pkg <span class="cf">in</span> <span class="kw">names</span>(pkgs)) {
-    <span class="cf">if</span> (<span class="op">!</span><span class="kw">basename</span>(pkg) <span class="op">%in%</span><span class="st"> </span><span class="kw">installed.packages</span>()[, <span class="dv">1</span>] <span class="op">||</span>
-<span class="st">        </span>(<span class="op">!</span><span class="kw">is.na</span>(pkgs[[pkg]]) <span class="op">&amp;&amp;</span><span class="st"> </span><span class="kw">packageVersion</span>(<span class="kw">basename</span>(pkg)) <span class="op">&lt;</span><span class="st"> </span>pkgs[[pkg]])) {
-        remotes<span class="op">::</span><span class="kw">install_github</span>(pkg)
+          <span class="st">&quot;AustralianAntarcticDivision/SOmap&quot;</span> =<span class="st">  &quot;0.5.1&quot;</span>)
+for (pkg in <span class="kw">names</span>(pkgs)) {
+    if (!<span class="kw">basename</span>(pkg) %in%<span class="st"> </span><span class="kw">installed.packages</span>()[, <span class="dv">1</span>] ||
+<span class="st">        </span>(!<span class="kw">is.na</span>(pkgs[[pkg]]) &amp;&amp;<span class="st"> </span><span class="kw">packageVersion</span>(<span class="kw">basename</span>(pkg)) &lt;<span class="st"> </span>pkgs[[pkg]])) {
+        remotes::<span class="kw">install_github</span>(pkg)
     }
 }</code></pre></div>
 </div>
@@ -277,7 +277,7 @@ tax</code></pre></div>
 ##   &lt;lgl&gt;        &lt;lgl&gt;         &lt;lgl&gt;     &lt;chr&gt;      &lt;chr&gt;                   
 ## 1 NA           NA            NA        exact      2010-03-02T17:11:18.233Z</code></pre>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">## the Aphia ID (taxonomic ID) of our species
-my_aphia_id &lt;-<span class="st"> </span>tax[[<span class="dv">1</span>]]<span class="op">$</span>valid_AphiaID</code></pre></div>
+my_aphia_id &lt;-<span class="st"> </span>tax[[<span class="dv">1</span>]]$valid_AphiaID</code></pre></div>
 </div>
 <div id="occurrences" class="section level2">
 <h2><span class="header-section-number">4.3</span> Occurrences</h2>
@@ -286,21 +286,21 @@ my_aphia_id &lt;-<span class="st"> </span>tax[[<span class="dv">1</span>]]<span 
 x &lt;-<span class="st"> </span><span class="kw">occurrence</span>(<span class="dt">datasetid =</span> <span class="st">&quot;cb16377b-56a8-4d95-802d-4eec02466773&quot;</span>)</code></pre></div>
 <p>Plot the complete distribution of samples in black, and <em>Euphausia crystallorophias</em> in green:</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">library</span>(SOmap)
-<span class="kw">SOmap_auto</span>(x<span class="op">$</span>decimalLongitude, x<span class="op">$</span>decimalLatitude, <span class="dt">input_lines =</span> <span class="ot">FALSE</span>, <span class="dt">pcol =</span> <span class="st">&quot;black&quot;</span>, <span class="dt">pcex =</span> <span class="fl">0.2</span>)
-<span class="kw">with</span>(x <span class="op">%&gt;%</span><span class="st"> </span>dplyr<span class="op">::</span><span class="kw">filter</span>(aphiaID <span class="op">==</span><span class="st"> </span>my_aphia_id), 
+<span class="kw">SOmap_auto</span>(x$decimalLongitude, x$decimalLatitude, <span class="dt">input_lines =</span> <span class="ot">FALSE</span>, <span class="dt">pcol =</span> <span class="st">&quot;black&quot;</span>, <span class="dt">pcex =</span> <span class="fl">0.2</span>)
+<span class="kw">with</span>(x %&gt;%<span class="st"> </span>dplyr::<span class="kw">filter</span>(aphiaID ==<span class="st"> </span>my_aphia_id), 
      <span class="kw">SOplot</span>(decimalLongitude, decimalLatitude, <span class="dt">pch =</span> <span class="dv">19</span>, <span class="dt">cex =</span> <span class="fl">0.2</span>, <span class="dt">col =</span> <span class="st">&quot;green&quot;</span>))</code></pre></div>
 <p><img src="_main_files/figure-html/map1-1.png" width="672" /></p>
 <p>Or as a polar stereo map:</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">basemap &lt;-<span class="st"> </span><span class="kw">SOmap</span>(<span class="dt">trim =</span> <span class="kw">ceiling</span>(<span class="kw">max</span>(x<span class="op">$</span>decimalLatitude))<span class="op">+</span><span class="dv">1</span>, <span class="dt">bathy_legend =</span> <span class="ot">FALSE</span>)
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">basemap &lt;-<span class="st"> </span><span class="kw">SOmap</span>(<span class="dt">trim =</span> <span class="kw">ceiling</span>(<span class="kw">max</span>(x$decimalLatitude))+<span class="dv">1</span>, <span class="dt">bathy_legend =</span> <span class="ot">FALSE</span>)
 <span class="kw">plot</span>(basemap)
-<span class="kw">SOplot</span>(x<span class="op">$</span>decimalLongitude, x<span class="op">$</span>decimalLatitude, <span class="dt">pch =</span> <span class="dv">19</span>, <span class="dt">cex =</span> <span class="fl">0.2</span>, <span class="dt">col =</span> <span class="st">&quot;black&quot;</span>)
-<span class="kw">with</span>(x <span class="op">%&gt;%</span><span class="st"> </span>dplyr<span class="op">::</span><span class="kw">filter</span>(aphiaID <span class="op">==</span><span class="st"> </span>my_aphia_id), 
+<span class="kw">SOplot</span>(x$decimalLongitude, x$decimalLatitude, <span class="dt">pch =</span> <span class="dv">19</span>, <span class="dt">cex =</span> <span class="fl">0.2</span>, <span class="dt">col =</span> <span class="st">&quot;black&quot;</span>)
+<span class="kw">with</span>(x %&gt;%<span class="st"> </span>dplyr::<span class="kw">filter</span>(aphiaID ==<span class="st"> </span>my_aphia_id), 
      <span class="kw">SOplot</span>(decimalLongitude, decimalLatitude, <span class="dt">pch =</span> <span class="dv">19</span>, <span class="dt">cex =</span> <span class="fl">0.2</span>, <span class="dt">col =</span> <span class="st">&quot;green&quot;</span>))</code></pre></div>
 <p><img src="_main_files/figure-html/map2-1.png" width="672" /></p>
 <p>We’re going to fit a species (presence/absence) distribution model, so first let’s reorganise our data into presence/absence by sampling site:</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">xfit &lt;-<span class="st"> </span>x <span class="op">%&gt;%</span><span class="st"> </span>dplyr<span class="op">::</span><span class="kw">rename</span>(<span class="dt">lon =</span> <span class="st">&quot;decimalLongitude&quot;</span>, <span class="dt">lat =</span> <span class="st">&quot;decimalLatitude&quot;</span>) <span class="op">%&gt;%</span>
-<span class="st">    </span><span class="kw">group_by</span>(lon, lat) <span class="op">%&gt;%</span>
-<span class="st">    </span>dplyr<span class="op">::</span><span class="kw">summarize</span>(<span class="dt">present =</span> <span class="kw">any</span>(my_aphia_id <span class="op">%in%</span><span class="st"> </span>aphiaID))</code></pre></div>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">xfit &lt;-<span class="st"> </span>x %&gt;%<span class="st"> </span>dplyr::<span class="kw">rename</span>(<span class="dt">lon =</span> <span class="st">&quot;decimalLongitude&quot;</span>, <span class="dt">lat =</span> <span class="st">&quot;decimalLatitude&quot;</span>) %&gt;%
+<span class="st">    </span><span class="kw">group_by</span>(lon, lat) %&gt;%
+<span class="st">    </span>dplyr::<span class="kw">summarize</span>(<span class="dt">present =</span> <span class="kw">any</span>(my_aphia_id %in%<span class="st"> </span>aphiaID))</code></pre></div>
 </div>
 <div id="environmental-data" class="section level2">
 <h2><span class="header-section-number">4.4</span> Environmental data</h2>
@@ -314,31 +314,86 @@ data_source &lt;-<span class="st"> </span><span class="kw">sources_sdm</span>(<s
 ## fetch the data
 status &lt;-<span class="st"> </span><span class="kw">bb_get</span>(data_source, <span class="dt">local_file_root =</span> my_data_directory, <span class="dt">verbose =</span> <span class="ot">TRUE</span>)</code></pre></div>
 <pre><code>## 
-## Mon Sep 02 08:43:35 2019
+## Tue Oct 22 13:14:33 2019
 ## Synchronizing dataset: Southern Ocean marine environmental data
-## Source URL https://data.aad.gov.au/eds/4742/download
 ## --------------------------------------------------------------------------------------------
 ## 
-##  this dataset path is: C:\Users\ben_ray\AppData\Local\Temp\Rtmpq0b7Uf/data.aad.gov.au/eds/4742
-##  building file list ... done.
-##  downloading file 1 of 1: https://data.aad.gov.au/eds/4742/download ...  done.
-##   decompressing: C:\Users\ben_ray\AppData\Local\Temp\Rtmpq0b7Uf/data.aad.gov.au/eds/4742/download.zip ... extracting 60 files into C:/Users/ben_ray/AppData/Local/Temp/Rtmpq0b7Uf/data.aad.gov.au/eds/4742 ... done.
+##  this dataset path is: C:\Users\ben_ray\AppData\Local\Temp\RtmpE3w3qi/services.aad.gov.au/public/datasets/science/environmental_layers
+##  downloading file 1 of 1: http://services.aad.gov.au/public/datasets/science/environmental_layers/POC_2005_2012_ampli.nc ...  done.
+##  downloading file 1 of 1: http://services.aad.gov.au/public/datasets/science/environmental_layers/POC_2005_2012_max.nc ...  done.
+##  downloading file 1 of 1: http://services.aad.gov.au/public/datasets/science/environmental_layers/POC_2005_2012_mean.nc ...  done.
+##  downloading file 1 of 1: http://services.aad.gov.au/public/datasets/science/environmental_layers/POC_2005_2012_min.nc ...  done.
+##  downloading file 1 of 1: http://services.aad.gov.au/public/datasets/science/environmental_layers/POC_2005_2012_sd.nc ...  done.
+##  downloading file 1 of 1: http://services.aad.gov.au/public/datasets/science/environmental_layers/chla_ampli_alltime_2005_2012.nc ...  done.
+##  downloading file 1 of 1: http://services.aad.gov.au/public/datasets/science/environmental_layers/chla_max_alltime_2005_2012.nc ...  done.
+##  downloading file 1 of 1: http://services.aad.gov.au/public/datasets/science/environmental_layers/chla_mean_alltime_2005_2012.nc ...  done.
+##  downloading file 1 of 1: http://services.aad.gov.au/public/datasets/science/environmental_layers/chla_min_alltime_2005_2012.nc ...  done.
+##  downloading file 1 of 1: http://services.aad.gov.au/public/datasets/science/environmental_layers/chla_sd_alltime_2005_2012.nc ...  done.
+##  downloading file 1 of 1: http://services.aad.gov.au/public/datasets/science/environmental_layers/depth.nc ...  done.
+##  downloading file 1 of 1: http://services.aad.gov.au/public/datasets/science/environmental_layers/distance_antarctica.nc ...  done.
+##  downloading file 1 of 1: http://services.aad.gov.au/public/datasets/science/environmental_layers/distance_canyon.nc ...  done.
+##  downloading file 1 of 1: http://services.aad.gov.au/public/datasets/science/environmental_layers/distance_max_ice_edge.nc ...  done.
+##  downloading file 1 of 1: http://services.aad.gov.au/public/datasets/science/environmental_layers/distance_shelf.nc ...  done.
+##  downloading file 1 of 1: http://services.aad.gov.au/public/datasets/science/environmental_layers/extreme_event_max_chl_2005_2012_ampli.nc ...  done.
+##  downloading file 1 of 1: http://services.aad.gov.au/public/datasets/science/environmental_layers/extreme_event_max_chl_2005_2012_max.nc ...  done.
+##  downloading file 1 of 1: http://services.aad.gov.au/public/datasets/science/environmental_layers/extreme_event_max_chl_2005_2012_mean.nc ...  done.
+##  downloading file 1 of 1: http://services.aad.gov.au/public/datasets/science/environmental_layers/extreme_event_max_chl_2005_2012_min.nc ...  done.
+##  downloading file 1 of 1: http://services.aad.gov.au/public/datasets/science/environmental_layers/extreme_event_max_sali_2005_2012_nb.nc ...  done.
+##  downloading file 1 of 1: http://services.aad.gov.au/public/datasets/science/environmental_layers/extreme_event_max_temp_2005_2012_nb.nc ...  done.
+##  downloading file 1 of 1: http://services.aad.gov.au/public/datasets/science/environmental_layers/extreme_event_min_chl_2005_2012_ampli.nc ...  done.
+##  downloading file 1 of 1: http://services.aad.gov.au/public/datasets/science/environmental_layers/extreme_event_min_chl_2005_2012_max.nc ...  done.
+##  downloading file 1 of 1: http://services.aad.gov.au/public/datasets/science/environmental_layers/extreme_event_min_chl_2005_2012_mean.nc ...  done.
+##  downloading file 1 of 1: http://services.aad.gov.au/public/datasets/science/environmental_layers/extreme_event_min_chl_2005_2012_min.nc ...  done.
+##  downloading file 1 of 1: http://services.aad.gov.au/public/datasets/science/environmental_layers/extreme_event_min_oxy_1955_2012_nb.nc ...  done.
+##  downloading file 1 of 1: http://services.aad.gov.au/public/datasets/science/environmental_layers/extreme_event_min_sali_2005_2012_nb.nc ...  done.
+##  downloading file 1 of 1: http://services.aad.gov.au/public/datasets/science/environmental_layers/extreme_event_min_temp_2005_2012_nb.nc ...  done.
+##  downloading file 1 of 1: http://services.aad.gov.au/public/datasets/science/environmental_layers/geomorphology.nc ...  done.
+##  downloading file 1 of 1: http://services.aad.gov.au/public/datasets/science/environmental_layers/ice_cover_max.nc ...  done.
+##  downloading file 1 of 1: http://services.aad.gov.au/public/datasets/science/environmental_layers/ice_cover_mean.nc ...  done.
+##  downloading file 1 of 1: http://services.aad.gov.au/public/datasets/science/environmental_layers/ice_cover_min.nc ...  done.
+##  downloading file 1 of 1: http://services.aad.gov.au/public/datasets/science/environmental_layers/ice_cover_range.nc ...  done.
+##  downloading file 1 of 1: http://services.aad.gov.au/public/datasets/science/environmental_layers/ice_thickness_max.nc ...  done.
+##  downloading file 1 of 1: http://services.aad.gov.au/public/datasets/science/environmental_layers/ice_thickness_mean.nc ...  done.
+##  downloading file 1 of 1: http://services.aad.gov.au/public/datasets/science/environmental_layers/ice_thickness_min.nc ...  done.
+##  downloading file 1 of 1: http://services.aad.gov.au/public/datasets/science/environmental_layers/ice_thickness_range.nc ...  done.
+##  downloading file 1 of 1: http://services.aad.gov.au/public/datasets/science/environmental_layers/metadata_details2.csv ...  done.
+##  downloading file 1 of 1: http://services.aad.gov.au/public/datasets/science/environmental_layers/mixed_layer_depth.nc ...  done.
+##  downloading file 1 of 1: http://services.aad.gov.au/public/datasets/science/environmental_layers/roughness.nc ...  done.
+##  downloading file 1 of 1: http://services.aad.gov.au/public/datasets/science/environmental_layers/seafloor_current_speed.nc ...  done.
+##  downloading file 1 of 1: http://services.aad.gov.au/public/datasets/science/environmental_layers/seafloor_oxy_19552012_ampli.nc ...  done.
+##  downloading file 1 of 1: http://services.aad.gov.au/public/datasets/science/environmental_layers/seafloor_oxy_19552012_max.nc ...  done.
+##  downloading file 1 of 1: http://services.aad.gov.au/public/datasets/science/environmental_layers/seafloor_oxy_19552012_mean.nc ...  done.
+##  downloading file 1 of 1: http://services.aad.gov.au/public/datasets/science/environmental_layers/seafloor_oxy_19552012_min.nc ...  done.
+##  downloading file 1 of 1: http://services.aad.gov.au/public/datasets/science/environmental_layers/seafloor_oxy_19552012_sd.nc ...  done.
+##  downloading file 1 of 1: http://services.aad.gov.au/public/datasets/science/environmental_layers/seafloor_sali_2005_2012_ampli.nc ...  done.
+##  downloading file 1 of 1: http://services.aad.gov.au/public/datasets/science/environmental_layers/seafloor_sali_2005_2012_max.nc ...  done.
+##  downloading file 1 of 1: http://services.aad.gov.au/public/datasets/science/environmental_layers/seafloor_sali_2005_2012_mean.nc ...  done.
+##  downloading file 1 of 1: http://services.aad.gov.au/public/datasets/science/environmental_layers/seafloor_sali_2005_2012_min.nc ...  done.
+##  downloading file 1 of 1: http://services.aad.gov.au/public/datasets/science/environmental_layers/seafloor_sali_2005_2012_sd.nc ...  done.
+##  downloading file 1 of 1: http://services.aad.gov.au/public/datasets/science/environmental_layers/seafloor_temp_2005_2012_ampli.nc ...  done.
+##  downloading file 1 of 1: http://services.aad.gov.au/public/datasets/science/environmental_layers/seafloor_temp_2005_2012_max.nc ...  done.
+##  downloading file 1 of 1: http://services.aad.gov.au/public/datasets/science/environmental_layers/seafloor_temp_2005_2012_mean.nc ...  done.
+##  downloading file 1 of 1: http://services.aad.gov.au/public/datasets/science/environmental_layers/seafloor_temp_2005_2012_min.nc ...  done.
+##  downloading file 1 of 1: http://services.aad.gov.au/public/datasets/science/environmental_layers/seafloor_temp_2005_2012_sd.nc ...  done.
+##  downloading file 1 of 1: http://services.aad.gov.au/public/datasets/science/environmental_layers/seasurface_current_speed.nc ...  done.
+##  downloading file 1 of 1: http://services.aad.gov.au/public/datasets/science/environmental_layers/sediments.nc ...  done.
+##  downloading file 1 of 1: http://services.aad.gov.au/public/datasets/science/environmental_layers/slope.nc ...  done.
 ## 
-## Mon Sep 02 08:45:42 2019 dataset synchronization complete: Southern Ocean marine environmental data</code></pre>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">nc_files &lt;-<span class="st"> </span><span class="kw">Filter</span>(<span class="cf">function</span>(z) <span class="kw">grepl</span>(<span class="st">&quot;</span><span class="ch">\\</span><span class="st">.nc$&quot;</span>, z), status<span class="op">$</span>files[[<span class="dv">1</span>]]<span class="op">$</span>file)
+## Tue Oct 22 13:15:12 2019 dataset synchronization complete: Southern Ocean marine environmental data</code></pre>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">nc_files &lt;-<span class="st"> </span><span class="kw">Filter</span>(function(z) <span class="kw">grepl</span>(<span class="st">&quot;</span><span class="ch">\\</span><span class="st">.nc$&quot;</span>, z), status$files[[<span class="dv">1</span>]]$file)
 
 ## create a raster stack of all layers
 env_stack &lt;-<span class="st"> </span><span class="kw">stack</span>(nc_files)
 
 ## the first few layers
 <span class="kw">head</span>(<span class="kw">names</span>(env_stack))</code></pre></div>
-<pre><code>## [1] &quot;chla_ampli_alltime_2005_2012&quot; &quot;chla_max_alltime_2005_2012&quot;  
-## [3] &quot;chla_mean_alltime_2005_2012&quot;  &quot;chla_min_alltime_2005_2012&quot;  
-## [5] &quot;chla_sd_alltime_2005_2012&quot;    &quot;depth&quot;</code></pre>
+<pre><code>## [1] &quot;POC_2005_2012_ampli&quot;          &quot;POC_2005_2012_max&quot;           
+## [3] &quot;POC_2005_2012_mean&quot;           &quot;POC_2005_2012_min&quot;           
+## [5] &quot;POC_2005_2012_sd&quot;             &quot;chla_ampli_alltime_2005_2012&quot;</code></pre>
 <p>Select just the <code>depth</code> and <code>ice_cover_mean</code> layers and extract their values at our sampling locations:</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">env_stack &lt;-<span class="st"> </span><span class="kw">subset</span>(env_stack, <span class="kw">c</span>(<span class="st">&quot;depth&quot;</span>, <span class="st">&quot;ice_cover_mean&quot;</span>))
 
-temp &lt;-<span class="st"> </span><span class="kw">as.data.frame</span>(raster<span class="op">::</span><span class="kw">extract</span>(env_stack, xfit[, <span class="kw">c</span>(<span class="st">&quot;lon&quot;</span>, <span class="st">&quot;lat&quot;</span>)]))
+temp &lt;-<span class="st"> </span><span class="kw">as.data.frame</span>(raster::<span class="kw">extract</span>(env_stack, xfit[, <span class="kw">c</span>(<span class="st">&quot;lon&quot;</span>, <span class="st">&quot;lat&quot;</span>)]))
 
 xfit &lt;-<span class="st"> </span><span class="kw">bind_cols</span>(xfit, temp)
 <span class="kw">head</span>(xfit)</code></pre></div>
@@ -358,7 +413,7 @@ xfit &lt;-<span class="st"> </span><span class="kw">bind_cols</span>(xfit, temp)
 <p>We have presence/absence data, so we’ll fit a simple binomial model. The probability of presence of <em>Euphausia crystallorophias</em> is fitted as a smooth function of depth and mean sea ice cover:</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">library</span>(mgcv)
 
-fit &lt;-<span class="st"> </span><span class="kw">gam</span>(present <span class="op">~</span><span class="st"> </span><span class="kw">s</span>(depth) <span class="op">+</span><span class="st"> </span><span class="kw">s</span>(ice_cover_mean), <span class="dt">family =</span> binomial, <span class="dt">data =</span> xfit)
+fit &lt;-<span class="st"> </span><span class="kw">gam</span>(present ~<span class="st"> </span><span class="kw">s</span>(depth) +<span class="st"> </span><span class="kw">s</span>(ice_cover_mean), <span class="dt">family =</span> binomial, <span class="dt">data =</span> xfit)
 
 <span class="kw">summary</span>(fit)</code></pre></div>
 <pre><code>## 
@@ -390,21 +445,21 @@ fit &lt;-<span class="st"> </span><span class="kw">gam</span>(present <span clas
 </div>
 <div id="predict-from-model" class="section level2">
 <h2><span class="header-section-number">4.6</span> Predict from model</h2>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">xpred &lt;-<span class="st"> </span><span class="kw">expand.grid</span>(<span class="dt">lon =</span> <span class="kw">seq</span>(<span class="dt">from =</span> <span class="kw">floor</span>(<span class="kw">min</span>(xfit<span class="op">$</span>lon)), <span class="dt">to =</span> <span class="kw">ceiling</span>(<span class="kw">max</span>(xfit<span class="op">$</span>lon)), <span class="dt">by =</span> <span class="fl">0.25</span>),
-                     <span class="dt">lat =</span> <span class="kw">seq</span>(<span class="dt">from =</span> <span class="kw">floor</span>(<span class="kw">min</span>(xfit<span class="op">$</span>lat)), <span class="dt">to =</span> <span class="kw">ceiling</span>(<span class="kw">max</span>(xfit<span class="op">$</span>lat)), <span class="dt">by =</span> <span class="fl">0.25</span>))
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">xpred &lt;-<span class="st"> </span><span class="kw">expand.grid</span>(<span class="dt">lon =</span> <span class="kw">seq</span>(<span class="dt">from =</span> <span class="kw">floor</span>(<span class="kw">min</span>(xfit$lon)), <span class="dt">to =</span> <span class="kw">ceiling</span>(<span class="kw">max</span>(xfit$lon)), <span class="dt">by =</span> <span class="fl">0.25</span>),
+                     <span class="dt">lat =</span> <span class="kw">seq</span>(<span class="dt">from =</span> <span class="kw">floor</span>(<span class="kw">min</span>(xfit$lat)), <span class="dt">to =</span> <span class="kw">ceiling</span>(<span class="kw">max</span>(xfit$lat)), <span class="dt">by =</span> <span class="fl">0.25</span>))
 
-xpred &lt;-<span class="st"> </span><span class="kw">bind_cols</span>(<span class="kw">as.data.frame</span>(xpred), <span class="kw">as.data.frame</span>(raster<span class="op">::</span><span class="kw">extract</span>(env_stack, xpred[, <span class="kw">c</span>(<span class="st">&quot;lon&quot;</span>, <span class="st">&quot;lat&quot;</span>)])))
+xpred &lt;-<span class="st"> </span><span class="kw">bind_cols</span>(<span class="kw">as.data.frame</span>(xpred), <span class="kw">as.data.frame</span>(raster::<span class="kw">extract</span>(env_stack, xpred[, <span class="kw">c</span>(<span class="st">&quot;lon&quot;</span>, <span class="st">&quot;lat&quot;</span>)])))
 
-xpred<span class="op">$</span>predicted &lt;-<span class="st"> </span><span class="kw">predict</span>(fit, <span class="dt">newdata =</span> xpred, <span class="dt">type =</span> <span class="st">&quot;response&quot;</span>)
+xpred$predicted &lt;-<span class="st"> </span><span class="kw">predict</span>(fit, <span class="dt">newdata =</span> xpred, <span class="dt">type =</span> <span class="st">&quot;response&quot;</span>)
 
 ## create raster
 pr &lt;-<span class="st"> </span><span class="kw">rasterFromXYZ</span>(xpred[, <span class="kw">c</span>(<span class="st">&quot;lon&quot;</span>, <span class="st">&quot;lat&quot;</span>, <span class="st">&quot;predicted&quot;</span>)])
 <span class="kw">projection</span>(pr) &lt;-<span class="st"> &quot;+proj=longlat +datum=WGS84&quot;</span>
 
-my_cmap &lt;-<span class="st"> </span><span class="cf">if</span> (<span class="kw">getRversion</span>() <span class="op">&gt;=</span><span class="st"> &quot;3.6&quot;</span>) <span class="kw">hcl.colors</span>(<span class="dv">21</span>, <span class="st">&quot;Geyser&quot;</span>) <span class="cf">else</span> <span class="kw">c</span>(<span class="st">&quot;#008585&quot;</span>, <span class="st">&quot;#359087&quot;</span>, <span class="st">&quot;#539B8A&quot;</span>, <span class="st">&quot;#6DA590&quot;</span>, <span class="st">&quot;#85AF97&quot;</span>, <span class="st">&quot;#9BBAA0&quot;</span>, <span class="st">&quot;#AEC4AA&quot;</span>, <span class="st">&quot;#BED0B0&quot;</span>, <span class="st">&quot;#D0DCB5&quot;</span>, <span class="st">&quot;#E5E7BC&quot;</span>, <span class="st">&quot;#FBF2C4&quot;</span>, <span class="st">&quot;#F3E3B2&quot;</span>, <span class="st">&quot;#EDD59F&quot;</span>, <span class="st">&quot;#E7C68C&quot;</span>, <span class="st">&quot;#E3B77A&quot;</span>, <span class="st">&quot;#DEA868&quot;</span>, <span class="st">&quot;#DA9857&quot;</span>, <span class="st">&quot;#D58847&quot;</span>, <span class="st">&quot;#D1773A&quot;</span>, <span class="st">&quot;#CC6530&quot;</span>, <span class="st">&quot;#C7522B&quot;</span>)</code></pre></div>
+my_cmap &lt;-<span class="st"> </span>if (<span class="kw">getRversion</span>() &gt;=<span class="st"> &quot;3.6&quot;</span>) <span class="kw">hcl.colors</span>(<span class="dv">21</span>, <span class="st">&quot;Geyser&quot;</span>) else <span class="kw">c</span>(<span class="st">&quot;#008585&quot;</span>, <span class="st">&quot;#359087&quot;</span>, <span class="st">&quot;#539B8A&quot;</span>, <span class="st">&quot;#6DA590&quot;</span>, <span class="st">&quot;#85AF97&quot;</span>, <span class="st">&quot;#9BBAA0&quot;</span>, <span class="st">&quot;#AEC4AA&quot;</span>, <span class="st">&quot;#BED0B0&quot;</span>, <span class="st">&quot;#D0DCB5&quot;</span>, <span class="st">&quot;#E5E7BC&quot;</span>, <span class="st">&quot;#FBF2C4&quot;</span>, <span class="st">&quot;#F3E3B2&quot;</span>, <span class="st">&quot;#EDD59F&quot;</span>, <span class="st">&quot;#E7C68C&quot;</span>, <span class="st">&quot;#E3B77A&quot;</span>, <span class="st">&quot;#DEA868&quot;</span>, <span class="st">&quot;#DA9857&quot;</span>, <span class="st">&quot;#D58847&quot;</span>, <span class="st">&quot;#D1773A&quot;</span>, <span class="st">&quot;#CC6530&quot;</span>, <span class="st">&quot;#C7522B&quot;</span>)</code></pre></div>
 <p>Plot it:</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">p &lt;-<span class="st"> </span><span class="kw">SOmap_auto</span>(<span class="dt">x =</span> pr, <span class="dt">bathy =</span> pr)
-p<span class="op">$</span>bathy_palette &lt;-<span class="st"> </span>my_cmap
+p$bathy_palette &lt;-<span class="st"> </span>my_cmap
 p</code></pre></div>
 <p><img src="_main_files/figure-html/predmap2-1.png" width="672" /></p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">plot</span>(basemap)
@@ -429,7 +484,7 @@ xn &lt;-<span class="st"> </span><span class="kw">an_preferred</span>(xn, <span 
 xns &lt;-<span class="st"> </span><span class="kw">an_suggest</span>(xn, <span class="dt">map_scale =</span> <span class="fl">20e6</span>, <span class="dt">map_extent =</span> <span class="kw">extent</span>(pr))
 
 ## transform to our map projection, convert to data frame, take the top 10
-xns &lt;-<span class="st"> </span><span class="kw">as_tibble</span>(<span class="kw">SOproj</span>(xns, <span class="dt">target =</span> basemap<span class="op">$</span>projection)) <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">head</span>(<span class="dv">10</span>)</code></pre></div>
+xns &lt;-<span class="st"> </span><span class="kw">as_tibble</span>(<span class="kw">SOproj</span>(xns, <span class="dt">target =</span> basemap$projection)) %&gt;%<span class="st"> </span><span class="kw">head</span>(<span class="dv">10</span>)</code></pre></div>
 <p>Add them to the map:</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">plot</span>(basemap)
 <span class="kw">SOplot</span>(pr, <span class="dt">col =</span> my_cmap)
@@ -438,7 +493,7 @@ xns &lt;-<span class="st"> </span><span class="kw">as_tibble</span>(<span class=
 <span class="kw">with</span>(xns, <span class="kw">points</span>(<span class="dt">x =</span> longitude, <span class="dt">y =</span> latitude, <span class="dt">pch =</span> <span class="dv">16</span>, <span class="dt">cex =</span> <span class="fl">0.4</span>))
 ## and labels
 <span class="kw">with</span>(xns, <span class="kw">text</span>(<span class="dt">x =</span> longitude, <span class="dt">y =</span> latitude, <span class="dt">labels =</span> place_name, 
-               <span class="dt">cex =</span> <span class="fl">0.75</span>, <span class="dt">pos =</span> <span class="dv">2</span> <span class="op">+</span><span class="st"> </span><span class="dv">2</span><span class="op">*</span>(<span class="kw">seq_len</span>(<span class="kw">nrow</span>(xns)) <span class="op">%%</span><span class="st"> </span><span class="dv">2</span>)))</code></pre></div>
+               <span class="dt">cex =</span> <span class="fl">0.75</span>, <span class="dt">pos =</span> <span class="dv">2</span> +<span class="st"> </span><span class="dv">2</span>*(<span class="kw">seq_len</span>(<span class="kw">nrow</span>(xns)) %%<span class="st"> </span><span class="dv">2</span>)))</code></pre></div>
 <p><img src="_main_files/figure-html/predmap3-1.png" width="672" /></p>
 
 </div>

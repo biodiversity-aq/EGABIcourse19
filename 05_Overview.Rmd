@@ -19,7 +19,7 @@ And from GitHub:
 ```{r pkgs2}
 ## packages with required minimum version
 pkgs <- c("SCAR/antanym" = NA, "AustralianAntarcticDivision/blueant" = NA,
-          "AustralianAntarcticDivision/SOmap" =  "0.3.0")
+          "AustralianAntarcticDivision/SOmap" =  "0.5.1")
 for (pkg in names(pkgs)) {
     if (!basename(pkg) %in% installed.packages()[, 1] ||
         (!is.na(pkgs[[pkg]]) && packageVersion(basename(pkg)) < pkgs[[pkg]])) {
