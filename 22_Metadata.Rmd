@@ -1,0 +1,121 @@
+# Metadata - Darwin Core
+
+The Darwin Core (DwC) is a body of standards maintained by [TDWG](https://www.tdwg.org)  (Biodiversity Information Standards, formerly known as The International Working Group on Taxonomic Databases).
+It includes a glossary of terms intended to facilitate the sharing of information about biological diversity by providing reference definitions, examples, and commentaries. The Darwin Core is primarily based on taxa, their occurrence in nature as documented by observations, specimens, and samples, and related information.
+
+Darwin Core revolves around a standard file format, the Darwin Core Archive (DwC-A). This compact package (a ZIP file) contains interconnected text files and enables data publishers to share their data using a common terminology. DwC is used both by [GBIF](www.gbif.org) and [OBIS](www.obis.org) for publishing data.
+ 
+This standardization not only simplifies the process of publishing biodiversity datasets, it also makes it easy for users to discover, search, evaluate and compare datasets as they seek answers to today’s data-intensive research and policy questions.
+
+
+## Darwin Core structure
+
+A DWC-A can contains 4 types of components. These files can include:
+
+* eml.xml
+* core file
+* extension files (optional)
+* meta.xml
+
+EML stands for [Ecological Metadata Language](https://en.wikipedia.org/wiki/Ecological_Metadata_Language). This file contains the dataset metadata in an XML format.
+
+Core and extension files contain data records, arranged one per line. Each row in the extension file or extension record points to a single record in the core file. For each single core record there can be many extension records. This is sometimes referred to as a “star schema”.
+
+The meta.xml file describes how the files in the archive are organised. It describes the linkage between the core and extension files and maps non-standards column names to Darwin Core terms.
+
+To publish the data as a DwC-A, we recommend to upload the core and extension files to the IPT (e.g. [IPT.biodiversity.aq](http://IPT.biodiversity.aq)). Use the IPT's built-in metadata editor to enter dataset metadata. The IPT will compile the EML on the data you provided, as well as the meta.xml.
+
+## Types of Darwin Core archives
+
+* [Resource Metadata](https://github.com/gbif/ipt/wiki/resourceMetadata) - Used to describe a biodiversity information resource, including contact details, even if no digital data can currently be shared (this provides a way for researchers to discover resources which are not yet available online).
+* [Checklist](https://github.com/gbif/ipt/wiki/checklistData) - Used to share annotated species checklists, taxonomic catalogues, and other information about taxa.
+* [Occurrence](https://github.com/gbif/ipt/wiki/occurrenceData) - Used to share information about a specific instance of a taxon such as a specimen or observation.
+* [Event](https://github.com/gbif/ipt/wiki/samplingEventData) - Used to share information about the protocols used in ecological investigations.
+
+
+## Darwin Core details
+
+In general, metadata EML will accompany some data core in a DwC-A. It provides a description and details on the resource.
+
+It is also possible to initially only publish your metadata and add your data at a later stage.
+
+This allows researchers to discover resources that or not yet available online.
+It is best to consider your abstract as the material and methods section of your paper but then for just your data.
+Try to provide as much detail as possible.
+
+Actually if you fill out your metadata extensively you have a first very good draft for a data paper (if that is something you would like to make). You'll just have to add some maps, summary statistics, and you are good to go.
+
+If you are in a hurry, below is an overview of what currently are the required fields.
+
+If you use the IPT to create your Darwin Core archive, you will have to choose a short name for your dataset. Choose this wisely because it can't be changed. The short name serves as an identifier within the IPT installation, and will be used as a parameter in the URL to access the resource via the Internet. For the short name you can only use alphanumeric characters, hyphens, or underscores.
+
+### Required metadata fields:
+
+#### Basic Metadata
+
+##### title
+> This will be the long title of your dataset, and how the dataset will be cited
+
+##### publishing organisation
+>Please select the organisation responsible for publishing (producing, releasing, holding) this resource. It will be used as the resource's publishing organisation when registering this resource with GBIF and when submitting metadata during DOI registrations. It will also be used to auto-generate the citation for the resource (if auto-generation is turned on), so consider the prominence of the role. Please be aware your selection cannot be changed after the resource has been either registered with GBIF or assigned a DOI.
+
+On our IPT you can choose
+
+* Antarctic Biodiversity Information Facility (AntaBIF) for terrestrial datasets
+* SCAR - AntOBIS for marine datasets
+* SCAR - Microbial Antarctic Resource System for microbial datasets
+
+We can also publish on behalf of others. Currently we have agreements with
+
+* British Antarctic Survey
+* Italian Antarctic National Museum (MNA, section Genua)
+ 
+
+##### type
+>The type of resource. The value of this field depends on the core mapping of the resource and is no longer editable if the Darwin Core mapping has already been made.
+
+This can be
+
+* Metadata-only
+* Checklist
+* Occurence
+* Event-Core
+
+##### metadata language
+>The language in which the metadata document is written.
+
+##### data language
+>The primary language in which the described data (not the metadata document) is written.
+
+##### Update Frequency
+>The frequency with which changes are made to the resource after the initial resource has been published. For convenience, its value will default to the auto-publishing interval (if auto-publishing has been turned on), however, it can always be overridden later. Please note a description of the maintenance frequency of the resource can also be entered on the Additional Metadata page.
+
+##### data license
+>The licence that you apply to a dataset provides a standardized way to define appropriate uses of your work. GBIF encourages publishers to adopt the least restrictive licence possible from among three machine-readable options (CC0 1.0, CC-BY 4.0 or CC-BY-NC 4.0) to encourage the widest possible use and application of data. Learn more here. If you are unable to choose one of the three options, and your dataset contains occurrence data, you will not be able to register your dataset with GBIF or make it globally discoverable through GBIF.org. If you feel unable to select one of the three options, please contact the GBIF Secretariat at participation@gbif.org.
+
+
+##### description
+>A brief overview of the resource that is being documented broken into paragraphs.
+
+Think of it as an abstract for a (data) paper
+
+##### Resource contact(s)
+##### Resource creator(s)
+##### metadata provider(s)
+* Last name
+* Position
+* Organisation
+	
+#### Geographic coverage
+##### description
+
+
+
+### Citation auto generation
+
+Creator 1 R, Creator 2 R, Creator 3 R (2019): How to create a metadata record. v1. Publishing organisation. Dataset/Type. https://ipt.biodiversity.aq/resource?r=shortname&amp;v=1.0
+
+#### Example
+
+Griffiths H J, Linse K, Crame J (2017): SOMBASE – Southern Ocean mollusc database: a tool for biogeographic analysis in diversity and evolution. v1.6. British Antarctic Survey. Dataset/Occurrence. https://ipt.biodiversity.aq/resource?r=sombase_southern_ocean_mollusc_database&amp;v=1.6
+

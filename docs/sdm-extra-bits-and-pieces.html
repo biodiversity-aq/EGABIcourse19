@@ -1,0 +1,369 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="" xml:lang="">
+<head>
+
+  <meta charset="utf-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <title>15 SDM extra bits and pieces | SCAR-EGABI Tools for Southern Ocean Spatial Analysis and Modelling</title>
+  <meta name="description" content="Course material" />
+  <meta name="generator" content="bookdown 0.12 and GitBook 2.6.7" />
+
+  <meta property="og:title" content="15 SDM extra bits and pieces | SCAR-EGABI Tools for Southern Ocean Spatial Analysis and Modelling" />
+  <meta property="og:type" content="book" />
+  
+  
+  <meta property="og:description" content="Course material" />
+  
+
+  <meta name="twitter:card" content="summary" />
+  <meta name="twitter:title" content="15 SDM extra bits and pieces | SCAR-EGABI Tools for Southern Ocean Spatial Analysis and Modelling" />
+  
+  <meta name="twitter:description" content="Course material" />
+  
+
+<meta name="author" content="Anton Van de Putte, Charlène Guillaumot, Grant Humphries, Huw Griffiths, Ben Raymond, Ryan Reisinger" />
+
+
+
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="apple-mobile-web-app-capable" content="yes" />
+  <meta name="apple-mobile-web-app-status-bar-style" content="black" />
+  
+  
+<link rel="prev" href="sdm-algorithms.html">
+<link rel="next" href="other-r-resources-for-southern-oceanantarctic-use.html">
+<script src="libs/jquery-2.2.3/jquery.min.js"></script>
+<link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-table.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-bookdown.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-highlight.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-search.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-fontsettings.css" rel="stylesheet" />
+
+
+
+
+
+
+
+<script src="libs/kePrint-0.0.1/kePrint.js"></script>
+
+
+<style type="text/css">
+div.sourceCode { overflow-x: auto; }
+table.sourceCode, tr.sourceCode, td.lineNumbers, td.sourceCode {
+  margin: 0; padding: 0; vertical-align: baseline; border: none; }
+table.sourceCode { width: 100%; line-height: 100%; }
+td.lineNumbers { text-align: right; padding-right: 4px; padding-left: 4px; color: #aaaaaa; border-right: 1px solid #aaaaaa; }
+td.sourceCode { padding-left: 5px; }
+code > span.kw { color: #007020; font-weight: bold; } /* Keyword */
+code > span.dt { color: #902000; } /* DataType */
+code > span.dv { color: #40a070; } /* DecVal */
+code > span.bn { color: #40a070; } /* BaseN */
+code > span.fl { color: #40a070; } /* Float */
+code > span.ch { color: #4070a0; } /* Char */
+code > span.st { color: #4070a0; } /* String */
+code > span.co { color: #60a0b0; font-style: italic; } /* Comment */
+code > span.ot { color: #007020; } /* Other */
+code > span.al { color: #ff0000; font-weight: bold; } /* Alert */
+code > span.fu { color: #06287e; } /* Function */
+code > span.er { color: #ff0000; font-weight: bold; } /* Error */
+code > span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
+code > span.cn { color: #880000; } /* Constant */
+code > span.sc { color: #4070a0; } /* SpecialChar */
+code > span.vs { color: #4070a0; } /* VerbatimString */
+code > span.ss { color: #bb6688; } /* SpecialString */
+code > span.im { } /* Import */
+code > span.va { color: #19177c; } /* Variable */
+code > span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
+code > span.op { color: #666666; } /* Operator */
+code > span.bu { } /* BuiltIn */
+code > span.ex { } /* Extension */
+code > span.pp { color: #bc7a00; } /* Preprocessor */
+code > span.at { color: #7d9029; } /* Attribute */
+code > span.do { color: #ba2121; font-style: italic; } /* Documentation */
+code > span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
+code > span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } /* CommentVar */
+code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
+</style>
+
+<link rel="stylesheet" href="styles.css" type="text/css" />
+</head>
+
+<body>
+
+
+
+  <div class="book without-animation with-summary font-size-2 font-family-1" data-basepath=".">
+
+    <div class="book-summary">
+      <nav role="navigation">
+
+<ul class="summary">
+<li class="chapter" data-level="1" data-path="index.html"><a href="index.html"><i class="fa fa-check"></i><b>1</b> About this</a><ul>
+<li class="chapter" data-level="" data-path="index.html"><a href="index.html#technical-stuff"><i class="fa fa-check"></i>Technical stuff</a></li>
+</ul></li>
+<li class="chapter" data-level="2" data-path="course-schedule.html"><a href="course-schedule.html"><i class="fa fa-check"></i><b>2</b> Course schedule</a><ul>
+<li class="chapter" data-level="2.1" data-path="course-schedule.html"><a href="course-schedule.html#monday"><i class="fa fa-check"></i><b>2.1</b> Monday</a></li>
+<li class="chapter" data-level="2.2" data-path="course-schedule.html"><a href="course-schedule.html#tuesday"><i class="fa fa-check"></i><b>2.2</b> Tuesday</a></li>
+<li class="chapter" data-level="2.3" data-path="course-schedule.html"><a href="course-schedule.html#wednesday"><i class="fa fa-check"></i><b>2.3</b> Wednesday</a></li>
+<li class="chapter" data-level="2.4" data-path="course-schedule.html"><a href="course-schedule.html#thursday"><i class="fa fa-check"></i><b>2.4</b> Thursday</a></li>
+<li class="chapter" data-level="2.5" data-path="course-schedule.html"><a href="course-schedule.html#friday"><i class="fa fa-check"></i><b>2.5</b> Friday</a></li>
+</ul></li>
+<li class="chapter" data-level="3" data-path="course-introduction.html"><a href="course-introduction.html"><i class="fa fa-check"></i><b>3</b> Course Introduction</a></li>
+<li class="chapter" data-level="4" data-path="overview.html"><a href="overview.html"><i class="fa fa-check"></i><b>4</b> Overview</a><ul>
+<li class="chapter" data-level="4.1" data-path="overview.html"><a href="overview.html#preparation"><i class="fa fa-check"></i><b>4.1</b> Preparation</a></li>
+<li class="chapter" data-level="4.2" data-path="overview.html"><a href="overview.html#taxonomy"><i class="fa fa-check"></i><b>4.2</b> Taxonomy</a></li>
+<li class="chapter" data-level="4.3" data-path="overview.html"><a href="overview.html#occurrences"><i class="fa fa-check"></i><b>4.3</b> Occurrences</a></li>
+<li class="chapter" data-level="4.4" data-path="overview.html"><a href="overview.html#environmental-data"><i class="fa fa-check"></i><b>4.4</b> Environmental data</a></li>
+<li class="chapter" data-level="4.5" data-path="overview.html"><a href="overview.html#fit-model"><i class="fa fa-check"></i><b>4.5</b> Fit model</a></li>
+<li class="chapter" data-level="4.6" data-path="overview.html"><a href="overview.html#predict-from-model"><i class="fa fa-check"></i><b>4.6</b> Predict from model</a></li>
+<li class="chapter" data-level="4.7" data-path="overview.html"><a href="overview.html#other-bits-and-pieces"><i class="fa fa-check"></i><b>4.7</b> Other bits and pieces</a><ul>
+<li class="chapter" data-level="4.7.1" data-path="overview.html"><a href="overview.html#place-names"><i class="fa fa-check"></i><b>4.7.1</b> Place names</a></li>
+</ul></li>
+</ul></li>
+<li class="chapter" data-level="5" data-path="introduction-to-r-and-the-tidyverse.html"><a href="introduction-to-r-and-the-tidyverse.html"><i class="fa fa-check"></i><b>5</b> Introduction to R and the Tidyverse</a><ul>
+<li class="chapter" data-level="5.1" data-path="introduction-to-r-and-the-tidyverse.html"><a href="introduction-to-r-and-the-tidyverse.html#exercise-r-script"><i class="fa fa-check"></i><b>5.1</b> Exercise R script</a></li>
+<li class="chapter" data-level="5.2" data-path="introduction-to-r-and-the-tidyverse.html"><a href="introduction-to-r-and-the-tidyverse.html#see-also"><i class="fa fa-check"></i><b>5.2</b> See also</a></li>
+</ul></li>
+<li class="chapter" data-level="6" data-path="open-data-and-data-cleaning.html"><a href="open-data-and-data-cleaning.html"><i class="fa fa-check"></i><b>6</b> Open data and data cleaning</a><ul>
+<li class="chapter" data-level="6.1" data-path="open-data-and-data-cleaning.html"><a href="open-data-and-data-cleaning.html#fair-principles"><i class="fa fa-check"></i><b>6.1</b> FAIR principles</a></li>
+</ul></li>
+<li class="chapter" data-level="7" data-path="metadata-darwin-core.html"><a href="metadata-darwin-core.html"><i class="fa fa-check"></i><b>7</b> Metadata - Darwin Core</a><ul>
+<li class="chapter" data-level="7.1" data-path="metadata-darwin-core.html"><a href="metadata-darwin-core.html#darwin-core-structure"><i class="fa fa-check"></i><b>7.1</b> Darwin Core structure</a></li>
+<li class="chapter" data-level="7.2" data-path="metadata-darwin-core.html"><a href="metadata-darwin-core.html#types-of-darwin-core-archives"><i class="fa fa-check"></i><b>7.2</b> Types of Darwin Core archives</a></li>
+<li class="chapter" data-level="7.3" data-path="metadata-darwin-core.html"><a href="metadata-darwin-core.html#darwin-core-details"><i class="fa fa-check"></i><b>7.3</b> Darwin Core details</a><ul>
+<li class="chapter" data-level="7.3.1" data-path="metadata-darwin-core.html"><a href="metadata-darwin-core.html#required-metadata-fields"><i class="fa fa-check"></i><b>7.3.1</b> Required metadata fields:</a></li>
+<li class="chapter" data-level="7.3.2" data-path="metadata-darwin-core.html"><a href="metadata-darwin-core.html#citation-auto-generation"><i class="fa fa-check"></i><b>7.3.2</b> Citation auto generation</a></li>
+</ul></li>
+<li class="chapter" data-level="7.4" data-path="metadata-darwin-core.html"><a href="metadata-darwin-core.html#metadata-for-occurrence-data"><i class="fa fa-check"></i><b>7.4</b> Metadata for occurrence data</a><ul>
+<li class="chapter" data-level="7.4.1" data-path="metadata-darwin-core.html"><a href="metadata-darwin-core.html#what"><i class="fa fa-check"></i><b>7.4.1</b> What</a></li>
+<li class="chapter" data-level="7.4.2" data-path="metadata-darwin-core.html"><a href="metadata-darwin-core.html#where"><i class="fa fa-check"></i><b>7.4.2</b> Where</a></li>
+<li class="chapter" data-level="7.4.3" data-path="metadata-darwin-core.html"><a href="metadata-darwin-core.html#when"><i class="fa fa-check"></i><b>7.4.3</b> When</a></li>
+<li class="chapter" data-level="7.4.4" data-path="metadata-darwin-core.html"><a href="metadata-darwin-core.html#who"><i class="fa fa-check"></i><b>7.4.4</b> Who</a></li>
+<li class="chapter" data-level="7.4.5" data-path="metadata-darwin-core.html"><a href="metadata-darwin-core.html#how"><i class="fa fa-check"></i><b>7.4.5</b> How</a></li>
+</ul></li>
+</ul></li>
+<li class="chapter" data-level="8" data-path="biological-data.html"><a href="biological-data.html"><i class="fa fa-check"></i><b>8</b> Biological data</a><ul>
+<li class="chapter" data-level="8.1" data-path="biological-data.html"><a href="biological-data.html#taxonomy-1"><i class="fa fa-check"></i><b>8.1</b> Taxonomy</a></li>
+<li class="chapter" data-level="8.2" data-path="biological-data.html"><a href="biological-data.html#other-packages"><i class="fa fa-check"></i><b>8.2</b> Other packages</a></li>
+</ul></li>
+<li class="chapter" data-level="9" data-path="environmental-data-1.html"><a href="environmental-data-1.html"><i class="fa fa-check"></i><b>9</b> Environmental data</a><ul>
+<li class="chapter" data-level="9.1" data-path="environmental-data-1.html"><a href="environmental-data-1.html#bowerbirdblueant"><i class="fa fa-check"></i><b>9.1</b> Bowerbird/blueant</a><ul>
+<li class="chapter" data-level="9.1.1" data-path="environmental-data-1.html"><a href="environmental-data-1.html#available-data-sets"><i class="fa fa-check"></i><b>9.1.1</b> Available data sets</a></li>
+<li class="chapter" data-level="9.1.2" data-path="environmental-data-1.html"><a href="environmental-data-1.html#usage"><i class="fa fa-check"></i><b>9.1.2</b> Usage</a></li>
+</ul></li>
+<li class="chapter" data-level="9.2" data-path="environmental-data-1.html"><a href="environmental-data-1.html#raadtools"><i class="fa fa-check"></i><b>9.2</b> RAADtools</a></li>
+<li class="chapter" data-level="9.3" data-path="environmental-data-1.html"><a href="environmental-data-1.html#other-useful-packages"><i class="fa fa-check"></i><b>9.3</b> Other useful packages</a></li>
+</ul></li>
+<li class="chapter" data-level="10" data-path="mapping.html"><a href="mapping.html"><i class="fa fa-check"></i><b>10</b> Mapping</a><ul>
+<li class="chapter" data-level="10.1" data-path="mapping.html"><a href="mapping.html#maps-in-r"><i class="fa fa-check"></i><b>10.1</b> Maps in R</a><ul>
+<li class="chapter" data-level="10.1.1" data-path="mapping.html"><a href="mapping.html#exercises"><i class="fa fa-check"></i><b>10.1.1</b> Exercises</a></li>
+<li class="chapter" data-level="10.1.2" data-path="mapping.html"><a href="mapping.html#lets-use-the-maps-data"><i class="fa fa-check"></i><b>10.1.2</b> Let’s use the maps data!</a></li>
+</ul></li>
+<li class="chapter" data-level="10.2" data-path="mapping.html"><a href="mapping.html#somap"><i class="fa fa-check"></i><b>10.2</b> SOmap</a><ul>
+<li class="chapter" data-level="10.2.1" data-path="mapping.html"><a href="mapping.html#circumpolar-maps"><i class="fa fa-check"></i><b>10.2.1</b> Circumpolar maps</a></li>
+<li class="chapter" data-level="10.2.2" data-path="mapping.html"><a href="mapping.html#non-circumpolar-maps"><i class="fa fa-check"></i><b>10.2.2</b> Non-circumpolar maps</a></li>
+<li class="chapter" data-level="10.2.3" data-path="mapping.html"><a href="mapping.html#plotting-via-ggplot2"><i class="fa fa-check"></i><b>10.2.3</b> Plotting via ggplot2</a></li>
+<li class="chapter" data-level="10.2.4" data-path="mapping.html"><a href="mapping.html#modifying-map-objects-advanced-usage"><i class="fa fa-check"></i><b>10.2.4</b> Modifying map objects (advanced usage)</a></li>
+<li class="chapter" data-level="10.2.5" data-path="mapping.html"><a href="mapping.html#other-somap-gotchas"><i class="fa fa-check"></i><b>10.2.5</b> Other SOmap gotchas</a></li>
+</ul></li>
+<li class="chapter" data-level="10.3" data-path="mapping.html"><a href="mapping.html#supporting-data-for-maps"><i class="fa fa-check"></i><b>10.3</b> Supporting data for maps</a><ul>
+<li class="chapter" data-level="10.3.1" data-path="mapping.html"><a href="mapping.html#quantarcticr"><i class="fa fa-check"></i><b>10.3.1</b> quantarcticR</a></li>
+<li class="chapter" data-level="10.3.2" data-path="mapping.html"><a href="mapping.html#antanym"><i class="fa fa-check"></i><b>10.3.2</b> antanym</a></li>
+</ul></li>
+</ul></li>
+<li class="chapter" data-level="11" data-path="data-visualisation.html"><a href="data-visualisation.html"><i class="fa fa-check"></i><b>11</b> Data visualisation</a></li>
+<li class="chapter" data-level="12" data-path="recent-and-past-application-of-sdms.html"><a href="recent-and-past-application-of-sdms.html"><i class="fa fa-check"></i><b>12</b> Recent and past application of SDMs</a></li>
+<li class="chapter" data-level="13" data-path="species-distribution-modelling.html"><a href="species-distribution-modelling.html"><i class="fa fa-check"></i><b>13</b> Species distribution modelling</a><ul>
+<li class="chapter" data-level="13.1" data-path="species-distribution-modelling.html"><a href="species-distribution-modelling.html#sdm-introduction-and-review"><i class="fa fa-check"></i><b>13.1</b> SDM introduction and review</a><ul>
+<li class="chapter" data-level="13.1.1" data-path="species-distribution-modelling.html"><a href="species-distribution-modelling.html#references"><i class="fa fa-check"></i><b>13.1.1</b> References</a></li>
+</ul></li>
+<li class="chapter" data-level="13.2" data-path="species-distribution-modelling.html"><a href="species-distribution-modelling.html#sdm-outputs"><i class="fa fa-check"></i><b>13.2</b> SDM outputs</a><ul>
+<li class="chapter" data-level="13.2.1" data-path="species-distribution-modelling.html"><a href="species-distribution-modelling.html#references-1"><i class="fa fa-check"></i><b>13.2.1</b> References</a></li>
+</ul></li>
+<li class="chapter" data-level="13.3" data-path="species-distribution-modelling.html"><a href="species-distribution-modelling.html#calibration"><i class="fa fa-check"></i><b>13.3</b> Calibration</a><ul>
+<li class="chapter" data-level="13.3.1" data-path="species-distribution-modelling.html"><a href="species-distribution-modelling.html#references-2"><i class="fa fa-check"></i><b>13.3.1</b> References</a></li>
+</ul></li>
+<li class="chapter" data-level="13.4" data-path="species-distribution-modelling.html"><a href="species-distribution-modelling.html#exercise-scripts"><i class="fa fa-check"></i><b>13.4</b> Exercise scripts</a></li>
+</ul></li>
+<li class="chapter" data-level="14" data-path="sdm-algorithms.html"><a href="sdm-algorithms.html"><i class="fa fa-check"></i><b>14</b> SDM algorithms</a><ul>
+<li class="chapter" data-level="14.1" data-path="sdm-algorithms.html"><a href="sdm-algorithms.html#exercises---practice-with-models"><i class="fa fa-check"></i><b>14.1</b> Exercises - Practice with models</a><ul>
+<li class="chapter" data-level="14.1.1" data-path="sdm-algorithms.html"><a href="sdm-algorithms.html#load-and-clean-the-data"><i class="fa fa-check"></i><b>14.1.1</b> Load and clean the data</a></li>
+<li class="chapter" data-level="14.1.2" data-path="sdm-algorithms.html"><a href="sdm-algorithms.html#one-hot-encoding"><i class="fa fa-check"></i><b>14.1.2</b> One hot encoding!</a></li>
+<li class="chapter" data-level="14.1.3" data-path="sdm-algorithms.html"><a href="sdm-algorithms.html#the-models"><i class="fa fa-check"></i><b>14.1.3</b> The models</a></li>
+<li class="chapter" data-level="14.1.4" data-path="sdm-algorithms.html"><a href="sdm-algorithms.html#regression-problem"><i class="fa fa-check"></i><b>14.1.4</b> Regression problem</a></li>
+</ul></li>
+</ul></li>
+<li class="chapter" data-level="15" data-path="sdm-extra-bits-and-pieces.html"><a href="sdm-extra-bits-and-pieces.html"><i class="fa fa-check"></i><b>15</b> SDM extra bits and pieces</a><ul>
+<li class="chapter" data-level="15.1" data-path="sdm-extra-bits-and-pieces.html"><a href="sdm-extra-bits-and-pieces.html#spatial-partial-predictions"><i class="fa fa-check"></i><b>15.1</b> Spatial partial predictions</a><ul>
+<li class="chapter" data-level="15.1.1" data-path="sdm-extra-bits-and-pieces.html"><a href="sdm-extra-bits-and-pieces.html#example-1"><i class="fa fa-check"></i><b>15.1.1</b> Example</a></li>
+</ul></li>
+</ul></li>
+<li class="chapter" data-level="16" data-path="other-r-resources-for-southern-oceanantarctic-use.html"><a href="other-r-resources-for-southern-oceanantarctic-use.html"><i class="fa fa-check"></i><b>16</b> Other R resources for Southern Ocean/Antarctic use</a><ul>
+<li class="chapter" data-level="16.1" data-path="other-r-resources-for-southern-oceanantarctic-use.html"><a href="other-r-resources-for-southern-oceanantarctic-use.html#diet-data-sohungry"><i class="fa fa-check"></i><b>16.1</b> Diet data: sohungry</a></li>
+<li class="chapter" data-level="16.2" data-path="other-r-resources-for-southern-oceanantarctic-use.html"><a href="other-r-resources-for-southern-oceanantarctic-use.html#allometric-equations-solong"><i class="fa fa-check"></i><b>16.2</b> Allometric equations: solong</a></li>
+</ul></li>
+</ul>
+
+      </nav>
+    </div>
+
+    <div class="book-body">
+      <div class="body-inner">
+        <div class="book-header" role="navigation">
+          <h1>
+            <i class="fa fa-circle-o-notch fa-spin"></i><a href="./">SCAR-EGABI Tools for Southern Ocean Spatial Analysis and Modelling</a>
+          </h1>
+        </div>
+
+        <div class="page-wrapper" tabindex="-1" role="main">
+          <div class="page-inner">
+
+            <section class="normal" id="section-">
+<div id="sdm-extra-bits-and-pieces" class="section level1">
+<h1><span class="header-section-number">15</span> SDM extra bits and pieces</h1>
+<p>This section contains some additional material that either arrived too late for beginning of the workshop or didn’t fit nicely into the existing structure. This material might be moved elsewhere at a later time.</p>
+<div id="spatial-partial-predictions" class="section level2">
+<h2><span class="header-section-number">15.1</span> Spatial partial predictions</h2>
+<p>The <a href="species-distribution-modelling.html#sdm-outputs">SDM outputs</a> section talked about partial dependence plots. These plots show the contribution that each predictor term makes to a model. It’s also worth knowing that these partial dependencies can be evaluated on a spatial grid, which will show the spatial pattern of the contribution that a model term makes. This can be very useful for evaluating whether a particular model term is behaving as it should.</p>
+<p>In many SDM applications we don’t tend to have predictor variables that directly tell us about processes and conditions that affect our target species. This is particularly true in the Southern Ocean because of its vast and remote nature. We typically rely on satellite- or model-derived information, which is not necessarily directly linked to the behaviour or distribution of our target species. Instead, we often rely on proxy variables.</p>
+<p>For example, we rarely have direct information about prey availability for predator species. Instead we might use e.g. satellite-derived chlorophyll, which tells us something about primary productivity, and therefore might be useful as a proxy for prey availability for higher trophic levels. But it is important to check that these proxy variables are acting in the model in a sensible way, and indeed that they are actually acting as a proxy for the process that we intended them to.</p>
+<div id="example-1" class="section level3">
+<h3><span class="header-section-number">15.1.1</span> Example</h3>
+<p>Let’s return to the example that was shown in the <a href="overview.html#overview">Overview</a> section. This first part of the code is the same as before:</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">library</span>(dplyr)
+<span class="kw">library</span>(worrms)
+<span class="kw">library</span>(robis)
+<span class="kw">library</span>(blueant)
+<span class="kw">library</span>(mgcv)
+<span class="kw">library</span>(SOmap)
+
+my_cmap &lt;-<span class="st"> </span>if (<span class="kw">getRversion</span>() &gt;=<span class="st"> &quot;3.6&quot;</span>) {
+  <span class="kw">hcl.colors</span>(<span class="dv">21</span>, <span class="st">&quot;Geyser&quot;</span>)
+} else {
+  <span class="kw">c</span>(<span class="st">&quot;#008585&quot;</span>, <span class="st">&quot;#359087&quot;</span>, <span class="st">&quot;#539B8A&quot;</span>, <span class="st">&quot;#6DA590&quot;</span>, <span class="st">&quot;#85AF97&quot;</span>, <span class="st">&quot;#9BBAA0&quot;</span>, <span class="st">&quot;#AEC4AA&quot;</span>,
+    <span class="st">&quot;#BED0B0&quot;</span>, <span class="st">&quot;#D0DCB5&quot;</span>, <span class="st">&quot;#E5E7BC&quot;</span>, <span class="st">&quot;#FBF2C4&quot;</span>, <span class="st">&quot;#F3E3B2&quot;</span>, <span class="st">&quot;#EDD59F&quot;</span>, <span class="st">&quot;#E7C68C&quot;</span>,
+    <span class="st">&quot;#E3B77A&quot;</span>, <span class="st">&quot;#DEA868&quot;</span>, <span class="st">&quot;#DA9857&quot;</span>, <span class="st">&quot;#D58847&quot;</span>, <span class="st">&quot;#D1773A&quot;</span>, <span class="st">&quot;#CC6530&quot;</span>, <span class="st">&quot;#C7522B&quot;</span>)
+}
+
+## taxonomy
+x &lt;-<span class="st"> </span><span class="kw">occurrence</span>(<span class="dt">datasetid =</span> <span class="st">&quot;cb16377b-56a8-4d95-802d-4eec02466773&quot;</span>)
+
+my_species &lt;-<span class="st"> &quot;Euphausia crystallorophias&quot;</span>
+tax &lt;-<span class="st"> </span><span class="kw">wm_records_names</span>(<span class="dt">name =</span> my_species)
+my_aphia_id &lt;-<span class="st"> </span>tax[[<span class="dv">1</span>]]$valid_AphiaID
+
+## data to presence/absence format
+xfit &lt;-<span class="st"> </span>x %&gt;%<span class="st"> </span>dplyr::<span class="kw">rename</span>(<span class="dt">lon =</span> <span class="st">&quot;decimalLongitude&quot;</span>, <span class="dt">lat =</span> <span class="st">&quot;decimalLatitude&quot;</span>) %&gt;%
+<span class="st">  </span><span class="kw">group_by</span>(lon, lat) %&gt;%
+<span class="st">  </span>dplyr::<span class="kw">summarize</span>(<span class="dt">present =</span> <span class="kw">any</span>(my_aphia_id %in%<span class="st"> </span>aphiaID))
+
+## environmental data
+## put the data into a temporary directory
+my_data_directory &lt;-<span class="st"> </span><span class="kw">tempdir</span>()
+
+data_source &lt;-<span class="st"> </span><span class="kw">sources_sdm</span>(<span class="st">&quot;Southern Ocean marine environmental data&quot;</span>)
+## fetch the data
+status &lt;-<span class="st"> </span><span class="kw">bb_get</span>(data_source, <span class="dt">local_file_root =</span> my_data_directory, <span class="dt">verbose =</span> <span class="ot">TRUE</span>)
+
+nc_files &lt;-<span class="st"> </span><span class="kw">Filter</span>(function(z) <span class="kw">grepl</span>(<span class="st">&quot;</span><span class="ch">\\</span><span class="st">.nc$&quot;</span>, z), status$files[[<span class="dv">1</span>]]$file)
+
+## create a raster stack of selected layers
+env_stack &lt;-<span class="st"> </span><span class="kw">subset</span>(<span class="kw">stack</span>(nc_files), <span class="kw">c</span>(<span class="st">&quot;depth&quot;</span>, <span class="st">&quot;ice_cover_mean&quot;</span>))
+
+temp &lt;-<span class="st"> </span><span class="kw">as.data.frame</span>(raster::<span class="kw">extract</span>(env_stack, xfit[, <span class="kw">c</span>(<span class="st">&quot;lon&quot;</span>, <span class="st">&quot;lat&quot;</span>)]))
+xfit &lt;-<span class="st"> </span><span class="kw">bind_cols</span>(xfit, temp)
+
+fit &lt;-<span class="st"> </span><span class="kw">gam</span>(present ~<span class="st"> </span><span class="kw">s</span>(depth) +<span class="st"> </span><span class="kw">s</span>(ice_cover_mean) +<span class="st"> </span><span class="kw">s</span>(lon), <span class="dt">family =</span> binomial, <span class="dt">data =</span> xfit) </code></pre></div>
+<p>This <code>gam</code> presence/absence model is the same as in the <a href="overview.html#overview">Overview</a> example, except that this time we have added <code>lon</code> (longitude) as a predictor term. You wouldn’t normally use latitude or longitude as a predictor in this way, we’re doing so here just to illustrate the example.</p>
+<p>The partial dependence plots for this model:</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">plot</span>(fit, <span class="dt">pages =</span> <span class="dv">1</span>, <span class="dt">shade =</span> <span class="ot">TRUE</span>, <span class="dt">scale =</span> <span class="dv">0</span>)</code></pre></div>
+<p><img src="_main_files/figure-html/spatial_partial2-1.png" width="672" /></p>
+<p>We can see that the partial term for longitude (bottom-left panel) is a bit wiggly - in particular, the bump at around -60 looks a little odd. However, it’s difficult to interpret that plot to know if this is an ecologically-plausible or informative fit.</p>
+<p>Let’s make a spatial plot of that partial term.</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">## grid to predict onto
+xpred &lt;-<span class="st"> </span><span class="kw">expand.grid</span>(
+            <span class="dt">lon =</span> <span class="kw">seq</span>(<span class="dt">from =</span> <span class="kw">floor</span>(<span class="kw">min</span>(xfit$lon)), <span class="dt">to =</span> <span class="kw">ceiling</span>(<span class="kw">max</span>(xfit$lon)), <span class="dt">by =</span> <span class="fl">0.25</span>),
+            <span class="dt">lat =</span> <span class="kw">seq</span>(<span class="dt">from =</span> <span class="kw">floor</span>(<span class="kw">min</span>(xfit$lat)), <span class="dt">to =</span> <span class="kw">ceiling</span>(<span class="kw">max</span>(xfit$lat)), <span class="dt">by =</span> <span class="fl">0.25</span>))
+## environmental data across our grid
+xpred &lt;-<span class="st"> </span><span class="kw">bind_cols</span>(<span class="kw">as.data.frame</span>(xpred),
+                   <span class="kw">as.data.frame</span>(raster::<span class="kw">extract</span>(env_stack, xpred[, <span class="kw">c</span>(<span class="st">&quot;lon&quot;</span>, <span class="st">&quot;lat&quot;</span>)])))
+
+## partial prediction terms
+sp_pred &lt;-<span class="st"> </span><span class="kw">predict</span>(fit, <span class="dt">newdata =</span> xpred, <span class="dt">type =</span> <span class="st">&quot;terms&quot;</span>)</code></pre></div>
+<p>We use <code>predict(..., type = &quot;terms&quot;)</code> to get the contribution of each term in the model across our <code>xpred</code> data (our grid). This <code>type = &quot;terms&quot;</code> option only works with some model types (GLMs and GAMs, for example), but analogous methods exist for other model frameworks.</p>
+<p>Now plot the spatial contribution of the <code>lon</code> predictor term:</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">xpred &lt;-<span class="st"> </span><span class="kw">cbind</span>(xpred, sp_pred)
+
+pr &lt;-<span class="st"> </span><span class="kw">rasterFromXYZ</span>(xpred[, <span class="kw">c</span>(<span class="st">&quot;lon&quot;</span>, <span class="st">&quot;lat&quot;</span>, <span class="st">&quot;s(lon)&quot;</span>)])
+## the &quot;s(lon)&quot; term is the fitted (smooth) predictor term
+
+## plot it
+<span class="kw">projection</span>(pr) &lt;-<span class="st"> &quot;+proj=longlat +datum=WGS84&quot;</span>
+p &lt;-<span class="st"> </span><span class="kw">SOmap_auto</span>(<span class="dt">x =</span> pr, <span class="dt">bathy =</span> pr)
+p$bathy_palette &lt;-<span class="st"> </span>my_cmap
+p</code></pre></div>
+<p><img src="_main_files/figure-html/spatial_partial4-1.png" width="672" /></p>
+<p>It’s quite clear from this plot that the <code>lon</code> predictor term is simply allowing the model to fit higher probabilities in certain longitude bands. This doesn’t seem to be a particularly ecologically-insightful mechanism, so we’d probably drop that term from the model. We’d be better off trying to find a predictor variable that more directly explains what is happening in those bands in ecological terms.</p>
+<p>One of the dangers to watch out for is a model term that appears to fit well on the training data, but which doesn’t have a plausible interpretation. It’s possible that this term is important to the model simply because it happens <em>by chance</em> to explain some of the patterns in the training data. But it’s not fitting those patterns in an ecologically-meaningful way. The danger here is that inferences that are subsequently made with that model (e.g. interpreting the importance of particular processes, or using the model to make predictions in different geographic areas or under different environmental conditions) are likely to be flawed, because there is little or no underlying ecological meaning to the model term.</p>
+
+</div>
+</div>
+</div>
+            </section>
+
+          </div>
+        </div>
+      </div>
+<a href="sdm-algorithms.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
+<a href="other-r-resources-for-southern-oceanantarctic-use.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
+    </div>
+  </div>
+<script src="libs/gitbook-2.6.7/js/app.min.js"></script>
+<script src="libs/gitbook-2.6.7/js/lunr.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-search.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-sharing.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-fontsettings.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-bookdown.js"></script>
+<script src="libs/gitbook-2.6.7/js/jquery.highlight.js"></script>
+<script>
+gitbook.require(["gitbook"], function(gitbook) {
+gitbook.start({
+"sharing": {
+"github": false,
+"facebook": true,
+"twitter": true,
+"google": false,
+"linkedin": false,
+"weibo": false,
+"instapaper": false,
+"vk": false,
+"all": ["facebook", "google", "twitter", "linkedin", "weibo", "instapaper"]
+},
+"fontsettings": {
+"theme": "white",
+"family": "sans",
+"size": 2
+},
+"edit": {
+"link": null,
+"text": null
+},
+"history": {
+"link": null,
+"text": null
+},
+"download": null,
+"toc": {
+"collapse": "subsection",
+"scroll_highlight": true
+},
+"toc_depth": 3
+});
+});
+</script>
+
+</body>
+
+</html>

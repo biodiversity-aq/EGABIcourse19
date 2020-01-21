@@ -1,0 +1,9 @@
+bookdown::gitbook:
+  css: styles.css
+  config:
+    toc_depth: 3
+    toc:
+      collapse: subsection
+      scroll_highlight: yes
+bookdown::html_book:
+  split_by: chapter

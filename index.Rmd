@@ -1,0 +1,41 @@
+---
+title: "SCAR-EGABI Tools for Southern Ocean Spatial Analysis and Modelling"
+author: Anton Van de Putte, Charlène Guillaumot, Grant Humphries, Huw Griffiths, Ben Raymond, Ryan Reisinger
+description: Course material
+documentclass: book
+site: bookdown::bookdown_site
+---
+
+```{r setup, echo = FALSE, cache = FALSE}
+library(knitr)
+library(kableExtra)
+
+knitr::opts_chunk$set(cache = TRUE, warning = FALSE)
+options(knitr.table.format = "html")
+
+showtbl <- function(z) kable_styling(knitr::kable(z), bootstrap_options = c("striped", "hover", "condensed"))
+
+```
+
+# About this
+
+This document provides material for the [SCAR-EGABI Tools for Southern Ocean Spatial Analysis and Modelling Course](https://github.com/SCAR/EGABIcourse19/) to be held in Leuven, Belgium in September 2019.
+
+Issues or suggestions about the content can be raised through the [issue tracker](https://github.com/SCAR/EGABIcourse19/issues) (GitHub account required).
+
+## Technical stuff {-}
+
+This material has been written using [bookdown](https://github.com/rstudio/bookdown) and [R](https://cran.r-project.org/).
+
+To build the book locally, clone the [repo](https://github.com/SCAR/EGABIcourse19), open R and run the following lines:
+
+```{r eval = FALSE}
+setwd("the/path/to/your/copy/of/the/repo")
+bookdown::render_book("index.Rmd")
+```
+
+And view it with:
+```{r eval = FALSE}
+browseURL("docs/index.html")
+```
+

@@ -1,0 +1,564 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="" xml:lang="">
+<head>
+
+  <meta charset="utf-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <title>5 Introduction to R and the Tidyverse | SCAR-EGABI Tools for Southern Ocean Spatial Analysis and Modelling</title>
+  <meta name="description" content="Course material" />
+  <meta name="generator" content="bookdown 0.12 and GitBook 2.6.7" />
+
+  <meta property="og:title" content="5 Introduction to R and the Tidyverse | SCAR-EGABI Tools for Southern Ocean Spatial Analysis and Modelling" />
+  <meta property="og:type" content="book" />
+  
+  
+  <meta property="og:description" content="Course material" />
+  
+
+  <meta name="twitter:card" content="summary" />
+  <meta name="twitter:title" content="5 Introduction to R and the Tidyverse | SCAR-EGABI Tools for Southern Ocean Spatial Analysis and Modelling" />
+  
+  <meta name="twitter:description" content="Course material" />
+  
+
+<meta name="author" content="Anton Van de Putte, Charlène Guillaumot, Grant Humphries, Huw Griffiths, Ben Raymond, Ryan Reisinger" />
+
+
+
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="apple-mobile-web-app-capable" content="yes" />
+  <meta name="apple-mobile-web-app-status-bar-style" content="black" />
+  
+  
+<link rel="prev" href="overview.html">
+<link rel="next" href="open-data-and-data-cleaning.html">
+<script src="libs/jquery-2.2.3/jquery.min.js"></script>
+<link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-table.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-bookdown.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-highlight.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-search.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-fontsettings.css" rel="stylesheet" />
+
+
+
+
+
+
+
+<script src="libs/kePrint-0.0.1/kePrint.js"></script>
+
+
+<style type="text/css">
+div.sourceCode { overflow-x: auto; }
+table.sourceCode, tr.sourceCode, td.lineNumbers, td.sourceCode {
+  margin: 0; padding: 0; vertical-align: baseline; border: none; }
+table.sourceCode { width: 100%; line-height: 100%; }
+td.lineNumbers { text-align: right; padding-right: 4px; padding-left: 4px; color: #aaaaaa; border-right: 1px solid #aaaaaa; }
+td.sourceCode { padding-left: 5px; }
+code > span.kw { color: #007020; font-weight: bold; } /* Keyword */
+code > span.dt { color: #902000; } /* DataType */
+code > span.dv { color: #40a070; } /* DecVal */
+code > span.bn { color: #40a070; } /* BaseN */
+code > span.fl { color: #40a070; } /* Float */
+code > span.ch { color: #4070a0; } /* Char */
+code > span.st { color: #4070a0; } /* String */
+code > span.co { color: #60a0b0; font-style: italic; } /* Comment */
+code > span.ot { color: #007020; } /* Other */
+code > span.al { color: #ff0000; font-weight: bold; } /* Alert */
+code > span.fu { color: #06287e; } /* Function */
+code > span.er { color: #ff0000; font-weight: bold; } /* Error */
+code > span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
+code > span.cn { color: #880000; } /* Constant */
+code > span.sc { color: #4070a0; } /* SpecialChar */
+code > span.vs { color: #4070a0; } /* VerbatimString */
+code > span.ss { color: #bb6688; } /* SpecialString */
+code > span.im { } /* Import */
+code > span.va { color: #19177c; } /* Variable */
+code > span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
+code > span.op { color: #666666; } /* Operator */
+code > span.bu { } /* BuiltIn */
+code > span.ex { } /* Extension */
+code > span.pp { color: #bc7a00; } /* Preprocessor */
+code > span.at { color: #7d9029; } /* Attribute */
+code > span.do { color: #ba2121; font-style: italic; } /* Documentation */
+code > span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
+code > span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } /* CommentVar */
+code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
+</style>
+
+<link rel="stylesheet" href="styles.css" type="text/css" />
+</head>
+
+<body>
+
+
+
+  <div class="book without-animation with-summary font-size-2 font-family-1" data-basepath=".">
+
+    <div class="book-summary">
+      <nav role="navigation">
+
+<ul class="summary">
+<li class="chapter" data-level="1" data-path="index.html"><a href="index.html"><i class="fa fa-check"></i><b>1</b> About this</a><ul>
+<li class="chapter" data-level="" data-path="index.html"><a href="index.html#technical-stuff"><i class="fa fa-check"></i>Technical stuff</a></li>
+</ul></li>
+<li class="chapter" data-level="2" data-path="course-schedule.html"><a href="course-schedule.html"><i class="fa fa-check"></i><b>2</b> Course schedule</a><ul>
+<li class="chapter" data-level="2.1" data-path="course-schedule.html"><a href="course-schedule.html#monday"><i class="fa fa-check"></i><b>2.1</b> Monday</a></li>
+<li class="chapter" data-level="2.2" data-path="course-schedule.html"><a href="course-schedule.html#tuesday"><i class="fa fa-check"></i><b>2.2</b> Tuesday</a></li>
+<li class="chapter" data-level="2.3" data-path="course-schedule.html"><a href="course-schedule.html#wednesday"><i class="fa fa-check"></i><b>2.3</b> Wednesday</a></li>
+<li class="chapter" data-level="2.4" data-path="course-schedule.html"><a href="course-schedule.html#thursday"><i class="fa fa-check"></i><b>2.4</b> Thursday</a></li>
+<li class="chapter" data-level="2.5" data-path="course-schedule.html"><a href="course-schedule.html#friday"><i class="fa fa-check"></i><b>2.5</b> Friday</a></li>
+</ul></li>
+<li class="chapter" data-level="3" data-path="course-introduction.html"><a href="course-introduction.html"><i class="fa fa-check"></i><b>3</b> Course Introduction</a></li>
+<li class="chapter" data-level="4" data-path="overview.html"><a href="overview.html"><i class="fa fa-check"></i><b>4</b> Overview</a><ul>
+<li class="chapter" data-level="4.1" data-path="overview.html"><a href="overview.html#preparation"><i class="fa fa-check"></i><b>4.1</b> Preparation</a></li>
+<li class="chapter" data-level="4.2" data-path="overview.html"><a href="overview.html#taxonomy"><i class="fa fa-check"></i><b>4.2</b> Taxonomy</a></li>
+<li class="chapter" data-level="4.3" data-path="overview.html"><a href="overview.html#occurrences"><i class="fa fa-check"></i><b>4.3</b> Occurrences</a></li>
+<li class="chapter" data-level="4.4" data-path="overview.html"><a href="overview.html#environmental-data"><i class="fa fa-check"></i><b>4.4</b> Environmental data</a></li>
+<li class="chapter" data-level="4.5" data-path="overview.html"><a href="overview.html#fit-model"><i class="fa fa-check"></i><b>4.5</b> Fit model</a></li>
+<li class="chapter" data-level="4.6" data-path="overview.html"><a href="overview.html#predict-from-model"><i class="fa fa-check"></i><b>4.6</b> Predict from model</a></li>
+<li class="chapter" data-level="4.7" data-path="overview.html"><a href="overview.html#other-bits-and-pieces"><i class="fa fa-check"></i><b>4.7</b> Other bits and pieces</a><ul>
+<li class="chapter" data-level="4.7.1" data-path="overview.html"><a href="overview.html#place-names"><i class="fa fa-check"></i><b>4.7.1</b> Place names</a></li>
+</ul></li>
+</ul></li>
+<li class="chapter" data-level="5" data-path="introduction-to-r-and-the-tidyverse.html"><a href="introduction-to-r-and-the-tidyverse.html"><i class="fa fa-check"></i><b>5</b> Introduction to R and the Tidyverse</a><ul>
+<li class="chapter" data-level="5.1" data-path="introduction-to-r-and-the-tidyverse.html"><a href="introduction-to-r-and-the-tidyverse.html#exercise-r-script"><i class="fa fa-check"></i><b>5.1</b> Exercise R script</a></li>
+<li class="chapter" data-level="5.2" data-path="introduction-to-r-and-the-tidyverse.html"><a href="introduction-to-r-and-the-tidyverse.html#see-also"><i class="fa fa-check"></i><b>5.2</b> See also</a></li>
+</ul></li>
+<li class="chapter" data-level="6" data-path="open-data-and-data-cleaning.html"><a href="open-data-and-data-cleaning.html"><i class="fa fa-check"></i><b>6</b> Open data and data cleaning</a><ul>
+<li class="chapter" data-level="6.1" data-path="open-data-and-data-cleaning.html"><a href="open-data-and-data-cleaning.html#fair-principles"><i class="fa fa-check"></i><b>6.1</b> FAIR principles</a></li>
+</ul></li>
+<li class="chapter" data-level="7" data-path="metadata-darwin-core.html"><a href="metadata-darwin-core.html"><i class="fa fa-check"></i><b>7</b> Metadata - Darwin Core</a><ul>
+<li class="chapter" data-level="7.1" data-path="metadata-darwin-core.html"><a href="metadata-darwin-core.html#darwin-core-structure"><i class="fa fa-check"></i><b>7.1</b> Darwin Core structure</a></li>
+<li class="chapter" data-level="7.2" data-path="metadata-darwin-core.html"><a href="metadata-darwin-core.html#types-of-darwin-core-archives"><i class="fa fa-check"></i><b>7.2</b> Types of Darwin Core archives</a></li>
+<li class="chapter" data-level="7.3" data-path="metadata-darwin-core.html"><a href="metadata-darwin-core.html#darwin-core-details"><i class="fa fa-check"></i><b>7.3</b> Darwin Core details</a><ul>
+<li class="chapter" data-level="7.3.1" data-path="metadata-darwin-core.html"><a href="metadata-darwin-core.html#required-metadata-fields"><i class="fa fa-check"></i><b>7.3.1</b> Required metadata fields:</a></li>
+<li class="chapter" data-level="7.3.2" data-path="metadata-darwin-core.html"><a href="metadata-darwin-core.html#citation-auto-generation"><i class="fa fa-check"></i><b>7.3.2</b> Citation auto generation</a></li>
+</ul></li>
+<li class="chapter" data-level="7.4" data-path="metadata-darwin-core.html"><a href="metadata-darwin-core.html#metadata-for-occurrence-data"><i class="fa fa-check"></i><b>7.4</b> Metadata for occurrence data</a><ul>
+<li class="chapter" data-level="7.4.1" data-path="metadata-darwin-core.html"><a href="metadata-darwin-core.html#what"><i class="fa fa-check"></i><b>7.4.1</b> What</a></li>
+<li class="chapter" data-level="7.4.2" data-path="metadata-darwin-core.html"><a href="metadata-darwin-core.html#where"><i class="fa fa-check"></i><b>7.4.2</b> Where</a></li>
+<li class="chapter" data-level="7.4.3" data-path="metadata-darwin-core.html"><a href="metadata-darwin-core.html#when"><i class="fa fa-check"></i><b>7.4.3</b> When</a></li>
+<li class="chapter" data-level="7.4.4" data-path="metadata-darwin-core.html"><a href="metadata-darwin-core.html#who"><i class="fa fa-check"></i><b>7.4.4</b> Who</a></li>
+<li class="chapter" data-level="7.4.5" data-path="metadata-darwin-core.html"><a href="metadata-darwin-core.html#how"><i class="fa fa-check"></i><b>7.4.5</b> How</a></li>
+</ul></li>
+</ul></li>
+<li class="chapter" data-level="8" data-path="biological-data.html"><a href="biological-data.html"><i class="fa fa-check"></i><b>8</b> Biological data</a><ul>
+<li class="chapter" data-level="8.1" data-path="biological-data.html"><a href="biological-data.html#taxonomy-1"><i class="fa fa-check"></i><b>8.1</b> Taxonomy</a></li>
+<li class="chapter" data-level="8.2" data-path="biological-data.html"><a href="biological-data.html#other-packages"><i class="fa fa-check"></i><b>8.2</b> Other packages</a></li>
+</ul></li>
+<li class="chapter" data-level="9" data-path="environmental-data-1.html"><a href="environmental-data-1.html"><i class="fa fa-check"></i><b>9</b> Environmental data</a><ul>
+<li class="chapter" data-level="9.1" data-path="environmental-data-1.html"><a href="environmental-data-1.html#bowerbirdblueant"><i class="fa fa-check"></i><b>9.1</b> Bowerbird/blueant</a><ul>
+<li class="chapter" data-level="9.1.1" data-path="environmental-data-1.html"><a href="environmental-data-1.html#available-data-sets"><i class="fa fa-check"></i><b>9.1.1</b> Available data sets</a></li>
+<li class="chapter" data-level="9.1.2" data-path="environmental-data-1.html"><a href="environmental-data-1.html#usage"><i class="fa fa-check"></i><b>9.1.2</b> Usage</a></li>
+</ul></li>
+<li class="chapter" data-level="9.2" data-path="environmental-data-1.html"><a href="environmental-data-1.html#raadtools"><i class="fa fa-check"></i><b>9.2</b> RAADtools</a></li>
+<li class="chapter" data-level="9.3" data-path="environmental-data-1.html"><a href="environmental-data-1.html#other-useful-packages"><i class="fa fa-check"></i><b>9.3</b> Other useful packages</a></li>
+</ul></li>
+<li class="chapter" data-level="10" data-path="mapping.html"><a href="mapping.html"><i class="fa fa-check"></i><b>10</b> Mapping</a><ul>
+<li class="chapter" data-level="10.1" data-path="mapping.html"><a href="mapping.html#maps-in-r"><i class="fa fa-check"></i><b>10.1</b> Maps in R</a><ul>
+<li class="chapter" data-level="10.1.1" data-path="mapping.html"><a href="mapping.html#exercises"><i class="fa fa-check"></i><b>10.1.1</b> Exercises</a></li>
+<li class="chapter" data-level="10.1.2" data-path="mapping.html"><a href="mapping.html#lets-use-the-maps-data"><i class="fa fa-check"></i><b>10.1.2</b> Let’s use the maps data!</a></li>
+</ul></li>
+<li class="chapter" data-level="10.2" data-path="mapping.html"><a href="mapping.html#somap"><i class="fa fa-check"></i><b>10.2</b> SOmap</a><ul>
+<li class="chapter" data-level="10.2.1" data-path="mapping.html"><a href="mapping.html#circumpolar-maps"><i class="fa fa-check"></i><b>10.2.1</b> Circumpolar maps</a></li>
+<li class="chapter" data-level="10.2.2" data-path="mapping.html"><a href="mapping.html#non-circumpolar-maps"><i class="fa fa-check"></i><b>10.2.2</b> Non-circumpolar maps</a></li>
+<li class="chapter" data-level="10.2.3" data-path="mapping.html"><a href="mapping.html#plotting-via-ggplot2"><i class="fa fa-check"></i><b>10.2.3</b> Plotting via ggplot2</a></li>
+<li class="chapter" data-level="10.2.4" data-path="mapping.html"><a href="mapping.html#modifying-map-objects-advanced-usage"><i class="fa fa-check"></i><b>10.2.4</b> Modifying map objects (advanced usage)</a></li>
+<li class="chapter" data-level="10.2.5" data-path="mapping.html"><a href="mapping.html#other-somap-gotchas"><i class="fa fa-check"></i><b>10.2.5</b> Other SOmap gotchas</a></li>
+</ul></li>
+<li class="chapter" data-level="10.3" data-path="mapping.html"><a href="mapping.html#supporting-data-for-maps"><i class="fa fa-check"></i><b>10.3</b> Supporting data for maps</a><ul>
+<li class="chapter" data-level="10.3.1" data-path="mapping.html"><a href="mapping.html#quantarcticr"><i class="fa fa-check"></i><b>10.3.1</b> quantarcticR</a></li>
+<li class="chapter" data-level="10.3.2" data-path="mapping.html"><a href="mapping.html#antanym"><i class="fa fa-check"></i><b>10.3.2</b> antanym</a></li>
+</ul></li>
+</ul></li>
+<li class="chapter" data-level="11" data-path="data-visualisation.html"><a href="data-visualisation.html"><i class="fa fa-check"></i><b>11</b> Data visualisation</a></li>
+<li class="chapter" data-level="12" data-path="recent-and-past-application-of-sdms.html"><a href="recent-and-past-application-of-sdms.html"><i class="fa fa-check"></i><b>12</b> Recent and past application of SDMs</a></li>
+<li class="chapter" data-level="13" data-path="species-distribution-modelling.html"><a href="species-distribution-modelling.html"><i class="fa fa-check"></i><b>13</b> Species distribution modelling</a><ul>
+<li class="chapter" data-level="13.1" data-path="species-distribution-modelling.html"><a href="species-distribution-modelling.html#sdm-introduction-and-review"><i class="fa fa-check"></i><b>13.1</b> SDM introduction and review</a><ul>
+<li class="chapter" data-level="13.1.1" data-path="species-distribution-modelling.html"><a href="species-distribution-modelling.html#references"><i class="fa fa-check"></i><b>13.1.1</b> References</a></li>
+</ul></li>
+<li class="chapter" data-level="13.2" data-path="species-distribution-modelling.html"><a href="species-distribution-modelling.html#sdm-outputs"><i class="fa fa-check"></i><b>13.2</b> SDM outputs</a><ul>
+<li class="chapter" data-level="13.2.1" data-path="species-distribution-modelling.html"><a href="species-distribution-modelling.html#references-1"><i class="fa fa-check"></i><b>13.2.1</b> References</a></li>
+</ul></li>
+<li class="chapter" data-level="13.3" data-path="species-distribution-modelling.html"><a href="species-distribution-modelling.html#calibration"><i class="fa fa-check"></i><b>13.3</b> Calibration</a><ul>
+<li class="chapter" data-level="13.3.1" data-path="species-distribution-modelling.html"><a href="species-distribution-modelling.html#references-2"><i class="fa fa-check"></i><b>13.3.1</b> References</a></li>
+</ul></li>
+<li class="chapter" data-level="13.4" data-path="species-distribution-modelling.html"><a href="species-distribution-modelling.html#exercise-scripts"><i class="fa fa-check"></i><b>13.4</b> Exercise scripts</a></li>
+</ul></li>
+<li class="chapter" data-level="14" data-path="sdm-algorithms.html"><a href="sdm-algorithms.html"><i class="fa fa-check"></i><b>14</b> SDM algorithms</a><ul>
+<li class="chapter" data-level="14.1" data-path="sdm-algorithms.html"><a href="sdm-algorithms.html#exercises---practice-with-models"><i class="fa fa-check"></i><b>14.1</b> Exercises - Practice with models</a><ul>
+<li class="chapter" data-level="14.1.1" data-path="sdm-algorithms.html"><a href="sdm-algorithms.html#load-and-clean-the-data"><i class="fa fa-check"></i><b>14.1.1</b> Load and clean the data</a></li>
+<li class="chapter" data-level="14.1.2" data-path="sdm-algorithms.html"><a href="sdm-algorithms.html#one-hot-encoding"><i class="fa fa-check"></i><b>14.1.2</b> One hot encoding!</a></li>
+<li class="chapter" data-level="14.1.3" data-path="sdm-algorithms.html"><a href="sdm-algorithms.html#the-models"><i class="fa fa-check"></i><b>14.1.3</b> The models</a></li>
+<li class="chapter" data-level="14.1.4" data-path="sdm-algorithms.html"><a href="sdm-algorithms.html#regression-problem"><i class="fa fa-check"></i><b>14.1.4</b> Regression problem</a></li>
+</ul></li>
+</ul></li>
+<li class="chapter" data-level="15" data-path="sdm-extra-bits-and-pieces.html"><a href="sdm-extra-bits-and-pieces.html"><i class="fa fa-check"></i><b>15</b> SDM extra bits and pieces</a><ul>
+<li class="chapter" data-level="15.1" data-path="sdm-extra-bits-and-pieces.html"><a href="sdm-extra-bits-and-pieces.html#spatial-partial-predictions"><i class="fa fa-check"></i><b>15.1</b> Spatial partial predictions</a><ul>
+<li class="chapter" data-level="15.1.1" data-path="sdm-extra-bits-and-pieces.html"><a href="sdm-extra-bits-and-pieces.html#example-1"><i class="fa fa-check"></i><b>15.1.1</b> Example</a></li>
+</ul></li>
+</ul></li>
+<li class="chapter" data-level="16" data-path="other-r-resources-for-southern-oceanantarctic-use.html"><a href="other-r-resources-for-southern-oceanantarctic-use.html"><i class="fa fa-check"></i><b>16</b> Other R resources for Southern Ocean/Antarctic use</a><ul>
+<li class="chapter" data-level="16.1" data-path="other-r-resources-for-southern-oceanantarctic-use.html"><a href="other-r-resources-for-southern-oceanantarctic-use.html#diet-data-sohungry"><i class="fa fa-check"></i><b>16.1</b> Diet data: sohungry</a></li>
+<li class="chapter" data-level="16.2" data-path="other-r-resources-for-southern-oceanantarctic-use.html"><a href="other-r-resources-for-southern-oceanantarctic-use.html#allometric-equations-solong"><i class="fa fa-check"></i><b>16.2</b> Allometric equations: solong</a></li>
+</ul></li>
+</ul>
+
+      </nav>
+    </div>
+
+    <div class="book-body">
+      <div class="body-inner">
+        <div class="book-header" role="navigation">
+          <h1>
+            <i class="fa fa-circle-o-notch fa-spin"></i><a href="./">SCAR-EGABI Tools for Southern Ocean Spatial Analysis and Modelling</a>
+          </h1>
+        </div>
+
+        <div class="page-wrapper" tabindex="-1" role="main">
+          <div class="page-inner">
+
+            <section class="normal" id="section-">
+<div id="introduction-to-r-and-the-tidyverse" class="section level1">
+<h1><span class="header-section-number">5</span> Introduction to R and the Tidyverse</h1>
+<p><a href="./course_material/tidyverse/Tidyverse.pdf">Presentation (PDF)</a></p>
+<div id="exercise-r-script" class="section level2">
+<h2><span class="header-section-number">5.1</span> Exercise R script</h2>
+<p>The R script can be <a href="./course_material/tidyverse/Intro_to_tidyverse.R">downloaded here</a> and is also reproduced below.</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">## We load Tidyverse here, which includes a suite of packages that can work together.
+## When loading directly like below, you get a table which tells you what packages are attached
+<span class="kw">library</span>(tidyverse)
+## you will also see a list of conflicted functions - that is, function names that appear
+## in multiple packages. For example, there is a &quot;filter&quot; function in both the stats package
+## and in the dplyr package. See the course notes about namespace prefixes (and e.g.
+## the &quot;dplyr::filter()&quot; usages below)
+
+## Load the starwars dataset found in the dplyr package  (we&#39;ll use this later!)
+<span class="kw">data</span>(starwars)
+
+
+#################################################################
+#### Data importing ####
+########################
+
+<span class="kw">setwd</span>(<span class="st">&quot;c:/EGABIcourse19-master/docs/course_material/tidyverse&quot;</span>)
+
+### Using base R read.csv the column classes are imported poorly and we would have to
+##    convert them ourselves later!!
+X.csv &lt;-<span class="st"> </span><span class="kw">read.csv</span>(<span class="st">&#39;tidyverse_dummy_import.csv&#39;</span>)
+<span class="kw">sapply</span>(X.csv, class)
+
+
+## the readr library can read in csvs as well, except this is done intelligently and fields
+##   can be defined better
+X.csv_r &lt;-<span class="st"> </span>readr::<span class="kw">read_csv</span>(<span class="st">&#39;tidyverse_dummy_import.csv&#39;</span>,
+                           <span class="dt">col_types=</span><span class="kw">list</span>(<span class="dt">Occurrence_field =</span> <span class="kw">col_factor</span>()))
+
+## The readxl library is for reading other excel formats and WORKS WELL FOR DATETIME columns
+## However, it does not have a column type option for factors
+##   (if you wanted to define a column as a factor)
+X.xlsx_t &lt;-<span class="st"> </span>readxl::<span class="kw">read_xlsx</span>(<span class="st">&#39;tidyverse_dummy_import.xlsx&#39;</span>,<span class="dv">1</span>,
+                              <span class="dt">col_types =</span> <span class="kw">c</span>(<span class="st">&#39;guess&#39;</span>,<span class="st">&#39;numeric&#39;</span>,<span class="st">&#39;numeric&#39;</span>,<span class="st">&#39;text&#39;</span>,<span class="st">&#39;date&#39;</span>))
+## you could make a column a factor, though, if you needed to:
+X.xlsx_t$Occurrence_field &lt;-<span class="st"> </span><span class="kw">as.factor</span>(X.xlsx_t$Occurrence_field)
+
+
+###################################################################
+#### Data wrangling ####
+########################
+
+<span class="co"># select the name, gender and homeworld columns</span>
+starwars %&gt;%<span class="st"> </span>dplyr::<span class="kw">select</span>(name,gender,homeworld)
+## note that we use dplyr::select(), not just select(), because there are several &quot;select&quot;
+##   functions in different packages. Using the namespace prefix makes it clear which one
+##   we are using and less prone to errors caused by e.g. packages being loaded in a
+##   different order
+
+<span class="co"># r base equivalent</span>
+starwars[,<span class="kw">c</span>(<span class="st">&#39;name&#39;</span>,<span class="st">&#39;gender&#39;</span>,<span class="st">&#39;homeworld&#39;</span>)]
+
+
+<span class="co"># filter rows with characters from Tatooine</span>
+starwars %&gt;%<span class="st"> </span>dplyr::<span class="kw">filter</span>(homeworld==<span class="st">&#39;Tatooine&#39;</span>)
+<span class="co"># r base equivalent</span>
+starwars[<span class="kw">which</span>(starwars$homeworld==<span class="st">&#39;Tatooine&#39;</span>),]
+
+
+<span class="co"># stringing arguments</span>
+starwars %&gt;%
+<span class="st">  </span>dplyr::<span class="kw">select</span>(name,gender,homeworld)%&gt;%
+<span class="st">  </span>dplyr::<span class="kw">filter</span>(homeworld==<span class="st">&#39;Tatooine&#39;</span>)
+
+<span class="co">#r base equivalent</span>
+starwars[<span class="kw">which</span>(starwars$homeworld==<span class="st">&#39;Tatooine&#39;</span>),<span class="kw">c</span>(<span class="st">&#39;name&#39;</span>,<span class="st">&#39;gender&#39;</span>,<span class="st">&#39;homeworld&#39;</span>)]
+
+
+##################################
+#### grouping and summarising ####
+##################################
+starwars %&gt;%<span class="st"> </span><span class="kw">group_by</span>(homeworld)
+
+## This gets the mean height of characters, grouped by homeworld, and adds a count to
+##   get sample size
+starwars %&gt;%
+<span class="st">  </span><span class="kw">group_by</span>(homeworld) %&gt;%
+<span class="st">  </span><span class="kw">summarise</span>(<span class="dt">mean_height =</span> <span class="kw">mean</span>(height),<span class="dt">n =</span> <span class="kw">n</span>())
+
+
+## This gets the mean height of characters, grouped by homeworld, and adds a count to
+##   get sample size
+starwars %&gt;%
+<span class="st">  </span><span class="kw">group_by</span>(homeworld,gender) %&gt;%
+<span class="st">  </span><span class="kw">summarise</span>(<span class="dt">mean_height =</span> <span class="kw">mean</span>(height),<span class="dt">n =</span> <span class="kw">n</span>()) %&gt;%
+<span class="st">  </span>dplyr::<span class="kw">filter</span>(!<span class="kw">is.na</span>(homeworld))
+
+
+### Other ways to count!
+starwars %&gt;%<span class="st"> </span><span class="kw">count</span>(homeworld,gender) %&gt;%<span class="st"> </span>dplyr::<span class="kw">filter</span>(!<span class="kw">is.na</span>(homeworld))
+starwars %&gt;%<span class="st"> </span><span class="kw">add_count</span>(homeworld,gender) %&gt;%<span class="st"> </span>dplyr::<span class="kw">filter</span>(!<span class="kw">is.na</span>(homeworld))
+
+################
+#### TASKS ####
+
+## Create a table with mean median and standard deviation of mass for all humans with brown hair
+starwars %&gt;%
+<span class="st">  </span><span class="kw">group_by</span>(hair_color,species) %&gt;%
+<span class="st">  </span><span class="kw">summarise</span>(<span class="dt">meanmass=</span><span class="kw">mean</span>(mass,<span class="dt">na.rm =</span> T),
+            <span class="dt">medmass=</span><span class="kw">median</span>(mass,<span class="dt">na.rm =</span> T),
+            <span class="dt">sdmass=</span><span class="kw">sd</span>(mass,<span class="dt">na.rm =</span> T)) %&gt;%
+<span class="st">  </span>dplyr::<span class="kw">filter</span>(species ==<span class="st"> &#39;Human&#39;</span>,hair_color==<span class="st">&#39;brown&#39;</span>)
+
+## Get the tallest and shortest non-human character
+starwars %&gt;%
+<span class="st">  </span>dplyr::<span class="kw">filter</span>(species !=<span class="st"> &#39;Human&#39;</span>) %&gt;%
+<span class="st">  </span><span class="kw">arrange</span>(height)
+
+starwars %&gt;%
+<span class="st">  </span>dplyr::<span class="kw">filter</span>(species !=<span class="st"> &#39;Human&#39;</span>) %&gt;%
+<span class="st">  </span><span class="kw">arrange</span>(-height)
+
+## How many droids were in Attack of the Clones?
+starwars %&gt;%
+<span class="st">  </span><span class="kw">unnest</span>(films) %&gt;%
+<span class="st">  </span><span class="kw">count</span>(species,films) %&gt;%
+<span class="st">  </span>dplyr::<span class="kw">filter</span>(species==<span class="st">&#39;Droid&#39;</span>,films==<span class="st">&#39;Attack of the Clones&#39;</span>)
+
+
+######################################
+#### Mutate ####
+
+<span class="co"># This will calculate a new column that is the ration of height to mass</span>
+starwars %&gt;%
+<span class="st">  </span><span class="kw">mutate</span>(<span class="dt">hm_ratio =</span> height/mass)
+
+
+
+######################################
+#### join ####
+
+df1 &lt;-<span class="st"> </span><span class="kw">tibble</span>(
+  <span class="dt">category =</span> <span class="kw">c</span>(<span class="st">&#39;a&#39;</span>,<span class="st">&#39;a&#39;</span>,<span class="st">&#39;b&#39;</span>,<span class="st">&#39;c&#39;</span>,<span class="st">&#39;c&#39;</span>,<span class="st">&#39;a&#39;</span>,<span class="st">&#39;b&#39;</span>),
+  <span class="dt">id =</span> <span class="kw">c</span>(<span class="dv">1</span>,<span class="dv">2</span>,<span class="dv">3</span>,<span class="dv">4</span>,<span class="dv">5</span>,<span class="dv">6</span>,<span class="dv">7</span>)
+)
+
+df2 &lt;-<span class="st"> </span><span class="kw">tibble</span>(
+  <span class="dt">category =</span> <span class="kw">c</span>(<span class="st">&#39;b&#39;</span>,<span class="st">&#39;a&#39;</span>,<span class="st">&#39;b&#39;</span>,<span class="st">&#39;a&#39;</span>,<span class="st">&#39;a&#39;</span>,<span class="st">&#39;c&#39;</span>,<span class="st">&#39;c&#39;</span>),
+  <span class="dt">id =</span> <span class="kw">c</span>(<span class="dv">7</span>,<span class="dv">6</span>,<span class="dv">5</span>,<span class="dv">4</span>,<span class="dv">3</span>,<span class="dv">2</span>,<span class="dv">1</span>)
+)
+
+## This will join the two tibbles by the id value.
+df1 %&gt;%<span class="st"> </span><span class="kw">left_join</span>(df2,<span class="dt">by=</span><span class="st">&#39;id&#39;</span>)
+
+
+
+#################################################################
+#### Gather and Spread ####
+###########################
+
+### This is a dataset that you might come across - different devices taking
+##    measurements on the same day
+sst_data &lt;-<span class="st"> </span><span class="kw">data.frame</span>(
+  <span class="dt">time =</span> <span class="kw">as.Date</span>(<span class="st">&#39;2009-01-01&#39;</span>) +<span class="st"> </span><span class="dv">0</span>:<span class="dv">9</span>,
+  <span class="dt">unit_A =</span> <span class="kw">round</span>(<span class="kw">runif</span>(<span class="dv">10</span>, <span class="dv">6</span>, <span class="dv">9</span>),<span class="dv">2</span>),
+  <span class="dt">unit_B =</span> <span class="kw">round</span>(<span class="kw">runif</span>(<span class="dv">10</span>, <span class="dv">7</span>, <span class="dv">10</span>),<span class="dv">2</span>),
+  <span class="dt">unit_C =</span> <span class="kw">round</span>(<span class="kw">runif</span>(<span class="dv">10</span>, <span class="dv">6</span>, <span class="dv">10</span>),<span class="dv">2</span>)
+)
+
+## Gathering makes the dataframe go from wide to LONG format (Long format
+##   typically used by ggplot2)
+sst_data %&gt;%
+<span class="st">  </span><span class="kw">gather</span>(unit,sst,-time)
+
+## spread is the opposite function to gather and goes from LONG to WIDE format
+sst_data %&gt;%
+<span class="st">  </span><span class="kw">gather</span>(unit,sst,-time) %&gt;%
+<span class="st">  </span><span class="kw">spread</span>(unit,sst)
+
+
+
+###############################
+#### Nesting ####
+
+## This nests the unit and sst columns into a table for every time column.
+nested_sst &lt;-<span class="st"> </span>sst_data %&gt;%
+<span class="st">  </span><span class="kw">gather</span>(unit,sst,-time) %&gt;%
+<span class="st">  </span><span class="kw">nest</span>(unit,sst)
+
+## This can be used to view a specific data row table
+nested_sst$data[[<span class="dv">1</span>]]
+
+###############################
+#### Tasks 2 ####
+#################################
+
+## A tibble with star wars films ranked (by my preference)
+film.rankings &lt;-<span class="st"> </span><span class="kw">tibble</span>(
+  <span class="dt">films =</span> <span class="kw">c</span>(<span class="st">&#39;The Phantom Menace&#39;</span>,<span class="st">&#39;Attack of the Clones&#39;</span>,<span class="st">&#39;Revenge of the Sith&#39;</span>,
+           <span class="st">&#39;A New Hope&#39;</span>,<span class="st">&#39;The Empire Strikes Back&#39;</span>,<span class="st">&#39;Return of the Jedi&#39;</span>,
+           <span class="st">&#39;The Force Awakens&#39;</span>),
+  <span class="dt">rank =</span> <span class="kw">c</span>(<span class="dv">7</span>,<span class="dv">6</span>,<span class="dv">5</span>,<span class="dv">3</span>,<span class="dv">4</span>,<span class="dv">1</span>,<span class="dv">2</span>)
+)
+
+
+## What films does the character Plo Koon appear in, ordered by rank? The final result
+##   should be a single table drawn from a list column
+Plo.Koon &lt;-starwars %&gt;%
+<span class="st">  </span>dplyr::<span class="kw">select</span>(name,films) %&gt;%
+<span class="st">  </span><span class="kw">unnest</span>(films) %&gt;%
+<span class="st">  </span><span class="kw">left_join</span>(film.rankings,<span class="dt">by=</span><span class="st">&#39;films&#39;</span>) %&gt;%
+<span class="st">  </span><span class="kw">arrange</span>(name,rank) %&gt;%
+<span class="st">  </span><span class="kw">nest</span>(films,rank) %&gt;%
+<span class="st">  </span>dplyr::<span class="kw">filter</span>(name ==<span class="st"> &#39;Plo Koon&#39;</span>)
+
+
+
+## Create a table that nests height and mass data for only humans in a column nested
+##   by film name.
+nested.mass.height &lt;-<span class="st"> </span>starwars %&gt;%
+<span class="st">  </span><span class="kw">unnest</span>(films)%&gt;%
+<span class="st">  </span>dplyr::<span class="kw">select</span>(name,height,mass,films,species) %&gt;%
+<span class="st">  </span>dplyr::<span class="kw">filter</span>(species==<span class="st">&#39;Human&#39;</span>)%&gt;%
+<span class="st">  </span><span class="kw">nest</span>(name,height,mass)
+
+
+
+
+################################################################################
+#### Final task - functional programming
+
+## Create an object that is a list of vectors
+X &lt;-<span class="st"> </span><span class="kw">c</span>(<span class="kw">list</span>(<span class="kw">seq</span>(<span class="dv">1</span>,<span class="dv">50</span>,<span class="dv">5</span>)),<span class="kw">list</span>(<span class="kw">seq</span>(<span class="dv">40</span>,<span class="dv">100</span>,<span class="dv">2</span>)))
+
+## base R
+<span class="kw">lapply</span>(X,mean)
+
+## tidyverse
+<span class="kw">map</span>(X,mean)
+
+
+
+### This shows how you can use map to run functions over lists to get interesting model
+##    results for large arrays of data.  Very helpful for summarising data quickly
+nested.mass.height %&gt;%
+<span class="st">  </span><span class="kw">mutate</span>(
+    <span class="dt">model =</span> <span class="kw">map</span>(
+      data,~<span class="kw">lm</span>(mass~height,<span class="dt">data=</span>.x)
+    ),
+    <span class="dt">slope =</span> <span class="kw">map_dbl</span>(
+      model, ~<span class="kw">coef</span>(.x)[<span class="st">&#39;height&#39;</span>]
+    ),
+    <span class="dt">r.sq =</span> <span class="kw">map_dbl</span>(
+      model,~<span class="kw">glance</span>(.x)$<span class="st">&#39;r.squared&#39;</span>
+    ),
+    <span class="dt">sample_size =</span> <span class="kw">map_dbl</span>(
+      data,~<span class="kw">nrow</span>(.x)
+    ),
+    <span class="dt">tallest =</span> <span class="kw">map</span>(
+      data,~.x[<span class="kw">which.max</span>(.x$height),<span class="st">&#39;name&#39;</span>]
+    ),
+    <span class="dt">heaviest =</span> <span class="kw">map</span>(
+      data,~.x[<span class="kw">which.max</span>(.x$mass),<span class="st">&#39;name&#39;</span>]
+    )
+  ) %&gt;%
+<span class="st">  </span><span class="kw">unnest</span>(tallest,heaviest) %&gt;%
+<span class="st">  </span><span class="kw">rename</span>(<span class="dt">tallest=</span>name,<span class="dt">heaviest=</span>name1)
+
+#########################################################################
+#### ggplot2 link ####
+
+
+
+starwars %&gt;%
+<span class="st">  </span>dplyr::<span class="kw">filter</span>(species==<span class="st">&#39;Human&#39;</span>,gender==<span class="st">&#39;male&#39;</span>) %&gt;%
+<span class="st">  </span><span class="kw">ggplot</span>(<span class="kw">aes</span>(<span class="dt">x=</span>mass,<span class="dt">y=</span>height))+
+<span class="st">    </span><span class="kw">geom_point</span>()+
+<span class="st">    </span><span class="kw">geom_smooth</span>(<span class="dt">method=</span>lm)</code></pre></div>
+</div>
+<div id="see-also" class="section level2">
+<h2><span class="header-section-number">5.2</span> See also</h2>
+<ul>
+<li>The Software Carpentry <a href="https://swcarpentry.github.io/r-novice-gapminder/01-rstudio-intro/">Introduction to R and RStudio</a>.</li>
+<li>An <a href="https://obis.org/manual/intror/">Introduction to R</a> by the Ocean Biogeographic Information System (OBIS).</li>
+<li><a href="./course_material/Getting-Started-in-R.pdf">Getting Started in R &amp;mdash; Tidyverse Edition</a> by <a href="https://github.com/saghirb/Getting-Started-in-R/">Saghir Bashir</a>.</li>
+</ul>
+
+</div>
+</div>
+            </section>
+
+          </div>
+        </div>
+      </div>
+<a href="overview.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
+<a href="open-data-and-data-cleaning.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
+    </div>
+  </div>
+<script src="libs/gitbook-2.6.7/js/app.min.js"></script>
+<script src="libs/gitbook-2.6.7/js/lunr.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-search.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-sharing.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-fontsettings.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-bookdown.js"></script>
+<script src="libs/gitbook-2.6.7/js/jquery.highlight.js"></script>
+<script>
+gitbook.require(["gitbook"], function(gitbook) {
+gitbook.start({
+"sharing": {
+"github": false,
+"facebook": true,
+"twitter": true,
+"google": false,
+"linkedin": false,
+"weibo": false,
+"instapaper": false,
+"vk": false,
+"all": ["facebook", "google", "twitter", "linkedin", "weibo", "instapaper"]
+},
+"fontsettings": {
+"theme": "white",
+"family": "sans",
+"size": 2
+},
+"edit": {
+"link": null,
+"text": null
+},
+"history": {
+"link": null,
+"text": null
+},
+"download": null,
+"toc": {
+"collapse": "subsection",
+"scroll_highlight": true
+},
+"toc_depth": 3
+});
+});
+</script>
+
+</body>
+
+</html>

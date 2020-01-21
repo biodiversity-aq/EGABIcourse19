@@ -1,0 +1,58 @@
+# Course schedule
+
+## Monday
+
+Time  Item
+----  ----
+9:00  [Course introduction][Course introduction], housekeeping, presentation of participants
+10:00 Break
+10:15 [Introduction to R and the Tidyverse]
+11:15 Break
+11:30 [Open data and data cleaning]
+12:30 Lunch
+13:00 Finding and downloading data through the rOpenSci packages
+14:00 Break
+14:15 [Mapping]
+15:15 Break
+15:30 [Data visualisation]
+17:30 End day 1
+
+
+
+## Tuesday
+Time  Item
+----  ----
+9:00  [What are species distribution models?][SDM introduction and review]
+10:00 Break
+10:15 [Recent and past application of SDMs]
+11:15 Break
+11:30 Preparation for exercises
+12:30 Lunch
+13:30 [Run a simple SDM, understand and generate SDM outputs][SDM outputs]
+15:00 Break
+15:15 [SDM calibration: what you should know before running a model][Calibration]
+17:30 End day 2
+
+## Wednesday
+Time  Item
+----  ----
+9:30  [Introduction to different SDM algorithms][SDM algorithms]
+10:30 Break
+10:45 Questions, complete previous courses if necessary
+12:30 Lunch
+13:30 Personal work
+17:30 End day 3
+
+
+## Thursday
+Time  Item
+----  ----
+9:30  Personal work (with breaks)
+17:30 End Day 4
+
+
+## Friday
+Time  Item
+----  ----
+9:30  Personal work, final presentations, and discussion (with breaks)
+17:00 End Day 5

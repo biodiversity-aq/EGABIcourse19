@@ -1,0 +1,11 @@
+# Other R resources for Southern Ocean/Antarctic use
+
+## Diet data: sohungry
+
+The [sohungry](https://github.com/SCAR/sohungry) package provides access to data from the [SCAR Southern Ocean Diet and Energetics Database](http://data.aad.gov.au/trophic/), and some tools for working with these data. The database includes data related to diet and energy flow from conventional (e.g. gut content) and modern (e.g. molecular) studies, stable isotopes, fatty acids, and energetic content. It is a product of the SCAR community and open for all to participate in and use.
+
+See the [sohungry package vignette](https://scar.github.io/sohungry/articles/sohungry.html) for more information.
+
+## Allometric equations: solong
+
+The [solong package](https://github.com/SCAR/solong) provides allometric equations that relate the body size of Southern Ocean taxa to their body part measurements. It is a component of the Southern Ocean Diet and Energetics Database project. See the [package reference](https://scar.github.io/solong/).

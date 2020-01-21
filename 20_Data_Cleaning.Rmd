@@ -1,0 +1,6 @@
+# Open data and data cleaning
+
+## FAIR principles
+[Presentation (PDF)](./course_material/AVDP_02_FAIR_OPEN.pdf)
+
+See also the [Metadata - Darwin Core] section.
